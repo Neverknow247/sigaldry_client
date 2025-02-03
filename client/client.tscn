@@ -92,6 +92,8 @@ theme_override_constants/outline_size = 10
 [connection signal="select_deck" from="scenes/deck_select_screen" to="." method="_on_deck_select_screen_select_deck"]
 [connection signal="cancel_game" from="scenes/waiting_for_game_screen" to="." method="_on_waiting_for_game_screen_cancel_game"]
 [connection signal="cancel_validation" from="scenes/waiting_for_game_screen" to="." method="_on_waiting_for_game_screen_cancel_validation"]
+[connection signal="card_select" from="scenes/card_select_screen" to="." method="_on_card_select_screen_card_select"]
+[connection signal="card_select_done" from="scenes/card_select_screen" to="." method="_on_card_select_screen_card_select_done"]
 [connection signal="exit_menu" from="scenes/card_view_screen" to="." method="_on_card_view_screen_exit_menu"]
 [connection signal="back_to_menu" from="scenes/card_builder" to="." method="_on_card_builder_back_to_menu"]
 [connection signal="change_name" from="scenes/card_builder" to="." method="_on_card_builder_change_name"]

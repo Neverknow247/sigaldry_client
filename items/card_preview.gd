@@ -8,18 +8,22 @@ extends TextureRect
 
 @onready var in_deck_ui = $in_deck_ui
 @onready var not_in_deck_ui = $not_in_deck_ui
+@onready var card_select_button = $card_select_button
 
 var type = ""
 var card_id = 0
 
 signal remove_from_deck(id)
 signal add_to_deck(id)
+signal select_card(id)
 
 func _on_mouse_entered():
 	if type == "in_deck":
 		in_deck_ui.show()
 	elif type == "not_in_deck":
 		not_in_deck_ui.show()
+	elif type == "card_select":
+		card_select_button.show()
 	else:
 		pass
 
@@ -34,3 +38,6 @@ func _on_remove_button_pressed():
 func _on_add_button_pressed():
 	if card_id:
 		add_to_deck.emit(card_id)
+
+func _on_card_select_button_pressed():
+	select_card.emit(card_id)

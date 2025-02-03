@@ -18,7 +18,6 @@ func _on_cancel_button_pressed():
 		return
 
 func waiting(payload):
-	if payload:
-		cancel_status = payload["oncancel"]
-		label.text = payload["title"]
+	if payload.has("oncancel"):cancel_status = payload["oncancel"]
+	if payload.has("title"):label.text = payload["title"]
 		

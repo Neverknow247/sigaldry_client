@@ -96,16 +96,19 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 		"select-deck":
 			change_scene("deck_select")
 			deck_select_screen.add_decks(payload)
-		"select-cards":
-			card_select_screen.add_cards(payload)
 		"waiting":
 			change_scene("waiting")
 			waiting_for_game_screen.waiting(payload)
 		"update-unit":
 			#print(payload)
 			pass
-		"select-cards-timers-update":
-			#print(payload)
+		"select-cards":
+			change_scene("card_select")
+			card_select_screen.update_cards(payload)
+		"select-cards-timer-update":
+			card_select_screen.countdown(payload)
+		"update-selected-cards":
+			card_select_screen.update_cards(payload)
 			pass
 		"update-turn":
 			#print(payload)
@@ -295,3 +298,9 @@ func _on_waiting_for_game_screen_cancel_validation():
 
 func _on_waiting_for_game_screen_cancel_game():
 	client.socketio_send("cancel-waiting-for-game")
+
+func _on_card_select_screen_card_select(id):
+	client.socketio_send("select-card",{"card_id":str(id)})
+
+func _on_card_select_screen_card_select_done():
+	client.socketio_send("select-cards-complete")

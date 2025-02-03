@@ -43,7 +43,7 @@ func add_cards(payload):
 				elif ability["name"] == "efficient":
 					discount = ability["value"]
 				elif ability["value"] > 0:
-					card_effect_text += ability["name"].capitalize() + " " \
+					card_effect_text += ability["name"].capitalize() + "-" \
 					+ str(ability["value"]) + "  " 
 		new_card["card_effects"].text = card_effect_text
 		new_card["card_price"].text = str(card["card"]["cost"]-discount)
