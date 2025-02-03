@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://3lhq3ikgmxbg"]
+
+[ext_resource type="Script" path="res://card_builder_scenes/component_button.gd" id="1_xl50o"]
+[ext_resource type="Script" path="res://card_builder_scenes/component_shape_grid.gd" id="2_oxwxw"]
+
+[node name="component_button" type="HBoxContainer"]
+offset_right = 159.0
+offset_bottom = 31.0
+script = ExtResource("1_xl50o")
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(150, 60)
+layout_mode = 2
+
+[node name="component_shape_grid" type="Control" parent="."]
+layout_mode = 2
+script = ExtResource("2_oxwxw")
+
+[node name="icons" type="Control" parent="component_shape_grid"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

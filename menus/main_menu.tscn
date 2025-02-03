@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=3 uid="uid://be8308edhjqd8"]
+
+[ext_resource type="Script" path="res://menus/main_menu.gd" id="1_lhqmb"]
+
+[node name="main_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_lhqmb")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.290196, 0.478431, 0.588235, 1)
+
+[node name="buttons" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 30.0
+offset_bottom = 61.0
+grow_horizontal = 2
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="search_for_a_pvp_game_button" type="Button" parent="buttons"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+text = "Play PVP
+"
+
+[node name="search_for_a_pve_game" type="Button" parent="buttons"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+text = "Play PVE"
+
+[node name="view_cards_button" type="Button" parent="buttons"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+text = "View All Cards"
+
+[node name="card_builder_button" type="Button" parent="buttons"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+text = "Card Builder"
+
+[node name="deck_editor_button" type="Button" parent="buttons"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+text = "Deck Editor"
+
+[connection signal="pressed" from="buttons/search_for_a_pvp_game_button" to="." method="_on_search_for_a_pvp_game_button_pressed"]
+[connection signal="pressed" from="buttons/search_for_a_pve_game" to="." method="_on_search_for_a_pve_game_pressed"]
+[connection signal="pressed" from="buttons/view_cards_button" to="." method="_on_view_cards_button_pressed"]
+[connection signal="pressed" from="buttons/card_builder_button" to="." method="_on_card_builder_button_pressed"]
+[connection signal="pressed" from="buttons/deck_editor_button" to="." method="_on_deck_editor_button_pressed"]

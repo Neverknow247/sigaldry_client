@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cuocor4p4cmi8"]
+
+[ext_resource type="Texture2D" uid="uid://beieuly8ajpfw" path="res://assets/art/star.png" id="1_hm128"]
+
+[node name="start_icon" type="Sprite2D"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_hm128")

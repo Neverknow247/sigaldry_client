@@ -1,0 +1,141 @@
+[gd_scene load_steps=6 format=3 uid="uid://d3qyhudrdt78l"]
+
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_jhejr"]
+[ext_resource type="Script" path="res://card_builder_scenes/card_builder.gd" id="1_t82xy"]
+[ext_resource type="Script" path="res://card_builder_scenes/card_grid.gd" id="2_gupog"]
+[ext_resource type="PackedScene" uid="uid://dwgnyi0lyorn8" path="res://card_builder_scenes/active_component.tscn" id="3_7yvkw"]
+[ext_resource type="PackedScene" uid="uid://urgkw5d0kikx" path="res://items/card_preview.tscn" id="5_0g7mw"]
+
+[node name="card_builder" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_jhejr")
+script = ExtResource("1_t82xy")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.290196, 0.478431, 0.588235, 1)
+
+[node name="card_grid" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 587.0
+offset_top = 151.0
+offset_right = -613.0
+offset_bottom = -122.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_gupog")
+
+[node name="icons" type="Control" parent="card_grid"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="active_component" parent="card_grid" instance=ExtResource("3_7yvkw")]
+layout_mode = 1
+
+[node name="back_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1767.0
+offset_top = 25.0
+offset_right = 1874.0
+offset_bottom = 83.0
+text = "Back"
+
+[node name="restart_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1497.0
+offset_top = 24.0
+offset_right = 1632.0
+offset_bottom = 82.0
+text = "Restart"
+
+[node name="template_select" type="OptionButton" parent="."]
+custom_minimum_size = Vector2(350, 80)
+layout_mode = 0
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 379.0
+offset_bottom = 106.0
+
+[node name="place_component_button" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 695.0
+offset_top = 29.0
+offset_right = 840.0
+offset_bottom = 60.0
+text = "Place_component
+"
+
+[node name="card_preview" type="Control" parent="."]
+anchors_preset = 0
+
+[node name="name_card_edit" type="LineEdit" parent="card_preview"]
+layout_mode = 0
+offset_left = 1496.0
+offset_top = 245.0
+offset_right = 1896.0
+offset_bottom = 303.0
+placeholder_text = "name card here"
+alignment = 1
+max_length = 21
+
+[node name="card_graphic" parent="card_preview" instance=ExtResource("5_0g7mw")]
+layout_mode = 0
+offset_left = 1514.0
+offset_top = 313.0
+offset_right = 1884.0
+offset_bottom = 838.0
+
+[node name="undo_button" type="Button" parent="card_preview"]
+layout_mode = 0
+offset_left = 870.0
+offset_top = 24.0
+offset_right = 1102.0
+offset_bottom = 132.0
+text = "Undo Last
+Move"
+
+[node name="save_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1789.0
+offset_top = 1009.0
+offset_right = 1896.0
+offset_bottom = 1066.0
+text = "Save"
+
+[node name="component_container" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 205.0
+offset_right = 529.0
+offset_bottom = 995.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="component_container"]
+layout_mode = 2
+
+[connection signal="active_component_changed" from="card_grid" to="." method="_on_card_grid_active_component_changed"]
+[connection signal="check_placement_pos" from="card_grid" to="." method="_on_card_grid_check_placement_pos"]
+[connection signal="mouse_entered" from="card_grid" to="card_grid" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="card_grid" to="card_grid" method="_on_mouse_exited"]
+[connection signal="piece_rotate" from="card_grid" to="." method="_on_card_grid_piece_rotate"]
+[connection signal="pressed" from="back_button" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="restart_button" to="." method="_on_restart_button_pressed"]
+[connection signal="item_selected" from="template_select" to="." method="_on_template_select_item_selected"]
+[connection signal="pressed" from="place_component_button" to="." method="_on_place_component_button_pressed"]
+[connection signal="text_changed" from="card_preview/name_card_edit" to="." method="_on_name_card_ed_text_changed"]
+[connection signal="pressed" from="card_preview/undo_button" to="." method="_on_undo_button_pressed"]
+[connection signal="pressed" from="save_button" to="." method="_on_save_button_pressed"]

@@ -1,0 +1,112 @@
+[gd_scene load_steps=12 format=3 uid="uid://dcjo6gkd7kxtk"]
+
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_bnrmd"]
+[ext_resource type="PackedScene" uid="uid://d3qyhudrdt78l" path="res://card_builder_scenes/card_builder.tscn" id="2_g4apw"]
+[ext_resource type="Script" path="res://client/client.gd" id="2_r6rot"]
+[ext_resource type="PackedScene" uid="uid://be8308edhjqd8" path="res://menus/main_menu.tscn" id="3_l7bh6"]
+[ext_resource type="PackedScene" uid="uid://d2mvewu0gwxc6" path="res://menus/login_screen.tscn" id="3_mdu8e"]
+[ext_resource type="PackedScene" uid="uid://csetiwpyf37t2" path="res://menus/card_view_screen.tscn" id="4_7j88m"]
+[ext_resource type="PackedScene" uid="uid://b728arcy5b3jo" path="res://menus/register_screen.tscn" id="4_aa44q"]
+[ext_resource type="PackedScene" uid="uid://bt81fiil5ouwn" path="res://game_scenes/deck_select_screen.tscn" id="6_buhrw"]
+[ext_resource type="PackedScene" uid="uid://cjju1df1daqdc" path="res://game_scenes/card_select_screen.tscn" id="6_mv13i"]
+[ext_resource type="PackedScene" uid="uid://2p7iqmaf2fwl" path="res://game_scenes/waiting_for_game_screen.tscn" id="7_3mey6"]
+[ext_resource type="PackedScene" uid="uid://bniv385seyq0k" path="res://deck_builder_scenes/deck_editor.tscn" id="8_0vlk2"]
+
+[node name="client" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bnrmd")
+script = ExtResource("2_r6rot")
+
+[node name="scenes" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="login_screen" parent="scenes" instance=ExtResource("3_mdu8e")]
+layout_mode = 1
+
+[node name="register_screen" parent="scenes" instance=ExtResource("4_aa44q")]
+visible = false
+layout_mode = 1
+
+[node name="main_menu" parent="scenes" instance=ExtResource("3_l7bh6")]
+visible = false
+layout_mode = 1
+
+[node name="deck_select_screen" parent="scenes" instance=ExtResource("6_buhrw")]
+visible = false
+layout_mode = 1
+
+[node name="waiting_for_game_screen" parent="scenes" instance=ExtResource("7_3mey6")]
+visible = false
+layout_mode = 1
+
+[node name="card_select_screen" parent="scenes" instance=ExtResource("6_mv13i")]
+visible = false
+layout_mode = 1
+
+[node name="card_view_screen" parent="scenes" instance=ExtResource("4_7j88m")]
+visible = false
+layout_mode = 1
+
+[node name="card_builder" parent="scenes" instance=ExtResource("2_g4apw")]
+visible = false
+layout_mode = 1
+
+[node name="deck_editor" parent="scenes" instance=ExtResource("8_0vlk2")]
+visible = false
+layout_mode = 1
+
+[node name="error_label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 50.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.917691, 0.000458734, 0.0859799, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+
+[connection signal="auto_login" from="scenes/login_screen" to="." method="_on_login_screen_auto_login"]
+[connection signal="change_screen_to_register" from="scenes/login_screen" to="." method="_on_login_screen_change_screen_to_register"]
+[connection signal="login" from="scenes/login_screen" to="." method="_on_login_screen_login"]
+[connection signal="change_screen_to_login" from="scenes/register_screen" to="." method="_on_register_screen_change_screen_to_login"]
+[connection signal="register" from="scenes/register_screen" to="." method="_on_register_screen_register"]
+[connection signal="search_for_pve_game" from="scenes/main_menu" to="." method="_on_main_menu_search_for_pve_game"]
+[connection signal="search_for_pvp_game" from="scenes/main_menu" to="." method="_on_main_menu_search_for_pvp_game"]
+[connection signal="start_card_builder" from="scenes/main_menu" to="." method="_on_main_menu_start_card_builder"]
+[connection signal="start_deck_editor" from="scenes/main_menu" to="." method="_on_main_menu_start_deck_editor"]
+[connection signal="view_all_cards" from="scenes/main_menu" to="." method="_on_main_menu_view_all_cards"]
+[connection signal="cancel_deck_select" from="scenes/deck_select_screen" to="." method="_on_deck_select_screen_cancel_deck_select"]
+[connection signal="select_deck" from="scenes/deck_select_screen" to="." method="_on_deck_select_screen_select_deck"]
+[connection signal="cancel_game" from="scenes/waiting_for_game_screen" to="." method="_on_waiting_for_game_screen_cancel_game"]
+[connection signal="cancel_validation" from="scenes/waiting_for_game_screen" to="." method="_on_waiting_for_game_screen_cancel_validation"]
+[connection signal="exit_menu" from="scenes/card_view_screen" to="." method="_on_card_view_screen_exit_menu"]
+[connection signal="back_to_menu" from="scenes/card_builder" to="." method="_on_card_builder_back_to_menu"]
+[connection signal="change_name" from="scenes/card_builder" to="." method="_on_card_builder_change_name"]
+[connection signal="move_card" from="scenes/card_builder" to="." method="_on_card_builder_move_card"]
+[connection signal="move_set" from="scenes/card_builder" to="." method="_on_card_builder_move_set"]
+[connection signal="place_component" from="scenes/card_builder" to="." method="_on_card_builder_place_component"]
+[connection signal="restart" from="scenes/card_builder" to="." method="_on_card_builder_restart"]
+[connection signal="rotate_card" from="scenes/card_builder" to="." method="_on_card_builder_rotate_card"]
+[connection signal="save_card" from="scenes/card_builder" to="." method="_on_card_builder_save_card"]
+[connection signal="set_component" from="scenes/card_builder" to="." method="_on_card_builder_set_component"]
+[connection signal="template_selected" from="scenes/card_builder" to="." method="_on_card_builder_template_selected"]
+[connection signal="undo" from="scenes/card_builder" to="." method="_on_card_builder_undo"]
+[connection signal="add_avatar_to_deck" from="scenes/deck_editor" to="." method="_on_deck_editor_add_avatar_to_deck"]
+[connection signal="add_card_to_deck" from="scenes/deck_editor" to="." method="_on_deck_editor_add_card_to_deck"]
+[connection signal="change_deck_name" from="scenes/deck_editor" to="." method="_on_deck_editor_change_deck_name"]
+[connection signal="close_deck_editor" from="scenes/deck_editor" to="." method="_on_deck_editor_close_deck_editor"]
+[connection signal="deck_selected" from="scenes/deck_editor" to="." method="_on_deck_editor_deck_selected"]
+[connection signal="remove_card_from_deck" from="scenes/deck_editor" to="." method="_on_deck_editor_remove_card_from_deck"]
