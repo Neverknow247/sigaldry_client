@@ -91,14 +91,50 @@ offset_right = 1896.0
 offset_bottom = 303.0
 placeholder_text = "name card here"
 alignment = 1
-max_length = 21
+max_length = 16
 
 [node name="card_graphic" parent="card_preview" instance=ExtResource("5_0g7mw")]
 layout_mode = 0
 offset_left = 1514.0
 offset_top = 313.0
-offset_right = 1884.0
-offset_bottom = 838.0
+offset_right = 1872.0
+offset_bottom = 816.0
+expand_mode = 5
+
+[node name="card_name" parent="card_preview/card_graphic" index="0"]
+offset_left = 22.0
+offset_top = 191.0
+offset_right = 334.0
+offset_bottom = 247.0
+theme_override_font_sizes/font_size = 40
+
+[node name="card_effects" parent="card_preview/card_graphic" index="1"]
+offset_left = 30.0
+offset_top = 263.0
+offset_right = 326.0
+offset_bottom = 423.0
+theme_override_font_sizes/font_size = 24
+
+[node name="card_price" parent="card_preview/card_graphic" index="3"]
+offset_left = 293.0
+offset_top = 7.0
+offset_right = 357.0
+offset_bottom = 63.0
+theme_override_font_sizes/font_size = 28
+
+[node name="card_attack" parent="card_preview/card_graphic" index="4"]
+offset_left = -2.0
+offset_top = 437.0
+offset_right = 70.0
+offset_bottom = 501.0
+theme_override_font_sizes/font_size = 28
+
+[node name="card_health" parent="card_preview/card_graphic" index="5"]
+offset_left = 293.0
+offset_top = 437.0
+offset_right = 357.0
+offset_bottom = 501.0
+theme_override_font_sizes/font_size = 28
 
 [node name="undo_button" type="Button" parent="card_preview"]
 layout_mode = 0
@@ -124,7 +160,7 @@ offset_top = 205.0
 offset_right = 529.0
 offset_bottom = 995.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="component_container"]
+[node name="component_v_box" type="VBoxContainer" parent="component_container"]
 layout_mode = 2
 
 [connection signal="active_component_changed" from="card_grid" to="." method="_on_card_grid_active_component_changed"]
@@ -139,3 +175,5 @@ layout_mode = 2
 [connection signal="text_changed" from="card_preview/name_card_edit" to="." method="_on_name_card_ed_text_changed"]
 [connection signal="pressed" from="card_preview/undo_button" to="." method="_on_undo_button_pressed"]
 [connection signal="pressed" from="save_button" to="." method="_on_save_button_pressed"]
+
+[editable path="card_preview/card_graphic"]

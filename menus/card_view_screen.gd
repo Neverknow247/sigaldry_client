@@ -4,7 +4,7 @@ var scene_name = "card_view"
 
 const card_preview = preload("res://items/card_preview.tscn")
 
-var binder_width = 4
+var binder_width = 5
 
 @onready var scroll_container = $ScrollContainer
 @onready var v_box_container = $ScrollContainer/VBoxContainer
@@ -27,12 +27,13 @@ func add_cards(payload):
 		var new_card = card_preview.instantiate()
 		row_node.add_child(new_card)
 		new_card["card_name"].text = card["card"]["name"]
+		new_card["card_type"].text = card["card"]["subtype"].capitalize()
 		var card_effect_text = ""
 		var discount = 0
-		print(card)
+		#print(card)
 		if card["card"]["keywords"]:
 			for ability in card["card"]["keywords"]:
-				print(ability)
+				#print(ability)
 				if ability["name"] == "health":
 					var card_hp = ability["value"]
 					new_card["card_health"].text = str(card_hp) if card_hp > 0 else ""

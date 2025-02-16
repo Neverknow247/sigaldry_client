@@ -13,8 +13,9 @@ var backendURL: String
 @onready var deck_select_screen = $scenes/deck_select_screen
 @onready var waiting_for_game_screen = $scenes/waiting_for_game_screen
 @onready var card_select_screen = $scenes/card_select_screen
-@onready var card_builder = $scenes/card_builder
+@onready var game_screen = $scenes/game_screen
 @onready var card_view_screen = $scenes/card_view_screen
+@onready var card_builder = $scenes/card_builder
 @onready var deck_editor = $scenes/deck_editor
 
 func _ready():
@@ -63,6 +64,8 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 			print(payload)
 		"login":
 			change_scene("menu")
+		"logout":
+			change_scene("login")
 		"show-lobby":
 			change_scene("menu")
 		"builder-update-templates":
@@ -73,9 +76,10 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 		"close-card-builder":
 			change_scene("menu")
 		"builder-update-components":
-			load_builder_components(payload)
+			card_builder.load_builder_components(payload)
+			#load_builder_components(payload)
 		"builder-update-grid":
-			load_builder_grid(payload)
+			card_builder.load_builder_grid(payload)
 		"editor-view-cards":
 			change_scene("card_view")
 			card_view_screen.add_cards(payload)
@@ -92,16 +96,18 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 			change_scene("menu")
 		
 		
-		#pvp events
+		#game events
 		"select-deck":
 			change_scene("deck_select")
+			card_select_screen.reset()
 			deck_select_screen.add_decks(payload)
 		"waiting":
 			change_scene("waiting")
 			waiting_for_game_screen.waiting(payload)
 		"update-unit":
+			game_screen.update_unit(payload)
 			#print(payload)
-			pass
+			#pass
 		"select-cards":
 			change_scene("card_select")
 			card_select_screen.update_cards(payload)
@@ -109,27 +115,26 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 			card_select_screen.countdown(payload)
 		"update-selected-cards":
 			card_select_screen.update_cards(payload)
-			pass
 		"update-turn":
-			#print(payload)
+			change_scene("game")
+			game_screen.update_turn(payload)
 			pass
 		"add-combat-log":
-			#print(payload)
-			pass
-		"update-victory-points":
-			#print(payload)
-			pass
+			game_screen.add_combat_log(payload)
 		"update-energy":
+			game_screen.update_energy(payload)
+		"update-victory-points":
+			game_screen.update_victory_points(payload)
 			#print(payload)
 			pass
 		"join-game":
-			#print(payload)
+			game_screen.join_game(payload)
 			pass
 		"update-players":
-			#print(payload)
+			game_screen.update_players(payload)
 			pass
-		"update-tiles":
-			#print(payload)
+		"update-tile":
+			game_screen.update_tile(payload)
 			pass
 		"start-game":
 			#print(payload)
@@ -164,47 +169,50 @@ func _on_card_view_screen_exit_menu():
 func _on_login_screen_auto_login():
 	client.socketio_send("login", {'username':"nk247",'password':"pass123"})
 
+func _on_main_menu_logout():
+	client.socketio_send("logout")
 
 
 
-func load_build_templates(payload):
-	$card_builder/template_select_code.clear()
-	$card_builder/template_select_code.add_item("Pick A Template", -1)
-	$card_builder/template_select_code.add_separator()
-	for item in payload["templates"]:
-		$card_builder/template_select_code.add_item(item["name"],item["id"])
-		if item["name"].contains("Legendary"):
-			$card_builder/template_select_code.add_separator()
 
-func load_builder_components(payload):
-	var component_container = $scenes/card_builder/component_container/VBoxContainer
-	var component_container_children = component_container.get_children()
-	for child in component_container_children:
-		child.queue_free()
-	#print(payload)
-	if payload["components"]:
-		for component in payload["components"]:
-			#if component["disabled"] or !KEYWORD_GLOSS.neverknow_approved_items.has(component["name"]):
-				#continue
-			var component_button = preload("res://card_builder_scenes/component_button.tscn")
-			var new_component_button = component_button.instantiate()
-			new_component_button.get_node("Button").text = str(component["cost"])+"\n"+component["name"]
-			new_component_button.get_node("Button").tooltip_text = KEYWORD_GLOSS["glossary"][component["keywords"][0]["name"]]
-			new_component_button.component_id = component["id"]
-			new_component_button.connect("component_selected",on_component_selected)
-			component_container.add_child(new_component_button)
-			new_component_button.get_node("component_shape_grid").create_component_shapes(component)
+#func load_build_templates(payload):
+	#$card_builder/template_select_code.clear()
+	#$card_builder/template_select_code.add_item("Pick A Template", -1)
+	#$card_builder/template_select_code.add_separator()
+	#for item in payload["templates"]:
+		#$card_builder/template_select_code.add_item(item["name"],item["id"])
+		#if item["name"].contains("Legendary"):
+			#$card_builder/template_select_code.add_separator()
+
+#func load_builder_components(payload):
+	#var component_container = $scenes/card_builder/component_container/VBoxContainer
+	#var component_container_children = component_container.get_children()
+	#for child in component_container_children:
+		#child.queue_free()
+	##print(payload)
+	#if payload["components"]:
+		#for component in payload["components"]:
+			##if component["disabled"] or !KEYWORD_GLOSS.neverknow_approved_items.has(component["name"]):
+				##continue
+			#var component_button = preload("res://card_builder_scenes/component_button.tscn")
+			#var new_component_button = component_button.instantiate()
+			#new_component_button.get_node("Button").text = str(component["cost"])+"\n"+component["name"]
+			#new_component_button.get_node("Button").tooltip_text = KEYWORD_GLOSS["glossary"][component["keywords"][0]["name"]]
+			#new_component_button.component_id = component["id"]
+			#new_component_button.connect("component_selected",on_component_selected)
+			#component_container.add_child(new_component_button)
+			#new_component_button.get_node("component_shape_grid").create_component_shapes(component)
 			#print(component)
 
-func load_builder_grid(payload):
-	if payload:
-		$scenes/card_builder/card_grid.create_card_grid(payload["grid"],payload["card"]["components"])
-		card_builder.update_card_preview(payload["card"])
-		if payload["active_component"]:
-			$scenes/card_builder/card_grid.create_component_shapes(payload["active_component"])
-			$scenes/card_builder/card_grid/active_component.create_active_component(payload["active_component"])
-		else:
-			$scenes/card_builder/card_grid/active_component.create_active_component({'shape':[],'x':'0','y':'0','color':{'background_color':"FFFFFF"}})
+#func load_builder_grid(payload):
+	#if payload:
+		#$scenes/card_builder/card_grid.create_card_grid(payload["grid"],payload["card"]["components"])
+		#card_builder.update_card_preview(payload["card"])
+		#if payload["active_component"]:
+			#$scenes/card_builder/card_grid.create_component_shapes(payload["active_component"])
+			#$scenes/card_builder/card_grid/active_component.create_active_component(payload["active_component"])
+		#else:
+			#$scenes/card_builder/card_grid/active_component.create_active_component({'shape':[],'x':'0','y':'0','color':{'background_color':"FFFFFF"}})
 
 #CARD BUILDER FUNCTIONS
 func _on_card_builder_back_to_menu():
@@ -219,7 +227,7 @@ func _on_card_builder_place_component():
 func _on_card_builder_set_component(id):
 	client.socketio_send("builder-add-component",{'component_id':id})
 
-func on_component_selected(id):
+func _on_card_builder_component_selected(id):
 	client.socketio_send("builder-add-component",{'component_id':id})
 
 func _on_card_builder_change_name(card_name):
@@ -227,15 +235,13 @@ func _on_card_builder_change_name(card_name):
 
 func _on_card_builder_save_card():
 	client.socketio_send("builder-save-card")
+	client.socketio_send("close-card-builder")
 
 func _on_card_builder_move_card(cords):
 	client.socketio_send("builder-move-component",cords)
 
 func _on_card_builder_rotate_card(direction):
 	client.socketio_send("builder-rotate-component",direction)
-
-func _on_card_builder_test():
-	client.socketio_send("builder-add-rotate-move-set",{'component_id':'42','direction':'0','move_x':'1','move_y':'1',})
 
 func _on_card_builder_move_set(data):
 	client.socketio_send("builder-move-set",data)
@@ -264,8 +270,8 @@ func _on_main_menu_view_all_cards():
 func _on_main_menu_start_card_builder():
 	client.socketio_send("start-card-builder")
 
-#Deck Editor Signals
 
+#Deck Editor Functions
 func _on_main_menu_start_deck_editor():
 	client.socketio_send("start-deck-editor")
 
@@ -287,6 +293,14 @@ func _on_deck_editor_remove_card_from_deck(id):
 func _on_deck_editor_change_deck_name(deck_name):
 	client.socketio_send("editor-change-name",{'name':deck_name})
 
+func _on_deck_editor_delete_deck():
+	client.socketio_send("editor-delete-deck",{})
+
+func _on_deck_editor_create_new_deck(deck_name):
+	client.socketio_send("editor-add-deck",{"name":deck_name})
+
+
+#Game Functions
 func _on_deck_select_screen_select_deck(id):
 	client.socketio_send("deck-selected-for-new-game",{"deck_id":str(id)})
 
@@ -304,3 +318,13 @@ func _on_card_select_screen_card_select(id):
 
 func _on_card_select_screen_card_select_done():
 	client.socketio_send("select-cards-complete")
+
+func _on_game_screen_end_turn():
+	client.socketio_send("end-turn")
+
+func _on_game_screen_concede():
+	client.socketio_send("concede-game")
+
+
+func _on_game_screen_test_play(play_info):
+	client.socketio_send("play",play_info)

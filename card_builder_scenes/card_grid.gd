@@ -64,7 +64,7 @@ func create_card_grid(grid_payload,components):
 	start = Vector2(int(grid_payload["start"]["x"]),int(grid_payload["start"]["y"]))
 	#print(start)
 	bonuses = grid_payload["bonuses"]
-	print(bonuses)
+	#print(bonuses)
 	findSizeOfSquares()
 	queue_redraw()
 

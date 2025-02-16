@@ -8,6 +8,8 @@ signal add_card_to_deck(id)
 signal add_avatar_to_deck(id)
 signal remove_card_from_deck(id)
 signal change_deck_name(deck_name)
+signal delete_deck
+signal create_new_deck(deck_name)
 
 const card_preview = preload("res://items/card_preview.tscn")
 
@@ -17,6 +19,8 @@ const card_preview = preload("res://items/card_preview.tscn")
 @onready var deck_label = $deck_information/deck_label
 @onready var cards_in_deck_box = $CenterContainer/HBoxContainer/cards_in_deck/cards_in_deck_box
 @onready var cards_not_in_deck_box = $CenterContainer/HBoxContainer/cards_not_in_deck/cards_not_in_deck_box
+@onready var new_deck_screen = $new_deck_screen
+@onready var new_deck_name = $new_deck_screen/CenterContainer/HBoxContainer/new_deck_name
 
 func _on_back_button_pressed():
 	close_deck_editor.emit()
@@ -49,9 +53,17 @@ func add_cards(parent,payload,type):
 			row_node.add_theme_constant_override("separation",10)
 		var new_card = card_preview.instantiate()
 		row_node.add_child(new_card)
+		if type == "in_deck":
+			if int(card["id"]) == int(payload["avatar_id"]):
+				new_card.activate_avatar()
 		new_card["card_name"].text = card["name"]
+		new_card["card_type"].text = card["subtype"].capitalize()
 		new_card["card_id"] = card["id"]
-		new_card["type"] = type
+		if type == "not_in_deck" and card["subtype"] == "unit":
+			new_card["type"] = "unit_not_in_deck"
+		else:
+			new_card["type"] = type
+		new_card.connect("add_avatar_to_deck",avatar_to_deck)
 		new_card.connect("add_to_deck",add_to_deck)
 		new_card.connect("remove_from_deck",remove_from_deck)
 		var card_effect_text = ""
@@ -72,7 +84,7 @@ func add_cards(parent,payload,type):
 		new_card["card_effects"].text = card_effect_text
 		new_card["card_price"].text = str(card["cost"]-discount)
 		card_number+=1
-		if card_number == 2:
+		if card_number == 3:
 			card_number = 0
 
 func add_to_deck(card_id):
@@ -96,6 +108,9 @@ func update_decks(payload):
 	deck_select.add_separator()
 	for item in payload["decks"]:
 		deck_select.add_item(item["name"],item["id"])
+		if item["active"] == true:
+			deck_information.show()
+			deck_name.text = item["name"]
 
 func _on_deck_select_item_selected(index):
 	deck_selected.emit(deck_select.get_selected_id())
@@ -109,4 +124,17 @@ func _on_deck_name_text_changed(new_text):
 		change_deck_name.emit(deck_name.text)
 
 func _on_delete_deck_button_pressed():
-	pass # Replace with function body.
+	delete_deck.emit()
+	deck_information.hide()
+
+func _on_new_deck_button_pressed():
+	new_deck_name.text = ""
+	new_deck_screen.show()
+
+func _on_create_deck_button_pressed():
+	if new_deck_name.text != "":
+		create_new_deck.emit(new_deck_name.text)
+		new_deck_screen.hide()
+
+func _on_cancel_create_deck_button_pressed():
+	new_deck_screen.hide()

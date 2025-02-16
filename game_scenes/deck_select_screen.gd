@@ -10,7 +10,7 @@ signal select_deck(id)
 signal cancel_deck_select
 
 func add_decks(payload):
-	print(payload)
+	#print(payload)
 	for n in v_box_container.get_children():
 		v_box_container.remove_child(n)
 		n.queue_free()

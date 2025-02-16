@@ -1,0 +1,899 @@
+[gd_scene load_steps=12 format=3 uid="uid://b15rxgd7b65m7"]
+
+[ext_resource type="Texture2D" uid="uid://bigxwkdsae6u8" path="res://assets/art/tiles/battlefield.png" id="1_ekwu7"]
+[ext_resource type="Script" path="res://game_scenes/game_screen.gd" id="1_jfx64"]
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_xc1rc"]
+[ext_resource type="Script" path="res://game_scenes/battlefield.gd" id="3_am5je"]
+[ext_resource type="PackedScene" uid="uid://urgkw5d0kikx" path="res://items/card_preview.tscn" id="5_f5h4a"]
+[ext_resource type="Script" path="res://game_scenes/grid_space.gd" id="5_fmi5a"]
+[ext_resource type="Texture2D" uid="uid://dd7y027ilc48f" path="res://assets/art/icons/energy_icon.png" id="5_ykyht"]
+[ext_resource type="Texture2D" uid="uid://dr66ml401d1xq" path="res://assets/art/icons/cards_in_hand_icon.png" id="6_hqoc0"]
+[ext_resource type="Texture2D" uid="uid://bb7rw6dflntj6" path="res://assets/art/icons/cards_in_deck_icon.png" id="7_k7dnc"]
+[ext_resource type="Texture2D" uid="uid://4u7lkx0cpuoc" path="res://assets/art/icons/victory_point_icon.png" id="8_cj54s"]
+
+[sub_resource type="Curve2D" id="Curve2D_oyv0u"]
+
+[node name="game_screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_xc1rc")
+script = ExtResource("1_jfx64")
+
+[node name="battlefield" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -570.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ekwu7")
+script = ExtResource("3_am5je")
+
+[node name="GridContainer" type="GridContainer" parent="battlefield"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 5
+
+[node name="0,0" type="CenterContainer" parent="battlefield/GridContainer"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+script = ExtResource("5_fmi5a")
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/0,0"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/0,0/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+
+[node name="card_preview" parent="battlefield/GridContainer/0,0/Control/Control" instance=ExtResource("5_f5h4a")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -176.0
+offset_right = 128.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="battlefield/GridContainer/0,0/Control"]
+layout_mode = 0
+offset_right = 117.0
+offset_bottom = 58.0
+text = "set_id"
+
+[node name="1,0" type="CenterContainer" parent="battlefield/GridContainer"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+script = ExtResource("5_fmi5a")
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/1,0"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/1,0/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+
+[node name="card_preview" parent="battlefield/GridContainer/1,0/Control/Control" instance=ExtResource("5_f5h4a")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -176.0
+offset_right = 128.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="2,0" type="CenterContainer" parent="battlefield/GridContainer"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+script = ExtResource("5_fmi5a")
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/2,0"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/2,0/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+
+[node name="card_preview" parent="battlefield/GridContainer/2,0/Control/Control" instance=ExtResource("5_f5h4a")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -176.0
+offset_right = 128.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="3,0" type="CenterContainer" parent="battlefield/GridContainer"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+script = ExtResource("5_fmi5a")
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/3,0"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/3,0/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+
+[node name="card_preview" parent="battlefield/GridContainer/3,0/Control/Control" instance=ExtResource("5_f5h4a")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -176.0
+offset_right = 128.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="4,0" type="CenterContainer" parent="battlefield/GridContainer"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+script = ExtResource("5_fmi5a")
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/4,0"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/4,0/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+
+[node name="card_preview" parent="battlefield/GridContainer/4,0/Control/Control" instance=ExtResource("5_f5h4a")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -176.0
+offset_right = 128.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="0,1" type="CenterContainer" parent="battlefield/GridContainer"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+script = ExtResource("5_fmi5a")
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/0,1"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/0,1/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+
+[node name="card_preview" parent="battlefield/GridContainer/0,1/Control/Control" instance=ExtResource("5_f5h4a")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -176.0
+offset_right = 128.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="1,1" type="CenterContainer" parent="battlefield/GridContainer"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+script = ExtResource("5_fmi5a")
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/1,1"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/1,1/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+
+[node name="card_preview" parent="battlefield/GridContainer/1,1/Control/Control" instance=ExtResource("5_f5h4a")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -176.0
+offset_right = 128.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="2,1" type="CenterContainer" parent="battlefield/GridContainer"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+script = ExtResource("5_fmi5a")
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/2,1"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/2,1/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+
+[node name="card_preview" parent="battlefield/GridContainer/2,1/Control/Control" instance=ExtResource("5_f5h4a")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -176.0
+offset_right = 128.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="3,1" type="CenterContainer" parent="battlefield/GridContainer"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+script = ExtResource("5_fmi5a")
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/3,1"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/3,1/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+
+[node name="card_preview" parent="battlefield/GridContainer/3,1/Control/Control" instance=ExtResource("5_f5h4a")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -176.0
+offset_right = 128.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="4,1" type="CenterContainer" parent="battlefield/GridContainer"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+script = ExtResource("5_fmi5a")
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/4,1"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/4,1/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+
+[node name="card_preview" parent="battlefield/GridContainer/4,1/Control/Control" instance=ExtResource("5_f5h4a")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -176.0
+offset_right = 128.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="0,2" type="CenterContainer" parent="battlefield/GridContainer"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+script = ExtResource("5_fmi5a")
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/0,2"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/0,2/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+
+[node name="card_preview" parent="battlefield/GridContainer/0,2/Control/Control" instance=ExtResource("5_f5h4a")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -176.0
+offset_right = 128.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="1,2" type="CenterContainer" parent="battlefield/GridContainer"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+script = ExtResource("5_fmi5a")
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/1,2"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/1,2/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+
+[node name="card_preview" parent="battlefield/GridContainer/1,2/Control/Control" instance=ExtResource("5_f5h4a")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -176.0
+offset_right = 128.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="2,2" type="CenterContainer" parent="battlefield/GridContainer"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+script = ExtResource("5_fmi5a")
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/2,2"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/2,2/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+
+[node name="card_preview" parent="battlefield/GridContainer/2,2/Control/Control" instance=ExtResource("5_f5h4a")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -176.0
+offset_right = 128.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="3,2" type="CenterContainer" parent="battlefield/GridContainer"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+script = ExtResource("5_fmi5a")
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/3,2"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/3,2/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+
+[node name="card_preview" parent="battlefield/GridContainer/3,2/Control/Control" instance=ExtResource("5_f5h4a")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -176.0
+offset_right = 128.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="4,2" type="CenterContainer" parent="battlefield/GridContainer"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+script = ExtResource("5_fmi5a")
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/4,2"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/4,2/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+
+[node name="card_preview" parent="battlefield/GridContainer/4,2/Control/Control" instance=ExtResource("5_f5h4a")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -176.0
+offset_right = 128.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="0,3" type="CenterContainer" parent="battlefield/GridContainer"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+script = ExtResource("5_fmi5a")
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/0,3"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/0,3/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+
+[node name="card_preview" parent="battlefield/GridContainer/0,3/Control/Control" instance=ExtResource("5_f5h4a")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -176.0
+offset_right = 128.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="battlefield/GridContainer/0,3/Control"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "set_id"
+
+[node name="1,3" type="CenterContainer" parent="battlefield/GridContainer"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+script = ExtResource("5_fmi5a")
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/1,3"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/1,3/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+
+[node name="card_preview" parent="battlefield/GridContainer/1,3/Control/Control" instance=ExtResource("5_f5h4a")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -176.0
+offset_right = 128.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="2,3" type="CenterContainer" parent="battlefield/GridContainer"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+script = ExtResource("5_fmi5a")
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/2,3"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/2,3/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+
+[node name="card_preview" parent="battlefield/GridContainer/2,3/Control/Control" instance=ExtResource("5_f5h4a")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -176.0
+offset_right = 128.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="3,3" type="CenterContainer" parent="battlefield/GridContainer"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+script = ExtResource("5_fmi5a")
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/3,3"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/3,3/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+
+[node name="card_preview" parent="battlefield/GridContainer/3,3/Control/Control" instance=ExtResource("5_f5h4a")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -176.0
+offset_right = 128.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="4,3" type="CenterContainer" parent="battlefield/GridContainer"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+script = ExtResource("5_fmi5a")
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/4,3"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="battlefield/GridContainer/4,3/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+
+[node name="card_preview" parent="battlefield/GridContainer/4,3/Control/Control" instance=ExtResource("5_f5h4a")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -176.0
+offset_right = 128.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="side_panel" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -570.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="side_panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.290196, 0.478431, 0.588235, 1)
+
+[node name="enemy_panel" type="HBoxContainer" parent="side_panel/ColorRect"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 8.0
+offset_bottom = 72.0
+grow_horizontal = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="energy" type="HBoxContainer" parent="side_panel/ColorRect/enemy_panel"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="side_panel/ColorRect/enemy_panel/energy"]
+layout_mode = 2
+texture = ExtResource("5_ykyht")
+expand_mode = 3
+
+[node name="enemy_energy" type="Label" parent="side_panel/ColorRect/enemy_panel/energy"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 52
+text = "0"
+
+[node name="cards_in_hand" type="HBoxContainer" parent="side_panel/ColorRect/enemy_panel"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="side_panel/ColorRect/enemy_panel/cards_in_hand"]
+layout_mode = 2
+texture = ExtResource("6_hqoc0")
+
+[node name="enemy_hand_size" type="Label" parent="side_panel/ColorRect/enemy_panel/cards_in_hand"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 52
+text = "0"
+
+[node name="cards_in_deck" type="HBoxContainer" parent="side_panel/ColorRect/enemy_panel"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="side_panel/ColorRect/enemy_panel/cards_in_deck"]
+layout_mode = 2
+texture = ExtResource("7_k7dnc")
+
+[node name="enemy_deck_size" type="Label" parent="side_panel/ColorRect/enemy_panel/cards_in_deck"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 52
+text = "0"
+
+[node name="victory_points" type="HBoxContainer" parent="side_panel/ColorRect/enemy_panel"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="side_panel/ColorRect/enemy_panel/victory_points"]
+layout_mode = 2
+texture = ExtResource("8_cj54s")
+
+[node name="enemy_victory_points" type="Label" parent="side_panel/ColorRect/enemy_panel/victory_points"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 52
+text = "0"
+
+[node name="hand_preview" type="ScrollContainer" parent="side_panel/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 88.0
+offset_right = -16.0
+offset_bottom = -160.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="hand" type="VBoxContainer" parent="side_panel/ColorRect/hand_preview"]
+layout_mode = 2
+
+[node name="player_panel" type="VBoxContainer" parent="side_panel/ColorRect"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -76.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 12
+
+[node name="buttons" type="HBoxContainer" parent="side_panel/ColorRect/player_panel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="end_turn_button" type="Button" parent="side_panel/ColorRect/player_panel/buttons"]
+custom_minimum_size = Vector2(284, 0)
+layout_mode = 2
+text = "End Turn"
+
+[node name="concede_button" type="Button" parent="side_panel/ColorRect/player_panel/buttons"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+text = "Concede
+"
+
+[node name="info" type="HBoxContainer" parent="side_panel/ColorRect/player_panel"]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="energy" type="HBoxContainer" parent="side_panel/ColorRect/player_panel/info"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="side_panel/ColorRect/player_panel/info/energy"]
+layout_mode = 2
+texture = ExtResource("5_ykyht")
+expand_mode = 3
+
+[node name="my_energy" type="Label" parent="side_panel/ColorRect/player_panel/info/energy"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 52
+text = "0"
+
+[node name="cards_in_hand" type="HBoxContainer" parent="side_panel/ColorRect/player_panel/info"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="side_panel/ColorRect/player_panel/info/cards_in_hand"]
+layout_mode = 2
+texture = ExtResource("6_hqoc0")
+
+[node name="my_hand_size" type="Label" parent="side_panel/ColorRect/player_panel/info/cards_in_hand"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 52
+text = "0"
+
+[node name="cards_in_deck" type="HBoxContainer" parent="side_panel/ColorRect/player_panel/info"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="side_panel/ColorRect/player_panel/info/cards_in_deck"]
+layout_mode = 2
+texture = ExtResource("7_k7dnc")
+
+[node name="my_deck_size" type="Label" parent="side_panel/ColorRect/player_panel/info/cards_in_deck"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 52
+text = "0"
+
+[node name="victory_points" type="HBoxContainer" parent="side_panel/ColorRect/player_panel/info"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="side_panel/ColorRect/player_panel/info/victory_points"]
+layout_mode = 2
+texture = ExtResource("8_cj54s")
+
+[node name="my_victory_points" type="Label" parent="side_panel/ColorRect/player_panel/info/victory_points"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 52
+text = "0"
+
+[node name="Button" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 1379.0
+offset_top = 107.0
+offset_right = 1387.0
+offset_bottom = 115.0
+text = "test play"
+
+[node name="LineEdit" type="LineEdit" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 1560.0
+offset_top = 107.0
+offset_right = 1652.0
+offset_bottom = 165.0
+
+[node name="card_controller" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Timer" type="Timer" parent="card_controller"]
+wait_time = 0.1
+
+[node name="Path2D" type="Path2D" parent="card_controller"]
+curve = SubResource("Curve2D_oyv0u")
+
+[node name="Line2D" type="Line2D" parent="card_controller"]
+
+[connection signal="focus" from="." to="." method="_on_focus"]
+[connection signal="mouse_released" from="." to="." method="_on_mouse_released"]
+[connection signal="set_tile_id" from="battlefield/GridContainer/0,0" to="." method="_on__set_tile_id"]
+[connection signal="pressed" from="battlefield/GridContainer/0,0/Control/Button" to="battlefield/GridContainer/0,0" method="_on_button_pressed"]
+[connection signal="set_tile_id" from="battlefield/GridContainer/0,3" to="." method="_on__set_tile_id"]
+[connection signal="pressed" from="battlefield/GridContainer/0,3/Control/Button" to="battlefield/GridContainer/0,3" method="_on_button_pressed"]
+[connection signal="pressed" from="side_panel/ColorRect/player_panel/buttons/end_turn_button" to="." method="_on_end_turn_button_pressed"]
+[connection signal="pressed" from="side_panel/ColorRect/player_panel/buttons/concede_button" to="." method="_on_concede_button_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="card_controller/Timer" to="." method="_on_timer_timeout"]
