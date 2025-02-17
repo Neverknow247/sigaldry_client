@@ -140,7 +140,7 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 			#print(payload)
 			pass
 		"quit-game":
-			#print(payload)
+			game_screen.quit_game(payload)
 			pass
 
 func show_error(payload):
@@ -325,6 +325,5 @@ func _on_game_screen_end_turn():
 func _on_game_screen_concede():
 	client.socketio_send("concede-game")
 
-
-func _on_game_screen_test_play(play_info):
+func _on_game_screen_card_selected(play_info):
 	client.socketio_send("play",play_info)

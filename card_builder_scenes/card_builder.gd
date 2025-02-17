@@ -72,8 +72,8 @@ func load_builder_components(payload):
 						is_in_filter = true
 				if !is_in_filter:
 					continue
-			#if component["disabled"] or !KEYWORD_GLOSS.neverknow_approved_items.has(component["name"]):
-				#continue
+			if component["disabled"] or !KEYWORD_GLOSS.neverknow_approved_items.has(component["name"]):
+				continue
 			var component_button = preload("res://card_builder_scenes/component_button.tscn")
 			var new_component_button = component_button.instantiate()
 			new_component_button.get_node("Button").text = str(component["cost"])+"\n"+component["name"]

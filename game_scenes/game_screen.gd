@@ -27,6 +27,7 @@ signal concede
 @onready var path_2d = $card_controller/Path2D
 @onready var line_2d = $card_controller/Line2D
 
+var battlefield_data = null
 var click_hover = false
 var card_middle = Vector2(128,176)
 
@@ -36,10 +37,16 @@ signal focus(_focus)
 
 func join_game(payload):
 	#print("join game: ",payload)
-	for tile in payload["board"]["tiles"]:
+	battlefield_data = payload["board"]["tiles"]
+	for tile in battlefield_data:
 		print(tile)
 		battlefield.set_grid_space(tile)
-	pass
+		battlefield.grid[tile["game_y"]][tile["game_x"]].connect("tile_chosen",_set_battle_field_tile)
+
+func quit_game(payload):
+	for tile in battlefield_data:
+		if battlefield.grid[tile["game_y"]][tile["game_x"]].is_connected("tile_chosen",_set_battle_field_tile):
+			battlefield.grid[tile["game_y"]][tile["game_x"]].disconnect("tile_chosen",_set_battle_field_tile)
 
 func update_unit(payload):
 	#print("update unit: ",payload)
@@ -140,9 +147,10 @@ func _on_end_turn_button_pressed():
 func _on_concede_button_pressed():
 	concede.emit()
 
-signal test_play(play_info)
+signal card_selected(play_info)
 func _on_button_pressed():
-	test_play.emit({"source_id":$LineEdit.text,"source_type":"card","disposition_override":"false","dest_id":selected_tile_id,"dest_type":"tile"})
+	pass
+	#test_play.emit({"source_id":$LineEdit.text,"source_type":"card","disposition_override":"false","dest_id":selected_tile_id,"dest_type":"tile"})
 
 var selected_tile_id = ""
 func _on__set_tile_id(id):
@@ -198,11 +206,12 @@ var focused_card = 0
 func _on_card_select_mouse_focus(_pos,_focus,_id):
 	if not Input.is_action_pressed("M1") && click_hover == false:
 		on_focus(_focus)
-		path_2d.curve = Curve2D.new()
-		path_2d.curve.add_point(_pos)
-		path_2d.curve.add_point(_pos)
-		print("card id: ",_id)
-		focused_card = _id
+		if _focus:
+			path_2d.curve = Curve2D.new()
+			path_2d.curve.add_point(_pos)
+			path_2d.curve.add_point(_pos)
+			print("card id: ",_id)
+			focused_card = _id
 
 #func _on_card_select_mouse_entered():
 	#if not Input.is_action_pressed("M1") && click_hover == false:
@@ -215,7 +224,7 @@ func _on_card_select_mouse_focus(_pos,_focus,_id):
 func _on_card_select_pressed():
 	if not picked_up:
 		timer.start()
-	test_play.emit({"source_id":str(focused_card),"source_type":"card","disposition_override":"false"})
+	card_selected.emit({"source_id":str(focused_card),"source_type":"card","disposition_override":"false"})
 
 func _on_mouse_released():
 	if not timer.is_stopped():
@@ -232,12 +241,20 @@ func _on_timer_timeout():
 		await mouse_released
 		picked_up = false
 
-
 func _on_focus(_focus):
 	if _focus == true:
-		#print(card_id)
-		print("FOCUSING")
-		#focused_card.emit()
-		#select_card.emit(card_id)
+		print("FOCUSING: ",focused_card)
 	else:
-		pass
+		focused_card = null
+		print("UNFOCUSING: ",focused_card)
+
+func _set_battle_field_tile(tile_id):
+	print("*******************************************************")
+	print("focused_card: ",focused_card)
+	if focused_card != null:
+		card_selected.emit({"source_id":str(focused_card),"source_type":"card","disposition_override":"false","dest_id":tile_id,"dest_type":"tile"})
+	#print(tile_id)
+
+
+func _on_card_preview_mouse_focus(_pos, _focus, card_id):
+	print(_pos, _focus, card_id)

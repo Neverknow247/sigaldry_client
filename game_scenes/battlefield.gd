@@ -76,9 +76,14 @@ func update_unit(info):
 	grid_space["control"].visible = !info["unit"]["dead"]
 	if !info["unit"]["dead"]:
 		grid_space["card"]["card_name"].text = info["unit"]["name"]
+		grid_space["card"]["card_id"] = info["unit"]["id"]
 		grid_space["card"]["card_type"].text = info["unit"]["subtype"].capitalize()
+		grid_space["card"]["type"] = "game_type"
 		print("exhausted: ",info["unit"]["exhausted"])
 		if info["unit"]["exhausted"]:
 			grid_space["control"].rotation_degrees = 35
 		else:
 			grid_space["control"].rotation_degrees = 0
+	else:
+		grid_space["card"]["card_id"] = 0
+		grid_space["card"]["type"] = ""

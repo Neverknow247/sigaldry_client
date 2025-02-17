@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b15rxgd7b65m7"]
+[gd_scene load_steps=23 format=3 uid="uid://b15rxgd7b65m7"]
 
 [ext_resource type="Texture2D" uid="uid://bigxwkdsae6u8" path="res://assets/art/tiles/battlefield.png" id="1_ekwu7"]
 [ext_resource type="Script" path="res://game_scenes/game_screen.gd" id="1_jfx64"]
@@ -10,6 +10,28 @@
 [ext_resource type="Texture2D" uid="uid://dr66ml401d1xq" path="res://assets/art/icons/cards_in_hand_icon.png" id="6_hqoc0"]
 [ext_resource type="Texture2D" uid="uid://bb7rw6dflntj6" path="res://assets/art/icons/cards_in_deck_icon.png" id="7_k7dnc"]
 [ext_resource type="Texture2D" uid="uid://4u7lkx0cpuoc" path="res://assets/art/icons/victory_point_icon.png" id="8_cj54s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cfsdt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ollxr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c0te2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7h5v1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w2u81"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6lwn3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p83vk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_deh2b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vss74"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pag5s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yyjov"]
 
 [sub_resource type="Curve2D" id="Curve2D_oyv0u"]
 
@@ -76,11 +98,20 @@ offset_bottom = 176.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="battlefield/GridContainer/0,0/Control"]
-layout_mode = 0
-offset_right = 117.0
-offset_bottom = 58.0
-text = "set_id"
+[node name="grid_button" type="Button" parent="battlefield/GridContainer/0,0"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
 
 [node name="1,0" type="CenterContainer" parent="battlefield/GridContainer"]
 custom_minimum_size = Vector2(270, 270)
@@ -113,6 +144,21 @@ offset_bottom = 176.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="grid_button" type="Button" parent="battlefield/GridContainer/1,0"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
+
 [node name="2,0" type="CenterContainer" parent="battlefield/GridContainer"]
 custom_minimum_size = Vector2(270, 270)
 layout_mode = 2
@@ -143,6 +189,21 @@ offset_right = 128.0
 offset_bottom = 176.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="grid_button" type="Button" parent="battlefield/GridContainer/2,0"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
 
 [node name="3,0" type="CenterContainer" parent="battlefield/GridContainer"]
 custom_minimum_size = Vector2(270, 270)
@@ -175,6 +236,21 @@ offset_bottom = 176.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="grid_button" type="Button" parent="battlefield/GridContainer/3,0"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
+
 [node name="4,0" type="CenterContainer" parent="battlefield/GridContainer"]
 custom_minimum_size = Vector2(270, 270)
 layout_mode = 2
@@ -205,6 +281,21 @@ offset_right = 128.0
 offset_bottom = 176.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="grid_button" type="Button" parent="battlefield/GridContainer/4,0"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
 
 [node name="0,1" type="CenterContainer" parent="battlefield/GridContainer"]
 custom_minimum_size = Vector2(270, 270)
@@ -237,6 +328,21 @@ offset_bottom = 176.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="grid_button" type="Button" parent="battlefield/GridContainer/0,1"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
+
 [node name="1,1" type="CenterContainer" parent="battlefield/GridContainer"]
 custom_minimum_size = Vector2(270, 270)
 layout_mode = 2
@@ -267,6 +373,21 @@ offset_right = 128.0
 offset_bottom = 176.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="grid_button" type="Button" parent="battlefield/GridContainer/1,1"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
 
 [node name="2,1" type="CenterContainer" parent="battlefield/GridContainer"]
 custom_minimum_size = Vector2(270, 270)
@@ -299,6 +420,21 @@ offset_bottom = 176.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="grid_button" type="Button" parent="battlefield/GridContainer/2,1"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
+
 [node name="3,1" type="CenterContainer" parent="battlefield/GridContainer"]
 custom_minimum_size = Vector2(270, 270)
 layout_mode = 2
@@ -329,6 +465,21 @@ offset_right = 128.0
 offset_bottom = 176.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="grid_button" type="Button" parent="battlefield/GridContainer/3,1"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
 
 [node name="4,1" type="CenterContainer" parent="battlefield/GridContainer"]
 custom_minimum_size = Vector2(270, 270)
@@ -361,6 +512,21 @@ offset_bottom = 176.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="grid_button" type="Button" parent="battlefield/GridContainer/4,1"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
+
 [node name="0,2" type="CenterContainer" parent="battlefield/GridContainer"]
 custom_minimum_size = Vector2(270, 270)
 layout_mode = 2
@@ -391,6 +557,21 @@ offset_right = 128.0
 offset_bottom = 176.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="grid_button" type="Button" parent="battlefield/GridContainer/0,2"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
 
 [node name="1,2" type="CenterContainer" parent="battlefield/GridContainer"]
 custom_minimum_size = Vector2(270, 270)
@@ -423,6 +604,21 @@ offset_bottom = 176.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="grid_button" type="Button" parent="battlefield/GridContainer/1,2"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
+
 [node name="2,2" type="CenterContainer" parent="battlefield/GridContainer"]
 custom_minimum_size = Vector2(270, 270)
 layout_mode = 2
@@ -453,6 +649,21 @@ offset_right = 128.0
 offset_bottom = 176.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="grid_button" type="Button" parent="battlefield/GridContainer/2,2"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
 
 [node name="3,2" type="CenterContainer" parent="battlefield/GridContainer"]
 custom_minimum_size = Vector2(270, 270)
@@ -485,6 +696,21 @@ offset_bottom = 176.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="grid_button" type="Button" parent="battlefield/GridContainer/3,2"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
+
 [node name="4,2" type="CenterContainer" parent="battlefield/GridContainer"]
 custom_minimum_size = Vector2(270, 270)
 layout_mode = 2
@@ -515,6 +741,21 @@ offset_right = 128.0
 offset_bottom = 176.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="grid_button" type="Button" parent="battlefield/GridContainer/4,2"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
 
 [node name="0,3" type="CenterContainer" parent="battlefield/GridContainer"]
 custom_minimum_size = Vector2(270, 270)
@@ -547,11 +788,20 @@ offset_bottom = 176.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="battlefield/GridContainer/0,3/Control"]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-text = "set_id"
+[node name="grid_button" type="Button" parent="battlefield/GridContainer/0,3"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
 
 [node name="1,3" type="CenterContainer" parent="battlefield/GridContainer"]
 custom_minimum_size = Vector2(270, 270)
@@ -584,6 +834,21 @@ offset_bottom = 176.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="grid_button" type="Button" parent="battlefield/GridContainer/1,3"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
+
 [node name="2,3" type="CenterContainer" parent="battlefield/GridContainer"]
 custom_minimum_size = Vector2(270, 270)
 layout_mode = 2
@@ -614,6 +879,21 @@ offset_right = 128.0
 offset_bottom = 176.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="grid_button" type="Button" parent="battlefield/GridContainer/2,3"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
 
 [node name="3,3" type="CenterContainer" parent="battlefield/GridContainer"]
 custom_minimum_size = Vector2(270, 270)
@@ -646,6 +926,21 @@ offset_bottom = 176.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="grid_button" type="Button" parent="battlefield/GridContainer/3,3"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
+
 [node name="4,3" type="CenterContainer" parent="battlefield/GridContainer"]
 custom_minimum_size = Vector2(270, 270)
 layout_mode = 2
@@ -676,6 +971,21 @@ offset_right = 128.0
 offset_bottom = 176.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="grid_button" type="Button" parent="battlefield/GridContainer/4,3"]
+custom_minimum_size = Vector2(270, 270)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
 
 [node name="side_panel" type="Control" parent="."]
 layout_mode = 1
@@ -889,10 +1199,28 @@ curve = SubResource("Curve2D_oyv0u")
 
 [connection signal="focus" from="." to="." method="_on_focus"]
 [connection signal="mouse_released" from="." to="." method="_on_mouse_released"]
-[connection signal="set_tile_id" from="battlefield/GridContainer/0,0" to="." method="_on__set_tile_id"]
-[connection signal="pressed" from="battlefield/GridContainer/0,0/Control/Button" to="battlefield/GridContainer/0,0" method="_on_button_pressed"]
-[connection signal="set_tile_id" from="battlefield/GridContainer/0,3" to="." method="_on__set_tile_id"]
-[connection signal="pressed" from="battlefield/GridContainer/0,3/Control/Button" to="battlefield/GridContainer/0,3" method="_on_button_pressed"]
+[connection signal="pressed" from="battlefield/GridContainer/0,0/grid_button" to="battlefield/GridContainer/0,0" method="_on_grid_button_pressed"]
+[connection signal="mouse_focus" from="battlefield/GridContainer/1,0/Control/Control/card_preview" to="." method="_on_card_preview_mouse_focus"]
+[connection signal="pressed" from="battlefield/GridContainer/1,0/grid_button" to="battlefield/GridContainer/1,0" method="_on_grid_button_pressed"]
+[connection signal="pressed" from="battlefield/GridContainer/2,0/grid_button" to="battlefield/GridContainer/2,0" method="_on_grid_button_pressed"]
+[connection signal="pressed" from="battlefield/GridContainer/3,0/grid_button" to="battlefield/GridContainer/3,0" method="_on_grid_button_pressed"]
+[connection signal="pressed" from="battlefield/GridContainer/4,0/grid_button" to="battlefield/GridContainer/4,0" method="_on_grid_button_pressed"]
+[connection signal="pressed" from="battlefield/GridContainer/0,1/grid_button" to="battlefield/GridContainer/0,1" method="_on_grid_button_pressed"]
+[connection signal="pressed" from="battlefield/GridContainer/1,1/grid_button" to="battlefield/GridContainer/1,1" method="_on_grid_button_pressed"]
+[connection signal="pressed" from="battlefield/GridContainer/2,1/grid_button" to="battlefield/GridContainer/2,1" method="_on_grid_button_pressed"]
+[connection signal="pressed" from="battlefield/GridContainer/3,1/grid_button" to="battlefield/GridContainer/3,1" method="_on_grid_button_pressed"]
+[connection signal="pressed" from="battlefield/GridContainer/4,1/grid_button" to="battlefield/GridContainer/4,1" method="_on_grid_button_pressed"]
+[connection signal="pressed" from="battlefield/GridContainer/0,2/grid_button" to="battlefield/GridContainer/0,2" method="_on_grid_button_pressed"]
+[connection signal="pressed" from="battlefield/GridContainer/1,2/grid_button" to="battlefield/GridContainer/1,2" method="_on_grid_button_pressed"]
+[connection signal="pressed" from="battlefield/GridContainer/2,2/grid_button" to="battlefield/GridContainer/2,2" method="_on_grid_button_pressed"]
+[connection signal="pressed" from="battlefield/GridContainer/3,2/grid_button" to="battlefield/GridContainer/3,2" method="_on_grid_button_pressed"]
+[connection signal="pressed" from="battlefield/GridContainer/4,2/grid_button" to="battlefield/GridContainer/4,2" method="_on_grid_button_pressed"]
+[connection signal="pressed" from="battlefield/GridContainer/0,3/grid_button" to="battlefield/GridContainer/0,3" method="_on_grid_button_pressed"]
+[connection signal="mouse_focus" from="battlefield/GridContainer/1,3/Control/Control/card_preview" to="." method="_on_card_preview_mouse_focus"]
+[connection signal="pressed" from="battlefield/GridContainer/1,3/grid_button" to="battlefield/GridContainer/1,3" method="_on_grid_button_pressed"]
+[connection signal="pressed" from="battlefield/GridContainer/2,3/grid_button" to="battlefield/GridContainer/2,3" method="_on_grid_button_pressed"]
+[connection signal="pressed" from="battlefield/GridContainer/3,3/grid_button" to="battlefield/GridContainer/3,3" method="_on_grid_button_pressed"]
+[connection signal="pressed" from="battlefield/GridContainer/4,3/grid_button" to="battlefield/GridContainer/4,3" method="_on_grid_button_pressed"]
 [connection signal="pressed" from="side_panel/ColorRect/player_panel/buttons/end_turn_button" to="." method="_on_end_turn_button_pressed"]
 [connection signal="pressed" from="side_panel/ColorRect/player_panel/buttons/concede_button" to="." method="_on_concede_button_pressed"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
