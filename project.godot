@@ -11,9 +11,17 @@ config_version=5
 [application]
 
 config/name="Deckmaster Master"
-run/main_scene="res://client/client.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/version="0.000.001"
+run/main_scene="uid://sdqjb15ql8mj"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="Deckmaster"
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://assets/art/icon.svg"
+
+[autoload]
+
+Stats="*res://singletons/stats.gd"
+SaveAndLoad="*res://save_and_load/save_and_load.gd"
 
 [display]
 
@@ -21,8 +29,12 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/window_width_override=1280
 window/size/window_height_override=720
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 window/vsync/vsync_mode=2
+
+[editor]
+
+naming/node_name_casing=2
 
 [input]
 
@@ -31,9 +43,18 @@ M1={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(119, 21),"global_position":Vector2(128, 67),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
+disposition_override={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194325,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+show_dev_tool={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":true,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":57,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
 
 [rendering]
 
-textures/canvas_textures/default_texture_filter=0
 textures/lossless_compression/force_png=true
 textures/default_filters/use_nearest_mipmap_filter=true

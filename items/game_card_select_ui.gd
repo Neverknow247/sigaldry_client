@@ -28,6 +28,7 @@ func _ready():
 	path_2d.curve.add_point(global_position)
 	path_2d.curve.bake_interval = 50
 
+@warning_ignore("unused_parameter")
 func _process(delta):
 	if picked_up:
 		path_2d.curve.set_point_position(1,get_global_mouse_position()-card_middle)

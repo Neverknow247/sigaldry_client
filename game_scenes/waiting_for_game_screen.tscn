@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://2p7iqmaf2fwl"]
 
-[ext_resource type="Script" path="res://game_scenes/waiting_for_game_screen.gd" id="1_nh1ku"]
+[ext_resource type="Script" uid="uid://eiveb7u41d3n" path="res://game_scenes/waiting_for_game_screen.gd" id="1_nh1ku"]
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_rukfv"]
 
 [node name="waiting_for_game_screen" type="Control"]
@@ -13,7 +13,7 @@ grow_vertical = 2
 theme = ExtResource("1_rukfv")
 script = ExtResource("1_nh1ku")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="background_color" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

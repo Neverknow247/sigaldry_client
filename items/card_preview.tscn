@@ -1,10 +1,12 @@
-[gd_scene load_steps=28 format=3 uid="uid://urgkw5d0kikx"]
+[gd_scene load_steps=41 format=3 uid="uid://urgkw5d0kikx"]
 
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_0oyr2"]
 [ext_resource type="Texture2D" uid="uid://cdhredoprpsoi" path="res://assets/art/card_template.png" id="2_5gsad"]
-[ext_resource type="Script" path="res://items/card_preview.gd" id="2_7hato"]
+[ext_resource type="Script" uid="uid://c4ndy0nfdsb0b" path="res://items/card_preview.gd" id="2_7hato"]
 [ext_resource type="FontFile" uid="uid://b2vvtmi4jxkl5" path="res://assets/fonts/fantasque-sans-mono.bold.otf" id="4_0dvfq"]
-[ext_resource type="Script" path="res://items/game_card_select_ui.gd" id="5_gi66g"]
+[ext_resource type="FontFile" uid="uid://c30qxhuiee44b" path="res://assets/fonts/OpenSans-Bold.ttf" id="4_82ll0"]
+[ext_resource type="Script" uid="uid://cu1b5sje7w6kb" path="res://items/game_card_select_ui.gd" id="5_gi66g"]
+[ext_resource type="Script" uid="uid://6eo8osswnvrf" path="res://items/card_select.gd" id="6_x1408"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jixci"]
 
@@ -50,6 +52,28 @@
 
 [sub_resource type="Curve2D" id="Curve2D_fbnvw"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x1408"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_82ll0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_40268"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k8h1m"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r1gca"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s7iew"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c2kxn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ebyug"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4x4ms"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d1gfs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ekqhi"]
+
 [node name="card_preview" type="TextureRect"]
 custom_minimum_size = Vector2(256, 352)
 offset_right = 256.0
@@ -64,6 +88,7 @@ offset_left = 8.0
 offset_top = 128.0
 offset_right = 248.0
 offset_bottom = 176.0
+theme = ExtResource("1_0oyr2")
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 28
@@ -73,13 +98,13 @@ vertical_alignment = 1
 
 [node name="card_effects" type="Label" parent="."]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 184.0
-offset_right = 232.0
-offset_bottom = 296.0
+offset_left = 20.0
+offset_top = 180.0
+offset_right = 236.0
+offset_bottom = 300.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_0dvfq")
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("4_82ll0")
+theme_override_font_sizes/font_size = 16
 text = "Card Effects"
 autowrap_mode = 3
 
@@ -132,6 +157,16 @@ theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="card_color_profile" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 104.0
+offset_right = 2256.0
+offset_bottom = 344.0
+scale = Vector2(0.1, 0.1)
+theme_override_constants/h_separation = 0
+columns = 9
 
 [node name="in_deck_ui" type="ColorRect" parent="."]
 visible = false
@@ -223,12 +258,43 @@ theme_override_constants/separation = 132
 alignment = 1
 
 [node name="add_avatar_button" type="Button" parent="unit_not_in_deck_ui/CenterContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 mouse_filter = 1
 text = "Add Avatar"
 
 [node name="add_button" type="Button" parent="unit_not_in_deck_ui/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+mouse_filter = 1
+text = "Add"
+
+[node name="unit_only_add_avatar" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.490196)
+
+[node name="CenterContainer" type="CenterContainer" parent="unit_only_add_avatar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 176.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="add_unit_only_avatar_button" type="Button" parent="unit_only_add_avatar/CenterContainer"]
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 mouse_filter = 1
@@ -282,6 +348,7 @@ theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_xjpa1")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_rg6mg")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_aebg8")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_kymoa")
+script = ExtResource("6_x1408")
 
 [node name="Timer" type="Timer" parent="game_card_select_ui"]
 
@@ -291,13 +358,45 @@ curve = SubResource("Curve2D_fbnvw")
 [node name="Line2D" type="Line2D" parent="game_card_select_ui"]
 top_level = true
 
+[node name="builder_compare_select_ui" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="compare_card_select" type="Button" parent="builder_compare_select_ui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_x1408")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_82ll0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_40268")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_k8h1m")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_r1gca")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_s7iew")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_c2kxn")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_ebyug")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_4x4ms")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_d1gfs")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ekqhi")
+
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="pressed" from="in_deck_ui/CenterContainer/remove_button" to="." method="_on_remove_button_pressed"]
 [connection signal="pressed" from="not_in_deck_ui/CenterContainer/add_button" to="." method="_on_add_button_pressed"]
 [connection signal="pressed" from="unit_not_in_deck_ui/CenterContainer/VBoxContainer/add_avatar_button" to="." method="_on_add_avatar_button_pressed"]
 [connection signal="pressed" from="unit_not_in_deck_ui/CenterContainer/VBoxContainer/add_button" to="." method="_on_add_button_pressed"]
+[connection signal="pressed" from="unit_only_add_avatar/CenterContainer/add_unit_only_avatar_button" to="." method="_on_add_unit_only_avatar_button_pressed"]
 [connection signal="pressed" from="card_select_button" to="." method="_on_card_select_button_pressed"]
+[connection signal="get_info" from="game_card_select_ui/card_select" to="." method="_on_card_select_get_info"]
 [connection signal="mouse_entered" from="game_card_select_ui/card_select" to="." method="_on_card_select_mouse_entered"]
 [connection signal="mouse_exited" from="game_card_select_ui/card_select" to="." method="_on_card_select_mouse_exited"]
 [connection signal="timeout" from="game_card_select_ui/Timer" to="game_card_select_ui" method="_on_timer_timeout"]
+[connection signal="pressed" from="builder_compare_select_ui/compare_card_select" to="." method="_on_compare_card_select_pressed"]

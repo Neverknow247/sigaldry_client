@@ -2,6 +2,11 @@ extends Control
 
 var scene_name = "card_select"
 
+var stats = Stats
+
+@onready var background_color = $background_color
+
+
 @onready var select_container = $ScrollContainer/select_container
 @onready var selected_container = $ScrollContainer2/selected_container
 @onready var done_button = $done_button
@@ -18,6 +23,9 @@ var cards_selected = false
 signal card_select(id)
 signal card_select_done
 
+func _ready():
+	background_color.color = stats.background_color
+
 func reset():
 	cards_selected = false
 	done_button.disabled = false
@@ -25,7 +33,7 @@ func reset():
 	finish_selection_screen_2.hide()
 
 func update_cards(payload):
-	$Label.text = "Select up to %s cards for your opening hand"%[str(payload["max_cards"])]
+	$Label.text = "Select up to %s cards for your opening hand"%[str(int(payload["max_cards"]))]
 	#print(payload)
 	for n in select_container.get_children():
 		select_container.remove_child(n)
@@ -72,25 +80,25 @@ func add_card(card,container):
 		for ability in card["abilities"]:
 			if card["abilities"][ability]["name"] == "health":
 				var card_hp = card["abilities"][ability]["value"]
-				new_card["card_health"].text = str(card_hp) if card_hp > 0 else ""
+				new_card["card_health"].text = str(int(card_hp)) if card_hp > 0 else ""
 			elif card["abilities"][ability]["name"] == "attack":
-				new_card["card_attack"].text = str(card["abilities"][ability]["value"])
+				new_card["card_attack"].text = str(int(card["abilities"][ability]["value"]))
 			elif card["abilities"][ability]["name"] == "actions":
 				pass
 			elif card["abilities"][ability]["name"] == "efficient":
 				discount = card["abilities"][ability]["value"]
 			elif card["abilities"][ability]["value"] > 0:
 				card_effect_text += card["abilities"][ability]["name"].capitalize() + "-" \
-				+ str(card["abilities"][ability]["value"]) + "  " 
+				+ str(int(card["abilities"][ability]["value"])) + "  " 
 	new_card["card_effects"].text = card_effect_text
-	new_card["card_price"].text = str(card["cost"]-discount)
+	new_card["card_price"].text = str(int(card["cost"]-discount))
 
 func countdown(payload):
 	#print(payload)
 	if cards_selected:
-		done_button.text = "Waiting (%s)" %[str(payload["time_remaining"])]
+		done_button.text = "Waiting (%s)" %[str(int(payload["time_remaining"]))]
 	else:
-		done_button.text = "Done (%s)" %[str(payload["time_remaining"])]
+		done_button.text = "Done (%s)" %[str(int(payload["time_remaining"]))]
 
 func _on_done_button_pressed():
 	card_select_done.emit()

@@ -2,23 +2,34 @@ extends Control
 
 var scene_name = "card_view"
 
+var stats = Stats
+
 const card_preview = preload("res://items/card_preview.tscn")
+const COLOR_PROFILE_SQUARE_LARGE = preload("res://items/color_profile_square_large.tscn")
 
 var binder_width = 5
+
+@onready var background_color = $background_color
 
 @onready var scroll_container = $ScrollContainer
 @onready var v_box_container = $ScrollContainer/VBoxContainer
 
 signal exit_menu
 
+func _ready():
+	background_color.color = stats.background_color
+
 func add_cards(payload):
-	#print(payload)
+	print(payload)
 	for n in v_box_container.get_children():
 		v_box_container.remove_child(n)
 		n.queue_free()
 	var card_number = 0
 	var row_node
+	var first_card = true
 	for card in payload["cards"]:
+		if first_card:
+			first_card = false
 		if card_number == 0:
 			row_node = HBoxContainer.new()
 			v_box_container.add_child(row_node)
@@ -36,18 +47,28 @@ func add_cards(payload):
 				#print(ability)
 				if ability["name"] == "health":
 					var card_hp = ability["value"]
-					new_card["card_health"].text = str(card_hp) if card_hp > 0 else ""
+					new_card["card_health"].text = str(int(card_hp)) if card_hp > 0 else ""
 				elif ability["name"] == "attack":
-					new_card["card_attack"].text = str(ability["value"])
+					new_card["card_attack"].text = str(int(ability["value"]))
 				elif ability["name"] == "actions":
 					pass
 				elif ability["name"] == "efficient":
 					discount = ability["value"]
 				elif ability["value"] > 0:
 					card_effect_text += ability["name"].capitalize() + "-" \
-					+ str(ability["value"]) + "  " 
+					+ str(int(ability["value"])) + "  " 
+					#+ str(int(ability["value"])) + "  " 
 		new_card["card_effects"].text = card_effect_text
-		new_card["card_price"].text = str(card["card"]["cost"]-discount)
+		new_card["card_price"].text = str(int(card["card"]["cost"]-discount))
+		
+		for _child in new_card.card_color_profile.get_children():
+			new_card.card_color_profile.remove_child(_child)
+			_child.queue_free()
+		for color in card["card"]["color_profile"]:
+			var new_color = COLOR_PROFILE_SQUARE_LARGE.instantiate()
+			new_card.card_color_profile.add_child(new_color)
+			new_color.color_square.color = Color(stats.COLOR_KEY[color["id"]])
+			new_color.color_magnitude.text = str(int(color["magnitude"]))
 		
 		card_number+=1
 		if card_number == binder_width:

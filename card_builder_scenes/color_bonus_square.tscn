@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://nu8u1n14jovn"]
+
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_qxxex"]
+[ext_resource type="Script" uid="uid://pjr54f0swwk0" path="res://card_builder_scenes/color_bonus.gd" id="1_vewjk"]
+
+[node name="color_bonus_square" type="ColorRect"]
+custom_minimum_size = Vector2(64, 64)
+theme = ExtResource("1_qxxex")
+color = Color(0, 0, 0, 1)
+script = ExtResource("1_vewjk")
+
+[node name="bonus_color" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 56.0
+offset_bottom = 56.0
+
+[node name="bonus_label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 24
+text = "+0.15"
+horizontal_alignment = 1
+vertical_alignment = 1

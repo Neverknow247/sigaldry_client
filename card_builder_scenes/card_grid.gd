@@ -1,5 +1,7 @@
 extends Control
 
+var stats = Stats
+
 const start_icon = preload("res://items/start_icon.tscn")
 const plus_one_icon = preload("res://items/plus_one_icon.tscn")
 const plus_two_icon = preload("res://items/plus_two_icon.tscn")
@@ -14,10 +16,10 @@ var bonuses = []
 var minSizeOfSquares = 0.0
 var screensize = Vector2(400,400)
 var grid_square_size = 100
-@export var color_one = Color("#333f58")
-@export var color_two = Color("#292831")
 
 #Other Colors I Like
+#@export var color_one = Color("#333f58")
+#@export var color_two = Color("#292831")
 #Color("#c0d4c9") and Color("#6fb6ae")
 #Color("#fbbbad") and Color("#ee8695")
 
@@ -91,10 +93,11 @@ func _draw():
 			for y in height:
 				var pos = Vector2(x*minSizeOfSquares,y*minSizeOfSquares)
 				var rect = Rect2(pos,Vector2(minSizeOfSquares,minSizeOfSquares))
-				var col = color_one
+				var col = stats.color_one
+				@warning_ignore("unused_variable")
 				var second_col = Color.BLACK
 				if (i%2):
-					col = color_two
+					col = stats.color_two
 				if tiles[y][x] == 0:
 					col = Color(1,1,1,0)
 					second_col = Color(1,1,1,1)
@@ -143,8 +146,10 @@ func _draw():
 							$icons.add_child(times_two)
 				i+=1
 
+@warning_ignore("unused_parameter")
 func _process(delta):
 	queue_redraw()
+	@warning_ignore("integer_division")
 	$active_component.position = ((get_local_mouse_position() - Vector2(minSizeOfSquares,minSizeOfSquares)/2) - ((Vector2.ONE*grid_square_size)*(shape.size()/2)) + (Vector2.ONE*grid_square_size/2)).snapped(Vector2(grid_square_size,grid_square_size))
 	#print($active_component.position)
 	#print(height,width)
@@ -162,7 +167,9 @@ func _input(event):
 	if event.is_pressed() and event is InputEventMouse:
 		if event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 			if active_component:
+				@warning_ignore("integer_division")
 				check_placement_pos.emit(active_component_start,grid_mouse_pos-(Vector2.ONE*(shape.size()/2)))
+				@warning_ignore("integer_division")
 				active_component_start = grid_mouse_pos-(Vector2.ONE*(shape.size()/2))
 				#print(grid_mouse_pos)
 				#print("its a mouse click")

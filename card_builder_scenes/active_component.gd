@@ -42,6 +42,7 @@ func _draw():
 	if (height == 0 and width == 0):
 		return
 	else:
+		@warning_ignore("unused_variable")
 		var i = 0
 		for x in width:
 			if height % 2 == 0:

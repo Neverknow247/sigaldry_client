@@ -1,8 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://dcjo6gkd7kxtk"]
+[gd_scene load_steps=15 format=3 uid="uid://dcjo6gkd7kxtk"]
 
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_bnrmd"]
 [ext_resource type="PackedScene" uid="uid://d3qyhudrdt78l" path="res://card_builder_scenes/card_builder.tscn" id="2_g4apw"]
-[ext_resource type="Script" path="res://client/client.gd" id="2_r6rot"]
+[ext_resource type="Script" uid="uid://dl3gn8gxjpq4r" path="res://client/client.gd" id="2_r6rot"]
 [ext_resource type="PackedScene" uid="uid://be8308edhjqd8" path="res://menus/main_menu.tscn" id="3_l7bh6"]
 [ext_resource type="PackedScene" uid="uid://d2mvewu0gwxc6" path="res://menus/login_screen.tscn" id="3_mdu8e"]
 [ext_resource type="PackedScene" uid="uid://csetiwpyf37t2" path="res://menus/card_view_screen.tscn" id="4_7j88m"]
@@ -12,6 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://2p7iqmaf2fwl" path="res://game_scenes/waiting_for_game_screen.tscn" id="7_3mey6"]
 [ext_resource type="PackedScene" uid="uid://bniv385seyq0k" path="res://deck_builder_scenes/deck_editor.tscn" id="8_0vlk2"]
 [ext_resource type="PackedScene" uid="uid://b15rxgd7b65m7" path="res://game_scenes/game_screen.tscn" id="9_ycmdf"]
+[ext_resource type="PackedScene" uid="uid://bnrpk8aqowvup" path="res://menus/transition.tscn" id="13_au68s"]
+[ext_resource type="PackedScene" uid="uid://cfs43teibk45h" path="res://dev_tools/dev_screen.tscn" id="14_sbtbl"]
 
 [node name="client" type="Control"]
 layout_mode = 3
@@ -22,6 +24,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_bnrmd")
 script = ExtResource("2_r6rot")
+
+[node name="transition" parent="." instance=ExtResource("13_au68s")]
+layout_mode = 1
 
 [node name="scenes" type="Control" parent="."]
 layout_mode = 1
@@ -83,7 +88,11 @@ theme_override_colors/font_color = Color(0.917691, 0.000458734, 0.0859799, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 
-[connection signal="auto_login" from="scenes/login_screen" to="." method="_on_login_screen_auto_login"]
+[node name="dev_screen" parent="." instance=ExtResource("14_sbtbl")]
+visible = false
+z_index = 100
+layout_mode = 1
+
 [connection signal="change_screen_to_register" from="scenes/login_screen" to="." method="_on_login_screen_change_screen_to_register"]
 [connection signal="login" from="scenes/login_screen" to="." method="_on_login_screen_login"]
 [connection signal="change_screen_to_login" from="scenes/register_screen" to="." method="_on_register_screen_change_screen_to_login"]
@@ -103,17 +112,18 @@ theme_override_constants/outline_size = 10
 [connection signal="card_selected" from="scenes/game_screen" to="." method="_on_game_screen_card_selected"]
 [connection signal="concede" from="scenes/game_screen" to="." method="_on_game_screen_concede"]
 [connection signal="end_turn" from="scenes/game_screen" to="." method="_on_game_screen_end_turn"]
+[connection signal="get_info" from="scenes/game_screen" to="." method="_on_game_screen_get_info"]
 [connection signal="exit_menu" from="scenes/card_view_screen" to="." method="_on_card_view_screen_exit_menu"]
 [connection signal="back_to_menu" from="scenes/card_builder" to="." method="_on_card_builder_back_to_menu"]
 [connection signal="change_name" from="scenes/card_builder" to="." method="_on_card_builder_change_name"]
+[connection signal="compare_card_select" from="scenes/card_builder" to="." method="_on_card_builder_compare_card_select"]
+[connection signal="component_removed" from="scenes/card_builder" to="." method="_on_card_builder_component_removed"]
 [connection signal="component_selected" from="scenes/card_builder" to="." method="_on_card_builder_component_selected"]
-[connection signal="move_card" from="scenes/card_builder" to="." method="_on_card_builder_move_card"]
 [connection signal="move_set" from="scenes/card_builder" to="." method="_on_card_builder_move_set"]
 [connection signal="place_component" from="scenes/card_builder" to="." method="_on_card_builder_place_component"]
 [connection signal="restart" from="scenes/card_builder" to="." method="_on_card_builder_restart"]
 [connection signal="rotate_card" from="scenes/card_builder" to="." method="_on_card_builder_rotate_card"]
 [connection signal="save_card" from="scenes/card_builder" to="." method="_on_card_builder_save_card"]
-[connection signal="set_component" from="scenes/card_builder" to="." method="_on_card_builder_set_component"]
 [connection signal="template_selected" from="scenes/card_builder" to="." method="_on_card_builder_template_selected"]
 [connection signal="undo" from="scenes/card_builder" to="." method="_on_card_builder_undo"]
 [connection signal="add_avatar_to_deck" from="scenes/deck_editor" to="." method="_on_deck_editor_add_avatar_to_deck"]
@@ -124,3 +134,9 @@ theme_override_constants/outline_size = 10
 [connection signal="deck_selected" from="scenes/deck_editor" to="." method="_on_deck_editor_deck_selected"]
 [connection signal="delete_deck" from="scenes/deck_editor" to="." method="_on_deck_editor_delete_deck"]
 [connection signal="remove_card_from_deck" from="scenes/deck_editor" to="." method="_on_deck_editor_remove_card_from_deck"]
+[connection signal="show_units_only" from="scenes/deck_editor" to="." method="_on_deck_editor_show_units_only"]
+[connection signal="add_components" from="dev_screen" to="." method="_on_dev_screen_add_components"]
+[connection signal="add_spice" from="dev_screen" to="." method="_on_dev_screen_add_spice"]
+[connection signal="add_templates" from="dev_screen" to="." method="_on_dev_screen_add_templates"]
+[connection signal="auto_login" from="dev_screen" to="." method="_on_dev_screen_auto_login"]
+[connection signal="get_reward" from="dev_screen" to="." method="_on_dev_screen_get_reward"]

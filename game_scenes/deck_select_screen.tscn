@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bt81fiil5ouwn"]
 
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_3rcdx"]
-[ext_resource type="Script" path="res://game_scenes/deck_select_screen.gd" id="1_ug0ox"]
+[ext_resource type="Script" uid="uid://d0jcmn0wr524x" path="res://game_scenes/deck_select_screen.gd" id="1_ug0ox"]
 
 [node name="deck_select_screen" type="Control"]
 layout_mode = 3
@@ -13,7 +13,7 @@ grow_vertical = 2
 theme = ExtResource("1_3rcdx")
 script = ExtResource("1_ug0ox")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="background_color" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

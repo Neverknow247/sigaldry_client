@@ -1,39 +1,21 @@
-[gd_scene load_steps=23 format=3 uid="uid://b15rxgd7b65m7"]
+[gd_scene load_steps=14 format=3 uid="uid://b15rxgd7b65m7"]
 
 [ext_resource type="Texture2D" uid="uid://bigxwkdsae6u8" path="res://assets/art/tiles/battlefield.png" id="1_ekwu7"]
-[ext_resource type="Script" path="res://game_scenes/game_screen.gd" id="1_jfx64"]
+[ext_resource type="Script" uid="uid://dkevts2lkrjpa" path="res://game_scenes/game_screen.gd" id="1_jfx64"]
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_xc1rc"]
-[ext_resource type="Script" path="res://game_scenes/battlefield.gd" id="3_am5je"]
-[ext_resource type="PackedScene" uid="uid://urgkw5d0kikx" path="res://items/card_preview.tscn" id="5_f5h4a"]
-[ext_resource type="Script" path="res://game_scenes/grid_space.gd" id="5_fmi5a"]
+[ext_resource type="Script" uid="uid://b08lga87axavw" path="res://game_scenes/battlefield.gd" id="3_am5je"]
+[ext_resource type="PackedScene" uid="uid://bncybjplfwfu6" path="res://game_scenes/grid_space.tscn" id="5_ow6xo"]
 [ext_resource type="Texture2D" uid="uid://dd7y027ilc48f" path="res://assets/art/icons/energy_icon.png" id="5_ykyht"]
 [ext_resource type="Texture2D" uid="uid://dr66ml401d1xq" path="res://assets/art/icons/cards_in_hand_icon.png" id="6_hqoc0"]
 [ext_resource type="Texture2D" uid="uid://bb7rw6dflntj6" path="res://assets/art/icons/cards_in_deck_icon.png" id="7_k7dnc"]
+[ext_resource type="Texture2D" uid="uid://dyq0ntiwuu4y2" path="res://assets/art/game_timer.png" id="7_kmdyf"]
 [ext_resource type="Texture2D" uid="uid://4u7lkx0cpuoc" path="res://assets/art/icons/victory_point_icon.png" id="8_cj54s"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cfsdt"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ollxr"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c0te2"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7h5v1"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w2u81"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6lwn3"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p83vk"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_deh2b"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vss74"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pag5s"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yyjov"]
+[ext_resource type="PackedScene" uid="uid://urgkw5d0kikx" path="res://items/card_preview.tscn" id="11_tqtnu"]
 
 [sub_resource type="Curve2D" id="Curve2D_oyv0u"]
+
+[sub_resource type="Curve2D" id="Curve2D_26jnf"]
+bake_interval = 50.0
 
 [node name="game_screen" type="Control"]
 layout_mode = 3
@@ -67,925 +49,84 @@ theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 5
 
-[node name="0,0" type="CenterContainer" parent="battlefield/GridContainer"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-script = ExtResource("5_fmi5a")
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/0,0"]
+[node name="0,0" parent="battlefield/GridContainer" instance=ExtResource("5_ow6xo")]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="battlefield/GridContainer/0,0/Control"]
+[node name="turn_timer" type="Control" parent="battlefield"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="turn_timer_left" type="ProgressBar" parent="battlefield/turn_timer"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -701.0
+offset_top = 8.0
+offset_right = -52.0
+offset_bottom = 24.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = 3.14159
+max_value = 60.0
+step = 1.0
+value = 2.0
+show_percentage = false
+
+[node name="turn_timer_right" type="ProgressBar" parent="battlefield/turn_timer"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -649.0
+offset_top = -8.0
+offset_bottom = 8.0
+grow_horizontal = 0
+grow_vertical = 2
+max_value = 60.0
+step = 1.0
+value = 2.0
+show_percentage = false
+
+[node name="turn_timer_graphic" type="TextureRect" parent="battlefield/turn_timer"]
+layout_mode = 0
+offset_left = 643.0
+offset_top = -24.0
+offset_right = 707.0
+offset_bottom = 40.0
+texture = ExtResource("7_kmdyf")
+
+[node name="turn_timer_count" type="Label" parent="battlefield/turn_timer/turn_timer_graphic"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.6, 0.6)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "60"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="card_preview" parent="battlefield/GridContainer/0,0/Control/Control" instance=ExtResource("5_f5h4a")]
+[node name="Control" type="Control" parent="battlefield"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 14
 anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -176.0
-offset_right = 128.0
-offset_bottom = 176.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="grid_button" type="Button" parent="battlefield/GridContainer/0,0"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
-
-[node name="1,0" type="CenterContainer" parent="battlefield/GridContainer"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-script = ExtResource("5_fmi5a")
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/1,0"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/1,0/Control"]
-layout_mode = 1
-anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.7, 0.7)
-
-[node name="card_preview" parent="battlefield/GridContainer/1,0/Control/Control" instance=ExtResource("5_f5h4a")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -176.0
-offset_right = 128.0
-offset_bottom = 176.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="grid_button" type="Button" parent="battlefield/GridContainer/1,0"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
-
-[node name="2,0" type="CenterContainer" parent="battlefield/GridContainer"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-script = ExtResource("5_fmi5a")
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/2,0"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/2,0/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.7, 0.7)
-
-[node name="card_preview" parent="battlefield/GridContainer/2,0/Control/Control" instance=ExtResource("5_f5h4a")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -176.0
-offset_right = 128.0
-offset_bottom = 176.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="grid_button" type="Button" parent="battlefield/GridContainer/2,0"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
-
-[node name="3,0" type="CenterContainer" parent="battlefield/GridContainer"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-script = ExtResource("5_fmi5a")
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/3,0"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/3,0/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.7, 0.7)
-
-[node name="card_preview" parent="battlefield/GridContainer/3,0/Control/Control" instance=ExtResource("5_f5h4a")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -176.0
-offset_right = 128.0
-offset_bottom = 176.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="grid_button" type="Button" parent="battlefield/GridContainer/3,0"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
-
-[node name="4,0" type="CenterContainer" parent="battlefield/GridContainer"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-script = ExtResource("5_fmi5a")
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/4,0"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/4,0/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.7, 0.7)
-
-[node name="card_preview" parent="battlefield/GridContainer/4,0/Control/Control" instance=ExtResource("5_f5h4a")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -176.0
-offset_right = 128.0
-offset_bottom = 176.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="grid_button" type="Button" parent="battlefield/GridContainer/4,0"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
-
-[node name="0,1" type="CenterContainer" parent="battlefield/GridContainer"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-script = ExtResource("5_fmi5a")
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/0,1"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/0,1/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.7, 0.7)
-
-[node name="card_preview" parent="battlefield/GridContainer/0,1/Control/Control" instance=ExtResource("5_f5h4a")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -176.0
-offset_right = 128.0
-offset_bottom = 176.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="grid_button" type="Button" parent="battlefield/GridContainer/0,1"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
-
-[node name="1,1" type="CenterContainer" parent="battlefield/GridContainer"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-script = ExtResource("5_fmi5a")
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/1,1"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/1,1/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.7, 0.7)
-
-[node name="card_preview" parent="battlefield/GridContainer/1,1/Control/Control" instance=ExtResource("5_f5h4a")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -176.0
-offset_right = 128.0
-offset_bottom = 176.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="grid_button" type="Button" parent="battlefield/GridContainer/1,1"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
-
-[node name="2,1" type="CenterContainer" parent="battlefield/GridContainer"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-script = ExtResource("5_fmi5a")
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/2,1"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/2,1/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.7, 0.7)
-
-[node name="card_preview" parent="battlefield/GridContainer/2,1/Control/Control" instance=ExtResource("5_f5h4a")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -176.0
-offset_right = 128.0
-offset_bottom = 176.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="grid_button" type="Button" parent="battlefield/GridContainer/2,1"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
-
-[node name="3,1" type="CenterContainer" parent="battlefield/GridContainer"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-script = ExtResource("5_fmi5a")
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/3,1"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/3,1/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.7, 0.7)
-
-[node name="card_preview" parent="battlefield/GridContainer/3,1/Control/Control" instance=ExtResource("5_f5h4a")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -176.0
-offset_right = 128.0
-offset_bottom = 176.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="grid_button" type="Button" parent="battlefield/GridContainer/3,1"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
-
-[node name="4,1" type="CenterContainer" parent="battlefield/GridContainer"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-script = ExtResource("5_fmi5a")
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/4,1"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/4,1/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.7, 0.7)
-
-[node name="card_preview" parent="battlefield/GridContainer/4,1/Control/Control" instance=ExtResource("5_f5h4a")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -176.0
-offset_right = 128.0
-offset_bottom = 176.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="grid_button" type="Button" parent="battlefield/GridContainer/4,1"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
-
-[node name="0,2" type="CenterContainer" parent="battlefield/GridContainer"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-script = ExtResource("5_fmi5a")
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/0,2"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/0,2/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.7, 0.7)
-
-[node name="card_preview" parent="battlefield/GridContainer/0,2/Control/Control" instance=ExtResource("5_f5h4a")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -176.0
-offset_right = 128.0
-offset_bottom = 176.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="grid_button" type="Button" parent="battlefield/GridContainer/0,2"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
-
-[node name="1,2" type="CenterContainer" parent="battlefield/GridContainer"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-script = ExtResource("5_fmi5a")
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/1,2"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/1,2/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.7, 0.7)
-
-[node name="card_preview" parent="battlefield/GridContainer/1,2/Control/Control" instance=ExtResource("5_f5h4a")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -176.0
-offset_right = 128.0
-offset_bottom = 176.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="grid_button" type="Button" parent="battlefield/GridContainer/1,2"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
-
-[node name="2,2" type="CenterContainer" parent="battlefield/GridContainer"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-script = ExtResource("5_fmi5a")
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/2,2"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/2,2/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.7, 0.7)
-
-[node name="card_preview" parent="battlefield/GridContainer/2,2/Control/Control" instance=ExtResource("5_f5h4a")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -176.0
-offset_right = 128.0
-offset_bottom = 176.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="grid_button" type="Button" parent="battlefield/GridContainer/2,2"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
-
-[node name="3,2" type="CenterContainer" parent="battlefield/GridContainer"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-script = ExtResource("5_fmi5a")
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/3,2"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/3,2/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.7, 0.7)
-
-[node name="card_preview" parent="battlefield/GridContainer/3,2/Control/Control" instance=ExtResource("5_f5h4a")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -176.0
-offset_right = 128.0
-offset_bottom = 176.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="grid_button" type="Button" parent="battlefield/GridContainer/3,2"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
-
-[node name="4,2" type="CenterContainer" parent="battlefield/GridContainer"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-script = ExtResource("5_fmi5a")
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/4,2"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/4,2/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.7, 0.7)
-
-[node name="card_preview" parent="battlefield/GridContainer/4,2/Control/Control" instance=ExtResource("5_f5h4a")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -176.0
-offset_right = 128.0
-offset_bottom = 176.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="grid_button" type="Button" parent="battlefield/GridContainer/4,2"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
-
-[node name="0,3" type="CenterContainer" parent="battlefield/GridContainer"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-script = ExtResource("5_fmi5a")
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/0,3"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/0,3/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.7, 0.7)
-
-[node name="card_preview" parent="battlefield/GridContainer/0,3/Control/Control" instance=ExtResource("5_f5h4a")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -176.0
-offset_right = 128.0
-offset_bottom = 176.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="grid_button" type="Button" parent="battlefield/GridContainer/0,3"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
-
-[node name="1,3" type="CenterContainer" parent="battlefield/GridContainer"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-script = ExtResource("5_fmi5a")
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/1,3"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/1,3/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.7, 0.7)
-
-[node name="card_preview" parent="battlefield/GridContainer/1,3/Control/Control" instance=ExtResource("5_f5h4a")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -176.0
-offset_right = 128.0
-offset_bottom = 176.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="grid_button" type="Button" parent="battlefield/GridContainer/1,3"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
-
-[node name="2,3" type="CenterContainer" parent="battlefield/GridContainer"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-script = ExtResource("5_fmi5a")
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/2,3"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/2,3/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.7, 0.7)
-
-[node name="card_preview" parent="battlefield/GridContainer/2,3/Control/Control" instance=ExtResource("5_f5h4a")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -176.0
-offset_right = 128.0
-offset_bottom = 176.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="grid_button" type="Button" parent="battlefield/GridContainer/2,3"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
-
-[node name="3,3" type="CenterContainer" parent="battlefield/GridContainer"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-script = ExtResource("5_fmi5a")
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/3,3"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/3,3/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.7, 0.7)
-
-[node name="card_preview" parent="battlefield/GridContainer/3,3/Control/Control" instance=ExtResource("5_f5h4a")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -176.0
-offset_right = 128.0
-offset_bottom = 176.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="grid_button" type="Button" parent="battlefield/GridContainer/3,3"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
-
-[node name="4,3" type="CenterContainer" parent="battlefield/GridContainer"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-script = ExtResource("5_fmi5a")
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/4,3"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="battlefield/GridContainer/4,3/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.7, 0.7)
-
-[node name="card_preview" parent="battlefield/GridContainer/4,3/Control/Control" instance=ExtResource("5_f5h4a")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -176.0
-offset_right = 128.0
-offset_bottom = 176.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="grid_button" type="Button" parent="battlefield/GridContainer/4,3"]
-custom_minimum_size = Vector2(270, 270)
-layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_cfsdt")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ollxr")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_c0te2")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7h5v1")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_w2u81")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_6lwn3")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_p83vk")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_deh2b")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_vss74")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pag5s")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_yyjov")
 
 [node name="side_panel" type="Control" parent="."]
 layout_mode = 1
@@ -997,16 +138,39 @@ offset_left = -570.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="side_panel"]
+[node name="side_panel_background" type="ColorRect" parent="side_panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.290196, 0.478431, 0.588235, 1)
+color = Color(0.229553, 0.392723, 0.487457, 1)
 
-[node name="enemy_panel" type="HBoxContainer" parent="side_panel/ColorRect"]
+[node name="darken" type="ColorRect" parent="side_panel/side_panel_background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.270588)
+
+[node name="side_tabs" type="TabContainer" parent="side_panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 0
+
+[node name="Game" type="ColorRect" parent="side_panel/side_tabs"]
+layout_mode = 2
+color = Color(0.290196, 0.478431, 0.588235, 1)
+metadata/_tab_index = 0
+
+[node name="enemy_panel" type="HBoxContainer" parent="side_panel/side_tabs/Game"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -1016,71 +180,71 @@ grow_horizontal = 2
 theme_override_constants/separation = 24
 alignment = 1
 
-[node name="energy" type="HBoxContainer" parent="side_panel/ColorRect/enemy_panel"]
+[node name="energy" type="HBoxContainer" parent="side_panel/side_tabs/Game/enemy_panel"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="side_panel/ColorRect/enemy_panel/energy"]
+[node name="TextureRect" type="TextureRect" parent="side_panel/side_tabs/Game/enemy_panel/energy"]
 layout_mode = 2
 texture = ExtResource("5_ykyht")
 expand_mode = 3
 
-[node name="enemy_energy" type="Label" parent="side_panel/ColorRect/enemy_panel/energy"]
+[node name="enemy_energy" type="Label" parent="side_panel/side_tabs/Game/enemy_panel/energy"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 52
 text = "0"
 
-[node name="cards_in_hand" type="HBoxContainer" parent="side_panel/ColorRect/enemy_panel"]
+[node name="cards_in_hand" type="HBoxContainer" parent="side_panel/side_tabs/Game/enemy_panel"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="side_panel/ColorRect/enemy_panel/cards_in_hand"]
+[node name="TextureRect" type="TextureRect" parent="side_panel/side_tabs/Game/enemy_panel/cards_in_hand"]
 layout_mode = 2
 texture = ExtResource("6_hqoc0")
 
-[node name="enemy_hand_size" type="Label" parent="side_panel/ColorRect/enemy_panel/cards_in_hand"]
+[node name="enemy_hand_size" type="Label" parent="side_panel/side_tabs/Game/enemy_panel/cards_in_hand"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 52
 text = "0"
 
-[node name="cards_in_deck" type="HBoxContainer" parent="side_panel/ColorRect/enemy_panel"]
+[node name="cards_in_deck" type="HBoxContainer" parent="side_panel/side_tabs/Game/enemy_panel"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="side_panel/ColorRect/enemy_panel/cards_in_deck"]
+[node name="TextureRect" type="TextureRect" parent="side_panel/side_tabs/Game/enemy_panel/cards_in_deck"]
 layout_mode = 2
 texture = ExtResource("7_k7dnc")
 
-[node name="enemy_deck_size" type="Label" parent="side_panel/ColorRect/enemy_panel/cards_in_deck"]
+[node name="enemy_deck_size" type="Label" parent="side_panel/side_tabs/Game/enemy_panel/cards_in_deck"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 52
 text = "0"
 
-[node name="victory_points" type="HBoxContainer" parent="side_panel/ColorRect/enemy_panel"]
+[node name="victory_points" type="HBoxContainer" parent="side_panel/side_tabs/Game/enemy_panel"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="side_panel/ColorRect/enemy_panel/victory_points"]
+[node name="TextureRect" type="TextureRect" parent="side_panel/side_tabs/Game/enemy_panel/victory_points"]
 layout_mode = 2
 texture = ExtResource("8_cj54s")
 
-[node name="enemy_victory_points" type="Label" parent="side_panel/ColorRect/enemy_panel/victory_points"]
+[node name="enemy_victory_points" type="Label" parent="side_panel/side_tabs/Game/enemy_panel/victory_points"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 52
 text = "0"
 
-[node name="hand_preview" type="ScrollContainer" parent="side_panel/ColorRect"]
+[node name="hand_preview" type="ScrollContainer" parent="side_panel/side_tabs/Game"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 16.0
-offset_top = 88.0
+offset_top = 84.0
 offset_right = -16.0
 offset_bottom = -160.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="hand" type="VBoxContainer" parent="side_panel/ColorRect/hand_preview"]
+[node name="hand" type="VBoxContainer" parent="side_panel/side_tabs/Game/hand_preview"]
 layout_mode = 2
 
-[node name="player_panel" type="VBoxContainer" parent="side_panel/ColorRect"]
+[node name="player_panel" type="VBoxContainer" parent="side_panel/side_tabs/Game"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -1092,93 +256,114 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 12
 
-[node name="buttons" type="HBoxContainer" parent="side_panel/ColorRect/player_panel"]
+[node name="buttons" type="HBoxContainer" parent="side_panel/side_tabs/Game/player_panel"]
 layout_mode = 2
 theme_override_constants/separation = 12
 alignment = 1
 
-[node name="end_turn_button" type="Button" parent="side_panel/ColorRect/player_panel/buttons"]
+[node name="end_turn_button" type="Button" parent="side_panel/side_tabs/Game/player_panel/buttons"]
 custom_minimum_size = Vector2(284, 0)
 layout_mode = 2
 text = "End Turn"
 
-[node name="concede_button" type="Button" parent="side_panel/ColorRect/player_panel/buttons"]
+[node name="concede_button" type="Button" parent="side_panel/side_tabs/Game/player_panel/buttons"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 text = "Concede
 "
 
-[node name="info" type="HBoxContainer" parent="side_panel/ColorRect/player_panel"]
+[node name="info" type="HBoxContainer" parent="side_panel/side_tabs/Game/player_panel"]
 layout_mode = 2
 theme_override_constants/separation = 24
 alignment = 1
 
-[node name="energy" type="HBoxContainer" parent="side_panel/ColorRect/player_panel/info"]
+[node name="energy" type="HBoxContainer" parent="side_panel/side_tabs/Game/player_panel/info"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="side_panel/ColorRect/player_panel/info/energy"]
+[node name="TextureRect" type="TextureRect" parent="side_panel/side_tabs/Game/player_panel/info/energy"]
 layout_mode = 2
 texture = ExtResource("5_ykyht")
 expand_mode = 3
 
-[node name="my_energy" type="Label" parent="side_panel/ColorRect/player_panel/info/energy"]
+[node name="my_energy" type="Label" parent="side_panel/side_tabs/Game/player_panel/info/energy"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 52
 text = "0"
 
-[node name="cards_in_hand" type="HBoxContainer" parent="side_panel/ColorRect/player_panel/info"]
+[node name="cards_in_hand" type="HBoxContainer" parent="side_panel/side_tabs/Game/player_panel/info"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="side_panel/ColorRect/player_panel/info/cards_in_hand"]
+[node name="TextureRect" type="TextureRect" parent="side_panel/side_tabs/Game/player_panel/info/cards_in_hand"]
 layout_mode = 2
 texture = ExtResource("6_hqoc0")
 
-[node name="my_hand_size" type="Label" parent="side_panel/ColorRect/player_panel/info/cards_in_hand"]
+[node name="my_hand_size" type="Label" parent="side_panel/side_tabs/Game/player_panel/info/cards_in_hand"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 52
 text = "0"
 
-[node name="cards_in_deck" type="HBoxContainer" parent="side_panel/ColorRect/player_panel/info"]
+[node name="cards_in_deck" type="HBoxContainer" parent="side_panel/side_tabs/Game/player_panel/info"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="side_panel/ColorRect/player_panel/info/cards_in_deck"]
+[node name="TextureRect" type="TextureRect" parent="side_panel/side_tabs/Game/player_panel/info/cards_in_deck"]
 layout_mode = 2
 texture = ExtResource("7_k7dnc")
 
-[node name="my_deck_size" type="Label" parent="side_panel/ColorRect/player_panel/info/cards_in_deck"]
+[node name="my_deck_size" type="Label" parent="side_panel/side_tabs/Game/player_panel/info/cards_in_deck"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 52
 text = "0"
 
-[node name="victory_points" type="HBoxContainer" parent="side_panel/ColorRect/player_panel/info"]
+[node name="victory_points" type="HBoxContainer" parent="side_panel/side_tabs/Game/player_panel/info"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="side_panel/ColorRect/player_panel/info/victory_points"]
+[node name="TextureRect" type="TextureRect" parent="side_panel/side_tabs/Game/player_panel/info/victory_points"]
 layout_mode = 2
 texture = ExtResource("8_cj54s")
 
-[node name="my_victory_points" type="Label" parent="side_panel/ColorRect/player_panel/info/victory_points"]
+[node name="my_victory_points" type="Label" parent="side_panel/side_tabs/Game/player_panel/info/victory_points"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 52
 text = "0"
 
-[node name="Button" type="Button" parent="."]
+[node name="Card View" type="ColorRect" parent="side_panel/side_tabs"]
 visible = false
-layout_mode = 0
-offset_left = 1379.0
-offset_top = 107.0
-offset_right = 1387.0
-offset_bottom = 115.0
-text = "test play"
+layout_mode = 2
+color = Color(0.290196, 0.478431, 0.588235, 1)
+metadata/_tab_index = 1
 
-[node name="LineEdit" type="LineEdit" parent="."]
+[node name="card_view_card" parent="side_panel/side_tabs/Card View" instance=ExtResource("11_tqtnu")]
 visible = false
 layout_mode = 0
-offset_left = 1560.0
-offset_top = 107.0
-offset_right = 1652.0
-offset_bottom = 165.0
+offset_left = 29.0
+offset_top = 159.0
+offset_right = 285.0
+offset_bottom = 511.0
+scale = Vector2(2, 2)
+
+[node name="Log" type="ColorRect" parent="side_panel/side_tabs"]
+visible = false
+layout_mode = 2
+color = Color(0.290196, 0.478431, 0.588235, 1)
+metadata/_tab_index = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="side_panel/side_tabs/Log"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="log_container" type="VBoxContainer" parent="side_panel/side_tabs/Log/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+alignment = 2
+
+[node name="first_log" type="Control" parent="side_panel/side_tabs/Log/ScrollContainer/log_container"]
+layout_mode = 2
 
 [node name="card_controller" type="Control" parent="."]
 layout_mode = 1
@@ -1197,31 +382,41 @@ curve = SubResource("Curve2D_oyv0u")
 
 [node name="Line2D" type="Line2D" parent="card_controller"]
 
+[node name="combat_action_controller" type="Control" parent="."]
+z_index = 10
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="combat_action_timer" type="Timer" parent="combat_action_controller"]
+one_shot = true
+
+[node name="combat_action_path" type="Path2D" parent="combat_action_controller"]
+curve = SubResource("Curve2D_26jnf")
+
+[node name="combat_action_line" type="Line2D" parent="combat_action_controller"]
+
+[node name="color_1" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.732539, 0.330447, 0.133277, 1)
+
+[node name="color_2" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(1, 0.498039, 0, 1)
+
 [connection signal="focus" from="." to="." method="_on_focus"]
 [connection signal="mouse_released" from="." to="." method="_on_mouse_released"]
-[connection signal="pressed" from="battlefield/GridContainer/0,0/grid_button" to="battlefield/GridContainer/0,0" method="_on_grid_button_pressed"]
-[connection signal="mouse_focus" from="battlefield/GridContainer/1,0/Control/Control/card_preview" to="." method="_on_card_preview_mouse_focus"]
-[connection signal="pressed" from="battlefield/GridContainer/1,0/grid_button" to="battlefield/GridContainer/1,0" method="_on_grid_button_pressed"]
-[connection signal="pressed" from="battlefield/GridContainer/2,0/grid_button" to="battlefield/GridContainer/2,0" method="_on_grid_button_pressed"]
-[connection signal="pressed" from="battlefield/GridContainer/3,0/grid_button" to="battlefield/GridContainer/3,0" method="_on_grid_button_pressed"]
-[connection signal="pressed" from="battlefield/GridContainer/4,0/grid_button" to="battlefield/GridContainer/4,0" method="_on_grid_button_pressed"]
-[connection signal="pressed" from="battlefield/GridContainer/0,1/grid_button" to="battlefield/GridContainer/0,1" method="_on_grid_button_pressed"]
-[connection signal="pressed" from="battlefield/GridContainer/1,1/grid_button" to="battlefield/GridContainer/1,1" method="_on_grid_button_pressed"]
-[connection signal="pressed" from="battlefield/GridContainer/2,1/grid_button" to="battlefield/GridContainer/2,1" method="_on_grid_button_pressed"]
-[connection signal="pressed" from="battlefield/GridContainer/3,1/grid_button" to="battlefield/GridContainer/3,1" method="_on_grid_button_pressed"]
-[connection signal="pressed" from="battlefield/GridContainer/4,1/grid_button" to="battlefield/GridContainer/4,1" method="_on_grid_button_pressed"]
-[connection signal="pressed" from="battlefield/GridContainer/0,2/grid_button" to="battlefield/GridContainer/0,2" method="_on_grid_button_pressed"]
-[connection signal="pressed" from="battlefield/GridContainer/1,2/grid_button" to="battlefield/GridContainer/1,2" method="_on_grid_button_pressed"]
-[connection signal="pressed" from="battlefield/GridContainer/2,2/grid_button" to="battlefield/GridContainer/2,2" method="_on_grid_button_pressed"]
-[connection signal="pressed" from="battlefield/GridContainer/3,2/grid_button" to="battlefield/GridContainer/3,2" method="_on_grid_button_pressed"]
-[connection signal="pressed" from="battlefield/GridContainer/4,2/grid_button" to="battlefield/GridContainer/4,2" method="_on_grid_button_pressed"]
-[connection signal="pressed" from="battlefield/GridContainer/0,3/grid_button" to="battlefield/GridContainer/0,3" method="_on_grid_button_pressed"]
-[connection signal="mouse_focus" from="battlefield/GridContainer/1,3/Control/Control/card_preview" to="." method="_on_card_preview_mouse_focus"]
-[connection signal="pressed" from="battlefield/GridContainer/1,3/grid_button" to="battlefield/GridContainer/1,3" method="_on_grid_button_pressed"]
-[connection signal="pressed" from="battlefield/GridContainer/2,3/grid_button" to="battlefield/GridContainer/2,3" method="_on_grid_button_pressed"]
-[connection signal="pressed" from="battlefield/GridContainer/3,3/grid_button" to="battlefield/GridContainer/3,3" method="_on_grid_button_pressed"]
-[connection signal="pressed" from="battlefield/GridContainer/4,3/grid_button" to="battlefield/GridContainer/4,3" method="_on_grid_button_pressed"]
-[connection signal="pressed" from="side_panel/ColorRect/player_panel/buttons/end_turn_button" to="." method="_on_end_turn_button_pressed"]
-[connection signal="pressed" from="side_panel/ColorRect/player_panel/buttons/concede_button" to="." method="_on_concede_button_pressed"]
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="side_panel/side_tabs/Game/player_panel/buttons/end_turn_button" to="." method="_on_end_turn_button_pressed"]
+[connection signal="pressed" from="side_panel/side_tabs/Game/player_panel/buttons/concede_button" to="." method="_on_concede_button_pressed"]
 [connection signal="timeout" from="card_controller/Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="combat_action_controller/combat_action_timer" to="." method="_on_combat_action_timer_timeout"]

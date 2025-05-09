@@ -1,0 +1,72 @@
+[gd_scene load_steps=4 format=3 uid="uid://ceyfwik0cosx8"]
+
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_as0mv"]
+[ext_resource type="Script" uid="uid://oipu7xehsvtv" path="res://game_scenes/game_finished_screen.gd" id="1_x5577"]
+[ext_resource type="PackedScene" uid="uid://urgkw5d0kikx" path="res://items/card_preview.tscn" id="3_2bj8s"]
+
+[node name="game_finished_screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_as0mv")
+script = ExtResource("1_x5577")
+
+[node name="background_color" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.564706, 0.564706, 0.564706, 1)
+
+[node name="center_container" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="v_box_container" type="VBoxContainer" parent="center_container"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="result_label" type="Label" parent="center_container/v_box_container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 52
+text = "blah blah defeated blah blah!"
+horizontal_alignment = 1
+
+[node name="h_box_container" type="HBoxContainer" parent="center_container/v_box_container"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="winner_card" parent="center_container/v_box_container/h_box_container" instance=ExtResource("3_2bj8s")]
+layout_mode = 2
+
+[node name="label" type="Label" parent="center_container/v_box_container/h_box_container"]
+layout_mode = 2
+text = "Defeats"
+
+[node name="loser_card" parent="center_container/v_box_container/h_box_container" instance=ExtResource("3_2bj8s")]
+layout_mode = 2
+
+[node name="h_box_container2" type="HBoxContainer" parent="center_container/v_box_container"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="main_menu_button" type="Button" parent="center_container/v_box_container/h_box_container2"]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="choose_prize_button" type="Button" parent="center_container/v_box_container/h_box_container2"]
+visible = false
+layout_mode = 2
+text = "Choose Prize"
+
+[connection signal="pressed" from="center_container/v_box_container/h_box_container2/main_menu_button" to="." method="_on_main_menu_button_pressed"]

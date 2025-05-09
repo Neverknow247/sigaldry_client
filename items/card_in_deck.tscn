@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_jwegf"]
 [ext_resource type="Texture2D" uid="uid://cahhstdj433pr" path="res://assets/art/card-bg.jpg" id="2_tlpi5"]
-[ext_resource type="Script" path="res://items/card_preview.gd" id="3_pw2r4"]
+[ext_resource type="Script" uid="uid://c4ndy0nfdsb0b" path="res://items/card_preview.gd" id="3_pw2r4"]
 
 [node name="card_preview" type="TextureRect"]
 custom_minimum_size = Vector2(370, 525)

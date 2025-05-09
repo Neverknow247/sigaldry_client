@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dwbc6aircmlpc"]
+
+[node name="game_log_label" type="Label"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 36
+autowrap_mode = 3

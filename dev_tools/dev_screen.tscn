@@ -1,0 +1,100 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfs43teibk45h"]
+
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_pnile"]
+[ext_resource type="Script" uid="uid://buxh6rygqw8ff" path="res://dev_tools/dev_screen.gd" id="1_xsmig"]
+
+[node name="dev_screen" type="Control"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -168.0
+offset_right = 1920.0
+grow_vertical = 0
+theme = ExtResource("1_pnile")
+script = ExtResource("1_xsmig")
+
+[node name="background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.233925, 0.233925, 0.233925, 1)
+
+[node name="v_box_container_1" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 292.0
+offset_bottom = 152.0
+theme_override_constants/separation = 8
+
+[node name="neverknow_login_button" type="Button" parent="v_box_container_1"]
+custom_minimum_size = Vector2(192, 64)
+layout_mode = 2
+text = "Neverknow Login"
+
+[node name="comp_login_button" type="Button" parent="v_box_container_1"]
+custom_minimum_size = Vector2(192, 64)
+layout_mode = 2
+text = "Computer Login"
+
+[node name="v_box_container_2" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 16.0
+offset_right = 622.0
+offset_bottom = 152.0
+theme_override_constants/separation = 8
+
+[node name="add_templates_button" type="Button" parent="v_box_container_2"]
+custom_minimum_size = Vector2(192, 64)
+layout_mode = 2
+text = "Add Templates"
+
+[node name="add_components_button" type="Button" parent="v_box_container_2"]
+custom_minimum_size = Vector2(192, 64)
+layout_mode = 2
+text = "Add Components"
+
+[node name="v_box_container_3" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 648.0
+offset_top = 16.0
+offset_right = 950.0
+offset_bottom = 148.0
+
+[node name="h_box_container" type="HBoxContainer" parent="v_box_container_3"]
+layout_mode = 2
+
+[node name="add_spice_button" type="Button" parent="v_box_container_3/h_box_container"]
+custom_minimum_size = Vector2(192, 64)
+layout_mode = 2
+text = "Add Spice"
+
+[node name="add_spice_edit" type="SpinBox" parent="v_box_container_3/h_box_container"]
+layout_mode = 2
+update_on_text_changed = true
+
+[node name="get_reward_button" type="Button" parent="v_box_container_3"]
+custom_minimum_size = Vector2(192, 64)
+layout_mode = 2
+text = "Get Reward"
+
+[node name="hide_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1824.0
+offset_top = 16.0
+offset_right = 1904.0
+offset_bottom = 74.0
+text = "Hide"
+
+[connection signal="pressed" from="v_box_container_1/neverknow_login_button" to="." method="_on_neverknow_login_button_pressed"]
+[connection signal="pressed" from="v_box_container_1/comp_login_button" to="." method="_on_comp_login_button_pressed"]
+[connection signal="pressed" from="v_box_container_2/add_templates_button" to="." method="_on_add_templates_button_pressed"]
+[connection signal="pressed" from="v_box_container_2/add_components_button" to="." method="_on_add_components_button_pressed"]
+[connection signal="pressed" from="v_box_container_3/h_box_container/add_spice_button" to="." method="_on_add_spice_button_pressed"]
+[connection signal="pressed" from="v_box_container_3/get_reward_button" to="." method="_on_get_reward_button_pressed"]
+[connection signal="pressed" from="hide_button" to="." method="_on_hide_button_pressed"]

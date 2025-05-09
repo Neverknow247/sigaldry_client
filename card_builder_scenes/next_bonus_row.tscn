@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsgob0n35w5qe"]
+
+[ext_resource type="PackedScene" uid="uid://nu8u1n14jovn" path="res://card_builder_scenes/color_bonus_square.tscn" id="1_4jam4"]
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_cvoh5"]
+
+[node name="next_bonus_row" type="HBoxContainer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -960.0
+offset_top = -1080.0
+offset_right = -96.0
+offset_bottom = -1016.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_cvoh5")
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Next Piece Bonus: "
+
+[node name="color_bonus_square" parent="." instance=ExtResource("1_4jam4")]
+layout_mode = 2
+
+[node name="color_bonus_square2" parent="." instance=ExtResource("1_4jam4")]
+layout_mode = 2
+
+[node name="color_bonus_square3" parent="." instance=ExtResource("1_4jam4")]
+layout_mode = 2
+
+[node name="color_bonus_square4" parent="." instance=ExtResource("1_4jam4")]
+layout_mode = 2
+
+[node name="color_bonus_square5" parent="." instance=ExtResource("1_4jam4")]
+layout_mode = 2
+
+[node name="color_bonus_square6" parent="." instance=ExtResource("1_4jam4")]
+layout_mode = 2
+
+[node name="color_bonus_square7" parent="." instance=ExtResource("1_4jam4")]
+layout_mode = 2
+
+[node name="color_bonus_square8" parent="." instance=ExtResource("1_4jam4")]
+layout_mode = 2
+
+[node name="color_bonus_square9" parent="." instance=ExtResource("1_4jam4")]
+layout_mode = 2

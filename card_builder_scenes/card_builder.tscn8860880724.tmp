@@ -1,0 +1,416 @@
+[gd_scene load_steps=12 format=3 uid="uid://d3qyhudrdt78l"]
+
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_jhejr"]
+[ext_resource type="Script" uid="uid://b204xh82wwll" path="res://card_builder_scenes/card_builder.gd" id="1_t82xy"]
+[ext_resource type="Script" uid="uid://cvxvqr6ke0b64" path="res://card_builder_scenes/card_grid.gd" id="2_gupog"]
+[ext_resource type="PackedScene" uid="uid://dwgnyi0lyorn8" path="res://card_builder_scenes/active_component.tscn" id="3_7yvkw"]
+[ext_resource type="PackedScene" uid="uid://urgkw5d0kikx" path="res://items/card_preview.tscn" id="5_0g7mw"]
+[ext_resource type="PackedScene" uid="uid://bsgob0n35w5qe" path="res://card_builder_scenes/next_bonus_row.tscn" id="5_ntmml"]
+[ext_resource type="PackedScene" uid="uid://6qvg33j8nb5a" path="res://items/color_profile_square_large.tscn" id="6_1sycy"]
+[ext_resource type="Script" uid="uid://b4p33ccxv3uyk" path="res://card_builder_scenes/card_compare_select_screen.gd" id="7_8oy6r"]
+[ext_resource type="Texture2D" uid="uid://bshu3o85op7sq" path="res://assets/art/test.png" id="8_q08ur"]
+[ext_resource type="Theme" uid="uid://by8ew0t4rulwy" path="res://assets/themes/card_theme.tres" id="9_c4brr"]
+[ext_resource type="FontFile" uid="uid://b2vvtmi4jxkl5" path="res://assets/fonts/fantasque-sans-mono.bold.otf" id="9_nacf6"]
+
+[node name="card_builder" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_jhejr")
+script = ExtResource("1_t82xy")
+
+[node name="background_color" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.564962, 0.564962, 0.564962, 1)
+
+[node name="card_grid" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 576.0
+offset_top = 136.0
+offset_right = -512.0
+offset_bottom = -120.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_gupog")
+
+[node name="icons" type="Control" parent="card_grid"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="active_component" parent="card_grid" instance=ExtResource("3_7yvkw")]
+layout_mode = 1
+
+[node name="next_bonus_row" parent="card_grid" instance=ExtResource("5_ntmml")]
+layout_mode = 1
+offset_left = -432.0
+offset_top = 0.0
+offset_right = 432.0
+offset_bottom = 64.0
+
+[node name="template_select" type="OptionButton" parent="."]
+custom_minimum_size = Vector2(350, 80)
+layout_mode = 0
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 379.0
+offset_bottom = 106.0
+
+[node name="place_component_button" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 695.0
+offset_top = 29.0
+offset_right = 840.0
+offset_bottom = 60.0
+text = "Place_component
+"
+
+[node name="card_preview" type="Control" parent="."]
+anchors_preset = 0
+
+[node name="name_card_edit" type="LineEdit" parent="card_preview"]
+layout_mode = 0
+offset_left = 1464.0
+offset_top = 128.0
+offset_right = 1864.0
+offset_bottom = 186.0
+placeholder_text = "name card here"
+alignment = 1
+max_length = 16
+
+[node name="card_graphic" parent="card_preview" instance=ExtResource("5_0g7mw")]
+layout_mode = 0
+offset_left = 1482.0
+offset_top = 196.0
+offset_right = 1840.0
+offset_bottom = 699.0
+expand_mode = 5
+
+[node name="card_name" parent="card_preview/card_graphic" index="0"]
+offset_left = 22.0
+offset_top = 191.0
+offset_right = 334.0
+offset_bottom = 247.0
+theme_override_font_sizes/font_size = 40
+
+[node name="card_effects" parent="card_preview/card_graphic" index="1"]
+offset_left = 30.0
+offset_top = 263.0
+offset_right = 326.0
+offset_bottom = 423.0
+theme_override_font_sizes/font_size = 24
+
+[node name="card_type" parent="card_preview/card_graphic" index="2"]
+offset_left = 110.0
+offset_top = 455.0
+offset_right = 254.0
+offset_bottom = 476.0
+theme_override_font_sizes/font_size = 24
+
+[node name="card_price" parent="card_preview/card_graphic" index="3"]
+offset_left = 293.0
+offset_top = 7.0
+offset_right = 357.0
+offset_bottom = 63.0
+theme_override_font_sizes/font_size = 28
+
+[node name="card_attack" parent="card_preview/card_graphic" index="4"]
+offset_left = -2.0
+offset_top = 437.0
+offset_right = 70.0
+offset_bottom = 501.0
+theme_override_font_sizes/font_size = 28
+
+[node name="card_health" parent="card_preview/card_graphic" index="5"]
+offset_left = 293.0
+offset_top = 437.0
+offset_right = 357.0
+offset_bottom = 501.0
+theme_override_font_sizes/font_size = 28
+
+[node name="card_color_profile" parent="card_preview/card_graphic" index="6"]
+offset_left = 22.0
+offset_top = 147.0
+offset_right = 2182.0
+offset_bottom = 387.0
+scale = Vector2(0.15, 0.15)
+
+[node name="color_profile_square" parent="card_preview/card_graphic/card_color_profile" index="0" instance=ExtResource("6_1sycy")]
+layout_mode = 2
+
+[node name="color_profile_square2" parent="card_preview/card_graphic/card_color_profile" index="1" instance=ExtResource("6_1sycy")]
+layout_mode = 2
+
+[node name="color_profile_square3" parent="card_preview/card_graphic/card_color_profile" index="2" instance=ExtResource("6_1sycy")]
+layout_mode = 2
+
+[node name="color_profile_square4" parent="card_preview/card_graphic/card_color_profile" index="3" instance=ExtResource("6_1sycy")]
+layout_mode = 2
+
+[node name="color_profile_square5" parent="card_preview/card_graphic/card_color_profile" index="4" instance=ExtResource("6_1sycy")]
+layout_mode = 2
+
+[node name="color_profile_square6" parent="card_preview/card_graphic/card_color_profile" index="5" instance=ExtResource("6_1sycy")]
+layout_mode = 2
+
+[node name="color_profile_square7" parent="card_preview/card_graphic/card_color_profile" index="6" instance=ExtResource("6_1sycy")]
+layout_mode = 2
+
+[node name="color_profile_square8" parent="card_preview/card_graphic/card_color_profile" index="7" instance=ExtResource("6_1sycy")]
+layout_mode = 2
+
+[node name="color_profile_square9" parent="card_preview/card_graphic/card_color_profile" index="8" instance=ExtResource("6_1sycy")]
+layout_mode = 2
+
+[node name="undo_button" type="Button" parent="card_preview"]
+layout_mode = 0
+offset_left = 870.0
+offset_top = 24.0
+offset_right = 1102.0
+offset_bottom = 132.0
+text = "Undo Last
+Move"
+
+[node name="compare_card_select_button" type="Button" parent="card_preview"]
+layout_mode = 0
+offset_left = 1544.0
+offset_top = 712.0
+offset_right = 1778.0
+offset_bottom = 770.0
+text = "Compare Card"
+
+[node name="search_bar" type="LineEdit" parent="."]
+visible = false
+layout_mode = 2
+offset_left = 60.0
+offset_top = 131.0
+offset_right = 529.0
+offset_bottom = 189.0
+
+[node name="component_container" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 205.0
+offset_right = 529.0
+offset_bottom = 995.0
+
+[node name="component_v_box" type="VBoxContainer" parent="component_container"]
+layout_mode = 2
+
+[node name="clear_component_piece_button" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 60.0
+offset_top = 205.0
+offset_right = 529.0
+offset_bottom = 995.0
+text = "Clear Piece"
+
+[node name="card_compare_screen" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("7_8oy6r")
+
+[node name="compare_card" type="Control" parent="card_compare_screen"]
+visible = false
+anchors_preset = 0
+offset_left = 1482.0
+offset_top = 779.0
+offset_right = 1842.0
+offset_bottom = 1075.0
+mouse_filter = 2
+theme = ExtResource("9_c4brr")
+
+[node name="card_texture" type="TextureRect" parent="card_compare_screen/compare_card"]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 208.0
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("8_q08ur")
+
+[node name="card_name" type="Label" parent="card_compare_screen/compare_card"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 8.0
+offset_right = 334.0
+offset_bottom = 64.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 40
+text = "Card Name Here"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="card_effects" type="Label" parent="card_compare_screen/compare_card"]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 93.0
+offset_right = 371.0
+offset_bottom = 264.0
+scale = Vector2(0.75, 0.75)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_nacf6")
+theme_override_font_sizes/font_size = 30
+text = "Card Effects"
+autowrap_mode = 3
+
+[node name="card_price" type="Label" parent="card_compare_screen/compare_card"]
+layout_mode = 0
+offset_left = 301.0
+offset_top = 67.0
+offset_right = 349.0
+offset_bottom = 115.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="card_attack" type="Label" parent="card_compare_screen/compare_card"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = -2.0
+offset_top = 226.0
+offset_right = 70.0
+offset_bottom = 290.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="card_health" type="Label" parent="card_compare_screen/compare_card"]
+layout_mode = 0
+offset_left = 292.0
+offset_top = 226.0
+offset_right = 356.0
+offset_bottom = 290.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="card_type" type="Label" parent="card_compare_screen/compare_card"]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 242.0
+offset_right = 291.0
+offset_bottom = 267.0
+theme_override_colors/font_color = Color(0.666667, 0.666667, 0.666667, 1)
+theme_override_fonts/font = ExtResource("9_nacf6")
+theme_override_font_sizes/font_size = 24
+text = "Type"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="card_color_profile" type="GridContainer" parent="card_compare_screen/compare_card"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 57.0
+offset_right = 3142.0
+offset_bottom = 297.0
+scale = Vector2(0.15, 0.15)
+theme_override_constants/h_separation = 0
+columns = 9
+
+[node name="color_profile_square" parent="card_compare_screen/compare_card/card_color_profile" instance=ExtResource("6_1sycy")]
+layout_mode = 2
+
+[node name="color_profile_square2" parent="card_compare_screen/compare_card/card_color_profile" instance=ExtResource("6_1sycy")]
+layout_mode = 2
+
+[node name="color_profile_square3" parent="card_compare_screen/compare_card/card_color_profile" instance=ExtResource("6_1sycy")]
+layout_mode = 2
+
+[node name="color_profile_square4" parent="card_compare_screen/compare_card/card_color_profile" instance=ExtResource("6_1sycy")]
+layout_mode = 2
+
+[node name="card_select_screen" type="Control" parent="card_compare_screen"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="card_select_background" type="ColorRect" parent="card_compare_screen/card_select_screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.290196, 0.478431, 0.588235, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="card_compare_screen/card_select_screen"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 120.0
+offset_right = 1888.0
+offset_bottom = 1048.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="card_compare_screen/card_select_screen/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 1437.0
+offset_top = 32.0
+offset_right = 1889.0
+offset_bottom = 90.0
+theme_override_constants/separation = 16
+
+[node name="save_button" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+text = "Save"
+
+[node name="restart_button" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+text = "Restart"
+
+[node name="back_button" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+text = "Back"
+
+[connection signal="active_component_changed" from="card_grid" to="." method="_on_card_grid_active_component_changed"]
+[connection signal="check_placement_pos" from="card_grid" to="." method="_on_card_grid_check_placement_pos"]
+[connection signal="mouse_entered" from="card_grid" to="card_grid" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="card_grid" to="card_grid" method="_on_mouse_exited"]
+[connection signal="piece_rotate" from="card_grid" to="." method="_on_card_grid_piece_rotate"]
+[connection signal="item_selected" from="template_select" to="." method="_on_template_select_item_selected"]
+[connection signal="text_changed" from="card_preview/name_card_edit" to="." method="_on_name_card_ed_text_changed"]
+[connection signal="pressed" from="card_preview/undo_button" to="." method="_on_undo_button_pressed"]
+[connection signal="pressed" from="card_preview/compare_card_select_button" to="." method="_on_compare_card_select_button_pressed"]
+[connection signal="text_changed" from="search_bar" to="." method="_on_search_bar_text_changed"]
+[connection signal="pressed" from="clear_component_piece_button" to="." method="_on_clear_component_piece_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/save_button" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/restart_button" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/back_button" to="." method="_on_back_button_pressed"]
+
+[editable path="card_preview/card_graphic"]

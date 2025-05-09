@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://be8308edhjqd8"]
+[gd_scene load_steps=4 format=3 uid="uid://be8308edhjqd8"]
 
-[ext_resource type="Script" path="res://menus/main_menu.gd" id="1_lhqmb"]
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_ij7vn"]
+[ext_resource type="Script" uid="uid://dc0qr50csa8a7" path="res://menus/main_menu.gd" id="1_lhqmb"]
+[ext_resource type="PackedScene" uid="uid://ceyfwik0cosx8" path="res://game_scenes/game_finished_screen.tscn" id="3_yjgyn"]
 
 [node name="main_menu" type="Control"]
 layout_mode = 3
@@ -10,9 +12,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = ExtResource("1_ij7vn")
 script = ExtResource("1_lhqmb")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="background_color" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,7 +35,7 @@ theme_override_constants/separation = 25
 alignment = 1
 
 [node name="spacer" type="Control" parent="buttons"]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
 [node name="spacer3" type="Control" parent="buttons"]
@@ -66,7 +69,7 @@ layout_mode = 2
 text = "Deck Editor"
 
 [node name="spacer2" type="Control" parent="buttons"]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
 [node name="logout_button" type="Button" parent="buttons"]
@@ -75,9 +78,19 @@ layout_mode = 2
 text = "Logout
 "
 
+[node name="quit_button" type="Button" parent="buttons"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+text = "Quit"
+
+[node name="game_finished_screen" parent="." instance=ExtResource("3_yjgyn")]
+visible = false
+layout_mode = 1
+
 [connection signal="pressed" from="buttons/search_for_a_pvp_game_button" to="." method="_on_search_for_a_pvp_game_button_pressed"]
 [connection signal="pressed" from="buttons/search_for_a_pve_game" to="." method="_on_search_for_a_pve_game_pressed"]
 [connection signal="pressed" from="buttons/view_cards_button" to="." method="_on_view_cards_button_pressed"]
 [connection signal="pressed" from="buttons/card_builder_button" to="." method="_on_card_builder_button_pressed"]
 [connection signal="pressed" from="buttons/deck_editor_button" to="." method="_on_deck_editor_button_pressed"]
 [connection signal="pressed" from="buttons/logout_button" to="." method="_on_logout_button_pressed"]
+[connection signal="pressed" from="buttons/quit_button" to="." method="_on_quit_button_pressed"]

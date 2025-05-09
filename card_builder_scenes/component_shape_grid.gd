@@ -23,11 +23,12 @@ func findSizeOfSquares():
 		minSizeOfSquares = screensize.y/height
 
 func _draw():
-	for child in $icons.get_children():
-		child.queue_free()
+	#for child in $icons.get_children():
+		#child.queue_free()
 	if height == 0 and width == 0:
 		return
 	else:
+		@warning_ignore("unused_variable")
 		var i = 0
 		for x in width:
 			if height % 2 == 0:
@@ -39,4 +40,8 @@ func _draw():
 				if tiles[y][x] == 0:
 					col = Color(1,1,1,0)
 				draw_rect(rect,col)
+				draw_rect(rect,Color("#2b2d31"),false,3)
+				#draw_rect(rect,Color(0, 0, 0, 0),false,3)
+				#draw_rect(rect,Color("#3e4144"),false,3)
+				#draw_rect(rect,Color.DIM_GRAY,false,3)
 				i+=1

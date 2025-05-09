@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgg51if08d1u4"]
+
+[ext_resource type="Script" uid="uid://do8bo56hphlv6" path="res://items/color_profile_square.gd" id="1_mqw5f"]
+
+[node name="color_profile_square" type="ColorRect"]
+custom_minimum_size = Vector2(28, 28)
+offset_right = 24.0
+offset_bottom = 24.0
+color = Color(0, 0, 0, 1)
+script = ExtResource("1_mqw5f")
+
+[node name="color_square" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 26.0
+offset_bottom = 26.0
+
+[node name="color_magnitude" type="Label" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 26.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 17
+text = "0"
+horizontal_alignment = 1

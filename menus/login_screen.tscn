@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://d2mvewu0gwxc6"]
 
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_dj5xg"]
-[ext_resource type="Script" path="res://menus/login_screen.gd" id="1_iahym"]
+[ext_resource type="Script" uid="uid://e3ws3mcyjspk" path="res://menus/login_screen.gd" id="1_iahym"]
 
 [node name="login_screen" type="Control"]
 layout_mode = 3
@@ -14,7 +14,7 @@ mouse_filter = 2
 theme = ExtResource("1_dj5xg")
 script = ExtResource("1_iahym")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="background_color" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -87,15 +87,20 @@ custom_minimum_size = Vector2(310, 0)
 layout_mode = 2
 text = "Quit"
 
-[node name="auto_login_button" type="Button" parent="."]
+[node name="remember_me" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 32.0
-offset_top = 32.0
-offset_right = 206.0
-offset_bottom = 90.0
-text = "Auto Login"
+offset_left = 1308.0
+offset_top = 491.0
+offset_right = 1542.0
+offset_bottom = 541.0
+
+[node name="Label" type="Label" parent="remember_me"]
+layout_mode = 2
+text = "Remember Me?"
+
+[node name="remember_me_checkbox" type="CheckBox" parent="remember_me"]
+layout_mode = 2
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/sign_in_button" to="." method="_on_sign_in_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer2/register_new_user_button" to="." method="_on_register_new_user_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer2/quit_button" to="." method="_on_quit_button_pressed"]
-[connection signal="pressed" from="auto_login_button" to="." method="_on_auto_login_button_pressed"]

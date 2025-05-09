@@ -1,69 +1,121 @@
 extends TextureRect
 
-@onready var _0_0 = $"GridContainer/0,0"
-@onready var _1_0 = $"GridContainer/1,0"
-@onready var _2_0 = $"GridContainer/2,0"
-@onready var _3_0 = $"GridContainer/3,0"
-@onready var _4_0 = $"GridContainer/4,0"
-@onready var _0_1 = $"GridContainer/0,1"
-@onready var _1_1 = $"GridContainer/1,1"
-@onready var _2_1 = $"GridContainer/2,1"
-@onready var _3_1 = $"GridContainer/3,1"
-@onready var _4_1 = $"GridContainer/4,1"
-@onready var _0_2 = $"GridContainer/0,2"
-@onready var _1_2 = $"GridContainer/1,2"
-@onready var _2_2 = $"GridContainer/2,2"
-@onready var _3_2 = $"GridContainer/3,2"
-@onready var _4_2 = $"GridContainer/4,2"
-@onready var _0_3 = $"GridContainer/0,3"
-@onready var _1_3 = $"GridContainer/1,3"
-@onready var _2_3 = $"GridContainer/2,3"
-@onready var _3_3 = $"GridContainer/3,3"
-@onready var _4_3 = $"GridContainer/4,3"
+const GRID_SPACE = preload("res://game_scenes/grid_space.tscn")
 
-@onready var grid = [
-	[_0_0,_1_0,_2_0,_3_0,_4_0],
-	[_0_1,_1_1,_2_1,_3_1,_4_1],
-	[_0_2,_1_2,_2_2,_3_2,_4_2],
-	[_0_3,_1_3,_2_3,_3_3,_4_3],
-]
+@onready var grid_container = $GridContainer
 
+var grid = []
 
 var height = 270
 var width = 270
 
-var col = 5
-var row = 4
+var cols = 0
+var rows = 0
+
+var disposition_override = false
+var disposition_color = "FFFFFF"
+var disposition_on_color = "FF0000"
+var disposition_off_color = "FFFFFF"
 
 func _draw():
-	for x in range(col):
-		for y in range(row):
-			draw_rect(Rect2(Vector2(x*width,y*height),Vector2(width,height)),"#FFFFFF",false,2)
+	for x in range(cols):
+		for y in range(rows):
+			draw_rect(Rect2(Vector2(x*width,y*height),Vector2(width,height)),disposition_color,false,2)
+
+func change_disposition(_disposition_override):
+	disposition_color = disposition_on_color if _disposition_override else disposition_off_color
+	queue_redraw()
+
+func create_grid(_cols,_rows):
+	for child in grid_container.get_children():
+		grid_container.remove_child(child)
+		child.queue_free()
+	grid = []
+	cols = _cols
+	rows = _rows
+	queue_redraw()
+	for x in range(_rows):
+		grid.append([])
+		for y in range(_cols):
+			var new_grid_space = GRID_SPACE.instantiate()
+			grid[x].append(new_grid_space)
+			grid_container.add_child(new_grid_space)
+	#print("grid: ",grid)
+	return
 
 func set_grid_space(info):
+	#print(info)
 	var grid_space = grid[info["game_y"]][info["game_x"]]
 	grid_space["control"].visible = info["occupied"]
+	grid_space["trap"].visible = info["trapped"]
 	grid_space["tile_id"] = info["id"]
+	grid_space["tile_type"] = info["type"]
+	grid_space["card"]["type"] = "game_type"
 	if info["occupied"]:
+		grid_space["occupied"] = true
+		grid_space["occupant_id"] = info["occupant"]["id"]
+		grid_space["occupant_type"] = info["occupant"]["type"]
 		grid_space["card"]["card_name"].text = info["occupant"]["name"]
+		
+		grid_space["card"]["card_id"] = info["occupant"]["id"]
+		grid_space["card"]["source_type"] = info["occupant"]["subtype"]
 		grid_space["card"]["card_type"].text = info["occupant"]["subtype"].capitalize()
+		if info["occupant"]["subtype"] == "avatar":
+			grid_space.set_avatar(true)
+		else:
+			grid_space.set_avatar(false)
 		if info["occupant"]["exhausted"]:
 			grid_space["control"].rotation_degrees = 35
 		else:
 			grid_space["control"].rotation_degrees = 0
+	else:
+		grid_space["occupied"] = false
+		grid_space["occupant_id"] = ""
+		grid_space["occupant_type"] = ""
 
 func update_grid_space(info):
 	#print("updating")
+	#print(info)
 	var grid_space = grid[info["tile"]["y"]][info["tile"]["x"]]
 	grid_space["control"].visible = info["tile"]["occupied"]
+	grid_space["trap"].visible = info["tile"]["trapped"]
 	if info["tile"]["occupied"]:
+		#print("******************")
+		#print(info["tile"])
+		#print(info["tile"]["occupant"])
 		#print(info["tile"]["occupant"]["exhausted"])
+		grid_space["occupied"] = true
+		grid_space["occupant_id"] = info["tile"]["occupant"]["id"]
+		grid_space["occupant_type"] = info["tile"]["occupant"]["type"]
 		grid_space["card"]["card_name"].text = info["tile"]["occupant"]["name"]
+		grid_space["card"]["card_id"] = info["tile"]["occupant"]["id"]
+		grid_space["card"]["source_type"] = info["tile"]["occupant"]["subtype"]
 		grid_space["card"]["card_type"].text = info["tile"]["occupant"]["subtype"].capitalize()
+		if info["tile"]["occupant"]["subtype"] == "avatar":
+			grid_space.set_avatar(true)
+		else:
+			grid_space.set_avatar(false)
 		if info["tile"]["occupant"]["exhausted"]:
 			grid_space["control"].rotation_degrees = 35
 		else:
 			grid_space["control"].rotation_degrees = 0
+		var abilities = info["tile"]["occupant"]["abilities"]
+		for ability in abilities:
+			if abilities[ability]["name"] == "health":
+				var card_hp = abilities[ability]["value"]
+				grid_space["card"]["card_health"].text = str(int(card_hp)) if card_hp > 0 else ""
+			elif abilities[ability]["name"] == "attack":
+				grid_space["card"]["card_attack"].text = str(int(abilities[ability]["value"]))
+	elif info["tile"]["trapped"]:
+		print("*****")
+		print(info["tile"])
+		print("*****")
+		print("Trapped Tile")
+	else:
+		#print(info["tile"])
+		grid_space["occupied"] = false
+		grid_space["occupant_id"] = ""
+		grid_space["occupant_type"] = ""
 
 func update_unit(info):
 	print(info["unit"]["name"])
@@ -84,6 +136,13 @@ func update_unit(info):
 			grid_space["control"].rotation_degrees = 35
 		else:
 			grid_space["control"].rotation_degrees = 0
+		var abilities = info["unit"]["abilities"]
+		for ability in abilities:
+			if abilities[ability]["name"] == "health":
+				var card_hp = abilities[ability]["value"]
+				grid_space["card"]["card_health"].text = str(int(card_hp)) if card_hp > 0 else ""
+			elif abilities[ability]["name"] == "attack":
+				grid_space["card"]["card_attack"].text = str(int(abilities[ability]["value"]))
 	else:
 		grid_space["card"]["card_id"] = 0
 		grid_space["card"]["type"] = ""
