@@ -22,14 +22,14 @@ func quit_game(payload):
 	setup_card(loser_card, payload["loser"], payload["loser_name"])
 
 func setup_card(card,data,_name):
-	print("*********")
+	#print("*********")
 	card["card_name"].text = _name
 	var card_effect_text = ""
-	for key in data:
-		print(key)
-	print("*********")
+	#for key in data:
+		#print(key)
+	#print("*********")
 	for ability in data["abilities"]:
-		print(ability)
+		#print(ability)
 		if ability == "health":
 			var card_hp = data["abilities"][ability]["value"]
 			card["card_health"].text = str(int(card_hp)) if card_hp > 0 else ""
@@ -56,3 +56,6 @@ func setup_card(card,data,_name):
 
 func _on_main_menu_button_pressed():
 	hide()
+
+func show_rewards(payload):
+	print(payload)

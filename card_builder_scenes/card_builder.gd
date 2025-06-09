@@ -183,8 +183,8 @@ func check_search_bar(new_text):
 
 func load_builder_grid(payload):
 	if payload:
-		card_grid.create_card_grid(payload["grid"],payload["card"]["components"])
-		update_card_preview(payload["card"])
+		card_grid.create_card_grid(payload["grid"],payload["card"]["card"]["components"])
+		update_card_preview(payload["card"]["card"])
 		if payload["active_component"]:
 			card_grid.create_component_shapes(payload["active_component"])
 			active_component.create_active_component(payload["active_component"])
@@ -310,6 +310,7 @@ func _on_compare_card_select_button_pressed():
 	compare_card_select.emit()
 
 func view_cards(payload):
+	print("compare_card: ",payload," ******")
 	card_select_screen.show()
 	card_compare_screen.add_cards(payload)
 

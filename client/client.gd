@@ -23,7 +23,7 @@ var backendURL: String
 
 func _ready():
 	# prepare URL
-	backendURL = "http://localhost:3000/socket.io"
+	backendURL = "http://192.168.1.151:3000/socket.io"
 
 	# initialize client
 	client = SocketIOClient.new(backendURL, {"token": "MY_AUTH_TOKEN"})
@@ -91,9 +91,13 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 			card_builder.load_builder_grid(payload)
 		"builder-view-cards":
 			card_builder.view_cards(payload)
-		"editor-view-cards":
+		"card-view-all":
 			change_scene("card_view")
 			card_view_screen.add_cards(payload)
+			#print(payload)
+		#"editor-view-cards":
+			#change_scene("card_view")
+			#card_view_screen.add_cards(payload)
 		"editor-update-cards-in-deck":
 			deck_editor.update_cards_in_deck(payload)
 		"editor-update-cards-not-in-deck":
@@ -142,6 +146,10 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 		"update-players":
 			#print(payload)
 			game_screen.update_players(payload)
+		"update-tiles":
+			#for i in payload:
+				#print(i)
+			print(payload["my_avatar_id"])
 		"update-tile":
 			game_screen.update_tile(payload)
 		"show-action":
@@ -156,7 +164,11 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 			game_screen.quit_game(payload)
 			main_menu.quit_game(payload)
 		"update-rewards":
-			print(payload)
+			main_menu.update_rewards(payload)
+			#print(payload)
+		
+		#"card-view-all":
+			#print(payload)
 
 func show_error(payload):
 	if payload["message"]:
@@ -241,7 +253,8 @@ func _on_main_menu_search_for_pve_game():
 	client.socketio_send("play-pve")
 
 func _on_main_menu_view_all_cards():
-	client.socketio_send("view-cards",{"unit_only":false,"builder":false})
+	client.socketio_send("card-select-all",{"unit_only":false,"builder":false})
+	#client.socketio_send("view-cards",{"unit_only":false,"builder":false})
 
 func _on_main_menu_start_card_builder():
 	client.socketio_send("start-card-builder")

@@ -1,11 +1,11 @@
-[gd_scene load_steps=29 format=3 uid="uid://bniv385seyq0k"]
+[gd_scene load_steps=29 format=3 uid="uid://ggdt2yu0srx0"]
 
-[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_8cvg7"]
-[ext_resource type="Script" uid="uid://c0f0ebck442nw" path="res://deck_builder_scenes/deck_editor_old.gd" id="2_37b42"]
-[ext_resource type="Texture2D" uid="uid://cdhredoprpsoi" path="res://assets/art/card_template.png" id="3_37b42"]
-[ext_resource type="Script" uid="uid://c4ndy0nfdsb0b" path="res://items/card_preview.gd" id="4_x5yio"]
-[ext_resource type="FontFile" uid="uid://b2vvtmi4jxkl5" path="res://assets/fonts/fantasque-sans-mono.bold.otf" id="5_t4fs1"]
-[ext_resource type="Script" uid="uid://cu1b5sje7w6kb" path="res://items/game_card_select_ui.gd" id="6_7tly1"]
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_edo6t"]
+[ext_resource type="Script" uid="uid://c0f0ebck442nw" path="res://deck_builder_scenes/deck_editor_old.gd" id="2_edo6t"]
+[ext_resource type="Texture2D" uid="uid://cdhredoprpsoi" path="res://assets/art/card_template.png" id="3_bbtem"]
+[ext_resource type="Script" uid="uid://c4ndy0nfdsb0b" path="res://items/card_preview.gd" id="4_rxmk0"]
+[ext_resource type="FontFile" uid="uid://b2vvtmi4jxkl5" path="res://assets/fonts/fantasque-sans-mono.bold.otf" id="5_ebyfe"]
+[ext_resource type="Script" uid="uid://cu1b5sje7w6kb" path="res://items/game_card_select_ui.gd" id="6_m3kyq"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jixci"]
 
@@ -51,15 +51,15 @@
 
 [sub_resource type="Curve2D" id="Curve2D_fbnvw"]
 
-[node name="deck_editor" type="Control"]
+[node name="deck_editor_old" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_8cvg7")
-script = ExtResource("2_37b42")
+theme = ExtResource("1_edo6t")
+script = ExtResource("2_edo6t")
 
 [node name="color_background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -254,9 +254,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_8cvg7")
-texture = ExtResource("3_37b42")
-script = ExtResource("4_x5yio")
+theme = ExtResource("1_edo6t")
+texture = ExtResource("3_bbtem")
+script = ExtResource("4_rxmk0")
 
 [node name="card_name" type="Label" parent="new_deck_screen/CenterContainer2/HBoxContainer/VBoxContainer/CenterContainer/Control/avatar_preview"]
 layout_mode = 0
@@ -278,7 +278,7 @@ offset_top = 270.0
 offset_right = 354.0
 offset_bottom = 450.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("5_t4fs1")
+theme_override_fonts/font = ExtResource("5_ebyfe")
 theme_override_font_sizes/font_size = 30
 text = "Card Effects"
 autowrap_mode = 3
@@ -290,7 +290,7 @@ offset_top = 476.0
 offset_right = 312.0
 offset_bottom = 501.0
 theme_override_colors/font_color = Color(0.666667, 0.666667, 0.666667, 1)
-theme_override_fonts/font = ExtResource("5_t4fs1")
+theme_override_fonts/font = ExtResource("5_ebyfe")
 theme_override_font_sizes/font_size = 24
 text = "Type"
 horizontal_alignment = 1
@@ -513,7 +513,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
-script = ExtResource("6_7tly1")
+script = ExtResource("6_m3kyq")
 
 [node name="card_select" type="Button" parent="new_deck_screen/CenterContainer2/HBoxContainer/VBoxContainer/CenterContainer/Control/avatar_preview/game_card_select_ui"]
 layout_mode = 1

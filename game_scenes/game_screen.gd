@@ -86,6 +86,8 @@ func _process(delta):
 		mouse_released.emit()
 	if Input.is_action_just_pressed("disposition_override"):
 		disposition_override = !disposition_override
+	if Input.is_action_just_pressed("M2") and picked_up:
+		picked_up = false
 
 func set_color_backgrounds():
 	side_panel_background.color = stats.background_color
@@ -100,9 +102,11 @@ func join_game(payload):
 	for tile in battlefield_data:
 		#print(tile)
 		battlefield.set_grid_space(tile)
-		battlefield.grid[tile["game_y"]][tile["game_x"]].connect("tile_chosen",_set_battle_field_tile)
+		#battlefield.grid[tile["game_y"]][tile["game_x"]].connect("tile_chosen",_set_battle_field_tile)
+		battlefield.grid[tile["display_y"]][tile["display_x"]].connect("tile_chosen",_set_battle_field_tile)
 		
-		var grid_space = battlefield["grid"][tile["game_y"]][tile["game_x"]]
+		#var grid_space = battlefield["grid"][tile["game_y"]][tile["game_x"]]
+		var grid_space = battlefield["grid"][tile["display_y"]][tile["display_x"]]
 		#here
 		grid_space["card"]["card_select"].connect("pressed",_on_card_select_pressed)
 		grid_space["card"].connect("mouse_focus",_on_card_select_mouse_focus)
@@ -115,7 +119,8 @@ func quit_game(payload):
 	card_view_card.hide()
 	card_view_id = ""
 	for tile in battlefield_data:
-		var grid_space = battlefield["grid"][tile["game_y"]][tile["game_x"]]
+		#var grid_space = battlefield["grid"][tile["game_y"]][tile["game_x"]]
+		var grid_space = battlefield["grid"][tile["display_y"]][tile["display_x"]]
 		if grid_space.is_connected("tile_chosen",_set_battle_field_tile):
 			grid_space.disconnect("tile_chosen",_set_battle_field_tile)
 		if grid_space["card"]["card_select"].is_connected("pressed",_on_card_select_pressed):
@@ -124,7 +129,12 @@ func quit_game(payload):
 			grid_space["card"].disconnect("mouse_focus",_on_card_select_mouse_focus)
 
 func update_unit(payload):
+	#print("unit selected: ", card_view_id)
 	#print("update unit: ",payload)
+	print("here")
+	
+	if payload["unit"]["id"] == card_view_id:
+		update_card_view(payload["unit"])
 	#print("update unit: ",payload["unit"]["x"])
 	battlefield.update_unit(payload)
 	pass
@@ -163,8 +173,8 @@ func update_energy(payload):
 
 func update_players(payload):
 	#print(payload)
-	#for key in payload:
-		#print(key)
+	for key in payload:
+		print(key)
 	my_deck_size.text = str(int(payload["my_deck_size"]))
 	enemy_deck_size.text = str(int(payload["opponent_deck_size"]))
 	my_hand_size.text = str(int(payload["my_hand_size"]))
@@ -405,31 +415,38 @@ func _on_combat_action_timer_timeout():
 	combat_action_line.clear_points()
 
 func _on_card_get_info(data):
+	print("*************************")
+	if data["id"] == card_view_id:
+		card_view_id = ""
+		side_tabs.current_tab = 0
+		return
 	get_info.emit(data)
 
 func info_request(payload):
 	card_view_card.show()
-	print(payload)
+	card_view_id = payload["def"]["id"]
 	if payload["def"]:
-		card_view_id = payload["def"]["id"]
-		side_tabs.current_tab = 1
-		card_view_card.card_name.text = payload["def"]["name"]
-		card_view_card.card_type.text = payload["def"]["subtype"].capitalize()
-		var card_effect_text = ""
-		var _discount = 0
-		if payload["def"]["abilities"]:
-			for ability in payload["def"]["abilities"]:
-				if payload["def"]["abilities"][ability]["name"] == "health":
-					var card_hp = payload["def"]["abilities"][ability]["value"]
-					card_view_card["card_health"].text = str(int(card_hp)) if card_hp > 0 else ""
-				elif payload["def"]["abilities"][ability]["name"] == "attack":
-					card_view_card["card_attack"].text = str(int(payload["def"]["abilities"][ability]["value"]))
-				elif payload["def"]["abilities"][ability]["name"] == "actions":
-					pass
-				elif payload["def"]["abilities"][ability]["name"] == "efficient":
-					_discount = payload["def"]["abilities"][ability]["value"]
-				elif payload["def"]["abilities"][ability]["value"] > 0:
-					card_effect_text += payload["def"]["abilities"][ability]["name"].capitalize() + "-" \
-					+ str(int(payload["def"]["abilities"][ability]["value"])) + "  "
-		card_view_card.card_effects.text = card_effect_text
-		card_view_card.card_price.text = str(int(payload["def"]["cost"]))
+		update_card_view(payload["def"])
+	side_tabs.current_tab = 1
+
+func update_card_view(card_payload):
+	card_view_card.card_name.text = card_payload["name"]
+	card_view_card.card_type.text = card_payload["subtype"].capitalize()
+	var card_effect_text = ""
+	var _discount = 0
+	if card_payload["abilities"]:
+		for ability in card_payload["abilities"]:
+			if card_payload["abilities"][ability]["name"] == "health":
+				var card_hp = card_payload["abilities"][ability]["value"]
+				card_view_card["card_health"].text = str(int(card_hp)) if card_hp > 0 else ""
+			elif card_payload["abilities"][ability]["name"] == "attack":
+				card_view_card["card_attack"].text = str(int(card_payload["abilities"][ability]["value"]))
+			elif card_payload["abilities"][ability]["name"] == "actions":
+				pass
+			elif card_payload["abilities"][ability]["name"] == "efficient":
+				_discount = card_payload["abilities"][ability]["value"]
+			elif card_payload["abilities"][ability]["value"] > 0:
+				card_effect_text += card_payload["abilities"][ability]["name"].capitalize() + "-" \
+				+ str(int(card_payload["abilities"][ability]["value"])) + "  "
+	card_view_card.card_effects.text = card_effect_text
+	card_view_card.card_price.text = str(int(card_payload["cost"]))

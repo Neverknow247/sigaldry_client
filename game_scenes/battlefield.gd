@@ -5,6 +5,7 @@ const GRID_SPACE = preload("res://game_scenes/grid_space.tscn")
 @onready var grid_container = $GridContainer
 
 var grid = []
+var display_grid = []
 
 var height = 270
 var width = 270
@@ -31,11 +32,13 @@ func create_grid(_cols,_rows):
 		grid_container.remove_child(child)
 		child.queue_free()
 	grid = []
+	display_grid = []
 	cols = _cols
 	rows = _rows
 	queue_redraw()
 	for x in range(_rows):
 		grid.append([])
+		display_grid.append([])
 		for y in range(_cols):
 			var new_grid_space = GRID_SPACE.instantiate()
 			grid[x].append(new_grid_space)
@@ -45,7 +48,8 @@ func create_grid(_cols,_rows):
 
 func set_grid_space(info):
 	#print(info)
-	var grid_space = grid[info["game_y"]][info["game_x"]]
+	#var grid_space = grid[info["game_y"]][info["game_x"]]
+	var grid_space = grid[info["display_y"]][info["display_x"]]
 	grid_space["control"].visible = info["occupied"]
 	grid_space["trap"].visible = info["trapped"]
 	grid_space["tile_id"] = info["id"]
@@ -76,7 +80,16 @@ func set_grid_space(info):
 func update_grid_space(info):
 	#print("updating")
 	#print(info)
-	var grid_space = grid[info["tile"]["y"]][info["tile"]["x"]]
+	#print(info["tile"]["id"])
+	var grid_space
+	for x in grid:
+		for y in x:
+			#print("matching?: ", info["tile"]["id"]," - ", y.tile_id)
+			if info["tile"]["id"] == y.tile_id:
+				grid_space = y
+			#print(y.occupant_id)
+	#var grid_space = grid[info["tile"]["y"]][info["tile"]["x"]]
+	#var grid_space = grid[info["tile"]["display_y"]][info["tile"]["display_x"]]
 	grid_space["control"].visible = info["tile"]["occupied"]
 	grid_space["trap"].visible = info["tile"]["trapped"]
 	if info["tile"]["occupied"]:
@@ -108,9 +121,9 @@ func update_grid_space(info):
 				grid_space["card"]["card_attack"].text = str(int(abilities[ability]["value"]))
 	elif info["tile"]["trapped"]:
 		print("*****")
-		print(info["tile"])
-		print("*****")
-		print("Trapped Tile")
+		#print(info["tile"])
+		#print("*****")
+		#print("Trapped Tile")
 	else:
 		#print(info["tile"])
 		grid_space["occupied"] = false
@@ -118,13 +131,22 @@ func update_grid_space(info):
 		grid_space["occupant_type"] = ""
 
 func update_unit(info):
-	print(info["unit"]["name"])
-	print(info["unit"]["x"],":",info["unit"]["y"])
-	print("dead: ",info["unit"]["dead"])
+	#print(info["unit"]["name"])
+	#print(info["unit"]["x"],":",info["unit"]["y"])
+	#print("dead: ",info["unit"]["dead"])
 	if !info["unit"]["tile_id"]:
-		print("returning now")
+		#print("returning now")
 		return
-	var grid_space = grid[info["unit"]["y"]][info["unit"]["x"]]
+	
+	var grid_space
+	for x in grid:
+		for y in x:
+			#print("matching?: ", info["unit"]["id"]," - ", y.occupant_id)
+			if info["unit"]["id"] == y.occupant_id:
+				grid_space = y
+	
+	#var grid_space = grid[info["unit"]["y"]][info["unit"]["x"]]
+	#var grid_space = grid[info["unit"]["display_y"]][info["unit"]["display_x"]]
 	grid_space["control"].visible = !info["unit"]["dead"]
 	if !info["unit"]["dead"]:
 		grid_space["card"]["card_name"].text = info["unit"]["name"]

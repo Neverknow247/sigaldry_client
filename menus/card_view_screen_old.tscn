@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmaw7yf1gsfov"]
+[gd_scene load_steps=3 format=3 uid="uid://csetiwpyf37t2"]
 
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_fmb5o"]
-[ext_resource type="Script" uid="uid://bj2fyacgare38" path="res://menus/card_view_screen.gd" id="1_r84ue"]
+[ext_resource type="Script" uid="uid://c3ieqg2dls5kk" path="res://menus/card_view_screen_old.gd" id="1_r84ue"]
 
-[node name="card_view_screen" type="Control"]
+[node name="card_view_screen_old" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,11 +33,6 @@ offset_bottom = 1048.0
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 25
-
-[node name="h_box_container" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 25
-alignment = 1
 
 [node name="back_button" type="Button" parent="."]
 layout_mode = 0

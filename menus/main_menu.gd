@@ -4,6 +4,8 @@ var scene_name = "menu"
 
 var stats = Stats
 
+const REWARD = preload("res://items/reward.tscn")
+
 @onready var background_color = $background_color
 @onready var game_finished_screen = $game_finished_screen
 
@@ -44,3 +46,19 @@ func _on_deck_editor_button_pressed():
 
 func quit_game(payload):
 	game_finished_screen.quit_game(payload)
+
+#func show_rewards(payload):
+	#game_finished_screen.show_rewards(payload)
+
+func update_rewards(payload):
+	print(payload)
+	for child in $rewards_box.get_children():
+		$rewards_box.remove_child(child)
+		child.queue_free()
+	for reward in payload["rewards"]:
+		var new_reward = REWARD.instantiate()
+		$rewards_box.add_child(new_reward)
+		new_reward.component_name.text = payload["rewards"][reward]["component"]["description"]
+		new_reward.count_label.text = "X"+str(int(payload["rewards"][reward]["count"]))
+		new_reward.component_shape_grid.create_component_shapes(payload["rewards"][reward]["component"])
+		print(reward)
