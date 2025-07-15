@@ -92,6 +92,7 @@ alignment = 1
 max_length = 16
 
 [node name="card_graphic" parent="card_preview" instance=ExtResource("5_0g7mw")]
+visible = false
 layout_mode = 0
 offset_left = 1482.0
 offset_top = 196.0
@@ -175,6 +176,14 @@ layout_mode = 2
 [node name="color_profile_square9" parent="card_preview/card_graphic/card_color_profile" index="8" instance=ExtResource("6_1sycy")]
 layout_mode = 2
 
+[node name="card" parent="card_preview" instance=ExtResource("12_0t5fn")]
+layout_mode = 1
+offset_left = 1482.0
+offset_top = 195.0
+offset_right = 1482.0
+offset_bottom = 235.0
+scale = Vector2(0.45, 0.45)
+
 [node name="undo_button" type="Button" parent="card_preview"]
 layout_mode = 0
 offset_left = 870.0
@@ -185,6 +194,7 @@ text = "Undo Last
 Move"
 
 [node name="compare_card_select_button" type="Button" parent="card_preview"]
+visible = false
 layout_mode = 0
 offset_left = 1544.0
 offset_top = 712.0

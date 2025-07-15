@@ -1,6 +1,7 @@
 extends TextureRect
 
 const GRID_SPACE = preload("res://game_scenes/grid_space.tscn")
+const GAME_EFFECT = preload("res://game_scenes/game_effect_queue.tscn")
 
 @onready var grid_container = $GridContainer
 
@@ -78,7 +79,7 @@ func set_grid_space(info):
 		grid_space["occupant_type"] = ""
 
 func update_grid_space(info):
-	#print("updating")
+	#print("updating grid space")
 	#print(info)
 	#print(info["tile"]["id"])
 	var grid_space
@@ -90,16 +91,18 @@ func update_grid_space(info):
 			#print(y.occupant_id)
 	#var grid_space = grid[info["tile"]["y"]][info["tile"]["x"]]
 	#var grid_space = grid[info["tile"]["display_y"]][info["tile"]["display_x"]]
+	
 	grid_space["control"].visible = info["tile"]["occupied"]
 	grid_space["trap"].visible = info["tile"]["trapped"]
 	if info["tile"]["occupied"]:
-		#print("******************")
-		#print(info["tile"])
-		#print(info["tile"]["occupant"])
-		#print(info["tile"]["occupant"]["exhausted"])
+		if grid_space["occupied"] == true:
+			add_card_effects(grid_space,info["tile"]["occupant"])
+			#print("Grid Space: ",grid_space)
 		grid_space["occupied"] = true
 		grid_space["occupant_id"] = info["tile"]["occupant"]["id"]
 		grid_space["occupant_type"] = info["tile"]["occupant"]["type"]
+		grid_space["abilities"] = info["tile"]["occupant"]["abilities"]
+		#print(grid_space["abilities"])
 		grid_space["card"]["card_name"].text = info["tile"]["occupant"]["name"]
 		grid_space["card"]["card_id"] = info["tile"]["occupant"]["id"]
 		grid_space["card"]["source_type"] = info["tile"]["occupant"]["subtype"]
@@ -115,8 +118,14 @@ func update_grid_space(info):
 		var abilities = info["tile"]["occupant"]["abilities"]
 		for ability in abilities:
 			if abilities[ability]["name"] == "health":
+				#print(abilities[ability])
 				var card_hp = abilities[ability]["value"]
+				grid_space["health"] = str(int(card_hp)) if card_hp > 0 else ""
 				grid_space["card"]["card_health"].text = str(int(card_hp)) if card_hp > 0 else ""
+				if abilities[ability]["value"] < abilities[ability]["max_value"]:
+					grid_space["card"]["card_health"].add_theme_color_override("font_color", Color.RED)
+				else:
+					grid_space["card"]["card_health"].add_theme_color_override("font_color", Color.WHITE)
 			elif abilities[ability]["name"] == "attack":
 				grid_space["card"]["card_attack"].text = str(int(abilities[ability]["value"]))
 	elif info["tile"]["trapped"]:
@@ -129,6 +138,36 @@ func update_grid_space(info):
 		grid_space["occupied"] = false
 		grid_space["occupant_id"] = ""
 		grid_space["occupant_type"] = ""
+
+func add_card_effects(old_card,new_card):
+	var effects = []
+	#print("Old Card: ",old_card)
+	#print("New Card: ",new_card)
+	for ability in old_card["abilities"]:
+		for second_ability in new_card["abilities"]:
+			if ability == second_ability:
+				#print(new_card["abilities"][ability])
+				#if ability[""]
+				#print("Ability: ",ability)
+				var diff = new_card["abilities"][ability]["value"] - old_card["abilities"][ability]["value"]
+				
+				
+				if diff != 0:
+					var effect_dict = {
+						"ability" : str(ability),
+						"diff_value" : diff,
+						"original_value" : old_card["abilities"][ability]["value"],
+						"new_value" : new_card["abilities"][ability]["value"]
+					}
+					effects.push_front(effect_dict)
+				#if new_card["abilities"][ability]["value"] != old_card["abilities"][ability]["value"]:
+					#effects.push_front({"ability":str(ability),"value":0})
+					
+	#var effect = GAME_EFFECT.instantiate()
+	#add_child(effect)
+	#effect.add_to_queue(effects)
+	#effect.global_position = (old_card.global_position + Vector2(135,135))
+	old_card.game_effect_queue.add_to_queue(effects)
 
 func update_unit(info):
 	#print(info["unit"]["name"])
@@ -149,20 +188,29 @@ func update_unit(info):
 	#var grid_space = grid[info["unit"]["display_y"]][info["unit"]["display_x"]]
 	grid_space["control"].visible = !info["unit"]["dead"]
 	if !info["unit"]["dead"]:
+		if grid_space["occupied"] == true:
+			add_card_effects(grid_space,info["unit"])
 		grid_space["card"]["card_name"].text = info["unit"]["name"]
 		grid_space["card"]["card_id"] = info["unit"]["id"]
 		grid_space["card"]["card_type"].text = info["unit"]["subtype"].capitalize()
 		grid_space["card"]["type"] = "game_type"
-		print("exhausted: ",info["unit"]["exhausted"])
+		#print("exhausted: ",info["unit"]["exhausted"])
 		if info["unit"]["exhausted"]:
 			grid_space["control"].rotation_degrees = 35
 		else:
 			grid_space["control"].rotation_degrees = 0
+		grid_space["abilities"] = info["unit"]["abilities"]
 		var abilities = info["unit"]["abilities"]
 		for ability in abilities:
 			if abilities[ability]["name"] == "health":
 				var card_hp = abilities[ability]["value"]
+				grid_space["health"] = str(int(card_hp)) if card_hp > 0 else ""
 				grid_space["card"]["card_health"].text = str(int(card_hp)) if card_hp > 0 else ""
+				if abilities[ability]["value"] < abilities[ability]["max_value"]:
+					grid_space["card"]["card_health"].add_theme_color_override("font_color", Color.RED)
+					grid_space["card"]["card_health"].add_theme_color_override("font_color", Color.RED)
+				else:
+					grid_space["card"]["card_health"].add_theme_color_override("font_color", Color.WHITE)
 			elif abilities[ability]["name"] == "attack":
 				grid_space["card"]["card_attack"].text = str(int(abilities[ability]["value"]))
 	else:

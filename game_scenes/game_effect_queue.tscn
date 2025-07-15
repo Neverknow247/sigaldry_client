@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://bv26274lujm66"]
+
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_881pf"]
+[ext_resource type="Script" uid="uid://28qcbjeue6l4" path="res://game_scenes/game_effect_queue.gd" id="2_21a55"]
+
+[node name="game_effect_queue" type="Control"]
+z_index = 100
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_881pf")
+script = ExtResource("2_21a55")
+
+[node name="effect_node" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+
+[node name="effect_timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="effect_timer" to="." method="_on_effect_timer_timeout"]

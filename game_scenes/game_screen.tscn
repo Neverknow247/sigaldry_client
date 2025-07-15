@@ -381,6 +381,7 @@ wait_time = 0.1
 curve = SubResource("Curve2D_oyv0u")
 
 [node name="Line2D" type="Line2D" parent="card_controller"]
+z_index = 100
 
 [node name="combat_action_controller" type="Control" parent="."]
 z_index = 10
@@ -399,6 +400,7 @@ one_shot = true
 curve = SubResource("Curve2D_26jnf")
 
 [node name="combat_action_line" type="Line2D" parent="combat_action_controller"]
+z_index = 100
 
 [node name="color_1" type="ColorRect" parent="."]
 visible = false
@@ -416,6 +418,7 @@ color = Color(1, 0.498039, 0, 1)
 
 [connection signal="focus" from="." to="." method="_on_focus"]
 [connection signal="mouse_released" from="." to="." method="_on_mouse_released"]
+[connection signal="tab_clicked" from="side_panel/side_tabs" to="." method="_on_side_tabs_tab_clicked"]
 [connection signal="pressed" from="side_panel/side_tabs/Game/player_panel/buttons/end_turn_button" to="." method="_on_end_turn_button_pressed"]
 [connection signal="pressed" from="side_panel/side_tabs/Game/player_panel/buttons/concede_button" to="." method="_on_concede_button_pressed"]
 [connection signal="timeout" from="card_controller/Timer" to="." method="_on_timer_timeout"]

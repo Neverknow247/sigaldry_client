@@ -15,6 +15,7 @@ var stats = Stats
 
 
 const card_preview = preload("res://items/card_preview.tscn")
+const card_c = preload("res://items/card.tscn")
 
 var binder_width = 4
 var selected_width = 2
@@ -32,11 +33,56 @@ func reset():
 	finish_selection_screen_1.hide()
 	finish_selection_screen_2.hide()
 
+#func update_cards(payload):
+	##print(payload)
+	##for i in payload["select_from"][0]:
+		##print(i)
+	##print("****************")
+	##print(payload["select_from"][0])
+	#for i in payload:
+		#print(i)
+	#$Label.text = "Select up to %s cards for your opening hand"%[str(int(payload["max_cards"]))]
+	##print(payload)
+	#for n in select_container.get_children():
+		#select_container.remove_child(n)
+		#n.queue_free()
+	#for n in selected_container.get_children():
+		#selected_container.remove_child(n)
+		#n.queue_free()
+	#var select_from_card_number = 0
+	#var selected_card_number = 0
+	#var select_from_row_node
+	#var selected_row_node
+	#for card in payload["cards"]:
+		#if select_from_card_number == 0:
+			#select_from_row_node = HBoxContainer.new()
+			#select_container.add_child(select_from_row_node)
+			#select_from_row_node.alignment = BoxContainer.ALIGNMENT_CENTER
+			#select_from_row_node.add_theme_constant_override("separation",25)
+		#add_card(card,select_from_row_node)
+		#select_from_card_number += 1
+		#if select_from_card_number == binder_width:
+			#select_from_card_number = 0
+	#for card in payload["selected"]:
+		#if selected_card_number == 0:
+			#selected_row_node = HBoxContainer.new()
+			#selected_container.add_child(selected_row_node)
+			#selected_row_node.alignment = BoxContainer.ALIGNMENT_CENTER
+			#selected_row_node.add_theme_constant_override("separation",25)
+		#add_card(card,selected_row_node)
+		#selected_card_number += 1
+		#if selected_card_number == selected_width:
+			#selected_card_number = 0
+
+
 func update_cards(payload):
-	for i in payload["select_from"][0]:
+	#print(payload)
+	#for i in payload["select_from"][0]:
+		#print(i)
+	#print("****************")
+	#print(payload["select_from"][0])
+	for i in payload:
 		print(i)
-	print("****************")
-	print(payload["select_from"][0])
 	$Label.text = "Select up to %s cards for your opening hand"%[str(int(payload["max_cards"]))]
 	#print(payload)
 	for n in select_container.get_children():
@@ -49,13 +95,16 @@ func update_cards(payload):
 	var selected_card_number = 0
 	var select_from_row_node
 	var selected_row_node
-	for card in payload["select_from"]:
+	for card in payload["cards"]:
 		if select_from_card_number == 0:
 			select_from_row_node = HBoxContainer.new()
 			select_container.add_child(select_from_row_node)
 			select_from_row_node.alignment = BoxContainer.ALIGNMENT_CENTER
 			select_from_row_node.add_theme_constant_override("separation",25)
-		add_card(card,select_from_row_node)
+		var new_card = card_c.instantiate()
+		select_from_row_node.add_child(new_card)
+		new_card.define_scale(3)
+		new_card.add_details(card)
 		select_from_card_number += 1
 		if select_from_card_number == binder_width:
 			select_from_card_number = 0
@@ -65,10 +114,28 @@ func update_cards(payload):
 			selected_container.add_child(selected_row_node)
 			selected_row_node.alignment = BoxContainer.ALIGNMENT_CENTER
 			selected_row_node.add_theme_constant_override("separation",25)
-		add_card(card,selected_row_node)
+		var new_card = card_c.instantiate()
+		selected_row_node.add_child(new_card)
+		new_card.define_scale(3)
+		new_card.add_details(card)
 		selected_card_number += 1
 		if selected_card_number == selected_width:
 			selected_card_number = 0
+
+#for card in payload["cards"]:
+		#if card_number == 0:
+			#row_node = HBoxContainer.new()
+			#parent.add_child(row_node)
+			#row_node.alignment = BoxContainer.ALIGNMENT_CENTER
+			#row_node.add_theme_constant_override("separation",10)
+		#var new_card = card_c.instantiate()
+		#row_node.add_child(new_card)
+		#new_card.define_scale(3)
+		#new_card.add_details(card)
+		#card_number+=1
+		#if card_number == 3:
+			#card_number = 0
+
 
 func add_card(card,container):
 	var new_card = card_preview.instantiate()

@@ -7,6 +7,7 @@ const BOARD_CARD_AVATAR = preload("res://assets/art/board_card_avatar.png")
 @onready var card = $Control/Control/card_preview
 @onready var grid_button = $grid_button
 @onready var grid_button_color = $grid_button/grid_button_color
+@onready var game_effect_queue = $game_effect_queue
 
 @export var default_color : Color = Color.BLACK
 @export var friendly_color : Color = Color.BLACK
@@ -21,6 +22,9 @@ var tile_type = ""
 var occupied = false
 var occupant_id = ""
 var occupant_type = ""
+
+var abilities = {}
+var health = ""
 
 signal tile_chosen(id)
 signal get_info(data)

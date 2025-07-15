@@ -88,6 +88,7 @@ func _process(delta):
 		disposition_override = !disposition_override
 	if Input.is_action_just_pressed("M2") and picked_up:
 		picked_up = false
+		mouse_released.emit()
 
 func set_color_backgrounds():
 	side_panel_background.color = stats.background_color
@@ -416,7 +417,7 @@ func _on_combat_action_timer_timeout():
 
 func _on_card_get_info(data):
 	print("*************************")
-	if data["id"] == card_view_id:
+	if str(data["id"]) == card_view_id:
 		card_view_id = ""
 		side_tabs.current_tab = 0
 		return
@@ -424,7 +425,7 @@ func _on_card_get_info(data):
 
 func info_request(payload):
 	card_view_card.show()
-	card_view_id = payload["def"]["id"]
+	card_view_id = str(payload["def"]["id"])
 	if payload["def"]:
 		update_card_view(payload["def"])
 	side_tabs.current_tab = 1
@@ -450,3 +451,7 @@ func update_card_view(card_payload):
 				+ str(int(card_payload["abilities"][ability]["value"])) + "  "
 	card_view_card.card_effects.text = card_effect_text
 	card_view_card.card_price.text = str(int(card_payload["cost"]))
+
+
+func _on_side_tabs_tab_clicked(tab):
+	card_view_id = ""

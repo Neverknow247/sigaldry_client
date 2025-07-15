@@ -83,10 +83,6 @@ custom_minimum_size = Vector2(150, 40)
 layout_mode = 2
 text = "Quit"
 
-[node name="game_finished_screen" parent="." instance=ExtResource("3_yjgyn")]
-visible = false
-layout_mode = 1
-
 [node name="rewards_box" type="HBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 64.0
@@ -95,6 +91,10 @@ offset_right = 1856.0
 offset_bottom = 848.0
 theme_override_constants/separation = 32
 alignment = 1
+
+[node name="game_finished_screen" parent="." instance=ExtResource("3_yjgyn")]
+visible = false
+layout_mode = 1
 
 [connection signal="pressed" from="buttons/search_for_a_pvp_game_button" to="." method="_on_search_for_a_pvp_game_button_pressed"]
 [connection signal="pressed" from="buttons/search_for_a_pve_game" to="." method="_on_search_for_a_pve_game_pressed"]

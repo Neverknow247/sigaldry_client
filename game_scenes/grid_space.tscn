@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://bncybjplfwfu6"]
+[gd_scene load_steps=42 format=3 uid="uid://bncybjplfwfu6"]
 
 [ext_resource type="Script" uid="uid://dofo4kh7waath" path="res://game_scenes/grid_space.gd" id="1_m0lvt"]
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="2_8sije"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://b2vvtmi4jxkl5" path="res://assets/fonts/fantasque-sans-mono.bold.otf" id="5_opxsm"]
 [ext_resource type="Script" uid="uid://cu1b5sje7w6kb" path="res://items/game_card_select_ui.gd" id="6_s4nig"]
 [ext_resource type="Script" uid="uid://6eo8osswnvrf" path="res://items/card_select.gd" id="7_88wmg"]
+[ext_resource type="PackedScene" uid="uid://bv26274lujm66" path="res://game_scenes/game_effect_queue.tscn" id="8_j3nil"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jixci"]
 
@@ -463,6 +464,9 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0.490196)
+
+[node name="game_effect_queue" parent="." instance=ExtResource("8_j3nil")]
+layout_mode = 2
 
 [connection signal="mouse_entered" from="Control/Control/card_preview" to="Control/Control/card_preview" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Control/Control/card_preview" to="Control/Control/card_preview" method="_on_mouse_exited"]

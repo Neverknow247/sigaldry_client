@@ -70,7 +70,7 @@ func set_card_effects(keywords):
 			"health":
 				card_health.text = str(int(k["value"])) if k["value"] > 0 else ""
 			"actions":
-				card_actions.size.x = 36* (k["value"]+3)
+				card_actions.size.x = 36* (k["value"])
 			"efficient":
 				pass
 			_:
@@ -88,3 +88,13 @@ func set_color_profile(colors):
 		card_color_profile.add_child(new_color)
 		new_color.color_square.color = Color(stats.COLOR_KEY[color["id"]])
 		new_color.color_magnitude.text = str(int(color["magnitude"]))
+
+func add_builder_details(card_details):
+	print("details: ",card_details)
+	card_id = card_details["id"]
+	set_color_profile(card_details["card"]["color_profile"])
+	card_cost.text = str(int(card_details["card"]["cost"]))
+	card_name.text = card_details["card"]["name"]
+	set_card_effects(card_details["card"]["keywords"])
+	card_type.text = card_details["card"]["subtype"].capitalize()
+	card_author.text = card_details["card"]["unique_author"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=29 format=3 uid="uid://bniv385seyq0k"]
 
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_8cvg7"]
-[ext_resource type="Script" uid="uid://c0f0ebck442nw" path="res://deck_builder_scenes/deck_editor_old.gd" id="2_37b42"]
+[ext_resource type="Script" uid="uid://dlm5sn7kebv7x" path="res://deck_builder_scenes/deck_editor.gd" id="2_37b42"]
 [ext_resource type="Texture2D" uid="uid://cdhredoprpsoi" path="res://assets/art/card_template.png" id="3_37b42"]
 [ext_resource type="Script" uid="uid://c4ndy0nfdsb0b" path="res://items/card_preview.gd" id="4_x5yio"]
 [ext_resource type="FontFile" uid="uid://b2vvtmi4jxkl5" path="res://assets/fonts/fantasque-sans-mono.bold.otf" id="5_t4fs1"]

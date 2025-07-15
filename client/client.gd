@@ -23,7 +23,9 @@ var backendURL: String
 
 func _ready():
 	# prepare URL
-	backendURL = "http://192.168.1.151:3000/socket.io"
+	#backendURL = "http://192.168.1.151:3050/socket.io"
+	#backendURL = "http://97.179.151.214:3050/socket.io"
+	backendURL = "http://97.179.151.214:3000/socket.io"
 
 	# initialize client
 	client = SocketIOClient.new(backendURL, {"token": "MY_AUTH_TOKEN"})
@@ -58,6 +60,7 @@ func on_socket_connect(_payload: Variant, _name_space, error: bool):
 func on_socket_event(event_name: String, payload: Variant, _name_space):
 	#print("Received Event: ", event_name, " ", payload)
 	print("Received Event: ", event_name)
+	#print(payload)
 	if payload:
 		print(payload["sequence"])
 	# hide login_screen and show basic menu

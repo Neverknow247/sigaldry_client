@@ -182,9 +182,13 @@ func check_search_bar(new_text):
 
 
 func load_builder_grid(payload):
+	#print(payload)
+	if payload:
+		print("Payload: ", payload["card"])
 	if payload:
 		card_grid.create_card_grid(payload["grid"],payload["card"]["card"]["components"])
-		update_card_preview(payload["card"]["card"])
+		update_card_preview(payload["card"])
+		#update_card_preview(payload["card"]["card"])
 		if payload["active_component"]:
 			card_grid.create_component_shapes(payload["active_component"])
 			active_component.create_active_component(payload["active_component"])
@@ -228,50 +232,52 @@ func _on_save_button_pressed():
 		save_card.emit()
 
 func update_card_preview(card_payload):
-	print(card_payload)
+	print("HERE IS WHERE I NEED AN UPDATE:")
+	#print(card_payload)
 	#print("Name: ",card_payload["name"])
 	#print("Unique Override: ",card_payload["unique_override"])
 	#print("Unique Author: ",card_payload["unique_author"])
 	#print("Unique Cost: ",card_payload["unique_cost"])
 	name_card_edit.editable = true
-	if card_payload["unique_author"] != "":
+	if card_payload["card"]["unique_author"] != "":
 		name_card_edit.editable = false
-		name_card_edit.text = card_payload["name"]
+		name_card_edit.text = card_payload["card"]["name"]
 	else:
 		pass
 		#name_card_edit.text = ""
 	card_preview.show()
 	reset_card()
-	card_name.text = card_payload["name"]
-	var card_effect_text = ""
-	var discount = 0
-	if card_payload["obj"]["abilities"]:
-		for ability in card_payload["obj"]["abilities"]:
-			if ability == "health":
-				var card_hp = card_payload["obj"]["abilities"][ability]["value"]
-				card_health.text = str(int(card_hp)) if card_hp > 0 else ""
-			elif ability == "attack":
-				card_attack.text = str(int(card_payload["obj"]["abilities"][ability]["value"]))
-			elif ability == "actions":
-				pass
-			elif ability == "efficient":
-				discount = card_payload["obj"]["abilities"][ability]["value"]
-			elif card_payload["obj"]["abilities"][ability]["value"] > 0:
-				card_effect_text += card_payload["obj"]["abilities"][ability]["display_name"].capitalize() + "-" \
-				+ str(card_payload["obj"]["abilities"][ability]["value"]) + "  " 
-				#+ str(int(card_payload["obj"]["abilities"][ability]["value"])) + "  " 
-	card_effects.text = card_effect_text
-	card_price.text = str(int(max(card_payload["true_cost"]-discount,0)))
-	#card_price.text = str(int(card_payload["card"]["cost"]))
-	#card_color_profile.columns = 1
-	for _child in card_color_profile.get_children():
-		card_color_profile.remove_child(_child)
-		_child.queue_free()
-	for color in card_payload["color_profile"]:
-		var new_color = COLOR_PROFILE_SQUARE_LARGE.instantiate()
-		card_color_profile.add_child(new_color)
-		new_color.color_square.color = Color(color["background_color"])
-		new_color.color_magnitude.text = str(int(color["magnitude"]))
+	$card_preview/card.add_builder_details(card_payload)
+	#card_name.text = card_payload["name"]
+	#var card_effect_text = ""
+	#var discount = 0
+	#if card_payload["obj"]["abilities"]:
+		#for ability in card_payload["obj"]["abilities"]:
+			#if ability == "health":
+				#var card_hp = card_payload["obj"]["abilities"][ability]["value"]
+				#card_health.text = str(int(card_hp)) if card_hp > 0 else ""
+			#elif ability == "attack":
+				#card_attack.text = str(int(card_payload["obj"]["abilities"][ability]["value"]))
+			#elif ability == "actions":
+				#pass
+			#elif ability == "efficient":
+				#discount = card_payload["obj"]["abilities"][ability]["value"]
+			#elif card_payload["obj"]["abilities"][ability]["value"] > 0:
+				#card_effect_text += card_payload["obj"]["abilities"][ability]["display_name"].capitalize() + "-" \
+				#+ str(card_payload["obj"]["abilities"][ability]["value"]) + "  " 
+				##+ str(int(card_payload["obj"]["abilities"][ability]["value"])) + "  " 
+	#card_effects.text = card_effect_text
+	#card_price.text = str(int(max(card_payload["true_cost"]-discount,0)))
+	##card_price.text = str(int(card_payload["card"]["cost"]))
+	##card_color_profile.columns = 1
+	#for _child in card_color_profile.get_children():
+		#card_color_profile.remove_child(_child)
+		#_child.queue_free()
+	#for color in card_payload["color_profile"]:
+		#var new_color = COLOR_PROFILE_SQUARE_LARGE.instantiate()
+		#card_color_profile.add_child(new_color)
+		#new_color.color_square.color = Color(color["background_color"])
+		#new_color.color_magnitude.text = str(int(color["magnitude"]))
 
 #28/24
 func reset_card():
