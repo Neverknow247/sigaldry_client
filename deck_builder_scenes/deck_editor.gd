@@ -14,7 +14,8 @@ signal delete_deck
 signal create_new_deck(deck_name)
 signal show_units_only
 
-const card_preview = preload("res://items/card.tscn")
+const card_preview = preload("res://items/card_preview.tscn")
+const card_c = preload("res://items/card.tscn")
 const COLOR_PROFILE_SQUARE_LARGE = preload("res://items/color_profile_square_large.tscn")
 
 @onready var color_background = $color_background
@@ -73,23 +74,9 @@ func clear_cards(parent):
 		n.queue_free()
 
 func add_cards(parent,payload,type):
-	var card_number = 0
-	var row_node
-	for card in payload["cards"]:
-		if card_number == 0:
-			row_node = HBoxContainer.new()
-			parent.add_child(row_node)
-			row_node.alignment = BoxContainer.ALIGNMENT_CENTER
-			row_node.add_theme_constant_override("separation", 25)
-		var new_card = card_preview.instantiate()
-		row_node.add_child(new_card)
-		new_card.define_scale(4)
-		new_card.add_details(card)
-		card_number+=1
-		if card_number == 3:
-			card_number = 0
-
-func add_unit_only_cards(parent,payload,type):
+	if !payload["cards"] :
+		return
+	print("parent: ", parent, " | payload: ", payload, " | type: ", type)
 	var card_number = 0
 	var row_node
 	for card in payload["cards"]:
@@ -98,47 +85,141 @@ func add_unit_only_cards(parent,payload,type):
 			parent.add_child(row_node)
 			row_node.alignment = BoxContainer.ALIGNMENT_CENTER
 			row_node.add_theme_constant_override("separation",10)
-		var new_card = card_preview.instantiate()
+		var new_card = card_c.instantiate()
 		row_node.add_child(new_card)
-		new_card["card_name"].text = card["card"]["name"]
-		new_card["card_type"].text = card["card"]["subtype"].capitalize()
-		new_card["card_id"] = card["id"]
-		new_card["type"] = type
-		new_card.connect("add_avatar_to_new_deck",avatar_to_new_deck)
-		var card_effect_text = ""
-		var discount = 0
-		#print(card)
-		if card["card"]["keywords"]:
-			for ability in card["card"]["keywords"]:
-				#print(ability)
-				if ability["name"] == "health":
-					var card_hp = ability["value"]
-					new_card["card_health"].text = str(int(card_hp)) if card_hp > 0 else ""
-				elif ability["name"] == "attack":
-					new_card["card_attack"].text = str(int(ability["value"]))
-				elif ability["name"] == "actions":
-					pass
-				elif ability["name"] == "efficient":
-					discount = ability["value"]
-				elif ability["value"] > 0:
-					card_effect_text += ability["name"].capitalize() + "-" \
-					+ str(int(ability["value"])) + "  " 
-		new_card["card_effects"].text = card_effect_text
-		new_card["card_price"].text = str(int(card["card"]["cost"]-discount))
-		
-		for _child in new_card.card_color_profile.get_children():
-			new_card.card_color_profile.remove_child(_child)
-			_child.queue_free()
-		for color in card["card"]["color_profile"]:
-			var new_color = COLOR_PROFILE_SQUARE_LARGE.instantiate()
-			new_card.card_color_profile.add_child(new_color)
-			print(color)
-			new_color.color_square.color = Color(stats.COLOR_KEY[color["id"]])
-			new_color.color_magnitude.text = str(int(color["magnitude"]))
-		
+		new_card.define_scale(3)
+		new_card.add_details(card)
 		card_number+=1
 		if card_number == 3:
 			card_number = 0
+
+#func add_cards(parent,payload,type):
+	#var card_number = 0
+	#var row_node
+	#for card in payload["cards"]:
+		#if card_number == 0:
+			#row_node = HBoxContainer.new()
+			#parent.add_child(row_node)
+			#row_node.alignment = BoxContainer.ALIGNMENT_CENTER
+			#row_node.add_theme_constant_override("separation",10)
+		#var new_card = card_preview.instantiate()
+		#row_node.add_child(new_card)
+		#new_card["card_name"].text = card["name"]
+		#new_card["card_type"].text = card["subtype"].capitalize()
+		#new_card["card_id"] = card["id"]
+		##if type == "not_in_deck" and card["subtype"] == "unit":
+			##new_card["type"] = "unit_not_in_deck"
+		#if type == "in_deck" and int(card["id"]) == int(payload["avatar_id"]):
+			#new_card.activate_avatar()
+			#
+			#for _child in new_card.card_color_profile.get_children():
+				#new_card.card_color_profile.remove_child(_child)
+				#_child.queue_free()
+			#for color in card["color_profile"]:
+				#if color["magnitude"] > 0:
+					#var new_color = COLOR_PROFILE_SQUARE_LARGE.instantiate()
+					#new_card.card_color_profile.add_child(new_color)
+					#print(color)
+					#new_color.color_square.color = Color(stats.COLOR_KEY[color["id"]])
+					#new_color.color_magnitude.text = str(int(color["magnitude"]))
+			#
+			#
+			#
+		#else:
+			#new_card["type"] = type
+		#new_card.connect("add_avatar_to_deck",avatar_to_deck)
+		#new_card.connect("add_to_deck",add_to_deck)
+		#new_card.connect("remove_from_deck",remove_from_deck)
+		#var card_effect_text = ""
+		#@warning_ignore("unused_variable")
+		#var discount = 0
+		#for ability in card["abilities"]:
+			#if card["abilities"][ability]["name"] == "health":
+				#var card_hp = card["abilities"][ability]["value"]
+				#new_card["card_health"].text = str(int(card_hp)) if card_hp > 0 else ""
+			#elif card["abilities"][ability]["name"] == "attack":
+				#new_card["card_attack"].text = str(int(card["abilities"][ability]["value"]))
+			#elif card["abilities"][ability]["name"] == "actions":
+				#pass
+			#elif card["abilities"][ability]["name"] == "efficient":
+				#discount = card["abilities"][ability]["value"]
+			#elif card["abilities"][ability]["value"] > 0:
+				#card_effect_text += card["abilities"][ability]["name"].capitalize() + "-" \
+				#+ str(int(card["abilities"][ability]["value"])) + " " 
+		#new_card["card_effects"].text = card_effect_text
+		#new_card["card_price"].text = str(int(card["cost"]))
+		#card_number+=1
+		#if card_number == 3:
+			#card_number = 0
+
+func add_unit_only_cards(parent,payload,type):
+	print("parent: ", parent, " | payload: ", payload, " | type: ", type)
+	var card_number = 0
+	var row_node
+	for card in payload["cards"]:
+		if card_number == 0:
+			row_node = HBoxContainer.new()
+			parent.add_child(row_node)
+			row_node.alignment = BoxContainer.ALIGNMENT_CENTER
+			row_node.add_theme_constant_override("separation",10)
+		var new_card = card_c.instantiate()
+		row_node.add_child(new_card)
+		new_card.define_scale(3)
+		new_card.add_details(card)
+		card_number+=1
+		if card_number == 3:
+			card_number = 0
+
+#func add_unit_only_cards(parent,payload,type):
+	#var card_number = 0
+	#var row_node
+	#for card in payload["cards"]:
+		#if card_number == 0:
+			#row_node = HBoxContainer.new()
+			#parent.add_child(row_node)
+			#row_node.alignment = BoxContainer.ALIGNMENT_CENTER
+			#row_node.add_theme_constant_override("separation",10)
+		#var new_card = card_preview.instantiate()
+		#row_node.add_child(new_card)
+		#new_card["card_name"].text = card["card"]["name"]
+		#new_card["card_type"].text = card["card"]["subtype"].capitalize()
+		#new_card["card_id"] = card["id"]
+		#new_card["type"] = type
+		#new_card.connect("add_avatar_to_new_deck",avatar_to_new_deck)
+		#var card_effect_text = ""
+		#var discount = 0
+		##print(card)
+		#if card["card"]["keywords"]:
+			#for ability in card["card"]["keywords"]:
+				##print(ability)
+				#if ability["name"] == "health":
+					#var card_hp = ability["value"]
+					#new_card["card_health"].text = str(int(card_hp)) if card_hp > 0 else ""
+				#elif ability["name"] == "attack":
+					#new_card["card_attack"].text = str(int(ability["value"]))
+				#elif ability["name"] == "actions":
+					#pass
+				#elif ability["name"] == "efficient":
+					#discount = ability["value"]
+				#elif ability["value"] > 0:
+					#card_effect_text += ability["name"].capitalize() + "-" \
+					#+ str(int(ability["value"])) + "  " 
+		#new_card["card_effects"].text = card_effect_text
+		#new_card["card_price"].text = str(int(card["card"]["cost"]-discount))
+		#
+		#for _child in new_card.card_color_profile.get_children():
+			#new_card.card_color_profile.remove_child(_child)
+			#_child.queue_free()
+		#for color in card["card"]["color_profile"]:
+			#var new_color = COLOR_PROFILE_SQUARE_LARGE.instantiate()
+			#new_card.card_color_profile.add_child(new_color)
+			#print(color)
+			#new_color.color_square.color = Color(stats.COLOR_KEY[color["id"]])
+			#new_color.color_magnitude.text = str(int(color["magnitude"]))
+		#
+		#card_number+=1
+		#if card_number == 3:
+			#card_number = 0
 
 func add_to_deck(card_id):
 	add_card_to_deck.emit(card_id)

@@ -16,12 +16,12 @@ var default_save_data = stats.return_new_save_data()
 
 func _ready():
 	var logged_settings_path
-	if dev_mode == false:
-		var dir = DirAccess.open("user://")
-		if !dir.dir_exists("save_data"):
-			dir.make_dir("save_data")
-		if !dir.dir_exists("save_data/additional_resources"):
-			dir.make_dir("save_data/additional_resources")
+	#if dev_mode == false:
+	var dir = DirAccess.open("user://")
+	if !dir.dir_exists("save_data"):
+		dir.make_dir("save_data")
+	if !dir.dir_exists("save_data/additional_resources"):
+		dir.make_dir("save_data/additional_resources")
 	if dev_mode == true:
 		logged_settings_path = "user://settings.cfg"
 		default_save_path = "user://save_data/dev_game_save_data.dat"

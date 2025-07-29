@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://2p7iqmaf2fwl" path="res://game_scenes/waiting_for_game_screen.tscn" id="7_3mey6"]
 [ext_resource type="PackedScene" uid="uid://b15rxgd7b65m7" path="res://game_scenes/game_screen.tscn" id="9_ycmdf"]
 [ext_resource type="PackedScene" uid="uid://bnrpk8aqowvup" path="res://menus/transition.tscn" id="13_au68s"]
-[ext_resource type="PackedScene" uid="uid://ggdt2yu0srx0" path="res://deck_builder_scenes/deck_editor_old.tscn" id="13_sbtbl"]
+[ext_resource type="PackedScene" uid="uid://ggdt2yu0srx0" path="res://deck_builder_scenes/deck_editor.tscn" id="13_sbtbl"]
 [ext_resource type="PackedScene" uid="uid://cfs43teibk45h" path="res://dev_tools/dev_screen.tscn" id="14_sbtbl"]
 
 [node name="client" type="Control"]

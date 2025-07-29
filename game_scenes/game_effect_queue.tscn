@@ -20,6 +20,7 @@ layout_mode = 1
 anchors_preset = 0
 
 [node name="effect_timer" type="Timer" parent="."]
+wait_time = 2.0
 one_shot = true
 
 [connection signal="timeout" from="effect_timer" to="." method="_on_effect_timer_timeout"]

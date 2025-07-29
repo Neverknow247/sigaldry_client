@@ -95,11 +95,13 @@ offset_right = 1542.0
 offset_bottom = 541.0
 
 [node name="Label" type="Label" parent="remember_me"]
+visible = false
 layout_mode = 2
 text = "Remember Me?"
 
 [node name="remember_me_checkbox" type="CheckBox" parent="remember_me"]
 layout_mode = 2
+text = "Remember Me?"
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/sign_in_button" to="." method="_on_sign_in_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer2/register_new_user_button" to="." method="_on_register_new_user_button_pressed"]

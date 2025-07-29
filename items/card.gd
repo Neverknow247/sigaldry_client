@@ -25,6 +25,7 @@ signal compare_card(id)
 @onready var card_type = $content/labels/card_type
 @onready var card_author = $content/labels/card_author
 @onready var card_actions = $content/labels/card_actions
+@onready var card_rich_effects = $content/card_rich_effects
 
 var type = ""
 var source_type = ""
@@ -47,12 +48,14 @@ func define_scale(size):
 		5:
 			custom_minimum_size = Vector2(408,560)
 			content.scale = Vector2(.5,.5)
+	#$content/buttons/button.size = content.size
+	#$buttons/card_Sbutton.set_anchors_preset(Control.PRESET_FULL_RECT)
 
 func activate_avatar():
 	card_texture = AVATAR_TEXTURE
 
 func add_details(card_details):
-	print(card_details)
+	#print(card_details)
 	card_id = card_details["id"]
 	set_color_profile(card_details["card_json"]["color_profile"])
 	card_cost.text = str(int(card_details["card_json"]["cost"]))
@@ -60,6 +63,24 @@ func add_details(card_details):
 	set_card_effects(card_details["card_json"]["keywords"])
 	card_type.text = card_details["card_json"]["subtype"].capitalize()
 	card_author.text = card_details["unique_author"]
+
+#func set_card_effects(keywords):
+	#var card_effect_text = ""
+	#for k in keywords:
+		#match k["name"]:
+			#"attack":
+				#card_attack.text = str(int(k["value"]))
+			#"health":
+				#card_health.text = str(int(k["value"])) if k["value"] > 0 else ""
+			#"actions":
+				#card_actions.size.x = 36* (k["value"])
+			#"efficient":
+				#pass
+			#_:
+				#pass
+				#card_effect_text += k["name"].capitalize() + "-" \
+				#+ str(int(k["value"])) + "  "
+	#card_effects.text = card_effect_text
 
 func set_card_effects(keywords):
 	var card_effect_text = ""
@@ -75,9 +96,9 @@ func set_card_effects(keywords):
 				pass
 			_:
 				pass
-				card_effect_text += k["name"].capitalize() + "-" \
+				card_effect_text += "[url="+k["name"]+"]"+k["name"].capitalize() +"[/url]"+ "-" \
 				+ str(int(k["value"])) + "  "
-	card_effects.text = card_effect_text
+	card_rich_effects.text = card_effect_text
 
 func set_color_profile(colors):
 	for _child in card_color_profile.get_children():
@@ -90,7 +111,7 @@ func set_color_profile(colors):
 		new_color.color_magnitude.text = str(int(color["magnitude"]))
 
 func add_builder_details(card_details):
-	print("details: ",card_details)
+	#print("details: ",card_details)
 	card_id = card_details["id"]
 	set_color_profile(card_details["card"]["color_profile"])
 	card_cost.text = str(int(card_details["card"]["cost"]))
@@ -98,3 +119,7 @@ func add_builder_details(card_details):
 	set_card_effects(card_details["card"]["keywords"])
 	card_type.text = card_details["card"]["subtype"].capitalize()
 	card_author.text = card_details["card"]["unique_author"]
+
+
+func _on_card_button_pressed():
+	print("i was pressed yess")

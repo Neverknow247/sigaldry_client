@@ -155,9 +155,10 @@ func add_card_effects(old_card,new_card):
 				if diff != 0:
 					var effect_dict = {
 						"ability" : str(ability),
-						"diff_value" : diff,
+						"sign" : "+" if diff > 0 else "-",
+						"diff_value" : abs(diff),
 						"original_value" : old_card["abilities"][ability]["value"],
-						"new_value" : new_card["abilities"][ability]["value"]
+						"new_value" : new_card["abilities"][ability]["value"],
 					}
 					effects.push_front(effect_dict)
 				#if new_card["abilities"][ability]["value"] != old_card["abilities"][ability]["value"]:

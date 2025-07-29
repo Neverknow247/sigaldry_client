@@ -25,7 +25,8 @@ func _ready():
 	# prepare URL
 	#backendURL = "http://192.168.1.151:3050/socket.io"
 	#backendURL = "http://97.179.151.214:3050/socket.io"
-	backendURL = "http://97.179.151.214:3000/socket.io"
+	#backendURL = "http://97.179.151.214:3000/socket.io"
+	backendURL = "http://192.168.40.179:3000/socket.io"
 
 	# initialize client
 	client = SocketIOClient.new(backendURL, {"token": "MY_AUTH_TOKEN"})
@@ -66,8 +67,10 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 	# hide login_screen and show basic menu
 	match event_name:
 		"exception":
-			#show_error(payload)
 			print(payload)
+			#show_error(payload)
+			#print(payload)
+			print("Error")
 		"login":
 			change_scene("menu")
 			login_screen.reset_screen()
@@ -292,7 +295,9 @@ func _on_deck_editor_delete_deck():
 	#client.socketio_send("editor-add-deck",{"name":deck_name})
 
 func _on_deck_editor_show_units_only():
-	client.socketio_send("view-cards",{"unit_only":true,"builder":false})
+	client.socketio_send("card-select-units",{"unit_only":true,"builder":false})
+	
+	#client.socketio_send("view-cards",{"unit_only":true,"builder":false})
 
 func _on_deck_editor_create_new_deck(deck_name,avatar_id):
 	client.socketio_send("editor-add-avatar-deck",{"name":deck_name,"avatar_id":avatar_id})

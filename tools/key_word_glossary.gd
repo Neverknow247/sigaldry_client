@@ -9,7 +9,7 @@ var glossary = {
 		"actions": "Actions: the number of times the unit can be used in a single turn",
 		"healer": "Healer: restores health on a target unit",
 		"impale": "Impale: damage dealt to unit behind a target; cannot exceed the damage dealt to the target",
-		"armor": "Armor: reduces attack and impale damage; depletes after each use",
+		"armor": "Armor: reduces attack, cleave and impale damage; depletes after each use",
 		"poisonous": "Poisonous: applies poisoned to a target unit",
 		"poisoned": "Poisoned: amount of damage suffered at the end of the turn; ignores armor and depletes after use",
 		"lacerate": "Lacerate: applies bleeding to a target unit after a successful attack",

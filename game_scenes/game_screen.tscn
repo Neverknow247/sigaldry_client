@@ -381,7 +381,7 @@ wait_time = 0.1
 curve = SubResource("Curve2D_oyv0u")
 
 [node name="Line2D" type="Line2D" parent="card_controller"]
-z_index = 100
+z_index = 50
 
 [node name="combat_action_controller" type="Control" parent="."]
 z_index = 10
@@ -400,7 +400,7 @@ one_shot = true
 curve = SubResource("Curve2D_26jnf")
 
 [node name="combat_action_line" type="Line2D" parent="combat_action_controller"]
-z_index = 100
+z_index = 50
 
 [node name="color_1" type="ColorRect" parent="."]
 visible = false
