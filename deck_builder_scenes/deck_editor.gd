@@ -14,8 +14,7 @@ signal delete_deck
 signal create_new_deck(deck_name)
 signal show_units_only
 
-const card_preview = preload("res://items/card_preview.tscn")
-const card_c = preload("res://items/card.tscn")
+const CARD_SCENE = preload("res://items/card.tscn")
 const COLOR_PROFILE_SQUARE_LARGE = preload("res://items/color_profile_square_large.tscn")
 
 @onready var color_background = $color_background
@@ -54,13 +53,13 @@ func update_cards_in_deck(payload):
 	#print("print cards in deck")
 	clear_cards(cards_in_deck_box)
 	if payload:
-		add_cards(cards_in_deck_box,payload,"in_deck")
+		add_cards(cards_in_deck_box,payload,"deck_editor_in_deck")
 
 func update_cards_not_in_deck(payload):
 	#print("print cards not in deck")
 	clear_cards(cards_not_in_deck_box)
 	if payload:
-		add_cards(cards_not_in_deck_box,payload,"not_in_deck")
+		add_cards(cards_not_in_deck_box,payload,"deck_editor_not_in_deck")
 
 func update_cards_unit_only(payload):
 	clear_cards(cards_units_only_box)
@@ -76,7 +75,7 @@ func clear_cards(parent):
 func add_cards(parent,payload,type):
 	if !payload["cards"] :
 		return
-	print("parent: ", parent, " | payload: ", payload, " | type: ", type)
+	#print("parent: ", parent, " | payload: ", payload, " | type: ", type)
 	var card_number = 0
 	var row_node
 	for card in payload["cards"]:
@@ -85,10 +84,28 @@ func add_cards(parent,payload,type):
 			parent.add_child(row_node)
 			row_node.alignment = BoxContainer.ALIGNMENT_CENTER
 			row_node.add_theme_constant_override("separation",10)
-		var new_card = card_c.instantiate()
+		var new_card = CARD_SCENE.instantiate()
 		row_node.add_child(new_card)
 		new_card.define_scale(3)
 		new_card.add_details(card)
+		
+		#print("*******")
+		#print(type)
+		#print("########")
+		#print(card)
+		#print("*******")
+		
+		#if type == "not_in_deck" and card["card_json"]["subtype"] == "unit":
+			#new_card["card_button_type"] = "deck_editor_not_in_deck"
+		if type == "in_deck" and int(card["id"]) == int(payload["avatar_id"]):
+			new_card["card_button_type"] = null
+			new_card.set_avatar()
+		else:
+			new_card["card_button_type"] = type
+		
+		new_card.connect("add_avatar_to_deck",avatar_to_deck)
+		new_card.connect("add_to_deck",add_to_deck)
+		new_card.connect("remove_from_deck",remove_from_deck)
 		card_number+=1
 		if card_number == 3:
 			card_number = 0
@@ -162,7 +179,7 @@ func add_unit_only_cards(parent,payload,type):
 			parent.add_child(row_node)
 			row_node.alignment = BoxContainer.ALIGNMENT_CENTER
 			row_node.add_theme_constant_override("separation",10)
-		var new_card = card_c.instantiate()
+		var new_card = CARD_SCENE.instantiate()
 		row_node.add_child(new_card)
 		new_card.define_scale(3)
 		new_card.add_details(card)

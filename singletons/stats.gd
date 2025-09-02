@@ -9,16 +9,16 @@ var rng = RandomNumberGenerator.new()
 var transition_time = .15
 
 const COLOR_KEY = {
-	"R" : "FF0000",
+	"r" : "FF0000",
 	#"O" : "FFA500",
-	"O" : "FF7F00",
-	"Y" : "FFFF00",
-	"G" : "00FF00",
-	"U" : "0000FF",
-	"P" : "800080",
-	"W" : "FFFFFF",
-	"B" : "000000",
-	"C" : "909090"
+	"o" : "FF7F00",
+	"y" : "FFFF00",
+	"g" : "00FF00",
+	"u" : "0000FF",
+	"p" : "800080",
+	"w" : "FFFFFF",
+	"b" : "000000",
+	"a" : "909090"
 }
 
 var new_save_data = {

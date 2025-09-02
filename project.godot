@@ -22,13 +22,14 @@ config/icon="res://assets/art/icon.svg"
 
 Stats="*res://singletons/stats.gd"
 SaveAndLoad="*res://save_and_load/save_and_load.gd"
+KeyWordGlossary="*res://tools/key_word_glossary.gd"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/window_width_override=1280
-window/size/window_height_override=720
+window/size/window_width_override=1720
+window/size/window_height_override=967
 window/stretch/mode="canvas_items"
 window/vsync/vsync_mode=2
 

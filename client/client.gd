@@ -1,7 +1,7 @@
 class_name DeckmasterClient extends Node
 
 var stats = Stats
-var KEYWORD_GLOSS = KeywordGloss.new()
+#var KEYWORD_GLOSSARY = KeyWordGlossary
 
 var client = SocketIOClient
 var backendURL: String
@@ -23,10 +23,12 @@ var backendURL: String
 
 func _ready():
 	# prepare URL
-	#backendURL = "http://192.168.1.151:3050/socket.io"
-	#backendURL = "http://97.179.151.214:3050/socket.io"
-	#backendURL = "http://97.179.151.214:3000/socket.io"
-	backendURL = "http://192.168.40.179:3000/socket.io"
+	
+	#backendURL = "http://75.219.184.116:3000/socket.io"
+	#backendURL = "http://192.168.1.151:3000/socket.io"
+	backendURL = "http://172.28.48.1:3000/socket.io"
+	#backendURL = "http://172.20.10.6:3000/socket.io"
+	#backendURL = "http://3.139.99.80/socket.io"
 
 	# initialize client
 	client = SocketIOClient.new(backendURL, {"token": "MY_AUTH_TOKEN"})
@@ -71,7 +73,11 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 			#show_error(payload)
 			#print(payload)
 			print("Error")
+		"get-glossary":
+			KeyWordGlossary.set_glossary(payload)
 		"login":
+			KeyWordGlossary.set_glossary(payload)
+			#print(payload)
 			change_scene("menu")
 			login_screen.reset_screen()
 		"logout":
@@ -82,7 +88,7 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 		"show-lobby":
 			#print(payload)
 			change_scene("menu")
-		"builder-update-templates":
+		"card-builder-update-templates":
 			card_builder.load_build_templates(payload)
 		"start-card-builder":
 			change_scene("card_builder")
@@ -90,11 +96,13 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 		"close-card-builder":
 			card_builder.close()
 			change_scene("menu")
-		"builder-update-components":
+		"card-builder-update-components":
 			card_builder.load_builder_components(payload)
 			#load_builder_components(payload)
-		"builder-update-grid":
-			card_builder.load_builder_grid(payload)
+		"card-builder-update-grid":
+			card_builder.card_builder_update_grid(payload)
+		"card-builder-update-card":
+			card_builder.card_builder_update_card(payload)
 		"builder-view-cards":
 			card_builder.view_cards(payload)
 		"card-view-all":
@@ -104,9 +112,11 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 		#"editor-view-cards":
 			#change_scene("card_view")
 			#card_view_screen.add_cards(payload)
-		"editor-update-cards-in-deck":
+		"card-view-units":
+			print(payload)
+		"deck-editor-update-cards-in-deck":
 			deck_editor.update_cards_in_deck(payload)
-		"editor-update-cards-not-in-deck":
+		"deck-editor-update-cards-not-in-deck":
 			deck_editor.update_cards_not_in_deck(payload)
 		"editor-view-units":
 			deck_editor.update_cards_unit_only(payload)
@@ -114,7 +124,7 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 			#deck_editor.add_avatar()
 		"start-deck-editor":
 			deck_editor.start_deck_editor(payload)
-		"editor-update-decks":
+		"deck-editor-update-decks":
 			change_scene("deck_editor")
 			deck_editor.update_decks(payload)
 		"close-deck-editor":
@@ -161,6 +171,8 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 		"show-action":
 			game_screen.show_action(payload)
 		"info-request":
+			game_screen.info_request(payload)
+		"get-info":
 			game_screen.info_request(payload)
 		"start-game":
 			change_scene("game")
@@ -213,32 +225,33 @@ func _on_card_builder_back_to_menu():
 	client.socketio_send("close-card-builder")
 
 func _on_card_builder_template_selected(id):
-	client.socketio_send("builder-select-template",{'template_id':id})
+	print("selecting builder template, id: ",id)
+	client.socketio_send("card-builder-select-template",{'template_id':id})
 
 func _on_card_builder_place_component():
-	client.socketio_send("builder-set-component")
+	client.socketio_send("card-builder-set-component")
 
 func _on_card_builder_component_removed():
-	client.socketio_send("builder-remove-component",{})
+	client.socketio_send("card-builder-remove-component",{})
 
 func _on_card_builder_component_selected(id):
-	client.socketio_send("builder-add-component",{'component_id':id})
+	client.socketio_send("card-builder-add-component",{'component_id':id})
 
 func _on_card_builder_change_name(card_name):
 	client.socketio_send("builder-change-name",{'name':card_name})
 
 func _on_card_builder_save_card():
-	client.socketio_send("builder-save-card")
+	client.socketio_send("card-builder-save-card")
 	client.socketio_send("close-card-builder")
 
 func _on_card_builder_rotate_card(direction):
-	client.socketio_send("builder-rotate-component",direction)
+	client.socketio_send("card-builder-rotate-component",direction)
 
 func _on_card_builder_move_set(data):
-	client.socketio_send("builder-move-set",data)
+	client.socketio_send("card-builder-add-component",data)
 
 func _on_card_builder_undo():
-	client.socketio_send("builder-unset-component",{})
+	client.socketio_send("card-builder-unset-component",{})
 
 func _on_card_builder_compare_card_select():
 	client.socketio_send("view-cards",{"unit_only":false,"builder":true})
@@ -259,7 +272,8 @@ func _on_main_menu_search_for_pve_game():
 	client.socketio_send("play-pve")
 
 func _on_main_menu_view_all_cards():
-	client.socketio_send("card-select-all",{"unit_only":false,"builder":false})
+	#client.socketio_send("card-select-all",{"unit_only":false,"builder":false})
+	client.socketio_send("card-view-all")
 	#client.socketio_send("view-cards",{"unit_only":false,"builder":false})
 
 func _on_main_menu_start_card_builder():
@@ -295,7 +309,7 @@ func _on_deck_editor_delete_deck():
 	#client.socketio_send("editor-add-deck",{"name":deck_name})
 
 func _on_deck_editor_show_units_only():
-	client.socketio_send("card-select-units",{"unit_only":true,"builder":false})
+	client.socketio_send("card-view-units",{"unit_only":true,"builder":false})
 	
 	#client.socketio_send("view-cards",{"unit_only":true,"builder":false})
 
@@ -381,3 +395,7 @@ func _on_dev_screen_get_reward():
 		client.socketio_send("get-reward",{"winner":true})
 	else:
 		pass
+
+
+func _on_dev_screen_get_gloss() -> void:
+	client.socketio_send("get-glossary")

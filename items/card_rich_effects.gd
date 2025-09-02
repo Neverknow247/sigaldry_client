@@ -1,6 +1,6 @@
 extends RichTextLabel
 
-var KEYWORD_GLOSS = KeywordGloss.new()
+var KEYWORD_GLOSS = KeyWordGlossary
 
 @export var custom_tooltip_scene: PackedScene
 

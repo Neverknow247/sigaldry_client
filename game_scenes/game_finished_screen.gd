@@ -18,8 +18,9 @@ func _ready():
 func quit_game(payload):
 	show()
 	result_label.text = "%s defeated %s!" % [payload["winner_name"], payload["loser_name"]]
-	setup_card(winner_card, payload["winner"], payload["winner_name"])
-	setup_card(loser_card, payload["loser"], payload["loser_name"])
+	$winner_card.add_details(payload["winner"])
+	#setup_card(winner_card, payload["winner"], payload["winner_name"])
+	#setup_card(loser_card, payload["loser"], payload["loser_name"])
 
 func setup_card(card,data,_name):
 	#print("*********")

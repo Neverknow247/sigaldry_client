@@ -81,16 +81,6 @@ text = "Place_component
 [node name="card_preview" type="Control" parent="."]
 anchors_preset = 0
 
-[node name="name_card_edit" type="LineEdit" parent="card_preview"]
-layout_mode = 0
-offset_left = 1464.0
-offset_top = 128.0
-offset_right = 1864.0
-offset_bottom = 186.0
-placeholder_text = "name card here"
-alignment = 1
-max_length = 16
-
 [node name="card_graphic" parent="card_preview" instance=ExtResource("5_0g7mw")]
 visible = false
 layout_mode = 0
@@ -183,6 +173,7 @@ offset_top = 195.0
 offset_right = 1482.0
 offset_bottom = 235.0
 scale = Vector2(0.45, 0.45)
+last_card = true
 
 [node name="undo_button" type="Button" parent="card_preview"]
 layout_mode = 0
@@ -424,7 +415,6 @@ scale = Vector2(0.5, 0.5)
 [connection signal="mouse_exited" from="card_grid" to="card_grid" method="_on_mouse_exited"]
 [connection signal="piece_rotate" from="card_grid" to="." method="_on_card_grid_piece_rotate"]
 [connection signal="item_selected" from="template_select" to="." method="_on_template_select_item_selected"]
-[connection signal="text_changed" from="card_preview/name_card_edit" to="." method="_on_name_card_ed_text_changed"]
 [connection signal="pressed" from="card_preview/undo_button" to="." method="_on_undo_button_pressed"]
 [connection signal="pressed" from="card_preview/compare_card_select_button" to="." method="_on_compare_card_select_button_pressed"]
 [connection signal="text_changed" from="search_bar" to="." method="_on_search_bar_text_changed"]

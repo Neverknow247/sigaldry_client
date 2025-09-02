@@ -17,7 +17,7 @@ func _ready():
 	background_color.color = stats.background_color
 
 func add_decks(payload):
-	#print(payload)
+	print(payload)
 	for n in v_box_container.get_children():
 		v_box_container.remove_child(n)
 		n.queue_free()

@@ -120,7 +120,6 @@ layout_mode = 1
 [connection signal="component_removed" from="scenes/card_builder" to="." method="_on_card_builder_component_removed"]
 [connection signal="component_selected" from="scenes/card_builder" to="." method="_on_card_builder_component_selected"]
 [connection signal="move_set" from="scenes/card_builder" to="." method="_on_card_builder_move_set"]
-[connection signal="place_component" from="scenes/card_builder" to="." method="_on_card_builder_place_component"]
 [connection signal="restart" from="scenes/card_builder" to="." method="_on_card_builder_restart"]
 [connection signal="rotate_card" from="scenes/card_builder" to="." method="_on_card_builder_rotate_card"]
 [connection signal="save_card" from="scenes/card_builder" to="." method="_on_card_builder_save_card"]
@@ -139,4 +138,5 @@ layout_mode = 1
 [connection signal="add_spice" from="dev_screen" to="." method="_on_dev_screen_add_spice"]
 [connection signal="add_templates" from="dev_screen" to="." method="_on_dev_screen_add_templates"]
 [connection signal="auto_login" from="dev_screen" to="." method="_on_dev_screen_auto_login"]
+[connection signal="get_gloss" from="dev_screen" to="." method="_on_dev_screen_get_gloss"]
 [connection signal="get_reward" from="dev_screen" to="." method="_on_dev_screen_get_reward"]

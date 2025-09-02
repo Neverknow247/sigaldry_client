@@ -91,6 +91,14 @@ offset_right = 1904.0
 offset_bottom = 74.0
 text = "Hide"
 
+[node name="get_gloss_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1072.0
+offset_top = 16.0
+offset_right = 1227.0
+offset_bottom = 74.0
+text = "get gloss"
+
 [connection signal="pressed" from="v_box_container_1/neverknow_login_button" to="." method="_on_neverknow_login_button_pressed"]
 [connection signal="pressed" from="v_box_container_1/comp_login_button" to="." method="_on_comp_login_button_pressed"]
 [connection signal="pressed" from="v_box_container_2/add_templates_button" to="." method="_on_add_templates_button_pressed"]
@@ -98,3 +106,4 @@ text = "Hide"
 [connection signal="pressed" from="v_box_container_3/h_box_container/add_spice_button" to="." method="_on_add_spice_button_pressed"]
 [connection signal="pressed" from="v_box_container_3/get_reward_button" to="." method="_on_get_reward_button_pressed"]
 [connection signal="pressed" from="hide_button" to="." method="_on_hide_button_pressed"]
+[connection signal="pressed" from="get_gloss_button" to="." method="_on_get_gloss_button_pressed"]

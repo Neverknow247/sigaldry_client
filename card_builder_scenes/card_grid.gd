@@ -53,6 +53,8 @@ func reset_card_grid():
 	minSizeOfSquares = 0.0
 
 func create_card_grid(grid_payload,components):
+	if !grid_payload:
+		return
 	active_component = false
 	if components:
 		current_components = true
@@ -111,11 +113,11 @@ func _draw():
 							#print("last")
 						if (x >= _component["x"] and x < _component["x"]+_component["shape"].size()) and (y >= _component["y"] and y < _component["y"]+_component["shape"].size()):
 							#print(y-_component["y"])
-							if _component["shape"][y-_component["y"]][x-_component["x"]] == 1:
+							if _component["shape"][y-_component["y"]][x-_component["x"]] != 0:
 								col = Color.DIM_GRAY
 								second_col = Color(1,1,1,0)
 								if _component == component_shapes[component_shapes.size()-1]:
-									col = Color(_component["color"]["background_color"])
+									col = Color(_component["color_profile"]["background_color"])
 									second_col = Color(1,1,1,0)
 				#if active_component:
 					##print(active_component_start)
@@ -151,14 +153,6 @@ func _process(delta):
 	queue_redraw()
 	@warning_ignore("integer_division")
 	$active_component.position = ((get_local_mouse_position() - Vector2(minSizeOfSquares,minSizeOfSquares)/2) - ((Vector2.ONE*grid_square_size)*(shape.size()/2)) + (Vector2.ONE*grid_square_size/2)).snapped(Vector2(grid_square_size,grid_square_size))
-	#print($active_component.position)
-	#print(height,width)
-	#print(height*70)
-	#print((get_local_mouse_position()-Vector2(minSizeOfSquares,minSizeOfSquares)/2)-((Vector2.ONE*70)*(shape.size()/2))+(Vector2.ONE*35))
-	#$active_component.position = Vector2(140,70)
-	#print(Vector2(139,75).snapped(Vector2(70,70)))
-	#print("start_pos: ", start_pos)
-	#print("mouse_pos: ",get_global_mouse_position())
 
 signal check_placement_pos(default_pos,possible_pos)
 signal piece_rotate()
@@ -181,7 +175,7 @@ func _input(event):
 
 func create_component_shapes(component_payload):
 	active_component = true
-	active_component_color = component_payload["color"]["background_color"]
+	active_component_color = component_payload["color_profile"]["background_color"]
 	active_component_height = int(component_payload["shape"].size())
 	active_component_width = int(component_payload["shape"].size())
 	shape = component_payload["shape"]

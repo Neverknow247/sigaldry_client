@@ -4,20 +4,20 @@ var scene_name = "card_builder"
 
 var stats = Stats
 
-var KEYWORD_GLOSS = KeywordGloss.new()
+var KEYWORD_GLOSS = KeyWordGlossary
 
 const COLOR_PROFILE_SQUARE_LARGE = preload("res://items/color_profile_square_large.tscn")
 
 @onready var next_bonuses = {
-	"R" : $card_grid/next_bonus_row/color_bonus_square,
-	"O" : $card_grid/next_bonus_row/color_bonus_square2,
-	"Y" : $card_grid/next_bonus_row/color_bonus_square3,
-	"G" : $card_grid/next_bonus_row/color_bonus_square4,
-	"U" : $card_grid/next_bonus_row/color_bonus_square5,
-	"P" : $card_grid/next_bonus_row/color_bonus_square6,
-	"W" : $card_grid/next_bonus_row/color_bonus_square7,
-	"B" : $card_grid/next_bonus_row/color_bonus_square8,
-	"C" : $card_grid/next_bonus_row/color_bonus_square9
+	"r" : $card_grid/next_bonus_row/color_bonus_square,
+	"o" : $card_grid/next_bonus_row/color_bonus_square2,
+	"y" : $card_grid/next_bonus_row/color_bonus_square3,
+	"g" : $card_grid/next_bonus_row/color_bonus_square4,
+	"u" : $card_grid/next_bonus_row/color_bonus_square5,
+	"p" : $card_grid/next_bonus_row/color_bonus_square6,
+	"w" : $card_grid/next_bonus_row/color_bonus_square7,
+	"b" : $card_grid/next_bonus_row/color_bonus_square8,
+	"a" : $card_grid/next_bonus_row/color_bonus_square9
 }
 
 signal back_to_menu
@@ -44,7 +44,6 @@ signal compare_card_select
 @onready var template_select = $template_select
 
 @onready var card_preview = $card_preview
-@onready var name_card_edit = $card_preview/name_card_edit
 @onready var card_name = $card_preview/card_graphic/card_name
 @onready var card_effects = $card_preview/card_graphic/card_effects
 @onready var card_price = $card_preview/card_graphic/card_price
@@ -63,6 +62,7 @@ signal compare_card_select
 
 var selected_template_num = 0
 var selected_template_type = ""
+var active_component_id = 0
 
 func _ready():
 	background_color.color = stats.background_color
@@ -76,7 +76,6 @@ func reset_card_builder():
 	next_bonus_row.hide()
 	card_grid.active_component = false
 	card_preview.hide()
-	name_card_edit.text = ""
 	search_bar.text = ""
 	search_bar.hide()
 	selected_template_num = 0
@@ -119,7 +118,7 @@ func _on_template_select_item_selected(index):
 	template_selected.emit(template_select.get_selected_id())
 
 func load_builder_components(payload):
-	#print(payload)
+	print(payload)
 	var component_container_children = component_v_box.get_children()
 	for child in component_container_children:
 		child.queue_free()
@@ -151,14 +150,15 @@ func load_builder_components(payload):
 			#new_component_button.text = "\n"+component["name"].capitalize()
 			new_component_button.cost_label.text = str(int(component["cost"]))
 			#new_component_button.text = str(int(component["cost"]))+"\n"+component["name"].capitalize()
-			new_component_button.amount_label.text = "X"+str(int(component["amount"]))
-			new_component_button.tooltip_text = KEYWORD_GLOSS["glossary"][component["keywords"][0]["name"]]
+			new_component_button.amount_label.text = "X"+str(int(component["available"])-int(component["used"]))
+			#new_component_button.amount_label.text = "X"+str(int(component["amount"]))
+			new_component_button.tooltip_text = KEYWORD_GLOSS["key_glossary"][component["abilities"][0]["key"]]["description"]
 			new_component_button.component_id = component["id"]
 			new_component_button.connect("component_selected",on_component_selected)
 			new_component_button.component_name = component["name"]
-			new_component_button.component_color = component["color"]["name"]
-			new_component_button.color_profile_square.color_square.color = component["color"]["background_color"]
-			new_component_button.color_profile_square.color_magnitude.text = str(int(component['color']['magnitude']))
+			new_component_button.component_color = component["color_profile"]["name"]
+			new_component_button.color_profile_square.color_square.color = component["color_profile"]["background_color"]
+			new_component_button.color_profile_square.color_magnitude.text = str(int(component['color_profile']['magnitude']))
 			new_component_button.component_shape_grid.create_component_shapes(component)
 	check_search_bar(search_bar.text)
 
@@ -180,24 +180,32 @@ func check_search_bar(new_text):
 		else:
 			component.hide()
 
-
-func load_builder_grid(payload):
-	#print(payload)
+func card_builder_update_grid(payload):
 	if payload:
-		print("Payload: ", payload["card"])
-	if payload:
-		card_grid.create_card_grid(payload["grid"],payload["card"]["card"]["components"])
-		update_card_preview(payload["card"])
-		#update_card_preview(payload["card"]["card"])
+		print("update grid: ",payload)
+		card_grid.create_card_grid(payload["grid"],payload["components"])
 		if payload["active_component"]:
 			card_grid.create_component_shapes(payload["active_component"])
 			active_component.create_active_component(payload["active_component"])
 		else:
-			active_component.create_active_component({'shape':[],'x':'0','y':'0','color':{'background_color':"FFFFFF"}})
+			active_component.create_active_component({'shape':[],'x':'0','y':'0','color_profile':{'background_color':'FFFFFF'}})
 		update_next_color_bonus(payload["last_color"])
+
+func card_builder_update_card(payload):
+	if payload["card"] == null:
+		return
+	var card_payload = payload
+	card_payload["id"] = payload["card"]["id"]
+	print(payload)
+	print("HERE IS WHERE I NEED AN UPDATE:")
+	card_preview.show()
+	reset_card()
+	$card_preview/card.add_builder_details(card_payload)
 
 func update_next_color_bonus(last_color):
 	#print(last_color["bonus_to"])
+	if !last_color:
+		return
 	next_bonus_row.show()
 	for color in last_color["bonus_to"]:
 		next_bonuses[color].bonus_color.color = stats.COLOR_KEY[color]
@@ -219,6 +227,7 @@ func update_next_color_bonus(last_color):
 		#next_bonuses[color].bonus_label.text = str(int(last_color["bonus_to"][color]))
 
 func on_component_selected(id):
+	active_component_id = id
 	component_selected.emit(id)
 
 func _on_clear_component_piece_button_pressed():
@@ -228,58 +237,10 @@ func _on_clear_component_piece_button_pressed():
 	#place_component.emit()
 
 func _on_save_button_pressed():
-	if $card_preview/name_card_edit.text != "":
-		save_card.emit()
+	save_card.emit()
+	#if $card_preview/name_card_edit.text != "":
+		#save_card.emit()
 
-func update_card_preview(card_payload):
-	print("HERE IS WHERE I NEED AN UPDATE:")
-	#print(card_payload)
-	#print("Name: ",card_payload["name"])
-	#print("Unique Override: ",card_payload["unique_override"])
-	#print("Unique Author: ",card_payload["unique_author"])
-	#print("Unique Cost: ",card_payload["unique_cost"])
-	name_card_edit.editable = true
-	if card_payload["card"]["unique_author"] != "":
-		name_card_edit.editable = false
-		name_card_edit.text = card_payload["card"]["name"]
-	else:
-		pass
-		#name_card_edit.text = ""
-	card_preview.show()
-	reset_card()
-	$card_preview/card.add_builder_details(card_payload)
-	#card_name.text = card_payload["name"]
-	#var card_effect_text = ""
-	#var discount = 0
-	#if card_payload["obj"]["abilities"]:
-		#for ability in card_payload["obj"]["abilities"]:
-			#if ability == "health":
-				#var card_hp = card_payload["obj"]["abilities"][ability]["value"]
-				#card_health.text = str(int(card_hp)) if card_hp > 0 else ""
-			#elif ability == "attack":
-				#card_attack.text = str(int(card_payload["obj"]["abilities"][ability]["value"]))
-			#elif ability == "actions":
-				#pass
-			#elif ability == "efficient":
-				#discount = card_payload["obj"]["abilities"][ability]["value"]
-			#elif card_payload["obj"]["abilities"][ability]["value"] > 0:
-				#card_effect_text += card_payload["obj"]["abilities"][ability]["display_name"].capitalize() + "-" \
-				#+ str(card_payload["obj"]["abilities"][ability]["value"]) + "  " 
-				##+ str(int(card_payload["obj"]["abilities"][ability]["value"])) + "  " 
-	#card_effects.text = card_effect_text
-	#card_price.text = str(int(max(card_payload["true_cost"]-discount,0)))
-	##card_price.text = str(int(card_payload["card"]["cost"]))
-	##card_color_profile.columns = 1
-	#for _child in card_color_profile.get_children():
-		#card_color_profile.remove_child(_child)
-		#_child.queue_free()
-	#for color in card_payload["color_profile"]:
-		#var new_color = COLOR_PROFILE_SQUARE_LARGE.instantiate()
-		#card_color_profile.add_child(new_color)
-		#new_color.color_square.color = Color(color["background_color"])
-		#new_color.color_magnitude.text = str(int(color["magnitude"]))
-
-#28/24
 func reset_card():
 	card_name.text = ""
 	card_effects.text = ""
@@ -288,19 +249,25 @@ func reset_card():
 	card_health.text = ""
 
 func _on_card_grid_check_placement_pos(default_pos,possible_pos):
+	#var move_to = Vector2(possible_pos.x, possible_pos.y)
 	var move_to = Vector2(possible_pos.x - default_pos.x, possible_pos.y - default_pos.y)
-	move_set.emit({"move_x":str(move_to.x),"move_y":str(move_to.y)})
+	#move_set.emit({"move_x":str(move_to.x),"move_y":str(move_to.y)})
+	var data = {
+		"component_id": active_component_id,
+		#"direction": 2,
+		"position": {
+			"x": possible_pos.x,
+			"y": possible_pos.y
+		},
+		"commit": true
+	}
+	move_set.emit(data)
 
 func _on_card_grid_piece_rotate():
 	rotate_card.emit({"direction":"clockwise"})
 
 func _on_undo_button_pressed():
 	undo.emit()
-
-@warning_ignore("unused_parameter")
-func _on_name_card_ed_text_changed(new_text):
-	if $card_preview/name_card_edit.text != "":
-		change_name.emit($card_preview/name_card_edit.text)
 
 func _on_card_grid_active_component_changed(val):
 	template_select.visible = !val

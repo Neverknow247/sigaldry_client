@@ -19,11 +19,15 @@ func reset_active_component():
 	queue_redraw()
 
 func create_active_component(component_payload):
-	#print(component_payload)
+	print("******************")
+	print("here: ",component_payload)
 	height = int(component_payload["shape"].size())
 	width = int(component_payload["shape"].size())
 	shape = component_payload["shape"]
-	shape_color = component_payload["color"]["background_color"]
+	#if component_payload.has("color"):
+		#shape_color = component_payload["color"]["background_color"]
+	#else:
+	shape_color = component_payload["color_profile"]["background_color"]
 	start = Vector2(int(component_payload["x"]),int(component_payload["y"]))
 	#print(start)
 	findSizeOfSquares()

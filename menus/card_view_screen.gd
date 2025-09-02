@@ -4,8 +4,7 @@ var scene_name = "card_view"
 
 var stats = Stats
 
-#const card_preview = preload("res://items/card_preview.tscn")
-const card_preview = preload("res://items/card.tscn")
+const CARD_SCENE = preload("res://items/card.tscn")
 const COLOR_PROFILE_SQUARE_LARGE = preload("res://items/color_profile_square_large.tscn")
 
 var binder_width = 5
@@ -35,12 +34,13 @@ func add_cards(payload):
 			v_box_container.add_child(row_node)
 			row_node.alignment = BoxContainer.ALIGNMENT_CENTER
 			row_node.add_theme_constant_override("separation", 25)
-		var new_card = card_preview.instantiate()
+		var new_card = CARD_SCENE.instantiate()
 		row_node.add_child(new_card)
 		new_card.define_scale(4)
 		new_card.add_details(card)
 		card_number+=1
 		if card_number == binder_width:
+			new_card.last_card  = true
 			card_number = 0
 
 #func add_cards(payload):

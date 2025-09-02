@@ -1,14 +1,302 @@
-[gd_scene load_steps=10 format=3 uid="uid://di0881y716irt"]
+[gd_scene load_steps=67 format=3 uid="uid://di0881y716irt"]
 
 [ext_resource type="Theme" uid="uid://by8ew0t4rulwy" path="res://assets/themes/card_theme.tres" id="1_7bo1f"]
 [ext_resource type="Script" uid="uid://ctjau1hpet627" path="res://items/card.gd" id="1_ijhri"]
-[ext_resource type="Texture2D" uid="uid://brrxvf3e8x3pk" path="res://assets/art/card.png" id="3_7bo1f"]
+[ext_resource type="Texture2D" uid="uid://dmg265fef5ww0" path="res://assets/art/card/card-front.png" id="3_20yvs"]
+[ext_resource type="Script" uid="uid://bp7g5bo8sv5mu" path="res://items/card_button.gd" id="3_wq0el"]
 [ext_resource type="PackedScene" uid="uid://66nqstxwt0ep" path="res://items/magnitude_square.tscn" id="4_d525o"]
-[ext_resource type="Texture2D" uid="uid://jg3euqo5xb1" path="res://assets/art/card_art/image_14.png" id="4_wmwrl"]
-[ext_resource type="FontFile" uid="uid://ce1fu13e786l4" path="res://assets/fonts/LondrinaSolid-Regular.ttf" id="5_d525o"]
+[ext_resource type="Texture2D" uid="uid://b2pxo6km7g63r" path="res://assets/art/card/banners/horizontal-1.png" id="4_wingh"]
+[ext_resource type="Texture2D" uid="uid://cmnrv5lo05p1k" path="res://assets/art/card/banners/horizontal-2.png" id="4_wq0el"]
+[ext_resource type="Texture2D" uid="uid://behrena7pyc3x" path="res://assets/art/card/banners/vertical.png" id="5_wq0el"]
+[ext_resource type="Texture2D" uid="uid://dox67g4boq7vc" path="res://assets/art/card/badges/large v3/circle.png" id="6_owe1f"]
+[ext_resource type="Texture2D" uid="uid://bkbaxxgcpbpmx" path="res://assets/art/card/badges/small/circle.png" id="7_5pqy3"]
 [ext_resource type="Texture2D" uid="uid://v7dy5aw5aubv" path="res://assets/art/action_icon.png" id="7_fpl5m"]
 [ext_resource type="Script" uid="uid://bs3sddjowfnua" path="res://items/card_rich_effects.gd" id="8_1wx62"]
+[ext_resource type="Texture2D" uid="uid://k3paya1hewit" path="res://assets/art/card/2d icons/sword.png" id="8_vhpwo"]
 [ext_resource type="PackedScene" uid="uid://dt77vy5nu6wl3" path="res://items/tooltip.tscn" id="9_pf630"]
+[ext_resource type="Texture2D" uid="uid://b6jg1xgy562kl" path="res://assets/art/card/badges/large v1/hex.png" id="10_q5wdc"]
+[ext_resource type="Texture2D" uid="uid://bkh1f5kmvoftf" path="res://assets/art/card_art/owlbear.png" id="11_d2yx4"]
+[ext_resource type="FontFile" uid="uid://c32o87n2oxwbt" path="res://assets/fonts/alegreya/Alegreya-Regular.ttf" id="13_cov8e"]
+[ext_resource type="Texture2D" uid="uid://dowmuxfgoe5dx" path="res://assets/art/card/2d icons/heart.png" id="13_wq0el"]
+[ext_resource type="FontFile" uid="uid://8b66omd77r0f" path="res://assets/fonts/alegreya/Alegreya-Medium.ttf" id="14_u2p8s"]
+[ext_resource type="FontFile" uid="uid://b6alpq4r15r5s" path="res://assets/fonts/alegreya/Alegreya-Black.ttf" id="16_pyk70"]
+[ext_resource type="FontFile" uid="uid://bd3bjcsi7ogrh" path="res://assets/fonts/alegreya/Alegreya-Italic.ttf" id="17_61yji"]
+[ext_resource type="FontFile" uid="uid://cfi00ok31jiiu" path="res://assets/fonts/alegreya/Alegreya-BoldItalic.ttf" id="18_xss71"]
+[ext_resource type="FontFile" uid="uid://cjg26hsv3itq1" path="res://assets/fonts/alegreya/Alegreya-Bold.ttf" id="19_o2lex"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4804b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1c5nx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7h0ao"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i46yw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uxy7s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1tqfn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o2y08"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mmjpy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qfuu2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fiyeq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iv8g3"]
+
+[sub_resource type="Animation" id="Animation_wq0el"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(32, -83)]
+}
+
+[sub_resource type="Animation" id="Animation_owe1f"]
+resource_name = "close_color_banner"
+length = 0.5
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(32, -11), Vector2(32, -83)]
+}
+
+[sub_resource type="Animation" id="Animation_wingh"]
+resource_name = "open_color_banner"
+length = 0.5
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(32, -83), Vector2(32, -11)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_owe1f"]
+_data = {
+&"RESET": SubResource("Animation_wq0el"),
+&"close_color_banner": SubResource("Animation_owe1f"),
+&"open_color_banner": SubResource("Animation_wingh")
+}
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5pqy3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vhpwo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h5ekm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q5wdc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d2yx4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cov8e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u2p8s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pyk70"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_61yji"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wingh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wq0el"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_owe1f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xss71"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o2lex"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1bmdb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8bw10"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5gqid"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d65ly"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qcjt0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qglwf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lrw7e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hp7u8"]
+
+[sub_resource type="Animation" id="Animation_vhpwo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 944)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(800, 88)]
+}
+
+[sub_resource type="Animation" id="Animation_q5wdc"]
+resource_name = "close_card_details_left"
+length = 0.25
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(672, 944), Vector2(0, 944)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-656, 88), Vector2(16, 88)]
+}
+
+[sub_resource type="Animation" id="Animation_d2yx4"]
+resource_name = "close_card_details_right"
+length = 0.25
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(672, 944), Vector2(0, 944)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(800, 88), Vector2(800, 88)]
+}
+
+[sub_resource type="Animation" id="Animation_h5ekm"]
+resource_name = "open_card_details_left"
+length = 0.25
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 944), Vector2(672, 944)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(16, 88), Vector2(-656, 88)]
+}
+
+[sub_resource type="Animation" id="Animation_5pqy3"]
+resource_name = "open_card_details_right"
+length = 0.25
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 944), Vector2(672, 944)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(800, 88)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vhpwo"]
+_data = {
+&"RESET": SubResource("Animation_vhpwo"),
+&"close_card_details_left": SubResource("Animation_q5wdc"),
+&"close_card_details_right": SubResource("Animation_d2yx4"),
+&"open_card_details_left": SubResource("Animation_h5ekm"),
+&"open_card_details_right": SubResource("Animation_5pqy3")
+}
 
 [node name="card" type="Control"]
 layout_mode = 3
@@ -19,8 +307,30 @@ offset_right = -1104.0
 offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("1_7bo1f")
 script = ExtResource("1_ijhri")
+
+[node name="card_button" type="Button" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4804b")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_1c5nx")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7h0ao")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_i46yw")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_uxy7s")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_1tqfn")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_o2y08")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_mmjpy")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qfuu2")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_fiyeq")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_iv8g3")
+script = ExtResource("3_wq0el")
 
 [node name="content" type="Control" parent="."]
 layout_mode = 1
@@ -30,57 +340,185 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="card_texture" type="TextureRect" parent="content"]
-layout_mode = 0
-offset_right = 816.0
-offset_bottom = 1120.0
-texture = ExtResource("3_7bo1f")
-
 [node name="card_image" type="TextureRect" parent="content"]
+clip_children = 2
 layout_mode = 0
-offset_left = 48.0
-offset_top = 160.0
-offset_right = 768.0
-offset_bottom = 512.0
-texture = ExtResource("4_wmwrl")
-stretch_mode = 3
+offset_left = 56.0
+offset_top = 51.0
+offset_right = 760.0
+offset_bottom = 755.0
+mouse_filter = 2
+texture = ExtResource("11_d2yx4")
+expand_mode = 5
 
-[node name="card_color_profile" type="GridContainer" parent="content"]
+[node name="color_banner" type="TextureRect" parent="content/card_image"]
 layout_mode = 0
-offset_left = 48.0
-offset_top = 48.0
-offset_right = 1200.0
-offset_bottom = 176.0
+offset_left = 32.0
+offset_top = -83.0
+offset_right = 672.0
+offset_bottom = 45.0
+texture = ExtResource("4_wq0el")
+expand_mode = 5
+
+[node name="card_color_profile" type="GridContainer" parent="content/card_image/color_banner"]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 24.0
+offset_right = 1181.0
+offset_bottom = 152.0
 scale = Vector2(0.5, 0.5)
 theme_override_constants/h_separation = 0
 columns = 9
 
-[node name="magnitude_square" parent="content/card_color_profile" instance=ExtResource("4_d525o")]
+[node name="magnitude_square" parent="content/card_image/color_banner/card_color_profile" instance=ExtResource("4_d525o")]
 layout_mode = 2
 
-[node name="magnitude_square2" parent="content/card_color_profile" instance=ExtResource("4_d525o")]
+[node name="magnitude_square2" parent="content/card_image/color_banner/card_color_profile" instance=ExtResource("4_d525o")]
 layout_mode = 2
 
-[node name="magnitude_square3" parent="content/card_color_profile" instance=ExtResource("4_d525o")]
+[node name="magnitude_square3" parent="content/card_image/color_banner/card_color_profile" instance=ExtResource("4_d525o")]
 layout_mode = 2
 
-[node name="magnitude_square4" parent="content/card_color_profile" instance=ExtResource("4_d525o")]
+[node name="magnitude_square4" parent="content/card_image/color_banner/card_color_profile" instance=ExtResource("4_d525o")]
 layout_mode = 2
 
-[node name="magnitude_square5" parent="content/card_color_profile" instance=ExtResource("4_d525o")]
+[node name="magnitude_square5" parent="content/card_image/color_banner/card_color_profile" instance=ExtResource("4_d525o")]
 layout_mode = 2
 
-[node name="magnitude_square6" parent="content/card_color_profile" instance=ExtResource("4_d525o")]
+[node name="magnitude_square6" parent="content/card_image/color_banner/card_color_profile" instance=ExtResource("4_d525o")]
 layout_mode = 2
 
-[node name="magnitude_square7" parent="content/card_color_profile" instance=ExtResource("4_d525o")]
+[node name="magnitude_square7" parent="content/card_image/color_banner/card_color_profile" instance=ExtResource("4_d525o")]
 layout_mode = 2
 
-[node name="magnitude_square8" parent="content/card_color_profile" instance=ExtResource("4_d525o")]
+[node name="magnitude_square8" parent="content/card_image/color_banner/card_color_profile" instance=ExtResource("4_d525o")]
 layout_mode = 2
 
-[node name="magnitude_square9" parent="content/card_color_profile" instance=ExtResource("4_d525o")]
+[node name="magnitude_square9" parent="content/card_image/color_banner/card_color_profile" instance=ExtResource("4_d525o")]
 layout_mode = 2
+
+[node name="color_banner_animation_player" type="AnimationPlayer" parent="content/card_image/color_banner"]
+libraries = {
+&"": SubResource("AnimationLibrary_owe1f")
+}
+
+[node name="color_banner_button" type="Button" parent="content/card_image/color_banner"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5pqy3")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_vhpwo")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_h5ekm")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_q5wdc")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_d2yx4")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_cov8e")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_u2p8s")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_pyk70")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_61yji")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_wingh")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_wq0el")
+
+[node name="card_texture" type="TextureRect" parent="content"]
+layout_mode = 0
+offset_right = 816.0
+offset_bottom = 1120.0
+mouse_filter = 2
+texture = ExtResource("3_20yvs")
+
+[node name="main_banner" type="TextureRect" parent="content/card_texture"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 648.0
+offset_right = 792.0
+offset_bottom = 828.0
+texture = ExtResource("4_wingh")
+expand_mode = 5
+
+[node name="stat_banner" type="TextureRect" parent="content/card_texture/main_banner"]
+layout_mode = 0
+offset_left = 48.0
+offset_right = 215.0
+offset_bottom = 479.0
+texture = ExtResource("5_wq0el")
+
+[node name="attack_badge" type="TextureRect" parent="content/card_texture/main_banner/stat_banner"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 80.0
+offset_right = 130.0
+offset_bottom = 195.0
+texture = ExtResource("6_owe1f")
+
+[node name="attack_icon_badge" type="TextureRect" parent="content/card_texture/main_banner/stat_banner/attack_badge"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 72.0
+offset_right = 128.0
+offset_bottom = 145.0
+texture = ExtResource("7_5pqy3")
+
+[node name="attack_icon" type="TextureRect" parent="content/card_texture/main_banner/stat_banner/attack_badge/attack_icon_badge"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 56.0
+offset_bottom = 56.0
+texture = ExtResource("8_vhpwo")
+
+[node name="health_badge" type="TextureRect" parent="content/card_texture/main_banner/stat_banner"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 256.0
+offset_right = 130.0
+offset_bottom = 371.0
+texture = ExtResource("6_owe1f")
+
+[node name="health_icon_badge" type="TextureRect" parent="content/card_texture/main_banner/stat_banner/health_badge"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 72.0
+offset_right = 128.0
+offset_bottom = 145.0
+texture = ExtResource("7_5pqy3")
+
+[node name="health_icon" type="TextureRect" parent="content/card_texture/main_banner/stat_banner/health_badge/health_icon_badge"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 56.0
+offset_bottom = 56.0
+texture = ExtResource("13_wq0el")
+
+[node name="cost_badge" type="TextureRect" parent="content/card_texture/main_banner"]
+layout_mode = 0
+offset_left = 632.0
+offset_top = 16.0
+offset_right = 748.0
+offset_bottom = 147.0
+texture = ExtResource("10_q5wdc")
+
+[node name="card_details_button" type="Button" parent="content/card_texture"]
+z_index = 1
+layout_mode = 0
+offset_left = 224.0
+offset_top = 816.0
+offset_right = 760.0
+offset_bottom = 1072.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_owe1f")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_xss71")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_o2lex")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_1bmdb")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_8bw10")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_5gqid")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_d65ly")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_qcjt0")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qglwf")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_lrw7e")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hp7u8")
 
 [node name="labels" type="Control" parent="content"]
 layout_mode = 1
@@ -92,11 +530,13 @@ grow_vertical = 2
 
 [node name="card_cost" type="Label" parent="content/labels"]
 layout_mode = 0
-offset_left = 656.0
-offset_right = 816.0
-offset_bottom = 160.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 24
+offset_left = 661.0
+offset_top = 661.0
+offset_right = 765.0
+offset_bottom = 776.0
+theme_override_colors/font_outline_color = Color(0.14902, 0.12549, 0.101961, 1)
+theme_override_constants/outline_size = 18
+theme_override_fonts/font = ExtResource("13_cov8e")
 theme_override_font_sizes/font_size = 84
 text = "0"
 horizontal_alignment = 1
@@ -104,16 +544,18 @@ vertical_alignment = 1
 
 [node name="card_name" type="Label" parent="content/labels"]
 layout_mode = 0
-offset_top = 512.0
-offset_right = 816.0
-offset_bottom = 640.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+offset_left = 256.0
+offset_top = 656.0
+offset_right = 640.0
+offset_bottom = 808.0
+theme_override_colors/font_outline_color = Color(0.156863, 0.192157, 0.235294, 1)
+theme_override_constants/line_spacing = -12
 theme_override_constants/outline_size = 18
-theme_override_fonts/font = ExtResource("5_d525o")
-theme_override_font_sizes/font_size = 72
-text = "Poison Master+"
+theme_override_fonts/font = ExtResource("14_u2p8s")
+theme_override_font_sizes/font_size = 60
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="card_effects" type="Label" parent="content/labels"]
 visible = false
@@ -131,11 +573,14 @@ autowrap_mode = 3
 
 [node name="card_attack" type="Label" parent="content/labels"]
 layout_mode = 0
-offset_top = 960.0
-offset_right = 160.0
-offset_bottom = 1120.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 24
+offset_left = 64.0
+offset_top = 699.0
+offset_right = 224.0
+offset_bottom = 859.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.337255, 0.305882, 0.192157, 1)
+theme_override_constants/outline_size = 18
+theme_override_fonts/font = ExtResource("13_cov8e")
 theme_override_font_sizes/font_size = 84
 text = "0"
 horizontal_alignment = 1
@@ -143,58 +588,43 @@ vertical_alignment = 1
 
 [node name="card_health" type="Label" parent="content/labels"]
 layout_mode = 0
-offset_left = 656.0
-offset_top = 960.0
-offset_right = 816.0
-offset_bottom = 1120.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 24
+offset_left = 64.0
+offset_top = 876.0
+offset_right = 224.0
+offset_bottom = 1036.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.337255, 0.305882, 0.192157, 1)
+theme_override_constants/outline_size = 18
+theme_override_fonts/font = ExtResource("13_cov8e")
 theme_override_font_sizes/font_size = 84
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="card_type" type="Label" parent="content/labels"]
-layout_mode = 0
-offset_left = 176.0
-offset_top = 960.0
-offset_right = 640.0
-offset_bottom = 1072.0
-theme_override_colors/font_color = Color(0.670588, 0.337255, 0.458824, 1)
-theme_override_font_sizes/font_size = 48
-text = "Unit"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="card_author" type="Label" parent="content/labels"]
-layout_mode = 0
-offset_left = 176.0
-offset_top = 1072.0
-offset_right = 640.0
-offset_bottom = 1120.0
-theme_override_colors/font_color = Color(0.670588, 0.337255, 0.458824, 1)
-theme_override_font_sizes/font_size = 30
-text = "Neverknow247"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="card_actions" type="TextureRect" parent="content/labels"]
 layout_mode = 0
-offset_left = 52.0
-offset_top = 476.0
-offset_right = 88.0
-offset_bottom = 508.0
+offset_left = 80.0
+offset_top = 664.0
+offset_right = 224.0
+offset_bottom = 696.0
 texture = ExtResource("7_fpl5m")
 stretch_mode = 1
 
 [node name="card_rich_effects" type="RichTextLabel" parent="content"]
 layout_mode = 0
-offset_left = 48.0
-offset_top = 640.0
-offset_right = 768.0
-offset_bottom = 960.0
+offset_left = 232.0
+offset_top = 816.0
+offset_right = 752.0
+offset_bottom = 1064.0
+mouse_filter = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 50
+theme_override_constants/line_separation = -12
+theme_override_fonts/normal_font = ExtResource("14_u2p8s")
+theme_override_fonts/mono_font = ExtResource("16_pyk70")
+theme_override_fonts/italics_font = ExtResource("17_61yji")
+theme_override_fonts/bold_italics_font = ExtResource("18_xss71")
+theme_override_fonts/bold_font = ExtResource("19_o2lex")
+theme_override_font_sizes/normal_font_size = 48
 bbcode_enabled = true
 text = "This is some text with a [url=tooltip_data_1]hoverable word[/url] and another [url=tooltip_data_2]interactive element[/url].
 "
@@ -210,24 +640,78 @@ offset_right = 720.0
 offset_bottom = 320.0
 mouse_filter = 2
 
-[node name="button" type="Control" parent="."]
+[node name="card_details" type="Control" parent="content"]
+clip_children = 2
+z_index = 100
+anchors_preset = 0
+offset_left = 800.0
+offset_top = 88.0
+offset_right = 800.0
+offset_bottom = 1032.0
+
+[node name="card_details_background" type="ColorRect" parent="content/card_details"]
+clip_children = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
+color = Color(0.168627, 0.223529, 0.270588, 1)
 
-[node name="card_button" type="Button" parent="button"]
-visible = false
-self_modulate = Color(0.609622, 0.000318529, 0.622214, 1)
+[node name="scroll_container" type="ScrollContainer" parent="content/card_details/card_details_background"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 64.0
+offset_right = -16.0
+offset_bottom = -64.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
+mouse_filter = 0
 
-[connection signal="pressed" from="button/card_button" to="." method="_on_card_button_pressed"]
+[node name="card_details_box" type="VBoxContainer" parent="content/card_details/card_details_background/scroll_container"]
+custom_minimum_size = Vector2(632, 0)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="card_type" type="Label" parent="content/card_details/card_details_background"]
+layout_mode = 0
+offset_right = 664.0
+offset_bottom = 67.0
+theme_override_colors/font_color = Color(0.670588, 0.337255, 0.458824, 1)
+theme_override_fonts/font = ExtResource("19_o2lex")
+theme_override_font_sizes/font_size = 49
+text = "Unit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="card_author" type="Label" parent="content/card_details/card_details_background"]
+layout_mode = 0
+offset_top = 888.0
+offset_right = 664.0
+offset_bottom = 944.0
+theme_override_colors/font_color = Color(0.670588, 0.337255, 0.458824, 1)
+theme_override_fonts/font = ExtResource("18_xss71")
+theme_override_font_sizes/font_size = 40
+text = "Neverknow247"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="card_details_timer" type="Timer" parent="content/card_details"]
+one_shot = true
+
+[node name="card_details_animation_player" type="AnimationPlayer" parent="content/card_details"]
+libraries = {
+&"": SubResource("AnimationLibrary_vhpwo")
+}
+
+[connection signal="get_info" from="card_button" to="." method="_on_card_button_get_info"]
+[connection signal="mouse_entered" from="card_button" to="." method="_on_card_button_mouse_entered"]
+[connection signal="mouse_exited" from="card_button" to="." method="_on_card_button_mouse_exited"]
+[connection signal="pressed" from="card_button" to="." method="_on_card_button_pressed"]
+[connection signal="pressed" from="content/card_image/color_banner/color_banner_button" to="." method="_on_color_banner_button_pressed"]
+[connection signal="pressed" from="content/card_texture/card_details_button" to="." method="_on_card_details_button_pressed"]
+[connection signal="timeout" from="content/card_details/card_details_timer" to="." method="_on_card_details_timer_timeout"]

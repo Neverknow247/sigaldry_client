@@ -7,6 +7,7 @@ signal add_templates
 signal add_components
 signal add_spice(value)
 signal get_reward()
+signal get_gloss()
 
 var dev_tools_open = false:
 	set(value):
@@ -44,3 +45,7 @@ func _on_get_reward_button_pressed():
 
 func _on_hide_button_pressed():
 	dev_tools_open = !dev_tools_open
+
+
+func _on_get_gloss_button_pressed() -> void:
+	get_gloss.emit()
