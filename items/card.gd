@@ -26,12 +26,12 @@ signal compare_card(id)
 @onready var card_effects = $content/labels/card_effects
 @onready var card_attack = $content/labels/card_attack
 @onready var card_health = $content/labels/card_health
-@onready var card_type = $content/card_details/card_details_background/card_type
-@onready var card_author = $content/card_details/card_details_background/card_author
+@onready var card_type: Label = $content/card_details/card_details_background/content/card_type
+@onready var card_author: Label = $content/card_details/card_details_background/content/card_author
 @onready var card_actions = $content/labels/card_actions
 @onready var card_rich_effects = $content/card_rich_effects
 @onready var card_details: Control = $content/card_details
-@onready var card_details_box: VBoxContainer = $content/card_details/card_details_background/scroll_container/card_details_box
+@onready var card_details_box: VBoxContainer = $content/card_details/card_details_background/content/scroll_container/card_details_box
 @onready var card_details_timer: Timer = $content/card_details/card_details_timer
 @onready var card_details_animation_player: AnimationPlayer = $content/card_details/card_details_animation_player
 
@@ -88,25 +88,38 @@ func activate_avatar():
 	card_texture = AVATAR_TEXTURE
 
 func add_details(_card_details):
-	print(_card_details)
-	#print("***********************")
-	#print(_card_details)
-	#print("***********************")
+	print("card_details: ",_card_details)
 	card_id = _card_details["id"]
-	#set_color_profile(_card_details["card_json"]["color_profile"])
-	#card_cost.text = str(int(_card_details["card_json"]["cost"]))
-	#card_name.text = _card_details["card_json"]["name"]
-	#set_card_effects(_card_details["card_json"]["keywords"])
-	#card_type.text = _card_details["card_json"]["subtype"].capitalize()
-	#card_author.text = _card_details["unique_author"]
 	set_color_profile(_card_details["color_profile"])
 	card_cost.text = str(int(_card_details["cost"]))
 	if _card_details["name"]:
 		card_name.text = _card_details["name"]
+	var image_path = "res://assets/temp_image_folder/%s" %[_card_details["image"]]
+	if FileAccess.file_exists(image_path):
+		card_image.texture = load(image_path)
+	else:
+		match _card_details["subtype"]:
+			"unit":
+				card_image.texture = load("res://assets/missing-images/none-unit.png")
+			"spell":
+				card_image.texture = load("res://assets/missing-images/none-spell.png")
+			"trap":
+				card_image.texture = load("res://assets/missing-images/none-trap.png")
+			"potion":
+				card_image.texture = load("res://assets/missing-images/none-potion.png")
 	set_card_effects(_card_details["abilities"])
 	card_type.text = _card_details["subtype"].capitalize()
-	#card_author.text = _card_details["unique_author"]
+	card_author.text = _card_details["meta"]["designer"]["user_name"]
 
+#func add_builder_details(_card_details):
+	#print("details: ",card_details)
+	#card_id = _card_details["id"]
+	#set_color_profile(_card_details["card"]["color_profile"])
+	#card_cost.text = str(int(_card_details["card"]["cost"]))
+	#card_name.text = _card_details["card"]["name"] if _card_details["card"]["name"] != null else ""
+	#set_card_effects(_card_details["card"]["abilities"])
+	#card_type.text = _card_details["card"]["subtype"].capitalize()
+	#card_author.text = _card_details["card"]["meta"]["designer"]["user_name"]
 
 func set_card_effects(abilities):
 	var card_effect_text = ""
@@ -150,15 +163,6 @@ func set_color_profile(colors):
 func set_avatar():
 	print("Add Avatar Image")
 
-func add_builder_details(_card_details):
-	#print("details: ",card_details)
-	card_id = _card_details["id"]
-	set_color_profile(_card_details["card"]["color_profile"])
-	card_cost.text = str(int(_card_details["card"]["cost"]))
-	card_name.text = _card_details["card"]["name"] if _card_details["card"]["name"] != null else ""
-	set_card_effects(_card_details["card"]["abilities"])
-	card_type.text = _card_details["card"]["subtype"].capitalize()
-	card_author.text = _card_details["card"]["meta"]["designer"]["user_name"]
 
 func _on_card_button_pressed():
 	match card_button_type:

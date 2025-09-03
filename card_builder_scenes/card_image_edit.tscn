@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0a2pght6n743"]
+
+[ext_resource type="Script" uid="uid://di1lk1ba1ehdw" path="res://card_builder_scenes/card_image_edit.gd" id="1_upxb7"]
+
+[node name="card_image_edit" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_upxb7")
+
+[node name="background_color" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.761561, 0.761561, 0.761561, 1)

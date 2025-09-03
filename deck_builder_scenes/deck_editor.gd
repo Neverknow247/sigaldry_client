@@ -50,12 +50,14 @@ func _on_back_button_pressed():
 	close_deck_editor.emit()
 
 func update_cards_in_deck(payload):
+	print(payload)
 	#print("print cards in deck")
 	clear_cards(cards_in_deck_box)
 	if payload:
 		add_cards(cards_in_deck_box,payload,"deck_editor_in_deck")
 
 func update_cards_not_in_deck(payload):
+	print(payload)
 	#print("print cards not in deck")
 	clear_cards(cards_not_in_deck_box)
 	if payload:

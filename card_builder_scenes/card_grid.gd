@@ -113,12 +113,15 @@ func _draw():
 							#print("last")
 						if (x >= _component["x"] and x < _component["x"]+_component["shape"].size()) and (y >= _component["y"] and y < _component["y"]+_component["shape"].size()):
 							#print(y-_component["y"])
-							if _component["shape"][y-_component["y"]][x-_component["x"]] != 0:
+							if _component["shape"][y-_component["y"]][x-_component["x"]] == 1 || _component["shape"][y-_component["y"]][x-_component["x"]] == 5:
 								col = Color.DIM_GRAY
 								second_col = Color(1,1,1,0)
 								if _component == component_shapes[component_shapes.size()-1]:
 									col = Color(_component["color_profile"]["background_color"])
 									second_col = Color(1,1,1,0)
+							if _component["shape"][y-_component["y"]][x-_component["x"]] == 5:
+								col = Color.AQUAMARINE
+				
 				#if active_component:
 					##print(active_component_start)
 					#if (x >= active_component_start.x and x < active_component_start.x+active_component_width) and (y >= active_component_start.y and y < active_component_start.y+active_component_height):

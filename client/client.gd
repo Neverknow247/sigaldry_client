@@ -19,6 +19,7 @@ var backendURL: String
 @onready var game_screen = $scenes/game_screen
 @onready var card_view_screen = $scenes/card_view_screen
 @onready var card_builder = $scenes/card_builder
+@onready var card_editor: Control = $scenes/card_editor
 @onready var deck_editor = $scenes/deck_editor
 
 func _ready():
@@ -105,6 +106,9 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 			card_builder.card_builder_update_card(payload)
 		"builder-view-cards":
 			card_builder.view_cards(payload)
+		"start-card-editor":
+			change_scene("card_editor")
+			card_editor.add_cards(payload)
 		"card-view-all":
 			change_scene("card_view")
 			card_view_screen.add_cards(payload)
@@ -272,9 +276,15 @@ func _on_main_menu_search_for_pve_game():
 	client.socketio_send("play-pve")
 
 func _on_main_menu_view_all_cards():
-	#client.socketio_send("card-select-all",{"unit_only":false,"builder":false})
-	client.socketio_send("card-view-all")
-	#client.socketio_send("view-cards",{"unit_only":false,"builder":false})
+	client.socketio_send("card-view-all",{
+		"query":{
+			#"subtype":"unit",
+			#"image_status":"none",
+			#"name_status":"none"
+			#"image_or_name_status":"none",
+			#"unique_key":""
+			}
+		})
 
 func _on_main_menu_start_card_builder():
 	client.socketio_send("start-card-builder")
@@ -285,7 +295,7 @@ func _on_main_menu_start_deck_editor():
 	client.socketio_send("start-deck-editor")
 
 func _on_deck_editor_deck_selected(id):
-	client.socketio_send("editor-select-deck",{"deck_id":id})
+	client.socketio_send("deck-editor-select-deck",{"deck_id":id})
 
 func _on_deck_editor_close_deck_editor():
 	client.socketio_send("close-deck-editor")
@@ -399,3 +409,21 @@ func _on_dev_screen_get_reward():
 
 func _on_dev_screen_get_gloss() -> void:
 	client.socketio_send("get-glossary")
+
+
+func _on_card_editor_back_to_menu() -> void:
+	change_scene("menu")
+
+func _on_main_menu_start_card_editor() -> void:
+	#change_scene("card_editor")
+	client.socketio_send("card-view-all",{
+		"response":"start-card-editor",
+		"query":{
+			#"subtype":"unit",
+			#"image_status":"none",
+			#"name_status":"none"
+			"image_or_name_status":"none",
+			#"unique_key":""
+			}
+		})
+	#client.socketio_send("card-view-missing-name")

@@ -5,7 +5,6 @@ var scene_name = "card_view"
 var stats = Stats
 
 const CARD_SCENE = preload("res://items/card.tscn")
-const COLOR_PROFILE_SQUARE_LARGE = preload("res://items/color_profile_square_large.tscn")
 
 var binder_width = 5
 
@@ -27,6 +26,7 @@ func add_cards(payload):
 	var row_node
 	var first_card = true
 	for card in payload["cards"]:
+		#print("Card: ",card["image"])
 		if first_card:
 			first_card = false
 		if card_number == 0:

@@ -34,52 +34,57 @@ grow_horizontal = 2
 theme_override_constants/separation = 25
 alignment = 1
 
-[node name="spacer" type="Control" parent="buttons"]
-custom_minimum_size = Vector2(100, 0)
+[node name="battle" type="VBoxContainer" parent="buttons"]
 layout_mode = 2
+theme_override_constants/separation = 25
 
-[node name="spacer3" type="Control" parent="buttons"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-
-[node name="search_for_a_pvp_game_button" type="Button" parent="buttons"]
-custom_minimum_size = Vector2(150, 40)
+[node name="search_for_a_pvp_game_button" type="Button" parent="buttons/battle"]
+custom_minimum_size = Vector2(230, 40)
 layout_mode = 2
 text = "Play PVP
 "
 
-[node name="search_for_a_pve_game" type="Button" parent="buttons"]
-custom_minimum_size = Vector2(150, 40)
+[node name="search_for_a_pve_game" type="Button" parent="buttons/battle"]
+custom_minimum_size = Vector2(230, 40)
 layout_mode = 2
 text = "Play PVE"
 
 [node name="view_cards_button" type="Button" parent="buttons"]
-custom_minimum_size = Vector2(150, 40)
+custom_minimum_size = Vector2(230, 40)
 layout_mode = 2
 text = "View All Cards"
 
-[node name="card_builder_button" type="Button" parent="buttons"]
-custom_minimum_size = Vector2(150, 40)
+[node name="card_design" type="VBoxContainer" parent="buttons"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="card_builder_button" type="Button" parent="buttons/card_design"]
+custom_minimum_size = Vector2(230, 40)
 layout_mode = 2
 text = "Card Builder"
 
+[node name="card_editor_button" type="Button" parent="buttons/card_design"]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+text = "Card Editor"
+
 [node name="deck_editor_button" type="Button" parent="buttons"]
-custom_minimum_size = Vector2(150, 40)
+custom_minimum_size = Vector2(230, 40)
 layout_mode = 2
 text = "Deck Editor"
 
 [node name="spacer2" type="Control" parent="buttons"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
 [node name="logout_button" type="Button" parent="buttons"]
-custom_minimum_size = Vector2(150, 40)
+custom_minimum_size = Vector2(230, 40)
 layout_mode = 2
 text = "Logout
 "
 
 [node name="quit_button" type="Button" parent="buttons"]
-custom_minimum_size = Vector2(150, 40)
+custom_minimum_size = Vector2(230, 40)
 layout_mode = 2
 text = "Quit"
 
@@ -96,10 +101,11 @@ alignment = 1
 visible = false
 layout_mode = 1
 
-[connection signal="pressed" from="buttons/search_for_a_pvp_game_button" to="." method="_on_search_for_a_pvp_game_button_pressed"]
-[connection signal="pressed" from="buttons/search_for_a_pve_game" to="." method="_on_search_for_a_pve_game_pressed"]
+[connection signal="pressed" from="buttons/battle/search_for_a_pvp_game_button" to="." method="_on_search_for_a_pvp_game_button_pressed"]
+[connection signal="pressed" from="buttons/battle/search_for_a_pve_game" to="." method="_on_search_for_a_pve_game_pressed"]
 [connection signal="pressed" from="buttons/view_cards_button" to="." method="_on_view_cards_button_pressed"]
-[connection signal="pressed" from="buttons/card_builder_button" to="." method="_on_card_builder_button_pressed"]
+[connection signal="pressed" from="buttons/card_design/card_builder_button" to="." method="_on_card_builder_button_pressed"]
+[connection signal="pressed" from="buttons/card_design/card_editor_button" to="." method="_on_card_editor_button_pressed"]
 [connection signal="pressed" from="buttons/deck_editor_button" to="." method="_on_deck_editor_button_pressed"]
 [connection signal="pressed" from="buttons/logout_button" to="." method="_on_logout_button_pressed"]
 [connection signal="pressed" from="buttons/quit_button" to="." method="_on_quit_button_pressed"]

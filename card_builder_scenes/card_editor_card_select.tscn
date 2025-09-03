@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://yndmmtak0l7u"]
+
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_st01c"]
+[ext_resource type="Script" uid="uid://b6aaaoiy48a62" path="res://card_builder_scenes/card_editor_card_select.gd" id="2_1awit"]
+
+[node name="card_editor_card_select" type="HBoxContainer"]
+custom_minimum_size = Vector2(551.4, 448)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1368.6
+offset_bottom = -632.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_st01c")
+theme_override_constants/separation = 25
+script = ExtResource("2_1awit")
+
+[node name="v_box_container" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="add_card_image_button" type="Button" parent="v_box_container"]
+visible = false
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+text = "Add Image"
+
+[node name="add_card_name_button" type="Button" parent="v_box_container"]
+visible = false
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+text = "Add Name"
+
+[connection signal="pressed" from="v_box_container/add_card_image_button" to="." method="_on_add_card_image_button_pressed"]
+[connection signal="pressed" from="v_box_container/add_card_name_button" to="." method="_on_add_card_name_button_pressed"]

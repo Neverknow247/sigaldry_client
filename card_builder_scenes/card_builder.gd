@@ -118,7 +118,7 @@ func _on_template_select_item_selected(index):
 	template_selected.emit(template_select.get_selected_id())
 
 func load_builder_components(payload):
-	print(payload)
+	#print(payload)
 	var component_container_children = component_v_box.get_children()
 	for child in component_container_children:
 		child.queue_free()
@@ -200,7 +200,9 @@ func card_builder_update_card(payload):
 	print("HERE IS WHERE I NEED AN UPDATE:")
 	card_preview.show()
 	reset_card()
-	$card_preview/card.add_builder_details(card_payload)
+	#$card_preview/card.add_builder_details(card_payload)
+	$card_preview/card.add_details(card_payload["card"])
+	
 
 func update_next_color_bonus(last_color):
 	#print(last_color["bonus_to"])
