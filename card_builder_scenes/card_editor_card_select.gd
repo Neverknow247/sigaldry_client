@@ -7,8 +7,8 @@ var card_id
 @onready var add_card_image_button: Button = $v_box_container/add_card_image_button
 @onready var add_card_name_button: Button = $v_box_container/add_card_name_button
 
-signal add_card_image(_id)
-signal add_card_name(_id)
+signal start_add_card_image(_id)
+signal start_add_card_name(_id)
 
 func add_card(card):
 	card_id = card["id"]
@@ -24,7 +24,7 @@ func add_card(card):
 		add_card_name_button.show()
 
 func _on_add_card_image_button_pressed() -> void:
-	add_card_image.emit(card_id)
+	start_add_card_image.emit(card_id)
 
 func _on_add_card_name_button_pressed() -> void:
-	add_card_name.emit(card_id)
+	start_add_card_name.emit(card_id)

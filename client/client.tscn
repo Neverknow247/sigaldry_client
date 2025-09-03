@@ -132,6 +132,8 @@ layout_mode = 1
 [connection signal="template_selected" from="scenes/card_builder" to="." method="_on_card_builder_template_selected"]
 [connection signal="undo" from="scenes/card_builder" to="." method="_on_card_builder_undo"]
 [connection signal="back_to_menu" from="scenes/card_editor" to="." method="_on_card_editor_back_to_menu"]
+[connection signal="imagegen_get_unit_classes_and_races" from="scenes/card_editor" to="." method="_on_card_editor_imagegen_get_unit_classes_and_races"]
+[connection signal="imagegen_make_unit_image" from="scenes/card_editor" to="." method="_on_card_editor_imagegen_make_unit_image"]
 [connection signal="add_avatar_to_deck" from="scenes/deck_editor" to="." method="_on_deck_editor_add_avatar_to_deck"]
 [connection signal="add_card_to_deck" from="scenes/deck_editor" to="." method="_on_deck_editor_add_card_to_deck"]
 [connection signal="change_deck_name" from="scenes/deck_editor" to="." method="_on_deck_editor_change_deck_name"]

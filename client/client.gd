@@ -109,6 +109,27 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 		"start-card-editor":
 			change_scene("card_editor")
 			card_editor.add_cards(payload)
+		"imagegen-get-unit-classes-and-races":
+			card_editor.start_card_image_editor(payload)
+		"imagegen-unit-image-started":
+			show_error({"message":"Image Started"})
+			client.socketio_send("card-view-all",{
+			"response":"start-card-editor",
+			"query":{
+				#"subtype":"unit",
+				#"image_status":"none",
+				#"name_status":"none"
+				"image_or_name_status":"none",
+				#"unique_key":""
+				}
+			})
+		"imagegen-unit-image-complete":
+			show_error({"message":"Image Complete"})
+		"imagegen-unit-image-failed":
+			show_error({"message":"Image Failed"})
+		
+		
+		
 		"card-view-all":
 			change_scene("card_view")
 			card_view_screen.add_cards(payload)
@@ -427,3 +448,10 @@ func _on_main_menu_start_card_editor() -> void:
 			}
 		})
 	#client.socketio_send("card-view-missing-name")
+
+func _on_card_editor_imagegen_get_unit_classes_and_races(_card_id: Variant) -> void:
+	#client.socketio_send("get_info",{"":"card","id":_card_id})
+	client.socketio_send("imagegen-get-unit-classes-and-races",{"card_id" : _card_id})
+
+func _on_card_editor_imagegen_make_unit_image(_data: Variant) -> void:
+	client.socketio_send("imagegen-make-unit-image",_data)

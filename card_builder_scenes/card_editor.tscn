@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://beroa57ibexrr"]
+[gd_scene load_steps=5 format=3 uid="uid://beroa57ibexrr"]
 
 [ext_resource type="Script" uid="uid://dhtr5n8chv1a6" path="res://card_builder_scenes/card_editor.gd" id="1_3jpcr"]
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="2_kuoyl"]
 [ext_resource type="PackedScene" uid="uid://b0a2pght6n743" path="res://card_builder_scenes/card_image_edit.tscn" id="3_vh46x"]
+[ext_resource type="PackedScene" uid="uid://c2mu8515uiia0" path="res://card_builder_scenes/card_name_edit.tscn" id="4_6d5r8"]
 
 [node name="card_editor" type="Control"]
 layout_mode = 3
@@ -40,7 +41,7 @@ theme_override_constants/separation = 25
 alignment = 1
 
 [node name="back_button" type="Button" parent="."]
-custom_minimum_size = Vector2(140, 0)
+custom_minimum_size = Vector2(140, 60)
 layout_mode = 0
 offset_left = 1749.0
 offset_top = 32.0
@@ -53,4 +54,10 @@ text = "Back"
 visible = false
 layout_mode = 1
 
+[node name="card_name_edit" parent="." instance=ExtResource("4_6d5r8")]
+visible = false
+layout_mode = 1
+
 [connection signal="pressed" from="back_button" to="." method="_on_back_button_pressed"]
+[connection signal="back_to_editor" from="card_image_edit" to="." method="_on_card_image_edit_back_to_editor"]
+[connection signal="imagegen_make_unit_image" from="card_image_edit" to="." method="_on_card_image_edit_imagegen_make_unit_image"]

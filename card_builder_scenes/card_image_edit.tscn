@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b0a2pght6n743"]
+[gd_scene load_steps=3 format=3 uid="uid://b0a2pght6n743"]
 
 [ext_resource type="Script" uid="uid://di1lk1ba1ehdw" path="res://card_builder_scenes/card_image_edit.gd" id="1_upxb7"]
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_vb586"]
 
 [node name="card_image_edit" type="Control"]
 layout_mode = 3
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_vb586")
 script = ExtResource("1_upxb7")
 
 [node name="background_color" type="ColorRect" parent="."]
@@ -19,3 +21,42 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.761561, 0.761561, 0.761561, 1)
+
+[node name="back_button" type="Button" parent="."]
+custom_minimum_size = Vector2(140, 60)
+layout_mode = 0
+offset_left = 1749.0
+offset_top = 32.0
+offset_right = 1889.0
+offset_bottom = 92.0
+text = "Back"
+
+[node name="class_button" type="OptionButton" parent="."]
+custom_minimum_size = Vector2(350, 80)
+layout_mode = 0
+offset_left = 216.0
+offset_top = 152.0
+offset_right = 566.0
+offset_bottom = 232.0
+
+[node name="race_button" type="OptionButton" parent="."]
+custom_minimum_size = Vector2(350, 80)
+layout_mode = 0
+offset_left = 752.0
+offset_top = 144.0
+offset_right = 1102.0
+offset_bottom = 224.0
+
+[node name="submit_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1208.0
+offset_top = 160.0
+offset_right = 1328.0
+offset_bottom = 218.0
+disabled = true
+text = "Submit"
+
+[connection signal="pressed" from="back_button" to="." method="_on_back_button_pressed"]
+[connection signal="item_selected" from="class_button" to="." method="_on_class_button_item_selected"]
+[connection signal="item_selected" from="race_button" to="." method="_on_race_button_item_selected"]
+[connection signal="pressed" from="submit_button" to="." method="_on_submit_button_pressed"]
