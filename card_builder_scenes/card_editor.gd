@@ -11,6 +11,10 @@ const CARD_EDITOR_CARD_SELECT = preload("res://card_builder_scenes/card_editor_c
 signal back_to_menu
 signal imagegen_get_unit_classes_and_races(_card_id)
 signal imagegen_make_unit_image(_data)
+signal start_card_name_edit(_card_id)
+signal validate_card_name(_data)
+signal save_card_name(_data)
+signal imagegen_get_unit_options(_data)
 
 @onready var background_color: ColorRect = $background_color
 @onready var v_box_container: VBoxContainer = $scroll_container/v_box_container
@@ -41,6 +45,9 @@ func add_cards(payload):
 	var row_node
 	var first_card = true
 	for card in payload["cards"]:
+		#print(card)
+		if (card["subtype"] != "unit" || card["subtype"] != "avatar") and str(card["name"]) != "<null>" and card["meta"]["can_change_name"] == false:
+			continue
 		if card["meta"]["designer"]["user_id"] != card["meta"]["owner"]["user_id"]:
 			continue
 		if first_card:
@@ -52,10 +59,10 @@ func add_cards(payload):
 			row_node.add_theme_constant_override("separation", 25)
 		var new_card_editor_card = CARD_EDITOR_CARD_SELECT.instantiate()
 		row_node.add_child(new_card_editor_card)
-		new_card_editor_card.add_card(card)
+		card_number+=1
+		new_card_editor_card.add_card(card,card_number == binder_width)
 		new_card_editor_card.connect("start_add_card_image",start_add_card_image)
 		new_card_editor_card.connect("start_add_card_name",start_add_card_name)
-		card_number+=1
 		if card_number == binder_width:
 			card_number = 0
 
@@ -63,22 +70,35 @@ func start_add_card_image(card_id):
 	if !changing_scene:
 		changing_scene = true
 		imagegen_get_unit_classes_and_races.emit(card_id)
-	
-func start_card_image_editor(payload):
-	card_image_edit.show()
-	card_image_edit.set_classes_and_races(payload)
+
+#func start_card_image_editor(payload):
+	#card_image_edit.show()
+	#card_image_edit.set_classes_and_races(payload)
 
 func start_add_card_name(card_id):
 	if !changing_scene:
 		changing_scene = true
-		print("card name start")
+		start_card_name_edit.emit(card_id)
 
-func start_card_name_editor(payload):
-	card_name_edit.show()
+#func start_card_name_editor(payload):
+	#card_name_edit.show()
 
 func _on_card_image_edit_back_to_editor() -> void:
 	changing_scene = false
 	card_image_edit.hide()
 
+func _on_card_name_edit_back_to_editor() -> void:
+	changing_scene = false
+	card_name_edit.hide()
+
 func _on_card_image_edit_imagegen_make_unit_image(_data: Variant) -> void:
 	imagegen_make_unit_image.emit(_data)
+
+func _on_card_name_edit_validate_card_name(_data: Variant) -> void:
+	validate_card_name.emit(_data)
+
+func _on_card_name_edit_save_card_name(_data: Variant) -> void:
+	save_card_name.emit(_data)
+
+func _on_card_image_edit_imagegen_get_unit_options(_data: Variant) -> void:
+	imagegen_get_unit_options.emit(_data)

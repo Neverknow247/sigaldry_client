@@ -6,30 +6,42 @@ var stats = Stats
 var client = SocketIOClient
 var backendURL: String
 
+#var card_art_cache = CardArtCache.new()
+var card_art_cache = CardArtCache
+
 @onready var transition = $transition
 
 @onready var all_scenes = $scenes.get_children()
 
+@onready var wrong_version_screen: Control = $scenes/wrong_version_screen
 @onready var login_screen = $scenes/login_screen
 @onready var register_screen = $scenes/register_screen
 @onready var main_menu = $scenes/main_menu
 @onready var deck_select_screen = $scenes/deck_select_screen
 @onready var waiting_for_game_screen = $scenes/waiting_for_game_screen
 @onready var card_select_screen = $scenes/card_select_screen
+@onready var game_select_screen: Control = $scenes/game_select_screen
 @onready var game_screen = $scenes/game_screen
 @onready var card_view_screen = $scenes/card_view_screen
 @onready var card_builder = $scenes/card_builder
 @onready var card_editor: Control = $scenes/card_editor
 @onready var deck_editor = $scenes/deck_editor
+@onready var rewards_screen: Control = $scenes/rewards_screen
+
+@onready var hud: Control = $hud
 
 func _ready():
 	# prepare URL
 	
 	#backendURL = "http://75.219.184.116:3000/socket.io"
-	#backendURL = "http://192.168.1.151:3000/socket.io"
-	backendURL = "http://172.28.48.1:3000/socket.io"
 	#backendURL = "http://172.20.10.6:3000/socket.io"
-	#backendURL = "http://3.139.99.80/socket.io"
+	
+	#aws
+	backendURL = "http://3.139.99.80/socket.io"
+	#ethernet
+	#backendURL = "http://192.168.1.151:3000/socket.io"
+	#wifi
+	#backendURL = "http://172.28.48.1:3000/socket.io"
 
 	# initialize client
 	client = SocketIOClient.new(backendURL, {"token": "MY_AUTH_TOKEN"})
@@ -45,6 +57,15 @@ func _ready():
 
 	# add client to tree to start websocket
 	add_child(client)
+	#add_child(card_art_cache)
+	card_art_cache.set_request_sender(func(req: Dictionary) -> void:
+		var ev: String = String(req.get("type", ""))
+		var dat = req.get("data", {})
+		if ev == "":
+			push_warning("CardArtCache tried to send without a type")
+			return
+		client.socketio_send(ev,dat)
+	)
 
 func _exit_tree():
 	# optional: disconnect from socketio server
@@ -61,6 +82,7 @@ func on_socket_connect(_payload: Variant, _name_space, error: bool):
 	
 		print("Socket connected")
 
+
 func on_socket_event(event_name: String, payload: Variant, _name_space):
 	#print("Received Event: ", event_name, " ", payload)
 	print("Received Event: ", event_name)
@@ -70,17 +92,26 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 	# hide login_screen and show basic menu
 	match event_name:
 		"exception":
+			if payload["message"].contains("You must be logged in"):
+				change_scene("login")
 			print(payload)
 			#show_error(payload)
 			#print(payload)
 			print("Error")
 		"get-glossary":
 			KeyWordGlossary.set_glossary(payload)
+		"update-player-info":
+			hud.update_player(payload["def"])
 		"login":
+			if ProjectSettings.get_setting("application/config/version") != payload["server_version"]:
+				change_scene("wrong_version")
+				return
+			hud.update_player(payload)
 			KeyWordGlossary.set_glossary(payload)
 			#print(payload)
 			change_scene("menu")
 			login_screen.reset_screen()
+			#card_art_cache.set_request_sender()
 		"logout":
 			change_scene("login")
 		"register-success":
@@ -98,6 +129,8 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 			card_builder.close()
 			change_scene("menu")
 		"card-builder-update-components":
+			#for component in payload["components"]:
+				#print(component)
 			card_builder.load_builder_components(payload)
 			#load_builder_components(payload)
 		"card-builder-update-grid":
@@ -109,8 +142,10 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 		"start-card-editor":
 			change_scene("card_editor")
 			card_editor.add_cards(payload)
-		"imagegen-get-unit-classes-and-races":
-			card_editor.start_card_image_editor(payload)
+		"imagegen-get-unit-requirements":
+			card_editor.card_image_edit.set_unit_requirements(payload)
+		"imagegen-get-unit-options":
+			card_editor.card_image_edit.set_unit_options(payload)
 		"imagegen-unit-image-started":
 			show_error({"message":"Image Started"})
 			client.socketio_send("card-view-all",{
@@ -127,7 +162,21 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 			show_error({"message":"Image Complete"})
 		"imagegen-unit-image-failed":
 			show_error({"message":"Image Failed"})
-		
+		"validate-card-name":
+			show_error({"message":"Card Name Validated"})
+			card_editor.card_name_edit.card_name_validated(payload)
+		"save-card-name":
+			show_error({"message":"Card Name Saved"})
+			client.socketio_send("card-view-all",{
+			"response":"start-card-editor",
+			"query":{
+				#"subtype":"unit",
+				#"image_status":"none",
+				#"name_status":"none"
+				"image_or_name_status":"none",
+				#"unique_key":""
+				}
+			})
 		
 		
 		"card-view-all":
@@ -145,10 +194,17 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 			deck_editor.update_cards_not_in_deck(payload)
 		"editor-view-units":
 			deck_editor.update_cards_unit_only(payload)
+		"deck-editor-start-new-deck":
+			deck_editor.start_new_deck(payload)
+		#"deck-editor-new-deck-units":
+			#deck_editor.update_cards_unit_only(payload)
+			#print(payload)
 		#"editor-done":
 			#deck_editor.add_avatar()
 		"start-deck-editor":
 			deck_editor.start_deck_editor(payload)
+		"get_info_deck_editor_card_avatar_selected":
+			deck_editor.card_avatar_selected(payload)
 		"deck-editor-update-decks":
 			change_scene("deck_editor")
 			deck_editor.update_decks(payload)
@@ -199,6 +255,10 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 			game_screen.info_request(payload)
 		"get-info":
 			game_screen.info_request(payload)
+		"get_info_card_image_edit":
+			card_editor.card_image_edit.get_info_card_image_edit(payload)
+		"get_info_card_name_edit":
+			card_editor.card_name_edit.get_info_card_name_edit(payload)
 		"start-game":
 			change_scene("game")
 		"choose-target":
@@ -206,12 +266,25 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 		"quit-game":
 			game_screen.quit_game(payload)
 			main_menu.quit_game(payload)
-		"update-rewards":
-			main_menu.update_rewards(payload)
-			#print(payload)
-		
+		"rewards-get-containers":
+			rewards_screen.set_up_rewards(payload)
+			main_menu.check_rewards(payload)
+			#print(JSON.stringify(payload, "\t"))
+		"rewards-open-containers":
+			rewards_screen.show_rewards(payload)
+			client.socketio_send("rewards-get-containers")
+			#print(JSON.stringify(payload, "\t"))
+		"rewards-earned-containers":
+			print(JSON.stringify(payload, "\t"))
 		#"card-view-all":
 			#print(payload)
+		"get-card-image-files","get-card-image-keys","get-opponent-card-image-keys":
+			if typeof(payload) == TYPE_DICTIONARY:
+				card_art_cache.route_server_message({"type": event_name, "data": payload})
+			else:
+				card_art_cache.route_server_message({"type": event_name, "data": {}})
+		_:
+			print("Unknown Event: ", event_name)
 
 func show_error(payload):
 	if payload["message"]:
@@ -220,6 +293,8 @@ func show_error(payload):
 		$error_label.text = ""
 
 func change_scene(new_scene_name = ""):
+	if new_scene_name == "menu":
+		client.socketio_send("rewards-get-containers")
 	transition.fade_out()
 	await get_tree().create_timer(stats.transition_time).timeout
 	for scene in all_scenes:
@@ -287,14 +362,30 @@ func _on_card_builder_restart():
 func _on_login_screen_login(username, password):
 	client.socketio_send("login", {'username':username,'password':password})
 
-func _on_register_screen_register(username, screen_name, password):
-	client.socketio_send("register",{'username':username,'password':password,'screen_name':screen_name})
+func _on_register_screen_register(username, screen_name, email, password):
+	client.socketio_send("register",{'username':username, 'email_address':email,'password':password,'screen_name':screen_name})
 
 func _on_main_menu_search_for_pvp_game():
-	client.socketio_send("start-looking-for-game")
+	#change_scene("game_select")
+	#game_select_screen.set_up_pvp()
+	client.socketio_send("start-looking-for-game",{
+		"min_rarity": 1,
+		"max_rarity": 5,
+		"match_type": "pvp",
+		"pvp_timeout": 60,
+		"region": 6
+	})
 
 func _on_main_menu_search_for_pve_game():
-	client.socketio_send("play-pve")
+	#change_scene("game_select")
+	#game_select_screen.set_up_pve()
+	client.socketio_send("start-looking-for-game",{
+		"min_rarity": 1,
+		"max_rarity": 5,
+		"match_type": "pve",
+		#"pve_deck_id": ,
+		#"region": 6
+	})
 
 func _on_main_menu_view_all_cards():
 	client.socketio_send("card-view-all",{
@@ -322,32 +413,59 @@ func _on_deck_editor_close_deck_editor():
 	client.socketio_send("close-deck-editor")
 
 func _on_deck_editor_add_card_to_deck(id):
-	client.socketio_send("editor-add-card",{"card_id":id,"is_avatar":false})
+	client.socketio_send("deck-editor-add-card",{"card_id":id,"is_avatar":false})
 
-func _on_deck_editor_add_avatar_to_deck(id):
-	client.socketio_send("editor-add-card",{"card_id":id,"is_avatar":true})
+#func _on_deck_editor_add_avatar_to_deck(id):
+	#client.socketio_send("editor-add-card",{"card_id":id,"is_avatar":true})
 
 func _on_deck_editor_remove_card_from_deck(id):
-	client.socketio_send("editor-remove-card",{"card_id":id})
+	client.socketio_send("deck-editor-remove-card",{"card_id":id})
 
 func _on_deck_editor_change_deck_name(deck_name):
 	client.socketio_send("editor-change-name",{'name':deck_name})
 
 func _on_deck_editor_delete_deck():
-	client.socketio_send("editor-delete-deck",{})
+	client.socketio_send("deck-editor-delete-deck",{})
 
 #func _on_deck_editor_create_new_deck(deck_name):
 	#client.socketio_send("editor-add-deck",{"name":deck_name})
 
+func _on_deck_editor_start_create_new_deck():
+	client.socketio_send("card-view-all",{
+		"response" : "deck-editor-start-new-deck",
+		"query" : {
+			"subtype" : "avatar",
+			#"image_status":"none",
+			#"name_status":"none"
+			#"image_or_name_status":"none",
+			#"unique_key":""
+		}
+	})
+
 func _on_deck_editor_show_units_only():
-	client.socketio_send("card-view-units",{"unit_only":true,"builder":false})
+	client.socketio_send("card-view-all",{
+		"response":"deck-editor-new-deck-units",
+		"query":{
+			"subtype":"unit",
+			#"image_status":"none",
+			#"name_status":"none"
+			#"image_or_name_status":"none",
+			#"unique_key":""
+			}
+		})
+	#client.socketio_send("card-view-units",{"unit_only":true,"builder":false})
 	
 	#client.socketio_send("view-cards",{"unit_only":true,"builder":false})
 
 func _on_deck_editor_create_new_deck(deck_name,avatar_id):
-	client.socketio_send("editor-add-avatar-deck",{"name":deck_name,"avatar_id":avatar_id})
+	client.socketio_send("deck-editor-add-avatar-deck",{"name":deck_name,"avatar_id":avatar_id})
+	#client.socketio_send("editor-add-avatar-deck",{"name":deck_name,"avatar_id":avatar_id})
 
 #Game Functions
+
+func _on_game_select_screen_close_game_select() -> void:
+	change_scene("menu")
+
 func _on_deck_select_screen_select_deck(id):
 	client.socketio_send("deck-selected-for-new-game",{"deck_id":str(id)})
 
@@ -380,32 +498,10 @@ func _on_game_screen_get_info(data):
 
 
 
-func _on_login_screen_auto_login(data):
-	client.socketio_send("login", data)
-
-func _on_main_menu_add_spice(value):
-	client.socketio_send("add-spice",{"spice":value})
-
-func _on_button_pressed():
-	client.socketio_send("add-components",{})
-
-func _on_button_2_pressed():
-	client.socketio_send("add-templates",{})
-
-func _on_main_menu_get_reward():
-	client.socketio_send("get-reward",{"winner":true})
-
-
 #dev tools
 func _on_dev_screen_add_components():
 	if stats.dev_mode:
 		client.socketio_send("add-components",{})
-	else:
-		pass
-
-func _on_dev_screen_add_spice(value):
-	if stats.dev_mode:
-		client.socketio_send("add-spice",{"spice":value})
 	else:
 		pass
 
@@ -421,18 +517,17 @@ func _on_dev_screen_auto_login(data):
 	else:
 		pass
 
-func _on_dev_screen_get_reward():
-	if stats.dev_mode:
-		client.socketio_send("get-reward",{"winner":true})
-	else:
-		pass
-
-
-func _on_dev_screen_get_gloss() -> void:
+func _on_dev_screen_get_glossary() -> void:
 	client.socketio_send("get-glossary")
 
-
 func _on_card_editor_back_to_menu() -> void:
+	change_scene("menu")
+
+func _on_main_menu_start_rewards_screen() -> void:
+	rewards_screen.reset()
+	change_scene("rewards")
+
+func _on_rewards_screen_close_rewards() -> void:
 	change_scene("menu")
 
 func _on_main_menu_start_card_editor() -> void:
@@ -450,8 +545,39 @@ func _on_main_menu_start_card_editor() -> void:
 	#client.socketio_send("card-view-missing-name")
 
 func _on_card_editor_imagegen_get_unit_classes_and_races(_card_id: Variant) -> void:
-	#client.socketio_send("get_info",{"":"card","id":_card_id})
-	client.socketio_send("imagegen-get-unit-classes-and-races",{"card_id" : _card_id})
+	client.socketio_send("get-info",{"id":_card_id,"type":"card","response":"get_info_card_image_edit"})
+	client.socketio_send("imagegen-get-unit-requirements",{"card_id" : _card_id})
+
+func _on_card_editor_imagegen_get_unit_options(_data: Variant) -> void:
+	client.socketio_send("imagegen-get-unit-options",_data)
 
 func _on_card_editor_imagegen_make_unit_image(_data: Variant) -> void:
 	client.socketio_send("imagegen-make-unit-image",_data)
+
+func _on_card_editor_start_card_name_edit(_card_id: Variant) -> void:
+	client.socketio_send("get-info",{"id":_card_id,"type":"card","response":"get_info_card_name_edit"})
+
+func _on_card_editor_validate_card_name(_data: Variant) -> void:
+	client.socketio_send("validate-card-name",_data)
+
+func _on_card_editor_save_card_name(_data: Variant) -> void:
+	client.socketio_send("save-card-name",_data)
+
+func _on_dev_screen_get_reward():
+	client.socketio_send("rewards-get-containers")
+
+func _on_dev_screen_open_common_reward() -> void:
+	client.socketio_send("rewards-open-containers",{"container" : 1, "quantity" : 1})
+
+func _on_dev_screen_open_uncommon_reward() -> void:
+	client.socketio_send("rewards-open-containers",{"container" : 3, "quantity" : 1})
+
+func _on_deck_editor_avatar_selected(_card_id: Variant) -> void:
+	client.socketio_send("get-info",{"id":_card_id,"type":"card","response":"get_info_deck_editor_card_avatar_selected"})
+
+func _on_dev_screen_edit_card(_id: Variant) -> void:
+	client.socketio_send("get-info",{"id":_id,"type":"card","response":"get_info_card_image_edit"})
+	client.socketio_send("imagegen-get-unit-requirements",{"card_id" : _id})
+
+func _on_rewards_screen_selected_reward(_id: Variant, _amount: Variant) -> void:
+	client.socketio_send("rewards-open-containers",{"container":_id, "quantity":_amount})

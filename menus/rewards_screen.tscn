@@ -1,0 +1,104 @@
+[gd_scene load_steps=3 format=3 uid="uid://b75q21lpkrmi4"]
+
+[ext_resource type="Script" uid="uid://bxvdynw6b0wcm" path="res://menus/rewards_screen.gd" id="1_gej4g"]
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_lmek6"]
+
+[node name="rewards_screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_lmek6")
+script = ExtResource("1_gej4g")
+
+[node name="color_background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5647059, 0.5647059, 0.5647059, 1)
+
+[node name="back_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1767.0
+offset_top = 24.0
+offset_right = 1861.0
+offset_bottom = 90.0
+text = "Back"
+
+[node name="h_box_container" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 128.0
+offset_right = 1856.0
+offset_bottom = 1016.0
+theme_override_constants/separation = 32
+
+[node name="rewards_container" type="VBoxContainer" parent="h_box_container"]
+custom_minimum_size = Vector2(432, 0)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="label" type="Label" parent="h_box_container/rewards_container"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 48
+text = "Rewards"
+horizontal_alignment = 1
+
+[node name="rewards_scroll" type="ScrollContainer" parent="h_box_container/rewards_container"]
+custom_minimum_size = Vector2(0, 806)
+layout_mode = 2
+
+[node name="rewards" type="VBoxContainer" parent="h_box_container/rewards_container/rewards_scroll"]
+custom_minimum_size = Vector2(432, 0)
+layout_mode = 2
+
+[node name="templates_container" type="VBoxContainer" parent="h_box_container"]
+custom_minimum_size = Vector2(648, 0)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="label" type="Label" parent="h_box_container/templates_container"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 48
+text = "Templates"
+horizontal_alignment = 1
+
+[node name="template_scroll" type="ScrollContainer" parent="h_box_container/templates_container"]
+custom_minimum_size = Vector2(0, 806)
+layout_mode = 2
+
+[node name="templates" type="VBoxContainer" parent="h_box_container/templates_container/template_scroll"]
+custom_minimum_size = Vector2(648, 0)
+layout_mode = 2
+
+[node name="components_container" type="VBoxContainer" parent="h_box_container"]
+custom_minimum_size = Vector2(648, 0)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="label" type="Label" parent="h_box_container/components_container"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 48
+text = "Components"
+horizontal_alignment = 1
+
+[node name="components_scroll" type="ScrollContainer" parent="h_box_container/components_container"]
+custom_minimum_size = Vector2(0, 806)
+layout_mode = 2
+
+[node name="components" type="VBoxContainer" parent="h_box_container/components_container/components_scroll"]
+custom_minimum_size = Vector2(648, 0)
+layout_mode = 2
+
+[connection signal="pressed" from="back_button" to="." method="_on_back_button_pressed"]

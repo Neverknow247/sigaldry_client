@@ -17,17 +17,21 @@ func _ready():
 	background_color.color = stats.background_color
 
 func add_decks(payload):
-	print(payload)
+	#print(payload)
 	for n in v_box_container.get_children():
 		v_box_container.remove_child(n)
 		n.queue_free()
 	for deck in payload["decks"]:
+		print(deck)
 		var new_deck = deck_select.instantiate()
 		v_box_container.add_child(new_deck)
 		new_deck.deck_id = deck["id"]
 		new_deck.deck_name = deck["name"]
-		new_deck.label.text = deck["name"]
+		new_deck.label.text = deck["name"] + " | " + str(int(deck["card_count"])) + "/" + str(int(deck["cards_required"]))
 		new_deck.select_deck.connect(_on_select_deck)
+		if !deck["is_valid"]:
+			#return
+			new_deck.button.disabled = true
 
 func _on_select_deck(id):
 	#print(id)

@@ -39,6 +39,8 @@ func _draw():
 				var col = Color(component_color)
 				if tiles[y][x] == 0:
 					col = Color(1,1,1,0)
+				elif tiles[y][x] == 5:
+					col = Color.AQUAMARINE
 				draw_rect(rect,col)
 				draw_rect(rect,Color("#2b2d31"),false,3)
 				#draw_rect(rect,Color(0, 0, 0, 0),false,3)

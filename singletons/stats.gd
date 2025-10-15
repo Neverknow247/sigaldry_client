@@ -21,6 +21,18 @@ const COLOR_KEY = {
 	"a" : "909090"
 }
 
+const COLOR_NAMES = {
+	"r" : "Red",
+	"o" : "Orange",
+	"y" : "Yellow",
+	"g" : "Green",
+	"u" : "Blue",
+	"p" : "Purple",
+	"w" : "White",
+	"b" : "Black",
+	"a" : "Gray"
+}
+
 var new_save_data = {
 	"version" : ProjectSettings.get_setting("application/config/version"),
 	"remember_me" : {

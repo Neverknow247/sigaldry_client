@@ -32,7 +32,7 @@ func add_cards(payload):
 		if card_number == 0:
 			row_node = HBoxContainer.new()
 			v_box_container.add_child(row_node)
-			row_node.alignment = BoxContainer.ALIGNMENT_CENTER
+			#row_node.alignment = BoxContainer.ALIGNMENT_CENTER
 			row_node.add_theme_constant_override("separation", 25)
 		var new_card = CARD_SCENE.instantiate()
 		row_node.add_child(new_card)

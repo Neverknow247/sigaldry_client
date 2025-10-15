@@ -11,6 +11,7 @@ var neverknow_approved_items = [
 ]
 
 func set_glossary(payload):
+	#print(payload)
 	if payload.has("glossary"):
 		key_glossary = {}
 		glossary = {}
@@ -27,4 +28,4 @@ func set_glossary(payload):
 				"description" : item["description"],
 				"dependencies" : item["dependencies"]
 			}
-		#print(glossary)
+	#print(glossary)

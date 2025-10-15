@@ -5,9 +5,11 @@ var stats = Stats
 signal auto_login(data)
 signal add_templates
 signal add_components
-signal add_spice(value)
-signal get_reward()
-signal get_gloss()
+signal get_reward
+signal open_common_reward
+signal open_uncommon_reward
+signal get_glossary
+signal edit_card(_id)
 
 var dev_tools_open = false:
 	set(value):
@@ -23,7 +25,7 @@ func _input(event):
 		dev_tools_open = !dev_tools_open
 
 func _on_neverknow_login_button_pressed():
-	auto_login.emit({'username':"nk247",'password':"ZcX%0SPav!se9d*S"})
+	auto_login.emit({'username':"neverknow247",'password':"ZcX%0SPav!se9d*S"})
 
 func _on_comp_login_button_pressed():
 	auto_login.emit({'username':"comp9001",'password':"43Kc@7HHtp#SAvFw"})
@@ -34,18 +36,21 @@ func _on_add_templates_button_pressed():
 func _on_add_components_button_pressed():
 	add_components.emit()
 
-func _on_add_spice_edit_text_changed(new_text):
-	pass # Replace with function body.
-
-func _on_add_spice_button_pressed():
-	add_spice.emit($v_box_container/h_box_container/add_spice_edit.value)
-
 func _on_get_reward_button_pressed():
 	get_reward.emit()
+
+func _on_open_common_button_pressed() -> void:
+	open_common_reward.emit()
+
+func _on_open_uncommon_button_pressed() -> void:
+	open_uncommon_reward.emit()
 
 func _on_hide_button_pressed():
 	dev_tools_open = !dev_tools_open
 
+func _on_get_glossary_button_pressed() -> void:
+	get_glossary.emit()
 
-func _on_get_gloss_button_pressed() -> void:
-	get_gloss.emit()
+func _on_edit_card_image_button_pressed() -> void:
+	if int($h_box_container/v_box_container2/h_box_container/edit_card_line.text):
+		edit_card.emit(int($h_box_container/v_box_container2/h_box_container/edit_card_line.text))

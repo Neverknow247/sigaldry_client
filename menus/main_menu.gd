@@ -8,6 +8,7 @@ const REWARD = preload("res://items/reward.tscn")
 
 @onready var background_color = $background_color
 @onready var game_finished_screen = $game_finished_screen
+@onready var rewards_button: Button = $rewards_button
 
 signal logout
 signal search_for_pvp_game
@@ -16,6 +17,7 @@ signal view_all_cards
 signal start_card_builder
 signal start_card_editor
 signal start_deck_editor
+signal start_rewards_screen
 
 func _ready():
 	background_color.color = stats.background_color
@@ -66,3 +68,13 @@ func update_rewards(payload):
 		new_reward.count_label.text = "X"+str(int(payload["rewards"][reward]["count"]))
 		new_reward.component_shape_grid.create_component_shapes(payload["rewards"][reward]["component"])
 		print(reward)
+
+func check_rewards(payload):
+	#print(payload)
+	if payload["containers"].size() > 0:
+		rewards_button.show()
+	else:
+		rewards_button.hide()
+
+func _on_rewards_button_pressed() -> void:
+	start_rewards_screen.emit()

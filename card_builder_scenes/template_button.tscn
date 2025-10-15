@@ -1,0 +1,116 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkbbwlr22vb6y"]
+
+[ext_resource type="Script" uid="uid://cwsc17mj06upo" path="res://card_builder_scenes/template_button.gd" id="1_onaqp"]
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_xtylh"]
+[ext_resource type="Script" uid="uid://lu1pg81qpull" path="res://card_builder_scenes/template_shape_grid.gd" id="2_71fcp"]
+[ext_resource type="PackedScene" uid="uid://nu8u1n14jovn" path="res://card_builder_scenes/color_bonus_square.tscn" id="4_b34p4"]
+
+[node name="template_button" type="Button"]
+custom_minimum_size = Vector2(868, 128)
+offset_right = 868.0
+offset_bottom = 128.0
+theme = ExtResource("1_xtylh")
+script = ExtResource("1_onaqp")
+
+[node name="template_amount" type="Label" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 120.0
+offset_bottom = 112.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 48
+text = "X1000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="template_name" type="Label" parent="."]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 16.0
+offset_right = 560.0
+offset_bottom = 112.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 48
+text = "Legendary Blueprint"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="template_shape_grid" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 744.0
+offset_top = 8.0
+offset_right = 856.0
+offset_bottom = 120.0
+mouse_filter = 2
+script = ExtResource("2_71fcp")
+
+[node name="color_rect" type="ColorRect" parent="template_shape_grid"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="color_bonus_container" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 576.0
+offset_top = 8.0
+offset_right = 746.0
+offset_bottom = 147.99998
+scale = Vector2(0.8, 0.8)
+alignment = 1
+
+[node name="start_bonus_container" type="HBoxContainer" parent="color_bonus_container"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="start_label" type="Label" parent="color_bonus_container/start_bonus_container"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+text = "Start:"
+horizontal_alignment = 2
+
+[node name="start_label_2" type="Label" parent="color_bonus_container/start_bonus_container"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+text = "N/A"
+horizontal_alignment = 2
+
+[node name="start_color_bonus_square" parent="color_bonus_container/start_bonus_container" instance=ExtResource("4_b34p4")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="end_bonus_container" type="HBoxContainer" parent="color_bonus_container"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="end_label" type="Label" parent="color_bonus_container/end_bonus_container"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+text = "End:"
+horizontal_alignment = 2
+
+[node name="end_label_2" type="Label" parent="color_bonus_container/end_bonus_container"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+text = "N/A"
+horizontal_alignment = 2
+
+[node name="end_color_bonus_square" parent="color_bonus_container/end_bonus_container" instance=ExtResource("4_b34p4")]
+layout_mode = 2
+mouse_filter = 2
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

@@ -64,6 +64,11 @@ custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 placeholder_text = "screen name"
 
+[node name="email" type="LineEdit" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+placeholder_text = "email"
+
 [node name="password" type="LineEdit" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2

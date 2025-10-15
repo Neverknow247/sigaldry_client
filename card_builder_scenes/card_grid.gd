@@ -158,7 +158,8 @@ func _process(delta):
 	$active_component.position = ((get_local_mouse_position() - Vector2(minSizeOfSquares,minSizeOfSquares)/2) - ((Vector2.ONE*grid_square_size)*(shape.size()/2)) + (Vector2.ONE*grid_square_size/2)).snapped(Vector2(grid_square_size,grid_square_size))
 
 signal check_placement_pos(default_pos,possible_pos)
-signal piece_rotate()
+signal piece_rotate(_direction)
+signal component_removed
 
 func _input(event):
 	if event.is_pressed() and event is InputEventMouse:
@@ -170,9 +171,16 @@ func _input(event):
 				active_component_start = grid_mouse_pos-(Vector2.ONE*(shape.size()/2))
 				#print(grid_mouse_pos)
 				#print("its a mouse click")
+		if event.is_pressed() and event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			if active_component:
+				piece_rotate.emit("clockwise")
+		if event.is_pressed() and event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			if active_component:
+				piece_rotate.emit("counterclockwise")
 		if event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT:
 			if active_component:
-				piece_rotate.emit()
+				component_removed.emit()
+				#piece_rotate.emit()
 	else:
 		pass
 

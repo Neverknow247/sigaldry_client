@@ -83,45 +83,92 @@ func define_scale(size):
 		5:
 			custom_minimum_size = Vector2(408,560)
 			content.scale = Vector2(.5,.5)
+		8:
+			custom_minimum_size = Vector2(816,1120)
+			content.scale = Vector2(.8,.8)
 
 func activate_avatar():
 	card_texture = AVATAR_TEXTURE
 
-func add_details(_card_details):
-	print("card_details: ",_card_details)
+func add_details(_card_details,_is_unit = false):
+	#print(_card_details)
 	card_id = _card_details["id"]
 	set_color_profile(_card_details["color_profile"])
-	card_cost.text = str(int(_card_details["cost"]))
-	if _card_details["name"]:
-		card_name.text = _card_details["name"]
-	var image_path = "res://assets/temp_image_folder/%s" %[_card_details["image"]]
-	if FileAccess.file_exists(image_path):
-		card_image.texture = load(image_path)
+	if is_equal_approx(_card_details["cost"], int(_card_details["cost"])):
+		card_cost.text = str(int(_card_details["cost"]))
 	else:
-		match _card_details["subtype"]:
-			"unit":
-				card_image.texture = load("res://assets/missing-images/none-unit.png")
-			"spell":
-				card_image.texture = load("res://assets/missing-images/none-spell.png")
-			"trap":
-				card_image.texture = load("res://assets/missing-images/none-trap.png")
-			"potion":
-				card_image.texture = load("res://assets/missing-images/none-potion.png")
-	set_card_effects(_card_details["abilities"])
+		card_cost.text = str(_card_details["cost"])
+		card_cost.add_theme_font_size_override("font_size",48)
+	if _card_details["name"]:
+		set_card_name(_card_details["name"])
+		#card_name.text = _card_name
+	else:
+		card_name.text = ""
+	type = _card_details["subtype"]
 	card_type.text = _card_details["subtype"].capitalize()
-	card_author.text = _card_details["meta"]["designer"]["user_name"]
-
-#func add_builder_details(_card_details):
-	#print("details: ",card_details)
-	#card_id = _card_details["id"]
-	#set_color_profile(_card_details["card"]["color_profile"])
-	#card_cost.text = str(int(_card_details["card"]["cost"]))
-	#card_name.text = _card_details["card"]["name"] if _card_details["card"]["name"] != null else ""
-	#set_card_effects(_card_details["card"]["abilities"])
-	#card_type.text = _card_details["card"]["subtype"].capitalize()
-	#card_author.text = _card_details["card"]["meta"]["designer"]["user_name"]
+	set_card_effects(_card_details["abilities"])
+	if !_is_unit:
+		card_author.text = _card_details["meta"]["designer"]["user_name"]
+	else:
+		card_author.text = _card_details["card"]["meta"]["designer"]["user_name"]
+	
+	
+	var default_texture
+	match _card_details["subtype"]:
+		"unit","avatar":
+			default_texture = load("res://assets/missing-images/none-unit.png")
+		"spell":
+			default_texture = load("res://assets/missing-images/none-spell.png")
+		"trap":
+			default_texture = load("res://assets/missing-images/none-trap.png")
+		"potion":
+			default_texture = load("res://assets/missing-images/none-potion.png")
+	var tex = await CardArtCache.get_texture_async(str(_card_details["image"]),default_texture,true)
+	#var tex = await CardArtCache.get_texture(_card_details["image"],default_texture)
+	card_image.texture = tex
+	
+func set_card_name(_card_name):
+	var font_size = 50
+	match _card_name.length():
+		14: font_size = 52
+		13: font_size = 58
+		12: font_size = 60
+		11: font_size = 66
+		10: font_size = 72
+		9: font_size = 78
+		_:
+			pass
+	if _card_name.length() < 9:
+		font_size = 88
+	card_name.add_theme_font_size_override("font_size",font_size)
+	card_name.text = _card_name
+	
+	#var image_path = "C:/sigaldry_images/%s" %[_card_details["image"]]
+	#if FileAccess.file_exists(image_path):
+		#var new_image = Image.new()
+		#var error = new_image.load(image_path)
+		#if error != OK:
+			#push_error("Failed to load image: %s (err = %d)" %[image_path, error])
+		#else:
+			#var new_texture = ImageTexture.create_from_image(new_image)
+			#card_image.texture = new_texture
+	#else:
+		#match _card_details["subtype"]:
+			#"unit":
+				#card_image.texture = load("res://assets/missing-images/none-unit.png")
+			#"avatar":
+				#card_image.texture = load("res://assets/missing-images/none-unit.png")
+			#"spell":
+				#card_image.texture = load("res://assets/missing-images/none-spell.png")
+			#"trap":
+				#card_image.texture = load("res://assets/missing-images/none-trap.png")
+			#"potion":
+				#card_image.texture = load("res://assets/missing-images/none-potion.png")
 
 func set_card_effects(abilities):
+	for child in card_details_box.get_children():
+		card_details_box.remove_child(child)
+		child.queue_free()
 	var card_effect_text = ""
 	for ability_key in abilities:
 		var ability = abilities[ability_key]
@@ -130,16 +177,25 @@ func set_card_effects(abilities):
 				card_attack.text = str(int(ability["value"]))
 			"health":
 				card_health.text = str(int(ability["value"])) if ability["value"] > 0 else ""
-			"actions":
-				card_actions.size.x = 36* (ability["value"])
-			"efficient":
-				pass
+			#"actions":
+				#card_actions.size.x = 36* (ability["value"])
+				
+			#"efficient":
+				#pass
 			_:
-				pass
-				#card_effect_text += "[url="+k["name"]+"]"+k["name"].capitalize() +"[/url]"+ ":" \
-				#+ str(int(k["value"])) + "  "
+				if ability["name"] == "actions":
+					card_actions.size.x = 36* (ability["value"])
+					if type != "potion":
+						continue
+				var ability_value
+				if is_equal_approx(ability["value"], int(ability["value"])):
+					ability_value = str(int(ability["value"]))
+				else:
+					ability_value = str(ability["value"])
 				card_effect_text += ability["name"].capitalize() + ":" \
-				+ str(int(ability["value"])) + "  "
+				+ ability_value + "  "
+				#card_effect_text += ability["name"].capitalize() + ":" \
+				#+ str(int(ability["value"])) + "  "
 				#var effect_label = Label.new()
 				var effect_label = preload("res://items/card_info_label.tscn").instantiate()
 				card_details_box.add_child(effect_label)
@@ -165,7 +221,10 @@ func set_avatar():
 
 
 func _on_card_button_pressed():
+	print("Card Type: ",card_button_type," | Card ID: ",card_id)
 	match card_button_type:
+		"avatar_deck_editor_in_deck":
+			pass
 		"deck_editor_in_deck":
 			remove_from_deck.emit(card_id)
 		"deck_editor_not_in_deck":
@@ -179,7 +238,8 @@ func _on_card_button_pressed():
 		"select":
 			select_card.emit(card_id)
 		_:
-			print(card_button_type)
+			#print("Card Type: ",card_button_type," | Card ID: ",card_id)
+			print("No Type")
 			return
 
 #func _on_card_button_mouse_entered() -> void:

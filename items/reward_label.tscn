@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=3 uid="uid://ck6nmdn3lywj1"]
+
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_6j031"]
+[ext_resource type="Script" uid="uid://sxd08e6foood" path="res://items/reward_label.gd" id="2_fclew"]
+[ext_resource type="Script" uid="uid://b6cdkflfs3q7g" path="res://items/reward_shape_grid.gd" id="3_586vq"]
+
+[node name="reward_label" type="Control"]
+custom_minimum_size = Vector2(648, 96)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("1_6j031")
+script = ExtResource("2_fclew")
+
+[node name="background_color" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.21950102, 0.21950102, 0.21950102, 1)
+
+[node name="rarity_label" type="Label" parent="."]
+layout_mode = 0
+offset_top = 72.00001
+offset_right = 106.0
+offset_bottom = 106.00001
+rotation = -0.7853982
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 24
+text = "Legendary"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 88.0
+offset_right = 480.0
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+text = "Legendary Blueprint"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="reward_shape_grid" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -152.0
+offset_top = 8.0
+offset_right = -72.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("3_586vq")

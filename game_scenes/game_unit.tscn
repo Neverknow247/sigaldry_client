@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bupv2u8y0oj0k"]
+
+[ext_resource type="Script" uid="uid://tg0hj4une88w" path="res://game_scenes/game_unit.gd" id="1_y7avu"]
+
+[node name="game_unit" type="CenterContainer"]
+custom_minimum_size = Vector2(270, 270)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_y7avu")
+
+[node name="content" type="Control" parent="."]
+layout_mode = 2
+
+[node name="unit_image" type="TextureRect" parent="content"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

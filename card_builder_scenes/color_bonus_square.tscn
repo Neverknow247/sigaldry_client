@@ -5,17 +5,19 @@
 
 [node name="color_bonus_square" type="ColorRect"]
 custom_minimum_size = Vector2(64, 64)
+mouse_filter = 2
 theme = ExtResource("1_qxxex")
 color = Color(0, 0, 0, 1)
 script = ExtResource("1_vewjk")
 
 [node name="bonus_color" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
+layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 56.0
 offset_bottom = 56.0
+mouse_filter = 2
 
 [node name="bonus_label" type="Label" parent="."]
 layout_mode = 0

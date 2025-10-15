@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2mu8515uiia0"]
+[gd_scene load_steps=4 format=3 uid="uid://c2mu8515uiia0"]
 
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_0o6u3"]
 [ext_resource type="Script" uid="uid://cv36en2k8p3wn" path="res://card_builder_scenes/card_name_edit.gd" id="1_caj4v"]
+[ext_resource type="PackedScene" uid="uid://di0881y716irt" path="res://items/card.tscn" id="2_ejqcl"]
 
 [node name="card_name_edit" type="Control"]
 layout_mode = 3
@@ -9,9 +11,63 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_0o6u3")
 script = ExtResource("1_caj4v")
 
 [node name="background_color" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.356064, 0.356064, 0.356064, 1)
+
+[node name="card_preview" parent="." instance=ExtResource("2_ejqcl")]
+visible = false
+layout_mode = 1
+offset_left = 1216.0
+offset_top = 128.0
+offset_right = 112.0
+offset_bottom = 168.0
+scale = Vector2(0.8, 0.8)
+last_card = true
+
+[node name="name_edit" type="LineEdit" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 248.0
+offset_top = 128.0
+offset_right = 768.0
+offset_bottom = 192.0
+placeholder_text = "Select A Name"
+max_length = 30
+
+[node name="buttons_container" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 1461.0
+offset_top = 32.0
+offset_right = 1889.0
+offset_bottom = 92.0
+alignment = 1
+
+[node name="validate_button" type="Button" parent="buttons_container"]
+custom_minimum_size = Vector2(140, 60)
+layout_mode = 2
+disabled = true
+text = "Validate"
+
+[node name="submit_button" type="Button" parent="buttons_container"]
+custom_minimum_size = Vector2(140, 60)
+layout_mode = 2
+disabled = true
+text = "Submit"
+
+[node name="back_button" type="Button" parent="buttons_container"]
+custom_minimum_size = Vector2(140, 60)
+layout_mode = 2
+text = "Back"
+
+[connection signal="text_changed" from="name_edit" to="." method="_on_line_edit_text_changed"]
+[connection signal="pressed" from="buttons_container/validate_button" to="." method="_on_validate_button_pressed"]
+[connection signal="pressed" from="buttons_container/submit_button" to="." method="_on_submit_button_pressed"]
+[connection signal="pressed" from="buttons_container/back_button" to="." method="_on_back_button_pressed"]

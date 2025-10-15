@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d3qyhudrdt78l"]
+[gd_scene load_steps=45 format=3 uid="uid://d3qyhudrdt78l"]
 
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_jhejr"]
 [ext_resource type="Script" uid="uid://b204xh82wwll" path="res://card_builder_scenes/card_builder.gd" id="1_t82xy"]
@@ -10,8 +10,40 @@
 [ext_resource type="Script" uid="uid://b4p33ccxv3uyk" path="res://card_builder_scenes/card_compare_select_screen.gd" id="7_8oy6r"]
 [ext_resource type="Texture2D" uid="uid://bshu3o85op7sq" path="res://assets/art/test.png" id="8_q08ur"]
 [ext_resource type="Theme" uid="uid://by8ew0t4rulwy" path="res://assets/themes/card_theme.tres" id="9_c4brr"]
+[ext_resource type="Texture2D" uid="uid://p6xjhte5i6uv" path="res://assets/art/color_squares/button_squars/red_selected.png" id="9_knpjq"]
 [ext_resource type="FontFile" uid="uid://b2vvtmi4jxkl5" path="res://assets/fonts/fantasque-sans-mono.bold.otf" id="9_nacf6"]
+[ext_resource type="Texture2D" uid="uid://c38377j3suce7" path="res://assets/art/color_squares/button_squars/black_selected.png" id="9_scv2d"]
+[ext_resource type="Texture2D" uid="uid://cd31q6i6rh5ul" path="res://assets/art/color_squares/button_squars/red_unselected.png" id="10_xxwcu"]
+[ext_resource type="Texture2D" uid="uid://ifafbg1kj83i" path="res://assets/art/color_squares/button_squars/orange_selected.png" id="11_i7ypo"]
 [ext_resource type="PackedScene" uid="uid://di0881y716irt" path="res://items/card.tscn" id="12_0t5fn"]
+[ext_resource type="Texture2D" uid="uid://c3o8gtkya5u3c" path="res://assets/art/color_squares/button_squars/orange_unselected.png" id="12_ftr1p"]
+[ext_resource type="Texture2D" uid="uid://602qur31tr75" path="res://assets/art/color_squares/button_squars/yellow_selected.png" id="13_dj1eh"]
+[ext_resource type="Script" uid="uid://sbcqen0nk0yi" path="res://card_builder_scenes/template_select_overlay.gd" id="13_qv2s3"]
+[ext_resource type="Texture2D" uid="uid://dhtt414ekg5xs" path="res://assets/art/color_squares/red.png" id="14_2h6kt"]
+[ext_resource type="Texture2D" uid="uid://du2nfsx00o2tq" path="res://assets/art/color_squares/button_squars/yellow_unselected.png" id="14_8xr3m"]
+[ext_resource type="Texture2D" uid="uid://lvc545bqs6wt" path="res://assets/missing-images/none-unit.png" id="14_h3m1n"]
+[ext_resource type="Texture2D" uid="uid://dpdy537rgpvcw" path="res://assets/art/color_squares/button_squars/green_selected.png" id="15_1rr7l"]
+[ext_resource type="Texture2D" uid="uid://k8d8l3rvqhir" path="res://assets/missing-images/none-trap.png" id="15_055wj"]
+[ext_resource type="Texture2D" uid="uid://dbyf6bru3gctn" path="res://assets/art/color_squares/orange.png" id="15_scv2d"]
+[ext_resource type="Texture2D" uid="uid://dlx5cqnrl0qpa" path="res://assets/missing-images/none-spell.png" id="16_v70lu"]
+[ext_resource type="Texture2D" uid="uid://ckbkddk7qf703" path="res://assets/art/color_squares/button_squars/green_unselected.png" id="16_y2njv"]
+[ext_resource type="Texture2D" uid="uid://c0fw4t6qfc41a" path="res://assets/art/color_squares/yellow.png" id="16_ysf2w"]
+[ext_resource type="Texture2D" uid="uid://dv12ynhtov2w5" path="res://assets/art/color_squares/green.png" id="17_4dsfd"]
+[ext_resource type="Texture2D" uid="uid://ddjqmr3jobvuk" path="res://assets/art/color_squares/button_squars/blue_selected.png" id="17_js7vi"]
+[ext_resource type="Texture2D" uid="uid://b3iakh8gfui1t" path="res://assets/missing-images/none-potion.png" id="17_km8dh"]
+[ext_resource type="Texture2D" uid="uid://ipju5tjb270v" path="res://assets/art/color_squares/button_squars/blue_unselected.png" id="18_ccula"]
+[ext_resource type="Texture2D" uid="uid://dhm815e60shka" path="res://assets/art/color_squares/blue.png" id="18_dqt60"]
+[ext_resource type="Texture2D" uid="uid://guxyk7dfcses" path="res://assets/art/color_squares/button_squars/purple_selected.png" id="19_2ioou"]
+[ext_resource type="Texture2D" uid="uid://bn4itc3q7k51g" path="res://assets/art/color_squares/purple.png" id="19_7ve71"]
+[ext_resource type="Texture2D" uid="uid://dl8vih80eq5x4" path="res://assets/art/color_squares/white.png" id="20_e0b5v"]
+[ext_resource type="Texture2D" uid="uid://c5ohx20vibebg" path="res://assets/art/color_squares/button_squars/purple_unselected.png" id="20_uxo38"]
+[ext_resource type="Texture2D" uid="uid://cghmhvdew3trf" path="res://assets/art/color_squares/black.png" id="21_cafbw"]
+[ext_resource type="Texture2D" uid="uid://06ibuxolbcaw" path="res://assets/art/color_squares/button_squars/white_selected.png" id="21_ya1el"]
+[ext_resource type="Texture2D" uid="uid://df7rip0i3ph2y" path="res://assets/art/color_squares/grey.png" id="22_xdko4"]
+[ext_resource type="Texture2D" uid="uid://yttel73dmgng" path="res://assets/art/color_squares/button_squars/white_unselected.png" id="22_ykqso"]
+[ext_resource type="Texture2D" uid="uid://btlg10j27rd7" path="res://assets/art/color_squares/button_squars/black_unselected.png" id="24_jmnga"]
+[ext_resource type="Texture2D" uid="uid://if14ukw24gg4" path="res://assets/art/color_squares/button_squars/grey_selected.png" id="25_1wn6a"]
+[ext_resource type="Texture2D" uid="uid://c6ai6fno30go3" path="res://assets/art/color_squares/button_squars/grey_unselected.png" id="26_sifsy"]
 
 [node name="card_builder" type="Control"]
 layout_mode = 3
@@ -59,14 +91,6 @@ offset_left = -432.0
 offset_top = 0.0
 offset_right = 432.0
 offset_bottom = 64.0
-
-[node name="template_select" type="OptionButton" parent="."]
-custom_minimum_size = Vector2(350, 80)
-layout_mode = 0
-offset_left = 24.0
-offset_top = 24.0
-offset_right = 374.0
-offset_bottom = 104.0
 
 [node name="place_component_button" type="Button" parent="."]
 visible = false
@@ -193,9 +217,62 @@ offset_right = 1778.0
 offset_bottom = 770.0
 text = "Compare Card"
 
-[node name="search_bar" type="LineEdit" parent="."]
-visible = false
+[node name="grid_container" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 32.0
+offset_right = 564.0
+offset_bottom = 88.0
+theme_override_constants/h_separation = 0
+columns = 9
+
+[node name="red_button" type="CheckButton" parent="grid_container"]
 layout_mode = 2
+theme_override_icons/checked = ExtResource("9_knpjq")
+theme_override_icons/unchecked = ExtResource("10_xxwcu")
+
+[node name="orange_button" type="CheckButton" parent="grid_container"]
+layout_mode = 2
+theme_override_icons/checked = ExtResource("11_i7ypo")
+theme_override_icons/unchecked = ExtResource("12_ftr1p")
+
+[node name="yellow_button" type="CheckButton" parent="grid_container"]
+layout_mode = 2
+theme_override_icons/checked = ExtResource("13_dj1eh")
+theme_override_icons/unchecked = ExtResource("14_8xr3m")
+
+[node name="green_button" type="CheckButton" parent="grid_container"]
+layout_mode = 2
+theme_override_icons/checked = ExtResource("15_1rr7l")
+theme_override_icons/unchecked = ExtResource("16_y2njv")
+
+[node name="blue_button" type="CheckButton" parent="grid_container"]
+layout_mode = 2
+theme_override_icons/checked = ExtResource("17_js7vi")
+theme_override_icons/unchecked = ExtResource("18_ccula")
+
+[node name="purple_button" type="CheckButton" parent="grid_container"]
+layout_mode = 2
+theme_override_icons/checked = ExtResource("19_2ioou")
+theme_override_icons/unchecked = ExtResource("20_uxo38")
+
+[node name="white_button" type="CheckButton" parent="grid_container"]
+layout_mode = 2
+theme_override_icons/checked = ExtResource("21_ya1el")
+theme_override_icons/unchecked = ExtResource("22_ykqso")
+
+[node name="black_button" type="CheckButton" parent="grid_container"]
+layout_mode = 2
+theme_override_icons/checked = ExtResource("9_scv2d")
+theme_override_icons/unchecked = ExtResource("24_jmnga")
+
+[node name="grey_button" type="CheckButton" parent="grid_container"]
+layout_mode = 2
+theme_override_icons/checked = ExtResource("25_1wn6a")
+theme_override_icons/unchecked = ExtResource("26_sifsy")
+
+[node name="search_bar" type="LineEdit" parent="."]
+layout_mode = 0
 offset_left = 24.0
 offset_top = 128.0
 offset_right = 552.0
@@ -409,18 +486,398 @@ offset_right = 352.0
 offset_bottom = 232.0
 scale = Vector2(0.5, 0.5)
 
+[node name="template_select_overlay" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("13_qv2s3")
+
+[node name="template_select_background" type="ColorRect" parent="template_select_overlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5647059, 0.5647059, 0.5647059, 1)
+
+[node name="template_type_back_button" type="Button" parent="template_select_overlay"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 0
+offset_left = 1749.0
+offset_top = 32.0
+offset_right = 1889.0
+offset_bottom = 98.0
+text = "Back"
+
+[node name="h_box_container" type="HBoxContainer" parent="template_select_overlay"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 128.0
+offset_right = 1856.0
+offset_bottom = 1016.0
+theme_override_constants/separation = 56
+alignment = 1
+
+[node name="v_box_container" type="VBoxContainer" parent="template_select_overlay/h_box_container"]
+custom_minimum_size = Vector2(868, 0)
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="h_box_container" type="HBoxContainer" parent="template_select_overlay/h_box_container/v_box_container"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="common_button" type="CheckButton" parent="template_select_overlay/h_box_container/v_box_container/h_box_container"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 36
+button_pressed = true
+text = "Common"
+alignment = 1
+
+[node name="uncommon_button" type="CheckButton" parent="template_select_overlay/h_box_container/v_box_container/h_box_container"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 36
+button_pressed = true
+text = "Uncommon"
+alignment = 1
+
+[node name="rare_button" type="CheckButton" parent="template_select_overlay/h_box_container/v_box_container/h_box_container"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 36
+button_pressed = true
+text = "Rare"
+alignment = 1
+
+[node name="epic_button" type="CheckButton" parent="template_select_overlay/h_box_container/v_box_container/h_box_container"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 36
+button_pressed = true
+text = "Epic"
+alignment = 1
+
+[node name="legendary_button" type="CheckButton" parent="template_select_overlay/h_box_container/v_box_container/h_box_container"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 36
+button_pressed = true
+text = "Legendary"
+alignment = 1
+
+[node name="h_box_container2" type="HBoxContainer" parent="template_select_overlay/h_box_container/v_box_container"]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="start_color_container" type="HBoxContainer" parent="template_select_overlay/h_box_container/v_box_container/h_box_container2"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="template_select_overlay/h_box_container/v_box_container/h_box_container2/start_color_container"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+text = "Start:"
+
+[node name="start_color_button" type="OptionButton" parent="template_select_overlay/h_box_container/v_box_container/h_box_container2/start_color_container"]
+layout_mode = 2
+selected = 0
+item_count = 11
+popup/item_0/text = "ALL"
+popup/item_0/id = 0
+popup/item_1/text = "N/A"
+popup/item_1/id = 1
+popup/item_2/text = "R"
+popup/item_2/icon = ExtResource("14_2h6kt")
+popup/item_2/id = 2
+popup/item_3/text = "O"
+popup/item_3/icon = ExtResource("15_scv2d")
+popup/item_3/id = 3
+popup/item_4/text = "Y"
+popup/item_4/icon = ExtResource("16_ysf2w")
+popup/item_4/id = 4
+popup/item_5/text = "G"
+popup/item_5/icon = ExtResource("17_4dsfd")
+popup/item_5/id = 7
+popup/item_6/text = "U"
+popup/item_6/icon = ExtResource("18_dqt60")
+popup/item_6/id = 5
+popup/item_7/text = "P"
+popup/item_7/icon = ExtResource("19_7ve71")
+popup/item_7/id = 6
+popup/item_8/text = "W"
+popup/item_8/icon = ExtResource("20_e0b5v")
+popup/item_8/id = 8
+popup/item_9/text = "B"
+popup/item_9/icon = ExtResource("21_cafbw")
+popup/item_9/id = 9
+popup/item_10/text = "A"
+popup/item_10/icon = ExtResource("22_xdko4")
+popup/item_10/id = 10
+
+[node name="h_box_container2" type="HBoxContainer" parent="template_select_overlay/h_box_container/v_box_container/h_box_container2"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="template_select_overlay/h_box_container/v_box_container/h_box_container2/h_box_container2"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+text = "End:"
+
+[node name="end_color_button" type="OptionButton" parent="template_select_overlay/h_box_container/v_box_container/h_box_container2/h_box_container2"]
+layout_mode = 2
+selected = 0
+item_count = 11
+popup/item_0/text = "ALL"
+popup/item_0/id = 0
+popup/item_1/text = "N/A"
+popup/item_1/id = 1
+popup/item_2/text = "R"
+popup/item_2/icon = ExtResource("14_2h6kt")
+popup/item_2/id = 2
+popup/item_3/text = "O"
+popup/item_3/icon = ExtResource("15_scv2d")
+popup/item_3/id = 3
+popup/item_4/text = "Y"
+popup/item_4/icon = ExtResource("16_ysf2w")
+popup/item_4/id = 4
+popup/item_5/text = "G"
+popup/item_5/icon = ExtResource("17_4dsfd")
+popup/item_5/id = 7
+popup/item_6/text = "B"
+popup/item_6/icon = ExtResource("18_dqt60")
+popup/item_6/id = 5
+popup/item_7/text = "P"
+popup/item_7/icon = ExtResource("19_7ve71")
+popup/item_7/id = 6
+popup/item_8/text = "W"
+popup/item_8/icon = ExtResource("20_e0b5v")
+popup/item_8/id = 8
+popup/item_9/text = "B"
+popup/item_9/icon = ExtResource("21_cafbw")
+popup/item_9/id = 9
+popup/item_10/text = "A"
+popup/item_10/icon = ExtResource("22_xdko4")
+popup/item_10/id = 10
+
+[node name="v_box_container" type="VBoxContainer" parent="template_select_overlay/h_box_container/v_box_container"]
+custom_minimum_size = Vector2(0, 692)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="order_select_button" type="Button" parent="template_select_overlay/h_box_container/v_box_container/v_box_container"]
+custom_minimum_size = Vector2(0, 132)
+layout_mode = 2
+
+[node name="v_box_container" type="HBoxContainer" parent="template_select_overlay/h_box_container/v_box_container/v_box_container/order_select_button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="label" type="Label" parent="template_select_overlay/h_box_container/v_box_container/v_box_container/order_select_button/v_box_container"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 60
+text = "Unit"
+horizontal_alignment = 1
+
+[node name="texture_rect" type="TextureRect" parent="template_select_overlay/h_box_container/v_box_container/v_box_container/order_select_button/v_box_container"]
+layout_mode = 2
+texture = ExtResource("14_h3m1n")
+expand_mode = 3
+
+[node name="blueprint_select_button" type="Button" parent="template_select_overlay/h_box_container/v_box_container/v_box_container"]
+custom_minimum_size = Vector2(0, 132)
+layout_mode = 2
+
+[node name="v_box_container" type="HBoxContainer" parent="template_select_overlay/h_box_container/v_box_container/v_box_container/blueprint_select_button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="label" type="Label" parent="template_select_overlay/h_box_container/v_box_container/v_box_container/blueprint_select_button/v_box_container"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 60
+text = "Blueprint"
+horizontal_alignment = 1
+
+[node name="texture_rect" type="TextureRect" parent="template_select_overlay/h_box_container/v_box_container/v_box_container/blueprint_select_button/v_box_container"]
+layout_mode = 2
+texture = ExtResource("15_055wj")
+expand_mode = 3
+
+[node name="scroll_select_button" type="Button" parent="template_select_overlay/h_box_container/v_box_container/v_box_container"]
+custom_minimum_size = Vector2(0, 132)
+layout_mode = 2
+
+[node name="v_box_container" type="HBoxContainer" parent="template_select_overlay/h_box_container/v_box_container/v_box_container/scroll_select_button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="label" type="Label" parent="template_select_overlay/h_box_container/v_box_container/v_box_container/scroll_select_button/v_box_container"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 60
+text = "Scroll"
+horizontal_alignment = 1
+
+[node name="texture_rect" type="TextureRect" parent="template_select_overlay/h_box_container/v_box_container/v_box_container/scroll_select_button/v_box_container"]
+layout_mode = 2
+texture = ExtResource("16_v70lu")
+expand_mode = 3
+
+[node name="formula_select_button" type="Button" parent="template_select_overlay/h_box_container/v_box_container/v_box_container"]
+custom_minimum_size = Vector2(0, 132)
+layout_mode = 2
+
+[node name="v_box_container" type="HBoxContainer" parent="template_select_overlay/h_box_container/v_box_container/v_box_container/formula_select_button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="label" type="Label" parent="template_select_overlay/h_box_container/v_box_container/v_box_container/formula_select_button/v_box_container"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 60
+text = "Formula"
+horizontal_alignment = 1
+
+[node name="texture_rect" type="TextureRect" parent="template_select_overlay/h_box_container/v_box_container/v_box_container/formula_select_button/v_box_container"]
+layout_mode = 2
+texture = ExtResource("17_km8dh")
+expand_mode = 3
+
+[node name="mirror_select_button" type="Button" parent="template_select_overlay/h_box_container/v_box_container/v_box_container"]
+custom_minimum_size = Vector2(0, 132)
+layout_mode = 2
+
+[node name="v_box_container" type="HBoxContainer" parent="template_select_overlay/h_box_container/v_box_container/v_box_container/mirror_select_button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="label" type="Label" parent="template_select_overlay/h_box_container/v_box_container/v_box_container/mirror_select_button/v_box_container"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 60
+text = "Mirror"
+horizontal_alignment = 1
+
+[node name="texture_rect" type="TextureRect" parent="template_select_overlay/h_box_container/v_box_container/v_box_container/mirror_select_button/v_box_container"]
+layout_mode = 2
+texture = ExtResource("14_h3m1n")
+expand_mode = 3
+
+[node name="scroll_container" type="ScrollContainer" parent="template_select_overlay/h_box_container"]
+custom_minimum_size = Vector2(868, 0)
+layout_mode = 2
+
+[node name="template_select" type="VBoxContainer" parent="template_select_overlay/h_box_container/scroll_container"]
+layout_mode = 2
+
 [connection signal="active_component_changed" from="card_grid" to="." method="_on_card_grid_active_component_changed"]
 [connection signal="check_placement_pos" from="card_grid" to="." method="_on_card_grid_check_placement_pos"]
+[connection signal="component_removed" from="card_grid" to="." method="_on_card_grid_component_removed"]
 [connection signal="mouse_entered" from="card_grid" to="card_grid" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="card_grid" to="card_grid" method="_on_mouse_exited"]
 [connection signal="piece_rotate" from="card_grid" to="." method="_on_card_grid_piece_rotate"]
-[connection signal="item_selected" from="template_select" to="." method="_on_template_select_item_selected"]
 [connection signal="pressed" from="card_preview/undo_button" to="." method="_on_undo_button_pressed"]
 [connection signal="pressed" from="card_preview/compare_card_select_button" to="." method="_on_compare_card_select_button_pressed"]
+[connection signal="toggled" from="grid_container/red_button" to="." method="_on_red_button_toggled"]
+[connection signal="toggled" from="grid_container/orange_button" to="." method="_on_orange_button_toggled"]
+[connection signal="toggled" from="grid_container/yellow_button" to="." method="_on_yellow_button_toggled"]
+[connection signal="toggled" from="grid_container/green_button" to="." method="_on_green_button_toggled"]
+[connection signal="toggled" from="grid_container/blue_button" to="." method="_on_blue_button_toggled"]
+[connection signal="toggled" from="grid_container/purple_button" to="." method="_on_purple_button_toggled"]
+[connection signal="toggled" from="grid_container/white_button" to="." method="_on_white_button_toggled"]
+[connection signal="toggled" from="grid_container/black_button" to="." method="_on_black_button_toggled"]
+[connection signal="toggled" from="grid_container/grey_button" to="." method="_on_grey_button_toggled"]
 [connection signal="text_changed" from="search_bar" to="." method="_on_search_bar_text_changed"]
 [connection signal="pressed" from="clear_component_piece_button" to="." method="_on_clear_component_piece_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/save_button" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/restart_button" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/back_button" to="." method="_on_back_button_pressed"]
+[connection signal="template_selected" from="template_select_overlay" to="." method="_on_template_select_overlay_template_selected"]
+[connection signal="pressed" from="template_select_overlay/template_type_back_button" to="." method="_on_template_type_back_button_pressed"]
+[connection signal="toggled" from="template_select_overlay/h_box_container/v_box_container/h_box_container/common_button" to="template_select_overlay" method="_on_common_button_toggled"]
+[connection signal="toggled" from="template_select_overlay/h_box_container/v_box_container/h_box_container/uncommon_button" to="template_select_overlay" method="_on_uncommon_button_toggled"]
+[connection signal="toggled" from="template_select_overlay/h_box_container/v_box_container/h_box_container/rare_button" to="template_select_overlay" method="_on_rare_button_toggled"]
+[connection signal="toggled" from="template_select_overlay/h_box_container/v_box_container/h_box_container/epic_button" to="template_select_overlay" method="_on_epic_button_toggled"]
+[connection signal="toggled" from="template_select_overlay/h_box_container/v_box_container/h_box_container/legendary_button" to="template_select_overlay" method="_on_legendary_button_toggled"]
+[connection signal="item_selected" from="template_select_overlay/h_box_container/v_box_container/h_box_container2/start_color_container/start_color_button" to="template_select_overlay" method="_on_start_color_button_item_selected"]
+[connection signal="item_selected" from="template_select_overlay/h_box_container/v_box_container/h_box_container2/h_box_container2/end_color_button" to="template_select_overlay" method="_on_end_color_button_item_selected"]
+[connection signal="pressed" from="template_select_overlay/h_box_container/v_box_container/v_box_container/order_select_button" to="template_select_overlay" method="_on_unit_select_button_pressed"]
+[connection signal="pressed" from="template_select_overlay/h_box_container/v_box_container/v_box_container/blueprint_select_button" to="template_select_overlay" method="_on_blueprint_select_button_pressed"]
+[connection signal="pressed" from="template_select_overlay/h_box_container/v_box_container/v_box_container/scroll_select_button" to="template_select_overlay" method="_on_scroll_select_button_pressed"]
+[connection signal="pressed" from="template_select_overlay/h_box_container/v_box_container/v_box_container/formula_select_button" to="template_select_overlay" method="_on_formula_select_button_pressed"]
+[connection signal="pressed" from="template_select_overlay/h_box_container/v_box_container/v_box_container/mirror_select_button" to="template_select_overlay" method="_on_mirror_select_button_pressed"]
 
 [editable path="card_preview/card_graphic"]

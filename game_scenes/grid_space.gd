@@ -14,6 +14,8 @@ const BOARD_CARD_AVATAR = preload("res://assets/art/board_card_avatar.png")
 @export var unfriendly_color : Color = Color.BLACK
 @export var move_color : Color = Color.BLACK
 
+@onready var card_image: TextureRect = $Control/Control/card_preview/card_image_clip/card_image
+
 @onready var trap = $Control/trap
 @onready var trap_label = $Control/trap/trap_label
 
@@ -60,4 +62,5 @@ func edit_theme_graphic(_target):
 			grid_button_color.color = unfriendly_color
 
 func _on_card_select_get_info():
-	get_info.emit({"type":"unit","id":str(occupant_id)})
+	#print(occupant_type)
+	get_info.emit({"type":occupant_type,"id":str(occupant_id)})

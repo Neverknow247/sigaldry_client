@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://0u3o8socssxq"]
+
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_1bpyt"]
+[ext_resource type="Script" uid="uid://dagy388pi5f2g" path="res://menus/wrong_version_screen.gd" id="1_4q7df"]
+
+[node name="wrong_version_screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_1bpyt")
+script = ExtResource("1_4q7df")
+
+[node name="color_background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5647059, 0.5647059, 0.5647059, 1)
+
+[node name="center_container" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="v_box_container" type="VBoxContainer" parent="center_container"]
+layout_mode = 2
+
+[node name="warning" type="Label" parent="center_container/v_box_container"]
+layout_mode = 2
+text = "I'm sorry.
+The version of your client is out of date.
+Please download the newest version from the discord.
+Thank you!"
+horizontal_alignment = 1
+
+[node name="exit_button" type="Button" parent="center_container/v_box_container"]
+layout_mode = 2
+text = "Exit Game"
+
+[connection signal="pressed" from="center_container/v_box_container/exit_button" to="." method="_on_exit_button_pressed"]

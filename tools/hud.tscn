@@ -1,0 +1,92 @@
+[gd_scene load_steps=3 format=3 uid="uid://dl04pl45gg4at"]
+
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_npvic"]
+[ext_resource type="Script" uid="uid://cnk53oj8mhcb0" path="res://tools/hud.gd" id="2_toebf"]
+
+[node name="hud" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1016.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_npvic")
+script = ExtResource("2_toebf")
+
+[node name="color_rect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.235294, 0.235294, 0.235294, 1)
+
+[node name="resources" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.712
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -343.04
+offset_right = -8.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 32
+alignment = 2
+
+[node name="materials" type="VBoxContainer" parent="resources"]
+layout_mode = 2
+alignment = 1
+
+[node name="standard_materials" type="HBoxContainer" parent="resources/materials"]
+layout_mode = 2
+
+[node name="standard_label" type="Label" parent="resources/materials/standard_materials"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "M:"
+
+[node name="standard_number" type="Label" parent="resources/materials/standard_materials"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "100000000"
+
+[node name="premium_materials" type="HBoxContainer" parent="resources/materials"]
+layout_mode = 2
+
+[node name="premium_label" type="Label" parent="resources/materials/premium_materials"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "P:"
+
+[node name="premium_number" type="Label" parent="resources/materials/premium_materials"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "100000000"
+
+[node name="screen_name_label" type="Label" parent="."]
+custom_minimum_size = Vector2(160, 48)
+layout_mode = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 640.0
+offset_bottom = 56.0
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 40
+text = "000000000000000000000000000000"
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="back_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 920.0
+offset_top = 8.0
+offset_right = 992.0
+offset_bottom = 56.0
+theme_override_font_sizes/font_size = 32
+text = "Back"
+
+[connection signal="pressed" from="back_button" to="." method="_on_back_button_pressed"]

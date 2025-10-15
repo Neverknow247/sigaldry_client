@@ -41,6 +41,7 @@ func findSizeOfSquares():
 	minSizeOfSquares = grid_square_size
 
 func _draw():
+	#print(shape)
 	for child in $icons.get_children():
 		child.queue_free()
 	if (height == 0 and width == 0):
@@ -57,6 +58,8 @@ func _draw():
 				var col = Color(shape_color,.75)
 				if shape[y][x] == 0 or shape[y][x] == 2:
 					col = Color(1,1,1,0)
+				elif shape[y][x] == 5:
+					col = Color("AQUAMARINE",.75)
 					#col = Color.BLUE_VIOLET
 				draw_rect(rect,col)
 				i+=1

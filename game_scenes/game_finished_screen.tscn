@@ -77,6 +77,7 @@ offset_top = 339.0
 offset_right = -566.0
 offset_bottom = 379.0
 scale = Vector2(0.4, 0.4)
+last_card = true
 
 [node name="loser_card" parent="." instance=ExtResource("4_2bj8s")]
 layout_mode = 1

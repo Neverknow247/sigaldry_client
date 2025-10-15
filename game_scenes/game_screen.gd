@@ -133,10 +133,10 @@ func quit_game(payload):
 func update_unit(payload):
 	#print("unit selected: ", card_view_id)
 	#print("update unit: ",payload)
-	print("here")
-	print(str(payload["unit"]["id"]),":",card_view_id)
+	#print("here")
+	#print(str(payload["unit"]["id"]),":",card_view_id)
 	if str(payload["unit"]["id"]) == card_view_id:
-		card_view_card.add_details(payload["unit"])
+		card_view_card.add_details(payload["unit"],true)
 		#update_card_view(payload["unit"])
 	#print("update unit: ",payload["unit"]["x"])
 	battlefield.update_unit(payload)
@@ -264,7 +264,7 @@ func update_players(payload):
 		if card_number == 0:
 			row_node = HBoxContainer.new()
 			hand.add_child(row_node)
-			row_node.alignment = BoxContainer.ALIGNMENT_CENTER
+			#row_node.alignment = BoxContainer.ALIGNMENT_CENTER
 			row_node.add_theme_constant_override("separation",10)
 		var new_card = CARD_SCENE.instantiate()
 		row_node.add_child(new_card)
@@ -484,6 +484,7 @@ func _on_card_get_info(data):
 func info_request(payload):
 	card_view_card.show()
 	card_view_id = str(payload["def"]["id"])
+	print(payload)
 	if payload["def"]:
 		card_view_card.add_details(payload["def"])
 	side_tabs.current_tab = 1

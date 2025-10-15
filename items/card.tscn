@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dmg265fef5ww0" path="res://assets/art/card/card-front.png" id="3_20yvs"]
 [ext_resource type="Script" uid="uid://bp7g5bo8sv5mu" path="res://items/card_button.gd" id="3_wq0el"]
 [ext_resource type="PackedScene" uid="uid://66nqstxwt0ep" path="res://items/magnitude_square.tscn" id="4_d525o"]
+[ext_resource type="Texture2D" uid="uid://lvc545bqs6wt" path="res://assets/missing-images/none-unit.png" id="4_owe1f"]
 [ext_resource type="Texture2D" uid="uid://b2pxo6km7g63r" path="res://assets/art/card/banners/horizontal-1.png" id="4_wingh"]
 [ext_resource type="Texture2D" uid="uid://cmnrv5lo05p1k" path="res://assets/art/card/banners/horizontal-2.png" id="4_wq0el"]
 [ext_resource type="Texture2D" uid="uid://behrena7pyc3x" path="res://assets/art/card/banners/vertical.png" id="5_wq0el"]
@@ -15,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://k3paya1hewit" path="res://assets/art/card/2d icons/sword.png" id="8_vhpwo"]
 [ext_resource type="PackedScene" uid="uid://dt77vy5nu6wl3" path="res://items/tooltip.tscn" id="9_pf630"]
 [ext_resource type="Texture2D" uid="uid://b6jg1xgy562kl" path="res://assets/art/card/badges/large v1/hex.png" id="10_q5wdc"]
-[ext_resource type="Texture2D" uid="uid://bkh1f5kmvoftf" path="res://assets/art/card_art/owlbear.png" id="11_d2yx4"]
 [ext_resource type="FontFile" uid="uid://c32o87n2oxwbt" path="res://assets/fonts/alegreya/Alegreya-Regular.ttf" id="13_cov8e"]
 [ext_resource type="Texture2D" uid="uid://dowmuxfgoe5dx" path="res://assets/art/card/2d icons/heart.png" id="13_wq0el"]
 [ext_resource type="FontFile" uid="uid://8b66omd77r0f" path="res://assets/fonts/alegreya/Alegreya-Medium.ttf" id="14_u2p8s"]
@@ -404,12 +404,12 @@ grow_vertical = 2
 [node name="card_image" type="TextureRect" parent="content"]
 clip_children = 2
 layout_mode = 0
-offset_left = 56.0
-offset_top = 51.0
-offset_right = 760.0
-offset_bottom = 755.0
+offset_left = 63.0
+offset_top = 40.0
+offset_right = 752.0
+offset_bottom = 729.0
 mouse_filter = 2
-texture = ExtResource("11_d2yx4")
+texture = ExtResource("4_owe1f")
 expand_mode = 5
 
 [node name="color_banner" type="TextureRect" parent="content/card_image"]
@@ -588,6 +588,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="card_cost" type="Label" parent="content/labels"]
 layout_mode = 0
@@ -605,15 +606,15 @@ vertical_alignment = 1
 
 [node name="card_name" type="Label" parent="content/labels"]
 layout_mode = 0
-offset_left = 256.0
+offset_left = 232.0
 offset_top = 656.0
-offset_right = 640.0
+offset_right = 656.0
 offset_bottom = 808.0
 theme_override_colors/font_outline_color = Color(0.156863, 0.192157, 0.235294, 1)
 theme_override_constants/line_spacing = -12
 theme_override_constants/outline_size = 18
 theme_override_fonts/font = ExtResource("14_u2p8s")
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 52
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
