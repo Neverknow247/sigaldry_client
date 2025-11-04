@@ -4,6 +4,7 @@ const AVATAR_TEXTURE = preload("res://assets/art/card_template_avatar.png")
 const COLOR_PROFILE_SQUARE = preload("res://items/magnitude_square.tscn")
 
 var stats = Stats
+
 var KEYWORD_GLOSS = KeyWordGlossary
 
 signal remove_from_deck(id)
@@ -42,6 +43,7 @@ var card_id = 0
 var card_button_type = null
 
 @export var last_card  = false
+var duplicated_details_ref = null
 var card_details_open=  false:
 	get:
 		return card_details_open
@@ -54,6 +56,21 @@ var card_details_open=  false:
 			false:
 				if !last_card: card_details_animation_player.play("close_card_details_right")
 				else: card_details_animation_player.play("close_card_details_left")
+
+#func duplicate_details(value):
+	#match value:
+		#true:
+			#if duplicated_details_ref: duplicated_details_ref.queue_free()
+			#var new_ref = card_details.duplicate(true)
+			#if get_tree().current_scene.is_in_group("client"):
+				#new_ref.z_index = 100
+				#get_tree().current_scene.tooltips.add_child(new_ref)
+				#new_ref.set_as_top_level(true)
+				#new_ref.global_position = card_details.global_position
+				#new_ref.scale = content.scale
+				#duplicated_details_ref = new_ref
+		#false:
+			#if duplicated_details_ref: duplicated_details_ref.queue_free()
 
 var color_banner_open =  false:
 	get:
@@ -192,17 +209,22 @@ func set_card_effects(abilities):
 					ability_value = str(int(ability["value"]))
 				else:
 					ability_value = str(ability["value"])
+				
 				card_effect_text += ability["name"].capitalize() + ":" \
 				+ ability_value + "  "
-				#card_effect_text += ability["name"].capitalize() + ":" \
-				#+ str(int(ability["value"])) + "  "
-				#var effect_label = Label.new()
+				
+				#card_effect_text += "[url=" + ability["name"] + "]" + \
+				#ability["name"].capitalize() + ": " + ability_value + "  "
+				
 				var effect_label = preload("res://items/card_info_label.tscn").instantiate()
 				card_details_box.add_child(effect_label)
 				effect_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-				effect_label.text = "[b]"+ability["name"].capitalize()+"[/b] : " 
-				effect_label.text += KEYWORD_GLOSS.glossary[ability["name"]]["description"]
+				#effect_label.text = "[b]"+ability["name"].capitalize()+"[/b] : " 
+				effect_label.text = "[url=" + ability["key"] + "]" + \
+				ability["name"].capitalize() + "[/url]" + ": "
+				effect_label.text += KEYWORD_GLOSS.key_glossary[ability["key"]]["description"]
 				
+				#effect_label.top_level = true
 	card_rich_effects.text = card_effect_text
 
 func set_color_profile(colors):
@@ -261,6 +283,7 @@ func _on_color_banner_button_pressed() -> void:
 func _on_card_details_button_pressed() -> void:
 	if !card_details_animation_player.is_playing():
 		card_details_open = !card_details_open
+		
 
 func _on_card_button_mouse_entered() -> void:
 	if card_button_type == "game_type":

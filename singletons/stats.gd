@@ -6,7 +6,8 @@ var color_two = Color("#f2ab37")
 
 var dev_mode = true
 var rng = RandomNumberGenerator.new()
-var transition_time = .15
+var transition_time = .20
+#var transition_time = .15
 
 const COLOR_KEY = {
 	"r" : "FF0000",

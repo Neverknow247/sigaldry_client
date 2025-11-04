@@ -7,6 +7,7 @@ var stats = Stats
 const CARD_SCENE = preload("res://items/card.tscn")
 
 var binder_width = 5
+var binder_seperation = 25
 
 @onready var background_color = $background_color
 
@@ -33,7 +34,7 @@ func add_cards(payload):
 			row_node = HBoxContainer.new()
 			v_box_container.add_child(row_node)
 			#row_node.alignment = BoxContainer.ALIGNMENT_CENTER
-			row_node.add_theme_constant_override("separation", 25)
+			row_node.add_theme_constant_override("separation", binder_seperation)
 		var new_card = CARD_SCENE.instantiate()
 		row_node.add_child(new_card)
 		new_card.define_scale(4)

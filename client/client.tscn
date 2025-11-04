@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://b75q21lpkrmi4" path="res://menus/rewards_screen.tscn" id="16_l1pb1"]
 [ext_resource type="PackedScene" uid="uid://dl04pl45gg4at" path="res://tools/hud.tscn" id="16_wqbiw"]
 
-[node name="client" type="Control"]
+[node name="client" type="Control" groups=["client"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,7 +31,13 @@ theme = ExtResource("1_bnrmd")
 script = ExtResource("2_r6rot")
 
 [node name="transition" parent="." instance=ExtResource("13_au68s")]
+z_index = 1000
 layout_mode = 1
+
+[node name="tooltips" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="scenes" type="Control" parent="."]
 layout_mode = 1
@@ -69,6 +75,7 @@ visible = false
 layout_mode = 1
 
 [node name="game_select_screen" parent="scenes" instance=ExtResource("11_fow2w")]
+visible = false
 layout_mode = 1
 
 [node name="game_screen" parent="scenes" instance=ExtResource("9_ycmdf")]

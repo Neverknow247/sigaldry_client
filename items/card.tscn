@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://di0881y716irt"]
+[gd_scene load_steps=67 format=3 uid="uid://di0881y716irt"]
 
 [ext_resource type="Theme" uid="uid://by8ew0t4rulwy" path="res://assets/themes/card_theme.tres" id="1_7bo1f"]
 [ext_resource type="Script" uid="uid://ctjau1hpet627" path="res://items/card.gd" id="1_ijhri"]
@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://v7dy5aw5aubv" path="res://assets/art/action_icon.png" id="7_fpl5m"]
 [ext_resource type="Script" uid="uid://bs3sddjowfnua" path="res://items/card_rich_effects.gd" id="8_1wx62"]
 [ext_resource type="Texture2D" uid="uid://k3paya1hewit" path="res://assets/art/card/2d icons/sword.png" id="8_vhpwo"]
-[ext_resource type="PackedScene" uid="uid://dt77vy5nu6wl3" path="res://items/tooltip.tscn" id="9_pf630"]
 [ext_resource type="Texture2D" uid="uid://b6jg1xgy562kl" path="res://assets/art/card/badges/large v1/hex.png" id="10_q5wdc"]
 [ext_resource type="FontFile" uid="uid://c32o87n2oxwbt" path="res://assets/fonts/alegreya/Alegreya-Regular.ttf" id="13_cov8e"]
 [ext_resource type="Texture2D" uid="uid://dowmuxfgoe5dx" path="res://assets/art/card/2d icons/heart.png" id="13_wq0el"]
@@ -25,27 +24,27 @@
 [ext_resource type="FontFile" uid="uid://cjg26hsv3itq1" path="res://assets/fonts/alegreya/Alegreya-Bold.ttf" id="19_o2lex"]
 [ext_resource type="Texture2D" uid="uid://oyf4kxpjsaug" path="res://assets/art/card/card-side-extra.png" id="24_owe1f"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4804b"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1c5nx"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7h0ao"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i46yw"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uxy7s"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1tqfn"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o2y08"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mmjpy"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qfuu2"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iv8g3"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fiyeq"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iv8g3"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qfuu2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mmjpy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o2y08"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1tqfn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uxy7s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i46yw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7h0ao"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1c5nx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4804b"]
 
 [sub_resource type="Animation" id="Animation_wq0el"]
 length = 0.001
@@ -103,49 +102,49 @@ _data = {
 &"open_color_banner": SubResource("Animation_wingh")
 }
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5pqy3"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vhpwo"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h5ekm"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q5wdc"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d2yx4"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cov8e"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u2p8s"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pyk70"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_61yji"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wq0el"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wingh"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wq0el"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_61yji"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_owe1f"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pyk70"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xss71"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u2p8s"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o2lex"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cov8e"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1bmdb"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d2yx4"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8bw10"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q5wdc"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5gqid"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h5ekm"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d65ly"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vhpwo"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qcjt0"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5pqy3"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qglwf"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hp7u8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lrw7e"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hp7u8"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qglwf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qcjt0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d65ly"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5gqid"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8bw10"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1bmdb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o2lex"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xss71"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_owe1f"]
 
 [sub_resource type="Animation" id="Animation_vhpwo"]
 length = 0.001
@@ -380,17 +379,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_4804b")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_1c5nx")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_7h0ao")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_i46yw")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_uxy7s")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_1tqfn")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_o2y08")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_mmjpy")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_qfuu2")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_fiyeq")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_iv8g3")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_fiyeq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qfuu2")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_mmjpy")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_o2y08")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_1tqfn")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_uxy7s")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_i46yw")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7h0ao")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_1c5nx")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4804b")
 script = ExtResource("3_wq0el")
 
 [node name="content" type="Control" parent="."]
@@ -471,17 +470,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_5pqy3")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_vhpwo")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_h5ekm")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_q5wdc")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_d2yx4")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_cov8e")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_u2p8s")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_pyk70")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_61yji")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_wingh")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_wq0el")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_wingh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_61yji")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_pyk70")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_u2p8s")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_cov8e")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_d2yx4")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_q5wdc")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_h5ekm")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_vhpwo")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5pqy3")
 
 [node name="card_texture" type="TextureRect" parent="content"]
 layout_mode = 0
@@ -569,17 +568,17 @@ offset_left = 224.0
 offset_top = 816.0
 offset_right = 760.0
 offset_bottom = 1072.0
-theme_override_styles/focus = SubResource("StyleBoxEmpty_owe1f")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_xss71")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_o2lex")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_1bmdb")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_8bw10")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_5gqid")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_d65ly")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_qcjt0")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_qglwf")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_lrw7e")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_hp7u8")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_lrw7e")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qglwf")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_qcjt0")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_d65ly")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_5gqid")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_8bw10")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_1bmdb")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_o2lex")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_xss71")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_owe1f")
 
 [node name="labels" type="Control" parent="content"]
 layout_mode = 1
@@ -682,10 +681,10 @@ mouse_filter = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_constants/line_separation = -12
 theme_override_fonts/normal_font = ExtResource("14_u2p8s")
-theme_override_fonts/mono_font = ExtResource("16_pyk70")
-theme_override_fonts/italics_font = ExtResource("17_61yji")
-theme_override_fonts/bold_italics_font = ExtResource("18_xss71")
 theme_override_fonts/bold_font = ExtResource("19_o2lex")
+theme_override_fonts/bold_italics_font = ExtResource("18_xss71")
+theme_override_fonts/italics_font = ExtResource("17_61yji")
+theme_override_fonts/mono_font = ExtResource("16_pyk70")
 theme_override_font_sizes/normal_font_size = 48
 bbcode_enabled = true
 text = "This is some text with a [url=tooltip_data_1]hoverable word[/url] and another [url=tooltip_data_2]interactive element[/url].
@@ -693,7 +692,6 @@ text = "This is some text with a [url=tooltip_data_1]hoverable word[/url] and an
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("8_1wx62")
-custom_tooltip_scene = ExtResource("9_pf630")
 
 [node name="labels" type="Control" parent="content/card_rich_effects"]
 layout_mode = 1
@@ -705,6 +703,7 @@ mouse_filter = 2
 [node name="card_details" type="Control" parent="content"]
 clip_children = 2
 z_index = 100
+y_sort_enabled = true
 anchors_preset = 0
 offset_left = 800.0
 offset_top = 88.0
@@ -719,6 +718,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
 texture = ExtResource("24_owe1f")
 expand_mode = 1
 
@@ -745,8 +745,11 @@ grow_vertical = 2
 mouse_filter = 0
 
 [node name="card_details_box" type="VBoxContainer" parent="content/card_details/card_details_background/content/scroll_container"]
+z_index = 100
+y_sort_enabled = true
 custom_minimum_size = Vector2(568, 0)
 layout_mode = 2
+mouse_filter = 0
 theme_override_constants/separation = 16
 
 [node name="card_type" type="Label" parent="content/card_details/card_details_background/content"]

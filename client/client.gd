@@ -13,6 +13,7 @@ var card_art_cache = CardArtCache
 
 @onready var all_scenes = $scenes.get_children()
 
+@onready var tooltips: Control = $tooltips
 @onready var wrong_version_screen: Control = $scenes/wrong_version_screen
 @onready var login_screen = $scenes/login_screen
 @onready var register_screen = $scenes/register_screen
@@ -296,6 +297,9 @@ func change_scene(new_scene_name = ""):
 	if new_scene_name == "menu":
 		client.socketio_send("rewards-get-containers")
 	transition.fade_out()
+	for child in tooltips.get_children():
+		tooltips.remove_child(child)
+		child.queue_free()
 	await get_tree().create_timer(stats.transition_time).timeout
 	for scene in all_scenes:
 		if scene.scene_name:

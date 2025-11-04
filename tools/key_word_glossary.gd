@@ -14,14 +14,14 @@ func set_glossary(payload):
 	#print(payload)
 	if payload.has("glossary"):
 		key_glossary = {}
-		glossary = {}
+		#glossary = {}
 		for item in payload["glossary"]:
-			glossary[item["name"]] = {
-				"key" : item["key"],
-				"name" : item["name"],
-				"description" : item["description"],
-				"dependencies" : item["dependencies"]
-			}
+			#glossary[item["name"]] = {
+				#"key" : item["key"],
+				#"name" : item["name"],
+				#"description" : item["description"],
+				#"dependencies" : item["dependencies"]
+			#}
 			key_glossary[item["key"]] = {
 				"key" : item["key"],
 				"name" : item["name"],

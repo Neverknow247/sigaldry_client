@@ -1,24 +1,47 @@
-[gd_scene format=3 uid="uid://dt77vy5nu6wl3"]
+[gd_scene load_steps=4 format=3 uid="uid://dt77vy5nu6wl3"]
+
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_50101"]
+[ext_resource type="Script" uid="uid://wcmm20qs6qbg" path="res://items/tooltip.gd" id="2_t656t"]
+[ext_resource type="Script" uid="uid://bs3sddjowfnua" path="res://items/card_rich_effects.gd" id="3_dh6ti"]
 
 [node name="tooltip" type="Control"]
+custom_minimum_size = Vector2(10, 10)
 layout_mode = 3
+anchors_preset = 0
+offset_right = 704.0
+offset_bottom = 56.0
+mouse_filter = 2
+theme = ExtResource("1_50101")
+script = ExtResource("2_t656t")
+
+[node name="window" type="Window" parent="."]
+oversampling_override = 1.0
+title = "Title Here"
+position = Vector2i(608, 490)
+size = Vector2i(704, 100)
+wrap_controls = true
+unresizable = true
+sharp_corners = true
+
+[node name="tooltip_rich_text_label" type="RichTextLabel" parent="window"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-
-[node name="tooltip_rich_text_label" type="RichTextLabel" parent="."]
-layout_mode = 1
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 696.0
-offset_bottom = 48.0
-mouse_filter = 2
+theme = ExtResource("1_50101")
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+theme_override_font_sizes/bold_italics_font_size = 36
+theme_override_font_sizes/italics_font_size = 36
+theme_override_font_sizes/mono_font_size = 36
+bbcode_enabled = true
+text = "jhhjh"
 fit_content = true
+script = ExtResource("3_dh6ti")
 
-[node name="color_rect" type="ColorRect" parent="tooltip_rich_text_label"]
+[node name="color_rect" type="ColorRect" parent="window/tooltip_rich_text_label"]
+visible = false
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -28,3 +51,18 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0.741176)
+
+[node name="color_rect2" type="ColorRect" parent="window/tooltip_rich_text_label"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.43230593, 0.054326028, 0.37217668, 1)
+
+[connection signal="close_requested" from="window" to="." method="_on_window_close_requested"]
+[connection signal="gui_input" from="window/tooltip_rich_text_label" to="." method="_on_tooltip_rich_text_label_gui_input"]
