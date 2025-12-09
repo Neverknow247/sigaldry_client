@@ -28,14 +28,12 @@ signal get_info(data)
 @onready var enemy_energy = $side_panel/side_tabs/Game/enemy_panel/energy/enemy_energy
 @onready var enemy_hand_size = $side_panel/side_tabs/Game/enemy_panel/cards_in_hand/enemy_hand_size
 @onready var enemy_deck_size = $side_panel/side_tabs/Game/enemy_panel/cards_in_deck/enemy_deck_size
-@onready var enemy_victory_points = $side_panel/side_tabs/Game/enemy_panel/victory_points/enemy_victory_points
 
 @onready var hand = $side_panel/side_tabs/Game/hand_preview/hand
 
 @onready var my_energy = $side_panel/side_tabs/Game/player_panel/info/energy/my_energy
 @onready var my_hand_size = $side_panel/side_tabs/Game/player_panel/info/cards_in_hand/my_hand_size
 @onready var my_deck_size = $side_panel/side_tabs/Game/player_panel/info/cards_in_deck/my_deck_size
-@onready var my_victory_points = $side_panel/side_tabs/Game/player_panel/info/victory_points/my_victory_points
 
 @onready var end_turn_button = $side_panel/side_tabs/Game/player_panel/buttons/end_turn_button
 
@@ -55,7 +53,14 @@ var card_view_id = ""
 
 var battlefield_data = null
 var click_hover = false
-var card_middle = Vector2(128,176)
+#var card_middle = Vector2(128,176)
+#var card_middle = Vector2(122.4,168)
+#var card_middle = Vector2(276,254)/2
+var card_middle = Vector2(138,127)
+var bend_factor = 0.3
+var curve_min_bend_strength = 10.0
+var curve_max_bend_strength = 150.0
+#244.8,336
 var disposition_override = false:
 	set(value):
 		disposition_override = value
@@ -63,7 +68,13 @@ var disposition_override = false:
 	get():
 		return disposition_override
 
-var my_turn = true
+var my_turn = true:
+	get():
+		return my_turn
+	set(value):
+		my_turn = value
+		side_panel_background.color = Color("3f845c") if value else Color("843f5c")
+		game.color = Color("3f845c") if value else Color("843f5c")
 
 signal mouse_released
 #signal picked_up_changed(picked)
@@ -79,8 +90,24 @@ func _ready():
 @warning_ignore("unused_parameter")
 func _process(delta):
 	if picked_up:
-		path_2d.curve.set_point_position(1,get_local_mouse_position()-card_middle)
-		path_2d.curve.set_point_in(1,(Vector2(get_local_mouse_position().x-1000,get_local_mouse_position().y)/2)*-1)
+		var dir = get_global_mouse_position()-start_curve_point
+		var dist = dir.length()
+		if dist < 1.0:
+			dist = 1.0
+		var dir_norm = dir / dist
+		var normal = dir_norm.orthogonal()
+		if normal.y > 0.0:
+			normal = -normal
+		var bend_strength = clamp(dist * bend_factor, curve_min_bend_strength, curve_max_bend_strength)
+		var out0 = dir_norm * (dist * 0.25) + normal * bend_strength
+		var in1 = -dir_norm * (dist * 0.25) + normal * bend_strength
+		path_2d.curve = Curve2D.new()
+		path_2d.curve.clear_points()
+		path_2d.curve.add_point(start_curve_point,Vector2.ZERO, out0)
+		path_2d.curve.add_point(get_global_mouse_position(),in1,Vector2.ZERO)
+		#path_2d.curve.set_point_position(1,get_local_mouse_position())
+		#path_2d.curve.set_point_in(1,(Vector2(get_local_mouse_position().x-1000,get_local_mouse_position().y)/2)*-1)
+		#path_2d.curve.set_point_in(1,(Vector2(get_local_mouse_position().x,get_local_mouse_position().y)))
 		#path_2d.curve.set_point_in(1,Vector2(get_local_mouse_position().x,(get_local_mouse_position().y-card_middle.y)/2)*-1)
 		_draw_line()
 	if Input.is_action_just_released("M1"):
@@ -110,9 +137,11 @@ func join_game(payload):
 		#var grid_space = battlefield["grid"][tile["game_y"]][tile["game_x"]]
 		var grid_space = battlefield["grid"][tile["display_y"]][tile["display_x"]]
 		#here
-		grid_space["card"]["card_select"].connect("pressed",_on_card_select_pressed)
-		grid_space["card"].connect("mouse_focus",_on_card_select_mouse_focus)
-		grid_space.connect("get_info",_on_card_get_info)
+		#grid_space["card"]["card_select"].connect("pressed",_on_card_select_pressed)
+		#grid_space["card"].connect("mouse_focus",_on_card_select_mouse_focus)
+		#grid_space.connect("get_info",_on_card_get_info)
+		grid_space["unit_select_button"].connect("pressed",_on_card_select_pressed)
+		grid_space.connect("mouse_focus",_on_card_select_mouse_focus)
 		
 		
 
@@ -123,12 +152,23 @@ func quit_game(payload):
 	for tile in battlefield_data:
 		#var grid_space = battlefield["grid"][tile["game_y"]][tile["game_x"]]
 		var grid_space = battlefield["grid"][tile["display_y"]][tile["display_x"]]
+		
+		
 		if grid_space.is_connected("tile_chosen",_set_battle_field_tile):
 			grid_space.disconnect("tile_chosen",_set_battle_field_tile)
-		if grid_space["card"]["card_select"].is_connected("pressed",_on_card_select_pressed):
-			grid_space["card"]["card_select"].disconnect("pressed",_on_card_select_pressed)
-		if grid_space["card"].is_connected("mouse_focus",_on_card_select_mouse_focus):
-			grid_space["card"].disconnect("mouse_focus",_on_card_select_mouse_focus)
+
+
+		#if grid_space["card"]["card_select"].is_connected("pressed",_on_card_select_pressed):
+			#grid_space["card"]["card_select"].disconnect("pressed",_on_card_select_pressed)
+		
+		if grid_space["unit_select_button"].is_connected("pressed",_on_card_select_pressed):
+			grid_space["unit_select_button"].disconnect("pressed",_on_card_select_pressed)
+
+		#if grid_space["card"].is_connected("mouse_focus",_on_card_select_mouse_focus):
+			#grid_space["card"].disconnect("mouse_focus",_on_card_select_mouse_focus)
+		
+		if grid_space.is_connected("mouse_focus",_on_card_select_mouse_focus):
+			grid_space.disconnect("mouse_focus",_on_card_select_mouse_focus)
 
 func update_unit(payload):
 	#print("unit selected: ", card_view_id)
@@ -277,6 +317,7 @@ func update_players(payload):
 		new_card.connect("game_select_card",_on_card_select_pressed)
 		new_card.connect("mouse_focus",_on_card_select_mouse_focus)
 		new_card.connect("get_info",_on_card_get_info)
+
 		
 		#new_card["card_select"].connect("pressed",_on_card_select_pressed)
 		
@@ -292,11 +333,6 @@ func update_tile(payload):
 		#print(tile)
 		#battlefield.update_grid_space(tile)
 	#pass
-
-func update_victory_points(payload):
-	my_victory_points.text = str(int(payload["points"]))
-	enemy_victory_points.text = str(int(payload["opponent_points"]))
-	#print(payload)
 
 func _on_end_turn_button_pressed():
 	end_turn.emit()
@@ -328,7 +364,7 @@ var picked_up : bool = false:
 func _draw_line():
 	line_2d.clear_points()
 	for point in path_2d.curve.get_baked_points():
-		line_2d.add_point(point+card_middle)
+		line_2d.add_point(point)
 
 func on_focus(_focus):
 	if _focus == true:
@@ -336,16 +372,17 @@ func on_focus(_focus):
 	else:
 		focus.emit(false)
 
+var start_curve_point
 var focused_card = 0
 var focused_type = ""
 func _on_card_select_mouse_focus(_pos,_focus,_id,_focused_type):
 	if not Input.is_action_pressed("M1") && click_hover == false:
 		on_focus(_focus)
 		if _focus:
-			path_2d.curve = Curve2D.new()
-			path_2d.curve.add_point(_pos)
-			path_2d.curve.add_point(_pos)
-			#print("card id: ",_id)
+			start_curve_point = _pos
+			#path_2d.curve = Curve2D.new()
+			#path_2d.curve.add_point(_pos)
+			#path_2d.curve.add_point(_pos)
 			focused_card = _id
 			focused_type = _focused_type
 
@@ -358,6 +395,7 @@ func _on_card_select_mouse_focus(_pos,_focus,_id,_focused_type):
 		#on_focus(false)
 
 func _on_card_select_pressed():
+	#print("source_id: ", focused_card)
 	if not picked_up:
 		timer.start()
 	card_selected.emit({"source_id":str(focused_card),"source_type":focused_type,"disposition_override":disposition_override})
@@ -404,7 +442,7 @@ func _on_card_preview_mouse_focus(_pos, _focus, card_id):
 func set_grid_buttons_visible(_visible):
 	for row in battlefield["grid"]:
 		for column in row:
-			column.grid_button.visible = _visible
+			column.unit_button.visible = _visible
 			column.disable_button(true)
 
 func choose_target(payload):
@@ -455,10 +493,12 @@ func show_action(payload):
 	for tile in battlefield_data:
 		var grid_space = battlefield["grid"][tile["game_y"]][tile["game_x"]]
 		if grid_space.tile_id == payload["dest_id"] || grid_space.occupant_id == payload["dest_id"]:
-			pos_2 = grid_space.global_position + Vector2(135, 135)
+			#pos_2 = grid_space.global_position + Vector2(135, 135)
+			pos_2 = grid_space.global_position + Vector2(127, 127)
 		if (payload["action"] == "use" || payload["action"] == "move") && payload.has("source_id"):
 			if grid_space.tile_id == payload["source_id"] || grid_space.occupant_id == payload["source_id"]:
-				pos_1 = grid_space.global_position + Vector2(135, 135)
+				#pos_1 = grid_space.global_position + Vector2(135, 135)
+				pos_1 = grid_space.global_position + Vector2(127, 127)
 	combat_action_path.curve.add_point(pos_1)
 	combat_action_path.curve.add_point(pos_1)
 	combat_action_path.curve.set_point_position(1,pos_2)
@@ -484,32 +524,10 @@ func _on_card_get_info(data):
 func info_request(payload):
 	card_view_card.show()
 	card_view_id = str(payload["def"]["id"])
-	print(payload)
+	#print(payload)
 	if payload["def"]:
 		card_view_card.add_details(payload["def"])
 	side_tabs.current_tab = 1
-
-#func update_card_view(card_payload):
-	#card_view_card.card_name.text = card_payload["name"]
-	#card_view_card.card_type.text = card_payload["subtype"].capitalize()
-	#var card_effect_text = ""
-	#var _discount = 0
-	#if card_payload["abilities"]:
-		#for ability in card_payload["abilities"]:
-			#if card_payload["abilities"][ability]["name"] == "health":
-				#var card_hp = card_payload["abilities"][ability]["value"]
-				#card_view_card["card_health"].text = str(int(card_hp)) if card_hp > 0 else ""
-			#elif card_payload["abilities"][ability]["name"] == "attack":
-				#card_view_card["card_attack"].text = str(int(card_payload["abilities"][ability]["value"]))
-			#elif card_payload["abilities"][ability]["name"] == "actions":
-				#pass
-			#elif card_payload["abilities"][ability]["name"] == "efficient":
-				#_discount = card_payload["abilities"][ability]["value"]
-			#elif card_payload["abilities"][ability]["value"] > 0:
-				#card_effect_text += card_payload["abilities"][ability]["name"].capitalize() + "-" \
-				#+ str(int(card_payload["abilities"][ability]["value"])) + "  "
-	#card_view_card.card_effects.text = card_effect_text
-	#card_view_card.card_price.text = str(int(card_payload["cost"]))
 
 func _on_side_tabs_tab_clicked(tab):
 	pass

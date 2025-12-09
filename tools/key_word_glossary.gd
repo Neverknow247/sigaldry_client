@@ -4,10 +4,28 @@ var key_glossary = {}
 var glossary = {}
 
 var neverknow_approved_items = [
-	"Armor +1","Attack +1","Cleave +1"
-	,"Counterattack +1","Efficient +1"
-	,"Fortify +1","Healer +1","Health +1"
-	,"Impale +1","Melee +2","Ranged +1",
+	#"Armor +1","Attack +1","Cleave +1"
+	#,"Counterattack +1","Efficient +1"
+	#,"Fortify +1","Healer +1","Health +1"
+	#,"Impale +1","Melee +2","Ranged +1",
+	
+	"attack",
+	"health",
+	"melee",
+	"bleed",
+	"armor",
+	"ranged",
+	"exhaust",
+	"pacify",
+	"mark",
+	"thorns",
+	"dispel",
+	"poison",
+	"heal",
+	"cure",
+	"weaken",
+	
+	
 ]
 
 func set_glossary(payload):
@@ -28,4 +46,4 @@ func set_glossary(payload):
 				"description" : item["description"],
 				"dependencies" : item["dependencies"]
 			}
-	#print(glossary)
+	#print(key_glossary)

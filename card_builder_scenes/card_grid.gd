@@ -159,6 +159,7 @@ func _process(delta):
 
 signal check_placement_pos(default_pos,possible_pos)
 signal piece_rotate(_direction)
+signal piece_flip
 signal component_removed
 
 func _input(event):
@@ -177,6 +178,9 @@ func _input(event):
 		if event.is_pressed() and event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			if active_component:
 				piece_rotate.emit("counterclockwise")
+		if event.is_pressed() and event.button_index == MOUSE_BUTTON_MIDDLE:
+			if active_component:
+				piece_flip.emit()
 		if event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT:
 			if active_component:
 				component_removed.emit()

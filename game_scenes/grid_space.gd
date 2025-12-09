@@ -1,10 +1,13 @@
 extends CenterContainer
 
-const BOARD_CARD = preload("res://assets/art/board_card.png")
-const BOARD_CARD_AVATAR = preload("res://assets/art/board_card_avatar.png")
+#const BOARD_CARD = preload("res://assets/art/board_card.png")
+#const BOARD_CARD_AVATAR = preload("res://assets/art/board_card_avatar.png")
+const BOARD_CARD = preload("res://assets/art/card/test_unit.png")
+const BOARD_CARD_AVATAR = preload("res://assets/art/card/test_unit.png")
 
 @onready var control = $Control/Control
 @onready var card = $Control/Control/card_preview
+#@onready var card = $Control/Control/card
 @onready var grid_button = $grid_button
 @onready var grid_button_color = $grid_button/grid_button_color
 @onready var game_effect_queue = $game_effect_queue
@@ -14,7 +17,7 @@ const BOARD_CARD_AVATAR = preload("res://assets/art/board_card_avatar.png")
 @export var unfriendly_color : Color = Color.BLACK
 @export var move_color : Color = Color.BLACK
 
-@onready var card_image: TextureRect = $Control/Control/card_preview/card_image_clip/card_image
+@onready var card_image: TextureRect = $Control/Control/card_image
 
 @onready var trap = $Control/trap
 @onready var trap_label = $Control/trap/trap_label

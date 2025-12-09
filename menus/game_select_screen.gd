@@ -16,8 +16,10 @@ func _ready() -> void:
 func _on_back_button_pressed() -> void:
 	close_game_select.emit()
 
-func set_up_pvp():
+func set_up_pvp(payload):
 	pass
 
-func set_up_pve():
-	pass
+func set_up_pve(payload):
+	for decks in payload["pve_opponent_decks"]:
+		print(decks)
+	#print(payload)

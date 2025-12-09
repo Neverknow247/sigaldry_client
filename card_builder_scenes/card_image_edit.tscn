@@ -24,22 +24,29 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.494331, 0.494331, 0.494331, 1)
 
+[node name="fake_hud" type="ColorRect" parent="background_color"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
 [node name="card_preview" parent="." instance=ExtResource("3_l7lvu")]
 visible = false
 layout_mode = 1
 offset_left = 1232.0
-offset_top = 128.0
-offset_right = 128.0
-offset_bottom = 168.0
+offset_top = 152.00002
+offset_right = 127.99988
+offset_bottom = 192.0
 scale = Vector2(0.8, 0.8)
 last_card = true
 
 [node name="select_boxes" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 64.0
-offset_top = 128.0
+offset_top = 103.0
 offset_right = 1146.0
-offset_bottom = 912.0
+offset_bottom = 993.0
 theme_override_constants/separation = 42
 
 [node name="standard_label" type="Label" parent="select_boxes"]
@@ -52,7 +59,7 @@ vertical_alignment = 1
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="race_button" type="OptionButton" parent="select_boxes/standard_select_box"]
+[node name="species_button" type="OptionButton" parent="select_boxes/standard_select_box"]
 custom_minimum_size = Vector2(350, 80)
 layout_mode = 2
 
@@ -75,13 +82,15 @@ vertical_alignment = 1
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="extra_race_button" type="OptionButton" parent="select_boxes/premium_select_box_1"]
+[node name="extra_species_button" type="OptionButton" parent="select_boxes/premium_select_box_1"]
 custom_minimum_size = Vector2(350, 80)
 layout_mode = 2
+disabled = true
 
 [node name="get_unit_options_button" type="Button" parent="select_boxes"]
 custom_minimum_size = Vector2(350, 80)
 layout_mode = 2
+disabled = true
 text = "Get Unit Options"
 
 [node name="premium_select_box_2" type="HBoxContainer" parent="select_boxes"]
@@ -91,14 +100,17 @@ theme_override_constants/separation = 16
 [node name="style_button" type="OptionButton" parent="select_boxes/premium_select_box_2"]
 custom_minimum_size = Vector2(350, 80)
 layout_mode = 2
+disabled = true
 
 [node name="age_button" type="OptionButton" parent="select_boxes/premium_select_box_2"]
 custom_minimum_size = Vector2(350, 80)
 layout_mode = 2
+disabled = true
 
 [node name="shade_button" type="OptionButton" parent="select_boxes/premium_select_box_2"]
 custom_minimum_size = Vector2(350, 80)
 layout_mode = 2
+disabled = true
 
 [node name="premium_select_box_3" type="HBoxContainer" parent="select_boxes"]
 layout_mode = 2
@@ -107,10 +119,12 @@ theme_override_constants/separation = 16
 [node name="action_button" type="OptionButton" parent="select_boxes/premium_select_box_3"]
 custom_minimum_size = Vector2(350, 80)
 layout_mode = 2
+disabled = true
 
 [node name="scene_button" type="OptionButton" parent="select_boxes/premium_select_box_3"]
 custom_minimum_size = Vector2(350, 80)
 layout_mode = 2
+disabled = true
 
 [node name="premium_select_box_4" type="HBoxContainer" parent="select_boxes"]
 layout_mode = 2
@@ -119,17 +133,19 @@ theme_override_constants/separation = 16
 [node name="day_phase_button" type="OptionButton" parent="select_boxes/premium_select_box_4"]
 custom_minimum_size = Vector2(350, 80)
 layout_mode = 2
+disabled = true
 
 [node name="weather_button" type="OptionButton" parent="select_boxes/premium_select_box_4"]
 custom_minimum_size = Vector2(350, 80)
 layout_mode = 2
+disabled = true
 
 [node name="buttons_container" type="HBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 1593.0
-offset_top = 32.0
+offset_top = 80.0
 offset_right = 1889.0
-offset_bottom = 92.0
+offset_bottom = 146.0
 theme_override_constants/separation = 16
 
 [node name="submit_button" type="Button" parent="buttons_container"]
@@ -143,10 +159,10 @@ custom_minimum_size = Vector2(140, 60)
 layout_mode = 2
 text = "Back"
 
-[connection signal="item_selected" from="select_boxes/standard_select_box/race_button" to="." method="_on_race_button_item_selected"]
+[connection signal="item_selected" from="select_boxes/standard_select_box/species_button" to="." method="_on_species_button_item_selected"]
 [connection signal="item_selected" from="select_boxes/standard_select_box/class_button" to="." method="_on_class_button_item_selected"]
 [connection signal="item_selected" from="select_boxes/standard_select_box/region_button" to="." method="_on_region_button_item_selected"]
-[connection signal="item_selected" from="select_boxes/premium_select_box_1/extra_race_button" to="." method="_on_extra_race_button_item_selected"]
+[connection signal="item_selected" from="select_boxes/premium_select_box_1/extra_species_button" to="." method="_on_extra_race_button_item_selected"]
 [connection signal="pressed" from="select_boxes/get_unit_options_button" to="." method="_on_get_unit_options_button_pressed"]
 [connection signal="item_selected" from="select_boxes/premium_select_box_2/style_button" to="." method="_on_style_button_item_selected"]
 [connection signal="item_selected" from="select_boxes/premium_select_box_2/age_button" to="." method="_on_age_button_item_selected"]

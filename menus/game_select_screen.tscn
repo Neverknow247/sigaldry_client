@@ -22,12 +22,33 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.2901961, 0.47843137, 0.5882353, 1)
 
+[node name="fake_hud" type="ColorRect" parent="color_background"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
 [node name="back_button" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 1767.0
 offset_top = 24.0
 offset_right = 1861.0
 offset_bottom = 90.0
 text = "Back"
+
+[node name="h_box_container" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 128.0
+offset_right = 1848.0
+offset_bottom = 932.0
+
+[node name="h_box_container" type="HBoxContainer" parent="h_box_container"]
+layout_mode = 2
+
+[node name="rarities" type="OptionButton" parent="h_box_container/h_box_container"]
+layout_mode = 2
 
 [connection signal="pressed" from="back_button" to="." method="_on_back_button_pressed"]

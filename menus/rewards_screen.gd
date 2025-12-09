@@ -40,7 +40,7 @@ func set_up_rewards(payload):
 		rewards.add_child(new_reward)
 		new_reward["button"].text = "X" + str(int(reward["available"])) + " " + reward["name"]
 		new_reward["spin_box"].max_value = reward["available"]
-		new_reward["reward_id"] = reward["id"]
+		new_reward["reward_id"] = reward["key"]
 		new_reward.connect("selected_reward",select_reward)
 
 func select_reward(_id, _amount):

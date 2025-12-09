@@ -17,6 +17,8 @@ signal add_avatar_to_new_deck(id)
 signal get_info(data)
 signal compare_card(id)
 
+@onready var center_point: Control = $content/card_texture/center_point
+
 @onready var content = $content
 @onready var card_texture = $content/card_texture
 @onready var card_image = $content/card_image
@@ -24,7 +26,7 @@ signal compare_card(id)
 @onready var color_banner_animation_player: AnimationPlayer = $content/card_image/color_banner/color_banner_animation_player
 @onready var card_cost = $content/labels/card_cost
 @onready var card_name = $content/labels/card_name
-@onready var card_effects = $content/labels/card_effects
+#@onready var card_effects = $content/labels/card_effects
 @onready var card_attack = $content/labels/card_attack
 @onready var card_health = $content/labels/card_health
 @onready var card_type: Label = $content/card_details/card_details_background/content/card_type
@@ -108,7 +110,11 @@ func activate_avatar():
 	card_texture = AVATAR_TEXTURE
 
 func add_details(_card_details,_is_unit = false):
-	#print(_card_details)
+	#print("CARD DETAILS: ",_card_details)
+	#print("*")
+	#print("*")
+	#print("*")
+	#print("*")
 	card_id = _card_details["id"]
 	set_color_profile(_card_details["color_profile"])
 	if is_equal_approx(_card_details["cost"], int(_card_details["cost"])):
@@ -210,24 +216,27 @@ func set_card_effects(abilities):
 				else:
 					ability_value = str(ability["value"])
 				
-				card_effect_text += ability["name"].capitalize() + ":" \
+				#card_effect_text += ability["name"].capitalize() + ":" \
+				#+ ability_value + "  "
+				card_effect_text += "[url=" + ability["key"] + "]" + \
+				ability["name"].capitalize() + "[/url]" + ":" \
 				+ ability_value + "  "
 				
 				#card_effect_text += "[url=" + ability["name"] + "]" + \
 				#ability["name"].capitalize() + ": " + ability_value + "  "
 				
-				var effect_label = preload("res://items/card_info_label.tscn").instantiate()
-				card_details_box.add_child(effect_label)
-				effect_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-				#effect_label.text = "[b]"+ability["name"].capitalize()+"[/b] : " 
-				effect_label.text = "[url=" + ability["key"] + "]" + \
-				ability["name"].capitalize() + "[/url]" + ": "
-				effect_label.text += KEYWORD_GLOSS.key_glossary[ability["key"]]["description"]
+				#var effect_label = preload("res://items/card_info_label.tscn").instantiate()
+				#card_details_box.add_child(effect_label)
+				#effect_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+				#effect_label.text = "[url=" + ability["key"] + "]" + \
+				#ability["name"].capitalize() + "[/url]" + ": "
+				#effect_label.text += KEYWORD_GLOSS.key_glossary[ability["key"]]["description"]
 				
 				#effect_label.top_level = true
 	card_rich_effects.text = card_effect_text
 
 func set_color_profile(colors):
+	#print(colors)
 	for _child in card_color_profile.get_children():
 		card_color_profile.remove_child(_child)
 		_child.queue_free()
@@ -236,7 +245,10 @@ func set_color_profile(colors):
 		var new_color = COLOR_PROFILE_SQUARE.instantiate()
 		card_color_profile.add_child(new_color)
 		new_color.color_square.color = Color(stats.COLOR_KEY[color["key"]])
-		new_color.color_magnitude.text = str(int(color["magnitude"]))
+		var color_magnitude = 0
+		color_magnitude += int(color["magnitude"])
+		new_color.color_magnitude.text = str(color_magnitude)
+		#new_color.color_magnitude.text += str(int(color["magnitude"]))
 
 func set_avatar():
 	print("Add Avatar Image")
@@ -287,11 +299,11 @@ func _on_card_details_button_pressed() -> void:
 
 func _on_card_button_mouse_entered() -> void:
 	if card_button_type == "game_type":
-		mouse_focus.emit(global_position,true,card_id,source_type)
+		mouse_focus.emit(center_point.global_position,true,card_id,source_type)
 
 func _on_card_button_mouse_exited() -> void:
 	if card_button_type == "game_type":
-		mouse_focus.emit(global_position,true,card_id,source_type)
+		mouse_focus.emit(center_point.global_position,true,card_id,source_type)
 
 func _on_card_button_get_info() -> void:
 	if card_button_type == "game_type":

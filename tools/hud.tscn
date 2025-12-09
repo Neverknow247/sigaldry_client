@@ -1,10 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://dl04pl45gg4at"]
+[gd_scene load_steps=9 format=3 uid="uid://dl04pl45gg4at"]
 
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_npvic"]
 [ext_resource type="Script" uid="uid://cnk53oj8mhcb0" path="res://tools/hud.gd" id="2_toebf"]
+[ext_resource type="Texture2D" uid="uid://bagqh4l2nwgsu" path="res://assets/art/icons/cog.png" id="3_8uqv4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_onhpx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cfvk6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4f0ee"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3bjwa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2bmni"]
 
 [node name="hud" type="Control"]
-visible = false
+z_index = 4096
+custom_minimum_size = Vector2(1920, 64)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,11 +39,13 @@ color = Color(0.235294, 0.235294, 0.235294, 1)
 [node name="resources" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.712
-anchor_right = 1.0
+anchor_left = 0.83300006
+anchor_right = 0.9620001
 anchor_bottom = 1.0
-offset_left = -343.04
-offset_right = -8.0
+offset_left = 0.6398926
+offset_top = -1.0
+offset_right = 0.95983887
+offset_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_constants/separation = 32
@@ -71,22 +85,62 @@ text = "100000000"
 custom_minimum_size = Vector2(160, 48)
 layout_mode = 0
 offset_left = 16.0
-offset_top = 8.0
 offset_right = 640.0
-offset_bottom = 56.0
+offset_bottom = 63.0
 theme_override_constants/line_spacing = 0
 theme_override_font_sizes/font_size = 40
 text = "000000000000000000000000000000"
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="back_button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 920.0
-offset_top = 8.0
-offset_right = 992.0
-offset_bottom = 56.0
+[node name="h_box_container" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.0
+offset_top = -26.5
+offset_right = 37.0
+offset_bottom = 26.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="back_button" type="Button" parent="h_box_container"]
+custom_minimum_size = Vector2(105, 0)
+layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Back"
 
-[connection signal="pressed" from="back_button" to="." method="_on_back_button_pressed"]
+[node name="settings_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1860.0
+offset_top = 4.0
+offset_right = 1916.0
+offset_bottom = 60.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_onhpx")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_cfvk6")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4f0ee")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_3bjwa")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2bmni")
+toggle_mode = true
+icon = ExtResource("3_8uqv4")
+icon_alignment = 1
+
+[node name="settings_dropdown" type="PopupMenu" parent="."]
+oversampling_override = 1.0
+position = Vector2i(1735, 16)
+size = Vector2i(164, 194)
+item_count = 3
+item_0/text = "Settings"
+item_0/id = 3
+item_1/text = "Logout"
+item_1/id = 1
+item_2/text = "Quit"
+item_2/id = 0
+
+[connection signal="pressed" from="h_box_container/back_button" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="settings_button" to="." method="_on_settings_button_pressed"]
+[connection signal="toggled" from="settings_button" to="." method="_on_settings_button_toggled"]
+[connection signal="index_pressed" from="settings_dropdown" to="." method="_on_settings_dropdown_index_pressed"]

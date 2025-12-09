@@ -24,6 +24,13 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.564706, 0.564706, 0.564706, 1)
 
+[node name="fake_hud" type="ColorRect" parent="background_color"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
 [node name="center_container" type="CenterContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -43,10 +50,13 @@ text = "blah blah defeated blah blah!"
 horizontal_alignment = 1
 
 [node name="h_box_container" type="HBoxContainer" parent="center_container/v_box_container"]
+custom_minimum_size = Vector2(0, 450)
 layout_mode = 2
 theme_override_constants/separation = 32
+alignment = 1
 
 [node name="winner_card" parent="center_container/v_box_container/h_box_container" instance=ExtResource("3_2bj8s")]
+visible = false
 layout_mode = 2
 
 [node name="label" type="Label" parent="center_container/v_box_container/h_box_container"]
@@ -54,6 +64,7 @@ layout_mode = 2
 text = "Defeats"
 
 [node name="loser_card" parent="center_container/v_box_container/h_box_container" instance=ExtResource("3_2bj8s")]
+visible = false
 layout_mode = 2
 
 [node name="h_box_container2" type="HBoxContainer" parent="center_container/v_box_container"]
@@ -62,6 +73,7 @@ theme_override_constants/separation = 32
 alignment = 1
 
 [node name="main_menu_button" type="Button" parent="center_container/v_box_container/h_box_container2"]
+visible = false
 layout_mode = 2
 text = "Main Menu"
 

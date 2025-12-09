@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Sigaldry"
-config/version="0.0.9"
+config/version="000.000.012"
 run/main_scene="uid://sdqjb15ql8mj"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="sigaldry"
@@ -21,8 +21,9 @@ config/icon="res://assets/art/icon.svg"
 [autoload]
 
 Stats="*res://singletons/stats.gd"
-SaveAndLoad="*res://save_and_load/save_and_load.gd"
 KeyWordGlossary="*res://tools/key_word_glossary.gd"
+Utils="*res://singletons/utils.gd"
+SaveAndLoad="*res://save_and_load/save_and_load.gd"
 CardArtCache="*res://singletons/card_art_cache.gd"
 
 [display]

@@ -1,6 +1,7 @@
 class_name DeckmasterClient extends Node
 
 var stats = Stats
+var utils = Utils
 #var KEYWORD_GLOSSARY = KeyWordGlossary
 
 var client = SocketIOClient
@@ -14,22 +15,46 @@ var card_art_cache = CardArtCache
 @onready var all_scenes = $scenes.get_children()
 
 @onready var tooltips: Control = $tooltips
-@onready var wrong_version_screen: Control = $scenes/wrong_version_screen
-@onready var login_screen = $scenes/login_screen
-@onready var register_screen = $scenes/register_screen
-@onready var main_menu = $scenes/main_menu
-@onready var deck_select_screen = $scenes/deck_select_screen
-@onready var waiting_for_game_screen = $scenes/waiting_for_game_screen
-@onready var card_select_screen = $scenes/card_select_screen
-@onready var game_select_screen: Control = $scenes/game_select_screen
-@onready var game_screen = $scenes/game_screen
-@onready var card_view_screen = $scenes/card_view_screen
-@onready var card_builder = $scenes/card_builder
-@onready var card_editor: Control = $scenes/card_editor
-@onready var deck_editor = $scenes/deck_editor
-@onready var rewards_screen: Control = $scenes/rewards_screen
 
 @onready var hud: Control = $hud
+
+#@onready var wrong_version_screen: Control = $v_box_container/scenes/wrong_version_screen
+#@onready var login_screen: Control = $v_box_container/scenes/login_screen
+#@onready var register_screen: Control = $v_box_container/scenes/register_screen
+#@onready var main_menu: Control = $v_box_container/scenes/main_menu
+#@onready var deck_select_screen: Control = $v_box_container/scenes/deck_select_screen
+#@onready var waiting_for_game_screen: Control = $v_box_container/scenes/waiting_for_game_screen
+#@onready var card_select_screen: Control = $v_box_container/scenes/card_select_screen
+#@onready var game_select_screen: Control = $v_box_container/scenes/game_select_screen
+#@onready var game_screen: Control = $v_box_container/scenes/game_screen
+#@onready var game_finished_screen: Control = $v_box_container/scenes/game_finished_screen
+#@onready var card_view_screen: Control = $v_box_container/scenes/card_view_screen
+#@onready var card_builder: Control = $v_box_container/scenes/card_builder
+#@onready var card_editor: Control = $v_box_container/scenes/card_editor
+#@onready var deck_editor: Control = $v_box_container/scenes/deck_editor
+#@onready var rewards_screen: Control = $v_box_container/scenes/rewards_screen
+
+
+
+
+
+@onready var wrong_version_screen: Control = $scenes/wrong_version_screen
+@onready var login_screen: Control = $scenes/login_screen
+@onready var register_screen: Control = $scenes/register_screen
+@onready var main_menu: Control = $scenes/main_menu
+@onready var deck_select_screen: Control = $scenes/deck_select_screen
+@onready var waiting_for_game_screen: Control = $scenes/waiting_for_game_screen
+@onready var card_select_screen: Control = $scenes/card_select_screen
+@onready var game_select_screen: Control = $scenes/game_select_screen
+@onready var game_screen: Control = $scenes/game_screen
+@onready var game_finished_screen: Control = $scenes/game_finished_screen
+@onready var card_view_screen: Control = $scenes/card_view_screen
+@onready var card_builder: Control = $scenes/card_builder
+@onready var card_editor: Control = $scenes/card_editor
+@onready var deck_editor: Control = $scenes/deck_editor
+@onready var rewards_screen: Control = $scenes/rewards_screen
+
+var current_scene = ""
 
 func _ready():
 	# prepare URL
@@ -67,6 +92,7 @@ func _ready():
 			return
 		client.socketio_send(ev,dat)
 	)
+	utils.tooltips = tooltips
 
 func _exit_tree():
 	# optional: disconnect from socketio server
@@ -150,7 +176,7 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 		"imagegen-unit-image-started":
 			show_error({"message":"Image Started"})
 			client.socketio_send("card-view-all",{
-			"response":"start-card-editor",
+			"on_success":"start-card-editor",
 			"query":{
 				#"subtype":"unit",
 				#"image_status":"none",
@@ -169,7 +195,7 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 		"save-card-name":
 			show_error({"message":"Card Name Saved"})
 			client.socketio_send("card-view-all",{
-			"response":"start-card-editor",
+			"on_success":"start-card-editor",
 			"query":{
 				#"subtype":"unit",
 				#"image_status":"none",
@@ -213,6 +239,8 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 			change_scene("menu")
 		
 		#game events
+		"new-game-options":
+			game_select_screen.set_up_pve(payload)
 		"select-deck":
 			change_scene("deck_select")
 			card_select_screen.reset()
@@ -236,8 +264,6 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 			game_screen.add_combat_log(payload)
 		"update-energy":
 			game_screen.update_energy(payload)
-		"update-victory-points":
-			game_screen.update_victory_points(payload)
 		"join-game":
 			#print(payload["id"])
 			game_screen.join_game(payload)
@@ -266,7 +292,9 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 			game_screen.choose_target(payload)
 		"quit-game":
 			game_screen.quit_game(payload)
-			main_menu.quit_game(payload)
+			change_scene("game_finished")
+			game_finished_screen.quit_game(payload)
+			#main_menu.quit_game(payload)
 		"rewards-get-containers":
 			rewards_screen.set_up_rewards(payload)
 			main_menu.check_rewards(payload)
@@ -294,19 +322,25 @@ func show_error(payload):
 		$error_label.text = ""
 
 func change_scene(new_scene_name = ""):
+	current_scene = new_scene_name
+	hud.update_scene(new_scene_name)
 	if new_scene_name == "menu":
 		client.socketio_send("rewards-get-containers")
 	transition.fade_out()
-	for child in tooltips.get_children():
-		tooltips.remove_child(child)
-		child.queue_free()
+	utils.clear_tooltips()
 	await get_tree().create_timer(stats.transition_time).timeout
 	for scene in all_scenes:
+		#print(scene.scene_name)
 		if scene.scene_name:
 			if scene.scene_name == new_scene_name:
 				scene.show()
 			else:
 				scene.hide()
+	match new_scene_name:
+		"login","register","wrong_version":
+			hud.hide()
+		_:
+			hud.show()
 	await get_tree().create_timer(stats.transition_time).timeout
 	transition.fade_in()
 
@@ -319,6 +353,12 @@ func _on_register_screen_change_screen_to_login():
 func _on_card_view_screen_exit_menu():
 	change_scene("menu")
 
+
+func _on_hud_logout() -> void:
+	client.socketio_send("logout")
+
+func _on_hud_concede() -> void:
+	client.socketio_send("concede-game")
 
 func _on_main_menu_logout():
 	client.socketio_send("logout")
@@ -348,8 +388,11 @@ func _on_card_builder_save_card():
 	client.socketio_send("card-builder-save-card")
 	client.socketio_send("close-card-builder")
 
-func _on_card_builder_rotate_card(direction):
+func _on_card_builder_piece_rotate(direction: Variant) -> void:
 	client.socketio_send("card-builder-rotate-component",direction)
+
+func _on_card_builder_piece_flip() -> void:
+	client.socketio_send("card-builder-flip-component",{"direction":"horizontal"})
 
 func _on_card_builder_move_set(data):
 	client.socketio_send("card-builder-add-component",data)
@@ -382,6 +425,8 @@ func _on_main_menu_search_for_pvp_game():
 
 func _on_main_menu_search_for_pve_game():
 	#change_scene("game_select")
+	#client.socketio_send("new-game-options")
+	#return
 	#game_select_screen.set_up_pve()
 	client.socketio_send("start-looking-for-game",{
 		"min_rarity": 1,
@@ -436,7 +481,7 @@ func _on_deck_editor_delete_deck():
 
 func _on_deck_editor_start_create_new_deck():
 	client.socketio_send("card-view-all",{
-		"response" : "deck-editor-start-new-deck",
+		"on_success" : "deck-editor-start-new-deck",
 		"query" : {
 			"subtype" : "avatar",
 			#"image_status":"none",
@@ -448,7 +493,7 @@ func _on_deck_editor_start_create_new_deck():
 
 func _on_deck_editor_show_units_only():
 	client.socketio_send("card-view-all",{
-		"response":"deck-editor-new-deck-units",
+		"on_success":"deck-editor-new-deck-units",
 		"query":{
 			"subtype":"unit",
 			#"image_status":"none",
@@ -537,7 +582,7 @@ func _on_rewards_screen_close_rewards() -> void:
 func _on_main_menu_start_card_editor() -> void:
 	#change_scene("card_editor")
 	client.socketio_send("card-view-all",{
-		"response":"start-card-editor",
+		"on_success":"start-card-editor",
 		"query":{
 			#"subtype":"unit",
 			#"image_status":"none",
@@ -549,7 +594,7 @@ func _on_main_menu_start_card_editor() -> void:
 	#client.socketio_send("card-view-missing-name")
 
 func _on_card_editor_imagegen_get_unit_classes_and_races(_card_id: Variant) -> void:
-	client.socketio_send("get-info",{"id":_card_id,"type":"card","response":"get_info_card_image_edit"})
+	client.socketio_send("get-info",{"id":_card_id,"type":"card","on_success":"get_info_card_image_edit"})
 	client.socketio_send("imagegen-get-unit-requirements",{"card_id" : _card_id})
 
 func _on_card_editor_imagegen_get_unit_options(_data: Variant) -> void:
@@ -559,7 +604,7 @@ func _on_card_editor_imagegen_make_unit_image(_data: Variant) -> void:
 	client.socketio_send("imagegen-make-unit-image",_data)
 
 func _on_card_editor_start_card_name_edit(_card_id: Variant) -> void:
-	client.socketio_send("get-info",{"id":_card_id,"type":"card","response":"get_info_card_name_edit"})
+	client.socketio_send("get-info",{"id":_card_id,"type":"card","on_success":"get_info_card_name_edit"})
 
 func _on_card_editor_validate_card_name(_data: Variant) -> void:
 	client.socketio_send("validate-card-name",_data)
@@ -577,11 +622,55 @@ func _on_dev_screen_open_uncommon_reward() -> void:
 	client.socketio_send("rewards-open-containers",{"container" : 3, "quantity" : 1})
 
 func _on_deck_editor_avatar_selected(_card_id: Variant) -> void:
-	client.socketio_send("get-info",{"id":_card_id,"type":"card","response":"get_info_deck_editor_card_avatar_selected"})
+	client.socketio_send("get-info",{"id":_card_id,"type":"card","on_success":"get_info_deck_editor_card_avatar_selected"})
 
 func _on_dev_screen_edit_card(_id: Variant) -> void:
-	client.socketio_send("get-info",{"id":_id,"type":"card","response":"get_info_card_image_edit"})
+	client.socketio_send("get-info",{"id":_id,"type":"card","on_success":"get_info_card_image_edit"})
 	client.socketio_send("imagegen-get-unit-requirements",{"card_id" : _id})
 
 func _on_rewards_screen_selected_reward(_id: Variant, _amount: Variant) -> void:
+	print(_id,_amount)
 	client.socketio_send("rewards-open-containers",{"container":_id, "quantity":_amount})
+
+
+func _on_hud_back() -> void:
+	match current_scene:
+		"wrong_version":
+			pass
+		"login":
+			pass
+		"register":
+			pass
+		"menu":
+			pass
+		"deck_select":
+			client.socketio_send("cancel-select-deck")
+		"waiting":
+			if waiting_for_game_screen.cancel_status == "cancel-waiting-for-validation":
+				client.socketio_send("cancel-waiting-for-validation")
+				#cancel_validation.emit()
+			elif waiting_for_game_screen.cancel_status == "cancel-waiting-for-game":
+				client.socketio_send("cancel-waiting-for-game")
+				#cancel_game.emit()
+			else:
+				return
+		"card_select":
+			pass
+		"game_select":
+			change_scene("menu")
+		"game":
+			pass
+		"game_finished":
+			change_scene("menu")
+		"card_view":
+			change_scene("menu")
+		"card_builder":
+			client.socketio_send("close-card-builder")
+		"card_editor":
+			change_scene("menu")
+		"deck_editor":
+			client.socketio_send("close-deck-editor")
+		"rewards":
+			change_scene("menu")
+		_:
+			print("No Scene")

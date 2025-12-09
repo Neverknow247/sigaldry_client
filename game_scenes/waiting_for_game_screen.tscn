@@ -22,16 +22,25 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.290196, 0.478431, 0.588235, 1)
 
+[node name="fake_hud" type="ColorRect" parent="background_color"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 64.0
+grow_horizontal = 2
+
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
 offset_left = 32.0
-offset_top = 32.0
-offset_right = 72.0
-offset_bottom = 82.0
+offset_top = 96.0
+offset_right = 355.0
+offset_bottom = 228.0
 theme_override_font_sizes/font_size = 96
 text = "Waiting"
 
 [node name="cancel_button" type="Button" parent="."]
+visible = false
 custom_minimum_size = Vector2(120, 80)
 layout_mode = 0
 offset_left = 1768.0

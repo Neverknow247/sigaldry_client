@@ -79,6 +79,7 @@ func _on_add_button_pressed():
 
 func _on_card_select_button_pressed():
 	select_card.emit(card_id)
+	print("pressssed")
 
 func _on_game_card_select_ui_focus(_focus):
 	if _focus == true:
@@ -92,10 +93,10 @@ func _on_game_card_select_ui_focus(_focus):
 signal mouse_focus(_pos,_focus,card_id,source_type)
 
 func _on_card_select_mouse_entered():
-	mouse_focus.emit(global_position,true,card_id,source_type)
+	mouse_focus.emit(global_position+Vector2(127,137),true,card_id,source_type)
 
 func _on_card_select_mouse_exited():
-	mouse_focus.emit(global_position,false,card_id,source_type)
+	mouse_focus.emit(global_position+Vector2(127,137),false,card_id,source_type)
 
 func _on_card_select_get_info():
 	get_info.emit({"type":"card","id":card_id})

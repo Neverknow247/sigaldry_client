@@ -25,7 +25,8 @@ signal back_to_menu
 signal template_selected(id)
 signal component_selected(id)
 signal component_removed
-signal rotate_card(direction)
+signal piece_rotate(direction)
+signal piece_flip
 @warning_ignore("unused_signal")
 signal place_component
 signal change_name(card_name)
@@ -116,7 +117,7 @@ func load_build_templates(payload):
 	template_select_overlay.set_templates_dict(payload["templates"])
 
 func load_builder_components(payload):
-	print(payload)
+	#print(payload)
 	var component_container_children = component_v_box.get_children()
 	for child in component_container_children:
 		child.queue_free()
@@ -131,9 +132,9 @@ func load_builder_components(payload):
 					continue
 			#if component["disabled"] or !KEYWORD_GLOSS.neverknow_approved_items.has(component["name"]):
 				#continue
-			#print("**********************")
-			#print(component)
-			#print("**********************")
+			print("**********************")
+			print(component)
+			print("**********************")
 			
 			var new_component_button = COMPONENT_BUTTON.instantiate()
 			component_v_box.add_child(new_component_button)
@@ -152,7 +153,28 @@ func load_builder_components(payload):
 			#new_component_button.amount_label.text = "X"+str(int(component["amount"]))
 			#print(KEYWORD_GLOSS["key_glossary"])
 			#if KEYWORD_GLOSS["key_glossary"].has([component["abilities"][0]["key"]]):
-			new_component_button.tooltip_text = KEYWORD_GLOSS["key_glossary"][component["abilities"][0]["key"]]["description"]
+			
+			#new_component_button.tooltip_text = KEYWORD_GLOSS["key_glossary"][component["abilities"][0]["key"]]["description"]
+			var _tooltip_text = ""
+			var words = KeyWordGlossary.key_glossary[component["abilities"][0]["key"]]["description"].split(" ")
+			for word in words:
+				var is_dependent = false
+				var dependent_keyword
+				var dependent_key
+				if word[0] == "<": #and word[word.length()-1] == ">":
+					#var key = word.substr(1,word.length() - 2)
+					var key = word.substr(1,word.length() - (word.length() - word.find(">")) -1)
+					is_dependent = true
+					dependent_key = key
+					dependent_keyword = KeyWordGlossary.key_glossary[key]["name"]
+				if is_dependent:
+					_tooltip_text += dependent_keyword.capitalize() + " "
+				else:
+					_tooltip_text += word + " "
+			new_component_button.tooltip_text = _tooltip_text
+			
+			
+			
 			new_component_button.component_id = component["id"]
 			new_component_button.connect("component_selected",on_component_selected)
 			new_component_button.component_name = component["name"]
@@ -286,7 +308,10 @@ func _on_card_grid_check_placement_pos(default_pos,possible_pos):
 	#rotate_card.emit({"direction":"clockwise"})
 
 func _on_card_grid_piece_rotate(_direction: Variant) -> void:
-	rotate_card.emit({"direction":_direction})
+	piece_rotate.emit({"direction":_direction})
+
+func _on_card_grid_piece_flip() -> void:
+	piece_flip.emit()
 
 func _on_card_grid_component_removed() -> void:
 	component_removed.emit()

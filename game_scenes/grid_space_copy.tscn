@@ -1,0 +1,516 @@
+[gd_scene load_steps=45 format=3 uid="uid://l8xg4rrfhx4p"]
+
+[ext_resource type="Script" uid="uid://dofo4kh7waath" path="res://game_scenes/grid_space.gd" id="1_ijht5"]
+[ext_resource type="PackedScene" uid="uid://di0881y716irt" path="res://items/card.tscn" id="2_o3gbq"]
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="3_tixxw"]
+[ext_resource type="Texture2D" uid="uid://2wvbeshj637w" path="res://assets/art/board_card.png" id="4_ndvm7"]
+[ext_resource type="Script" uid="uid://c4ndy0nfdsb0b" path="res://items/card_preview.gd" id="5_wt01v"]
+[ext_resource type="FontFile" uid="uid://b2vvtmi4jxkl5" path="res://assets/fonts/fantasque-sans-mono.bold.otf" id="6_avc5p"]
+[ext_resource type="Script" uid="uid://cu1b5sje7w6kb" path="res://items/game_card_select_ui.gd" id="7_up1gr"]
+[ext_resource type="Script" uid="uid://6eo8osswnvrf" path="res://items/card_select.gd" id="8_fgi8c"]
+[ext_resource type="Texture2D" uid="uid://q6c7kryaxkqr" path="res://assets/art/board_art_area.png" id="9_3co56"]
+[ext_resource type="Texture2D" uid="uid://lvc545bqs6wt" path="res://assets/missing-images/none-unit.png" id="10_avj4p"]
+[ext_resource type="PackedScene" uid="uid://bv26274lujm66" path="res://game_scenes/game_effect_queue.tscn" id="11_mik86"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kd03x"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y2ts2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b5gga"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a08hb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_miok6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_spt51"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xxr7x"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wxsia"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8k2k4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jixci"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kymoa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aebg8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rg6mg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xjpa1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jpu80"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_umyon"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gc04y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0gbax"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pudgh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g0pld"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2dl80"]
+
+[sub_resource type="Curve2D" id="Curve2D_fbnvw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8e8jv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c2fqk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s4u1b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bkqlj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dod2p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fhomn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d2quw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7j4kb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yita2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dfhns"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x1lt2"]
+
+[node name="grid_space" type="CenterContainer"]
+custom_minimum_size = Vector2(276, 254)
+script = ExtResource("1_ijht5")
+default_color = Color(0, 0, 0, 0)
+friendly_color = Color(0, 1, 0, 0.490196)
+unfriendly_color = Color(1, 0, 0, 0.490196)
+move_color = Color(0, 0, 1, 0.490196)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="card" parent="Control/Control" instance=ExtResource("2_o3gbq")]
+visible = false
+z_index = 100
+layout_mode = 1
+offset_left = 105.0
+offset_top = -78.99999
+offset_right = 105.0
+offset_bottom = -38.999992
+rotation = 1.5707964
+scale = Vector2(0.2, 0.2)
+
+[node name="card_preview" type="TextureRect" parent="Control/Control"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -96.0
+offset_right = 96.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_tixxw")
+texture = ExtResource("4_ndvm7")
+script = ExtResource("5_wt01v")
+
+[node name="card_name" type="Label" parent="Control/Control/card_preview"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 104.0
+offset_right = 183.0
+offset_bottom = 136.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+text = "Card Name Here"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="card_effects" type="Label" parent="Control/Control/card_preview"]
+visible = false
+layout_mode = 0
+offset_left = 39.0
+offset_top = 196.0
+offset_right = 247.0
+offset_bottom = 308.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_avc5p")
+theme_override_font_sizes/font_size = 20
+text = "Card Effects"
+autowrap_mode = 3
+
+[node name="card_type" type="Label" parent="Control/Control/card_preview"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 151.0
+offset_right = 128.0
+offset_bottom = 172.0
+theme_override_colors/font_color = Color(0.666667, 0.666667, 0.666667, 1)
+theme_override_fonts/font = ExtResource("6_avc5p")
+theme_override_font_sizes/font_size = 20
+text = "Type"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="card_price" type="Label" parent="Control/Control/card_preview"]
+visible = false
+layout_mode = 0
+offset_left = 208.0
+offset_right = 256.0
+offset_bottom = 48.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="card_attack" type="Label" parent="Control/Control/card_preview"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 136.0
+offset_right = 56.0
+offset_bottom = 184.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="card_health" type="Label" parent="Control/Control/card_preview"]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 136.0
+offset_right = 184.0
+offset_bottom = 184.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="card_color_profile" type="GridContainer" parent="Control/Control/card_preview"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="in_deck_ui" type="ColorRect" parent="Control/Control/card_preview"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.490196)
+
+[node name="CenterContainer" type="CenterContainer" parent="Control/Control/card_preview/in_deck_ui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 176.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="remove_button" type="Button" parent="Control/Control/card_preview/in_deck_ui/CenterContainer"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+mouse_filter = 1
+text = "Remove"
+
+[node name="not_in_deck_ui" type="ColorRect" parent="Control/Control/card_preview"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.490196)
+
+[node name="CenterContainer" type="CenterContainer" parent="Control/Control/card_preview/not_in_deck_ui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 176.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="add_button" type="Button" parent="Control/Control/card_preview/not_in_deck_ui/CenterContainer"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+mouse_filter = 1
+text = "Add"
+
+[node name="unit_not_in_deck_ui" type="ColorRect" parent="Control/Control/card_preview"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.490196)
+
+[node name="CenterContainer" type="CenterContainer" parent="Control/Control/card_preview/unit_not_in_deck_ui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Control/card_preview/unit_not_in_deck_ui/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 132
+alignment = 1
+
+[node name="add_avatar_button" type="Button" parent="Control/Control/card_preview/unit_not_in_deck_ui/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+mouse_filter = 1
+text = "Add Avatar"
+
+[node name="add_button" type="Button" parent="Control/Control/card_preview/unit_not_in_deck_ui/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+mouse_filter = 1
+text = "Add"
+
+[node name="unit_only_add_avatar" type="ColorRect" parent="Control/Control/card_preview"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.490196)
+
+[node name="CenterContainer" type="CenterContainer" parent="Control/Control/card_preview/unit_only_add_avatar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Control/card_preview/unit_only_add_avatar/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 132
+alignment = 1
+
+[node name="add_avatar_button" type="Button" parent="Control/Control/card_preview/unit_only_add_avatar/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+mouse_filter = 1
+text = "Add Avatar"
+
+[node name="add_button" type="Button" parent="Control/Control/card_preview/unit_only_add_avatar/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+mouse_filter = 1
+text = "Add"
+
+[node name="card_select_button" type="Button" parent="Control/Control/card_preview"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_kd03x")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_y2ts2")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_b5gga")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_a08hb")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_miok6")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_spt51")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_xxr7x")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_wxsia")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_8k2k4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jixci")
+
+[node name="game_card_select_ui" type="ColorRect" parent="Control/Control/card_preview"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+script = ExtResource("7_up1gr")
+
+[node name="card_select" type="Button" parent="Control/Control/card_preview/game_card_select_ui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_kymoa")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_aebg8")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_rg6mg")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_xjpa1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jpu80")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_umyon")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_gc04y")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_0gbax")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_pudgh")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_g0pld")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2dl80")
+script = ExtResource("8_fgi8c")
+
+[node name="Timer" type="Timer" parent="Control/Control/card_preview/game_card_select_ui"]
+
+[node name="Path2D" type="Path2D" parent="Control/Control/card_preview/game_card_select_ui"]
+curve = SubResource("Curve2D_fbnvw")
+
+[node name="Line2D" type="Line2D" parent="Control/Control/card_preview/game_card_select_ui"]
+top_level = true
+
+[node name="builder_compare_select_ui" type="ColorRect" parent="Control/Control/card_preview"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="card_image_clip" type="TextureRect" parent="Control/Control/card_preview"]
+clip_children = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("9_3co56")
+
+[node name="card_image" type="TextureRect" parent="Control/Control/card_preview/card_image_clip"]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 178.0
+offset_bottom = 162.0
+mouse_filter = 2
+texture = ExtResource("10_avj4p")
+expand_mode = 5
+
+[node name="trap" type="ColorRect" parent="Control"]
+custom_minimum_size = Vector2(192, 192)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.545098, 0.027451, 0.172549, 0.556863)
+
+[node name="trap_label" type="Label" parent="Control/trap"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -96.0
+offset_right = 96.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Hostile
+Trap"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="grid_button" type="Button" parent="."]
+visible = false
+custom_minimum_size = Vector2(276, 254)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8e8jv")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_c2fqk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_s4u1b")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_bkqlj")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_dod2p")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_fhomn")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_d2quw")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7j4kb")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_yita2")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_dfhns")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_x1lt2")
+
+[node name="grid_button_color" type="ColorRect" parent="grid_button"]
+custom_minimum_size = Vector2(276, 254)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.490196)
+
+[node name="game_effect_queue" parent="." instance=ExtResource("11_mik86")]
+layout_mode = 2
+
+[connection signal="mouse_entered" from="Control/Control/card_preview" to="Control/Control/card_preview" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Control/card_preview" to="Control/Control/card_preview" method="_on_mouse_exited"]
+[connection signal="pressed" from="Control/Control/card_preview/in_deck_ui/CenterContainer/remove_button" to="Control/Control/card_preview" method="_on_remove_button_pressed"]
+[connection signal="pressed" from="Control/Control/card_preview/not_in_deck_ui/CenterContainer/add_button" to="Control/Control/card_preview" method="_on_add_button_pressed"]
+[connection signal="pressed" from="Control/Control/card_preview/unit_not_in_deck_ui/CenterContainer/VBoxContainer/add_avatar_button" to="Control/Control/card_preview" method="_on_add_avatar_button_pressed"]
+[connection signal="pressed" from="Control/Control/card_preview/unit_not_in_deck_ui/CenterContainer/VBoxContainer/add_button" to="Control/Control/card_preview" method="_on_add_button_pressed"]
+[connection signal="pressed" from="Control/Control/card_preview/unit_only_add_avatar/CenterContainer/VBoxContainer/add_avatar_button" to="Control/Control/card_preview" method="_on_add_avatar_button_pressed"]
+[connection signal="pressed" from="Control/Control/card_preview/unit_only_add_avatar/CenterContainer/VBoxContainer/add_button" to="Control/Control/card_preview" method="_on_add_button_pressed"]
+[connection signal="pressed" from="Control/Control/card_preview/card_select_button" to="Control/Control/card_preview" method="_on_card_select_button_pressed"]
+[connection signal="get_info" from="Control/Control/card_preview/game_card_select_ui/card_select" to="." method="_on_card_select_get_info"]
+[connection signal="mouse_entered" from="Control/Control/card_preview/game_card_select_ui/card_select" to="Control/Control/card_preview" method="_on_card_select_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Control/card_preview/game_card_select_ui/card_select" to="Control/Control/card_preview" method="_on_card_select_mouse_exited"]
+[connection signal="timeout" from="Control/Control/card_preview/game_card_select_ui/Timer" to="Control/Control/card_preview/game_card_select_ui" method="_on_timer_timeout"]
+[connection signal="pressed" from="grid_button" to="." method="_on_grid_button_pressed"]

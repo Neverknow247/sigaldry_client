@@ -23,31 +23,37 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.356064, 0.356064, 0.356064, 1)
 
-[node name="card_preview" parent="." instance=ExtResource("2_ejqcl")]
-visible = false
+[node name="fake_hud" type="ColorRect" parent="background_color"]
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 1
-offset_left = 1216.0
-offset_top = 128.0
-offset_right = 112.0
-offset_bottom = 168.0
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="card_preview" parent="." instance=ExtResource("2_ejqcl")]
+layout_mode = 1
+offset_left = 1216.0001
+offset_top = 152.0
+offset_right = 112.00012
+offset_bottom = 192.0
 scale = Vector2(0.8, 0.8)
 last_card = true
 
 [node name="name_edit" type="LineEdit" parent="."]
 layout_mode = 0
 offset_left = 248.0
-offset_top = 128.0
+offset_top = 104.0
 offset_right = 768.0
-offset_bottom = 192.0
+offset_bottom = 170.0
 placeholder_text = "Select A Name"
 max_length = 30
 
 [node name="buttons_container" type="HBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 1461.0
-offset_top = 32.0
-offset_right = 1889.0
-offset_bottom = 92.0
+offset_top = 80.0
+offset_right = 1900.0
+offset_bottom = 146.0
 alignment = 1
 
 [node name="validate_button" type="Button" parent="buttons_container"]

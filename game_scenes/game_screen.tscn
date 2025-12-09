@@ -1,9 +1,9 @@
 [gd_scene load_steps=15 format=3 uid="uid://b15rxgd7b65m7"]
 
-[ext_resource type="Texture2D" uid="uid://bigxwkdsae6u8" path="res://assets/art/tiles/battlefield.png" id="1_ekwu7"]
 [ext_resource type="Script" uid="uid://dkevts2lkrjpa" path="res://game_scenes/game_screen.gd" id="1_jfx64"]
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_xc1rc"]
 [ext_resource type="Script" uid="uid://b08lga87axavw" path="res://game_scenes/battlefield.gd" id="3_am5je"]
+[ext_resource type="Texture2D" uid="uid://bu8c2odv7254p" path="res://assets/art/tiles/battlefield_3.png" id="3_nliwj"]
 [ext_resource type="PackedScene" uid="uid://bncybjplfwfu6" path="res://game_scenes/grid_space.tscn" id="5_ow6xo"]
 [ext_resource type="Texture2D" uid="uid://dd7y027ilc48f" path="res://assets/art/icons/energy_icon.png" id="5_ykyht"]
 [ext_resource type="Texture2D" uid="uid://dr66ml401d1xq" path="res://assets/art/icons/cards_in_hand_icon.png" id="6_hqoc0"]
@@ -19,6 +19,7 @@
 bake_interval = 50.0
 
 [node name="game_screen" type="Control"]
+custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,15 +29,33 @@ grow_vertical = 2
 theme = ExtResource("1_xc1rc")
 script = ExtResource("1_jfx64")
 
-[node name="battlefield" type="TextureRect" parent="."]
+[node name="background_color" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -570.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_ekwu7")
+color = Color(0.5647059, 0.5647059, 0.5647059, 1)
+
+[node name="fake_hud" type="ColorRect" parent="background_color"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="battlefield" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(1380, 1016)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 64.0
+offset_right = -540.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_nliwj")
 script = ExtResource("3_am5je")
 
 [node name="GridContainer" type="GridContainer" parent="battlefield"]
@@ -54,6 +73,7 @@ columns = 5
 layout_mode = 2
 
 [node name="turn_timer" type="Control" parent="battlefield"]
+z_index = 100
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -71,9 +91,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -701.0
+offset_left = -722.0
 offset_top = 8.0
-offset_right = -52.0
+offset_right = -64.0
 offset_bottom = 24.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -90,7 +110,7 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -649.0
+offset_left = -658.0
 offset_top = -8.0
 offset_bottom = 8.0
 grow_horizontal = 0
@@ -102,10 +122,10 @@ show_percentage = false
 
 [node name="turn_timer_graphic" type="TextureRect" parent="battlefield/turn_timer"]
 layout_mode = 0
-offset_left = 643.0
-offset_top = -24.0
-offset_right = 707.0
-offset_bottom = 40.0
+offset_left = 658.0
+offset_top = -28.0
+offset_right = 722.0
+offset_bottom = 36.0
 texture = ExtResource("7_kmdyf")
 
 [node name="turn_timer_count" type="Label" parent="battlefield/turn_timer/turn_timer_graphic"]
@@ -116,7 +136,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "60"
+text = "96"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -130,12 +150,14 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="side_panel" type="Control" parent="."]
+custom_minimum_size = Vector2(540, 1016)
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -570.0
+offset_left = -540.0
+offset_top = 64.0
 grow_horizontal = 0
 grow_vertical = 2
 
@@ -146,7 +168,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.229553, 0.392723, 0.487457, 1)
+color = Color(0.24705882, 0.5176471, 0.36078432, 1)
 
 [node name="darken" type="ColorRect" parent="side_panel/side_panel_background"]
 layout_mode = 1
@@ -168,7 +190,7 @@ current_tab = 0
 
 [node name="Game" type="ColorRect" parent="side_panel/side_tabs"]
 layout_mode = 2
-color = Color(0.290196, 0.478431, 0.588235, 1)
+color = Color(0.5179158, 0.24780053, 0.36074692, 1)
 metadata/_tab_index = 0
 
 [node name="enemy_panel" type="HBoxContainer" parent="side_panel/side_tabs/Game"]
@@ -219,6 +241,7 @@ theme_override_font_sizes/font_size = 52
 text = "0"
 
 [node name="victory_points" type="HBoxContainer" parent="side_panel/side_tabs/Game/enemy_panel"]
+visible = false
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="side_panel/side_tabs/Game/enemy_panel/victory_points"]
@@ -268,6 +291,7 @@ layout_mode = 2
 text = "End Turn"
 
 [node name="concede_button" type="Button" parent="side_panel/side_tabs/Game/player_panel/buttons"]
+visible = false
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
@@ -317,6 +341,7 @@ theme_override_font_sizes/font_size = 52
 text = "0"
 
 [node name="victory_points" type="HBoxContainer" parent="side_panel/side_tabs/Game/player_panel/info"]
+visible = false
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="side_panel/side_tabs/Game/player_panel/info/victory_points"]
@@ -400,6 +425,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 64.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2

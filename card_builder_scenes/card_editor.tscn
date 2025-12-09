@@ -23,12 +23,19 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.564706, 0.564706, 0.564706, 1)
 
+[node name="fake_hud" type="ColorRect" parent="background_color"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
 [node name="scroll_container" type="ScrollContainer" parent="."]
 layout_mode = 0
 offset_left = 104.0
-offset_top = 120.0
+offset_top = 128.0
 offset_right = 1816.0
-offset_bottom = 1048.0
+offset_bottom = 992.0
 
 [node name="v_box_container" type="VBoxContainer" parent="scroll_container"]
 layout_mode = 2
@@ -41,6 +48,7 @@ theme_override_constants/separation = 25
 alignment = 1
 
 [node name="back_button" type="Button" parent="."]
+visible = false
 custom_minimum_size = Vector2(140, 60)
 layout_mode = 0
 offset_left = 1749.0

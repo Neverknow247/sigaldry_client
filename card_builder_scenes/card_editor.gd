@@ -37,6 +37,9 @@ func _on_back_button_pressed() -> void:
 	back_to_menu.emit()
 
 func add_cards(payload):
+	reset_editor()
+	#card_image_edit.hide()
+	#card_name_edit.hide()
 	#print(payload)
 	for n in v_box_container.get_children():
 		v_box_container.remove_child(n)

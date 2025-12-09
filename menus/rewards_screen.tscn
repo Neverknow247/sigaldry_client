@@ -22,7 +22,15 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.5647059, 0.5647059, 0.5647059, 1)
 
+[node name="fake_hud" type="ColorRect" parent="color_background"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
 [node name="back_button" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 1767.0
 offset_top = 24.0

@@ -23,15 +23,23 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.290196, 0.478431, 0.588235, 1)
 
+[node name="fake_hud" type="ColorRect" parent="color_background"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
 [node name="deck_select" type="OptionButton" parent="."]
 custom_minimum_size = Vector2(350, 80)
 layout_mode = 0
-offset_left = 35.0
-offset_top = 35.0
-offset_right = 385.0
-offset_bottom = 115.0
+offset_left = 32.0
+offset_top = 96.0
+offset_right = 382.0
+offset_bottom = 176.0
 
 [node name="back_button" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 1767.0
 offset_top = 24.0
@@ -42,10 +50,10 @@ text = "Back"
 [node name="new_deck_button" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 58)
 layout_mode = 0
-offset_left = 1553.0
-offset_top = 24.0
-offset_right = 1736.0
-offset_bottom = 90.0
+offset_left = 1705.0
+offset_top = 96.0
+offset_right = 1888.0
+offset_bottom = 162.0
 text = "New Deck"
 
 [node name="deck_information" type="HBoxContainer" parent="."]
@@ -55,9 +63,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -500.0
-offset_top = 35.0
+offset_top = 96.0
 offset_right = 500.0
-offset_bottom = 110.0
+offset_bottom = 171.0
 grow_horizontal = 2
 theme_override_constants/separation = 30
 alignment = 1
@@ -82,7 +90,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 150.0
+offset_top = 200.0
+offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -92,7 +101,7 @@ theme_override_constants/separation = 60
 alignment = 1
 
 [node name="cards_in_deck" type="ScrollContainer" parent="CenterContainer/HBoxContainer"]
-custom_minimum_size = Vector2(900, 900)
+custom_minimum_size = Vector2(900, 848)
 layout_mode = 2
 
 [node name="cards_in_deck_box" type="VBoxContainer" parent="CenterContainer/HBoxContainer/cards_in_deck"]
@@ -100,7 +109,7 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="cards_not_in_deck" type="ScrollContainer" parent="CenterContainer/HBoxContainer"]
-custom_minimum_size = Vector2(900, 900)
+custom_minimum_size = Vector2(900, 848)
 layout_mode = 2
 
 [node name="cards_not_in_deck_box" type="VBoxContainer" parent="CenterContainer/HBoxContainer/cards_not_in_deck"]
@@ -113,6 +122,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 64.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.290196, 0.478431, 0.588235, 1)
@@ -162,7 +172,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 164.0
+offset_top = 160.0
+offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -171,7 +182,7 @@ layout_mode = 2
 theme_override_constants/separation = 60
 
 [node name="VBoxContainer" type="VBoxContainer" parent="new_deck_screen/CenterContainer2/HBoxContainer"]
-custom_minimum_size = Vector2(900, 886)
+custom_minimum_size = Vector2(900, 822)
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
@@ -199,13 +210,14 @@ custom_minimum_size = Vector2(408, 560)
 layout_mode = 2
 
 [node name="avatar_preview" parent="new_deck_screen/CenterContainer2/HBoxContainer/VBoxContainer/CenterContainer/avatar_card_box" instance=ExtResource("3_d8ax2")]
+visible = false
 custom_minimum_size = Vector2(408, 560)
 layout_mode = 1
 offset_right = 0.0
 offset_bottom = 0.0
 
 [node name="cards_units_only" type="ScrollContainer" parent="new_deck_screen/CenterContainer2/HBoxContainer"]
-custom_minimum_size = Vector2(900, 886)
+custom_minimum_size = Vector2(900, 822)
 layout_mode = 2
 
 [node name="cards_units_only_box" type="VBoxContainer" parent="new_deck_screen/CenterContainer2/HBoxContainer/cards_units_only"]
