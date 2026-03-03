@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bnrivi82xph37"]
+[gd_scene load_steps=38 format=3 uid="uid://bnrivi82xph37"]
 
 [ext_resource type="Theme" uid="uid://by8ew0t4rulwy" path="res://assets/themes/card_theme.tres" id="1_ct3q6"]
 [ext_resource type="Script" uid="uid://c60qkltwaql8h" path="res://game_scenes/unit.gd" id="1_oi642"]
@@ -16,6 +16,8 @@
 [ext_resource type="FontFile" uid="uid://bd3bjcsi7ogrh" path="res://assets/fonts/alegreya/Alegreya-Italic.ttf" id="13_dxx3e"]
 [ext_resource type="FontFile" uid="uid://b6alpq4r15r5s" path="res://assets/fonts/alegreya/Alegreya-Black.ttf" id="14_k3cbc"]
 [ext_resource type="Script" uid="uid://bs3sddjowfnua" path="res://items/card_rich_effects.gd" id="15_dxx3e"]
+[ext_resource type="Texture2D" uid="uid://c6atm047bxlm8" path="res://assets/art/card/badges/large v3/square.png" id="17_widav"]
+[ext_resource type="Texture2D" uid="uid://bo131wlyta2r3" path="res://assets/art/icons/Icon_Armor_Crown.png" id="18_ppa03"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pbs8y"]
 
@@ -127,6 +129,24 @@ offset_left = 18.0
 offset_top = 189.0
 offset_right = 162.0
 offset_bottom = 238.0
+
+[node name="avatar_icon_badge" type="TextureRect" parent="unit_content/unit_texture/stat_banner"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -112.0
+offset_right = 25.126125
+offset_bottom = -87.0
+texture = ExtResource("17_widav")
+expand_mode = 3
+
+[node name="avatar_icon" type="TextureRect" parent="unit_content/unit_texture/stat_banner/avatar_icon_badge"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 20.75
+offset_bottom = 19.0
+texture = ExtResource("18_ppa03")
+expand_mode = 3
 
 [node name="attack_badge" type="TextureRect" parent="unit_content/unit_texture/stat_banner"]
 layout_mode = 0

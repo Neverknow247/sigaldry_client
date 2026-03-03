@@ -24,7 +24,8 @@ func create_component_shapes(components_payload):
 	height = int(components_payload["shape"].size())
 	width = int(components_payload["shape"].size())
 	tiles = components_payload["shape"]
-	component_color = stats["COLOR_KEY"][components_payload["color_profile"]["key"]]
+	#component_color = stats["COLOR_KEY"][components_payload["color_profile"]["key"]]
+	component_color = components_payload["color_profile"]["background_color"]
 	findSizeOfSquares()
 	queue_redraw()
 

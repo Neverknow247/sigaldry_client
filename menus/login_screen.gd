@@ -3,17 +3,23 @@ extends Control
 var scene_name = "login"
 
 var stats = Stats
+var utils = Utils
 
+@onready var background: TextureRect = $background
 @onready var background_color = $background_color
 
 @onready var username = $CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/username
 @onready var password = $CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/password
 @onready var remember_me_checkbox = $remember_me/remember_me_checkbox
 
+@onready var line_edit: LineEdit = $custom_ip_container/line_edit
+
 signal login(username,password)
 signal change_screen_to_register
+signal change_ip(_new_ip)
 
 func _ready():
+	background.texture = utils.random_background()
 	background_color.color = stats.background_color
 	check_remember_me()
 
@@ -42,6 +48,11 @@ func _on_register_new_user_button_pressed():
 func reset_screen():
 	username.text = ""
 	password.text = ""
+	
 
 func _on_quit_button_pressed():
 	get_tree().quit()
+
+
+func _on_connect_button_pressed() -> void:
+	change_ip.emit(line_edit.text)

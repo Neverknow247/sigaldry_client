@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://d2mvewu0gwxc6"]
+[gd_scene load_steps=5 format=3 uid="uid://d2mvewu0gwxc6"]
 
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_dj5xg"]
 [ext_resource type="Script" uid="uid://e3ws3mcyjspk" path="res://menus/login_screen.gd" id="1_iahym"]
+[ext_resource type="Texture2D" uid="uid://cscuonbas5878" path="res://assets/art/card_art/BG_3.png" id="3_jdtxs"]
+[ext_resource type="Texture2D" uid="uid://cdufykrexx2j3" path="res://assets/art/sigaldry.png" id="4_cusra"]
 
 [node name="login_screen" type="Control"]
 layout_mode = 3
@@ -14,7 +16,17 @@ mouse_filter = 2
 theme = ExtResource("1_dj5xg")
 script = ExtResource("1_iahym")
 
+[node name="background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_jdtxs")
+
 [node name="background_color" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,6 +36,7 @@ grow_vertical = 2
 color = Color(0.290196, 0.478431, 0.588235, 1)
 
 [node name="login_label" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -33,8 +46,21 @@ offset_top = 120.0
 offset_right = 122.0
 offset_bottom = 263.0
 grow_horizontal = 2
+theme_override_constants/outline_size = 24
 theme_override_font_sizes/font_size = 120
 text = "Login"
+
+[node name="title" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -471.5
+offset_top = 56.0
+offset_right = 471.5
+offset_bottom = 352.0
+grow_horizontal = 2
+texture = ExtResource("4_cusra")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -59,17 +85,20 @@ alignment = 2
 [node name="username" type="LineEdit" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
+theme_override_constants/outline_size = 8
 placeholder_text = "username"
 
 [node name="password" type="LineEdit" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
+theme_override_constants/outline_size = 8
 placeholder_text = "password"
 secret = true
 
 [node name="sign_in_button" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+theme_override_constants/outline_size = 12
 text = "Sign In"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
@@ -80,11 +109,13 @@ alignment = 1
 [node name="register_new_user_button" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(310, 0)
 layout_mode = 2
+theme_override_constants/outline_size = 12
 text = "Register New User"
 
 [node name="quit_button" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(310, 0)
 layout_mode = 2
+theme_override_constants/outline_size = 12
 text = "Quit"
 
 [node name="remember_me" type="HBoxContainer" parent="."]
@@ -97,12 +128,32 @@ offset_bottom = 541.0
 [node name="Label" type="Label" parent="remember_me"]
 visible = false
 layout_mode = 2
+theme_override_constants/outline_size = 12
 text = "Remember Me?"
 
 [node name="remember_me_checkbox" type="CheckBox" parent="remember_me"]
 layout_mode = 2
+theme_override_constants/outline_size = 12
 text = "Remember Me?"
+
+[node name="custom_ip_container" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 1424.0
+offset_top = 24.0
+offset_right = 1894.0
+offset_bottom = 90.0
+theme_override_constants/separation = 16
+
+[node name="line_edit" type="LineEdit" parent="custom_ip_container"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+placeholder_text = "127.0.0.1:3000"
+
+[node name="connect_button" type="Button" parent="custom_ip_container"]
+layout_mode = 2
+text = "Connect"
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/sign_in_button" to="." method="_on_sign_in_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer2/register_new_user_button" to="." method="_on_register_new_user_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer2/quit_button" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="custom_ip_container/connect_button" to="." method="_on_connect_button_pressed"]

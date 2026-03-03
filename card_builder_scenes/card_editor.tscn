@@ -33,9 +33,9 @@ grow_horizontal = 2
 [node name="scroll_container" type="ScrollContainer" parent="."]
 layout_mode = 0
 offset_left = 104.0
-offset_top = 128.0
-offset_right = 1816.0
-offset_bottom = 992.0
+offset_top = 104.0
+offset_right = 1824.0
+offset_bottom = 1032.0
 
 [node name="v_box_container" type="VBoxContainer" parent="scroll_container"]
 layout_mode = 2
@@ -69,7 +69,7 @@ layout_mode = 1
 [connection signal="pressed" from="back_button" to="." method="_on_back_button_pressed"]
 [connection signal="back_to_editor" from="card_image_edit" to="." method="_on_card_image_edit_back_to_editor"]
 [connection signal="imagegen_get_unit_options" from="card_image_edit" to="." method="_on_card_image_edit_imagegen_get_unit_options"]
-[connection signal="imagegen_make_unit_image" from="card_image_edit" to="." method="_on_card_image_edit_imagegen_make_unit_image"]
+[connection signal="imagegen_make_image" from="card_image_edit" to="." method="_on_card_image_edit_imagegen_make_image"]
 [connection signal="back_to_editor" from="card_name_edit" to="." method="_on_card_name_edit_back_to_editor"]
 [connection signal="save_card_name" from="card_name_edit" to="." method="_on_card_name_edit_save_card_name"]
 [connection signal="validate_card_name" from="card_name_edit" to="." method="_on_card_name_edit_validate_card_name"]

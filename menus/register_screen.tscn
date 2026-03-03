@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b728arcy5b3jo"]
+[gd_scene load_steps=5 format=3 uid="uid://b728arcy5b3jo"]
 
 [ext_resource type="Script" uid="uid://cfm53yuc4ad3e" path="res://menus/register_screen.gd" id="1_ef74y"]
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_t2bnn"]
+[ext_resource type="Texture2D" uid="uid://cscuonbas5878" path="res://assets/art/card_art/BG_3.png" id="3_mp158"]
+[ext_resource type="Texture2D" uid="uid://cdufykrexx2j3" path="res://assets/art/sigaldry.png" id="4_fj3n4"]
 
 [node name="register_screen" type="Control"]
 layout_mode = 3
@@ -13,7 +15,17 @@ grow_vertical = 2
 theme = ExtResource("1_t2bnn")
 script = ExtResource("1_ef74y")
 
+[node name="background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_mp158")
+
 [node name="background_color" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,7 +34,20 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.290196, 0.478431, 0.588235, 1)
 
+[node name="title" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -471.5
+offset_top = 23.0
+offset_right = 471.5
+offset_bottom = 319.0
+grow_horizontal = 2
+texture = ExtResource("4_fj3n4")
+
 [node name="register_label" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -32,6 +57,7 @@ offset_top = 120.0
 offset_right = 196.5
 offset_bottom = 263.0
 grow_horizontal = 2
+theme_override_constants/outline_size = 24
 theme_override_font_sizes/font_size = 120
 text = "Register"
 
@@ -57,27 +83,32 @@ layout_mode = 2
 [node name="username" type="LineEdit" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
+theme_override_constants/outline_size = 8
 placeholder_text = "username"
 
 [node name="screen_name" type="LineEdit" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
+theme_override_constants/outline_size = 8
 placeholder_text = "screen name"
 
 [node name="email" type="LineEdit" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
+theme_override_constants/outline_size = 8
 placeholder_text = "email"
 
 [node name="password" type="LineEdit" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
+theme_override_constants/outline_size = 8
 placeholder_text = "password"
 secret = true
 
 [node name="register_button" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+theme_override_constants/outline_size = 12
 text = "Register"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
@@ -88,11 +119,13 @@ alignment = 1
 [node name="return_to_login_button" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(310, 0)
 layout_mode = 2
+theme_override_constants/outline_size = 12
 text = "Return To Login"
 
 [node name="quit_button" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(310, 0)
 layout_mode = 2
+theme_override_constants/outline_size = 12
 text = "Quit
 "
 

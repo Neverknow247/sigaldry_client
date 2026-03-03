@@ -62,7 +62,12 @@ func set_grid_space(info):
 	#print(info)
 	#var grid_space = grid[info["game_y"]][info["game_x"]]
 	var grid_space = grid[info["display_y"]][info["display_x"]]
+	
 	grid_space.set_up_unit(info)
+	
+	#grid_space.set_up_unit(info)
+	
+	
 	#grid_space["control"].visible = info["occupied"]
 	#grid_space["trap"].visible = info["trapped"]
 	#grid_space["tile_id"] = info["id"]
@@ -246,7 +251,7 @@ func update_unit(info):
 	#print("*****************************************")
 	#print(info)
 	#print("*****************************************")
-	grid_space.update_unit(info)
+	grid_space.update_unit(info["unit"])
 	#grid_space["control"].visible = !info["unit"]["dead"]
 	#if !info["unit"]["dead"]:
 		#if grid_space["occupied"] == true:

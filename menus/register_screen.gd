@@ -3,7 +3,9 @@ extends Control
 var scene_name = "register"
 
 var stats = Stats
+var utils = Utils
 
+@onready var background: TextureRect = $background
 @onready var background_color = $background_color
 
 @onready var username = $CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/username
@@ -15,6 +17,7 @@ signal register(username,screen_name,password)
 signal change_screen_to_login
 
 func _ready():
+	background.texture = utils.random_background()
 	background_color.color = stats.background_color
 
 func _on_register_button_pressed():

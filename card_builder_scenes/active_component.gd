@@ -19,8 +19,8 @@ func reset_active_component():
 	queue_redraw()
 
 func create_active_component(component_payload):
-	print("******************")
-	print("here: ",component_payload)
+	#print("******************")
+	#print("here: ",component_payload)
 	height = int(component_payload["shape"].size())
 	width = int(component_payload["shape"].size())
 	shape = component_payload["shape"]

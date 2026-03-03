@@ -1,0 +1,81 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckthh455tbbug"]
+
+[ext_resource type="Script" uid="uid://cjj5pyak2xd0e" path="res://items/are_you_sure_popup.gd" id="1_jncfj"]
+
+[node name="are_you_sure_popup" type="Popup"]
+transparent_bg = true
+oversampling_override = 1.0
+initial_position = 2
+size = Vector2i(800, 400)
+visible = true
+script = ExtResource("1_jncfj")
+
+[node name="color_rect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.83500004)
+
+[node name="margin_container" type="MarginContainer" parent="color_rect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="color_rect" type="ColorRect" parent="color_rect/margin_container"]
+layout_mode = 2
+color = Color(0.60933006, 0.6093301, 0.60933006, 0.518)
+
+[node name="center_container" type="CenterContainer" parent="color_rect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="v_box_container" type="VBoxContainer" parent="color_rect/center_container"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="are_you_sure_label" type="Label" parent="color_rect/center_container/v_box_container"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 36
+text = "are you sure?"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+uppercase = true
+
+[node name="h_box_container" type="HBoxContainer" parent="color_rect/center_container/v_box_container"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="yes_button" type="Button" parent="color_rect/center_container/v_box_container/h_box_container"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 36
+text = "YES"
+
+[node name="no_button" type="Button" parent="color_rect/center_container/v_box_container/h_box_container"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 36
+text = "NO"
+
+[connection signal="pressed" from="color_rect/center_container/v_box_container/h_box_container/yes_button" to="." method="_on_yes_button_pressed"]
+[connection signal="pressed" from="color_rect/center_container/v_box_container/h_box_container/no_button" to="." method="_on_no_button_pressed"]

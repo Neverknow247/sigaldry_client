@@ -1,8 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://be8308edhjqd8"]
+[gd_scene load_steps=16 format=3 uid="uid://be8308edhjqd8"]
 
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_ij7vn"]
 [ext_resource type="Script" uid="uid://dc0qr50csa8a7" path="res://menus/main_menu.gd" id="1_lhqmb"]
+[ext_resource type="Texture2D" uid="uid://bwvq32isu6ogs" path="res://assets/art/background/main_menu_1.png" id="3_a63lr"]
 [ext_resource type="PackedScene" uid="uid://ceyfwik0cosx8" path="res://game_scenes/game_finished_screen.tscn" id="3_yjgyn"]
+[ext_resource type="Texture2D" uid="uid://cws2nkipuu40" path="res://assets/art/buttons/discord_image_3.png" id="4_a63lr"]
+[ext_resource type="Texture2D" uid="uid://b2pxo6km7g63r" path="res://assets/art/card/banners/horizontal-1.png" id="4_oblsv"]
+[ext_resource type="Texture2D" uid="uid://dagifh2heo064" path="res://assets/art/buttons/card_fusion_coming_soon_button.png" id="5_vmd75"]
+[ext_resource type="Texture2D" uid="uid://datie312cm3tv" path="res://assets/art/buttons/story_mode_updates.png" id="6_caclp"]
+[ext_resource type="Texture2D" uid="uid://cenejpiihuoth" path="res://assets/art/buttons/button.png" id="6_hswy5"]
+[ext_resource type="Texture2D" uid="uid://c83k4ap0riwso" path="res://assets/art/buttons/button_pressed.png" id="7_vmd75"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_caclp"]
+texture = ExtResource("6_hswy5")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nc6jr"]
+texture = ExtResource("7_vmd75")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hswy5"]
+texture = ExtResource("7_vmd75")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kk4mm"]
+texture = ExtResource("6_hswy5")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rx1ud"]
+texture = ExtResource("7_vmd75")
 
 [node name="main_menu" type="Control"]
 layout_mode = 3
@@ -15,7 +37,18 @@ mouse_filter = 2
 theme = ExtResource("1_ij7vn")
 script = ExtResource("1_lhqmb")
 
-[node name="background_color" type="ColorRect" parent="."]
+[node name="background" type="TextureRect" parent="."]
+self_modulate = Color(0.31061733, 0.31061703, 0.31061718, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_a63lr")
+
+[node name="background_color" type="ColorRect" parent="background"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,7 +57,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.290196, 0.478431, 0.588235, 1)
 
-[node name="fake_hud" type="ColorRect" parent="background_color"]
+[node name="fake_hud" type="ColorRect" parent="background"]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 1
 anchors_preset = 10
@@ -32,7 +65,111 @@ anchor_right = 1.0
 offset_bottom = 64.0
 grow_horizontal = 2
 
+[node name="main" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.059000004
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 0.27999496
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="color_rect" type="ColorRect" parent="main"]
+visible = false
+layout_mode = 2
+color = Color(0.42365062, 0.42365065, 0.42365062, 1)
+
+[node name="main_region" type="VBoxContainer" parent="main"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="main_margin" type="MarginContainer" parent="main/main_region"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="button_section" type="HBoxContainer" parent="main/main_region/main_margin"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="main_button" type="Button" parent="main/main_region/main_margin/button_section"]
+custom_minimum_size = Vector2(957, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+icon = ExtResource("4_a63lr")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="button_subsection" type="VBoxContainer" parent="main/main_region/main_margin/button_section"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 50
+
+[node name="button_1" type="Button" parent="main/main_region/main_margin/button_section/button_subsection"]
+layout_mode = 2
+size_flags_vertical = 3
+icon = ExtResource("5_vmd75")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="button_2" type="Button" parent="main/main_region/main_margin/button_section/button_subsection"]
+layout_mode = 2
+size_flags_vertical = 3
+icon = ExtResource("6_caclp")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="button_3" type="Button" parent="main/main_region/main_margin/button_section/button_subsection"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+icon = ExtResource("4_oblsv")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="play_section" type="HBoxContainer" parent="main/main_region"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="build_button" type="Button" parent="main/main_region/play_section"]
+custom_minimum_size = Vector2(384, 128)
+layout_mode = 2
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 55
+theme_override_styles/normal = SubResource("StyleBoxTexture_caclp")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_nc6jr")
+theme_override_styles/hover = SubResource("StyleBoxTexture_hswy5")
+text = "Build"
+
+[node name="control" type="Control" parent="main/main_region/play_section"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="fight_button" type="Button" parent="main/main_region/play_section"]
+custom_minimum_size = Vector2(384, 128)
+layout_mode = 2
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 55
+theme_override_styles/normal = SubResource("StyleBoxTexture_kk4mm")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_rx1ud")
+theme_override_styles/hover = SubResource("StyleBoxTexture_hswy5")
+text = "Fight"
+
 [node name="buttons" type="HBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -49,13 +186,13 @@ theme_override_constants/separation = 25
 [node name="search_for_a_pvp_game_button" type="Button" parent="buttons/battle"]
 custom_minimum_size = Vector2(230, 40)
 layout_mode = 2
-text = "Play PVP
+text = "Online Game
 "
 
 [node name="search_for_a_pve_game" type="Button" parent="buttons/battle"]
 custom_minimum_size = Vector2(230, 40)
 layout_mode = 2
-text = "Play PVE"
+text = "Offline"
 
 [node name="view_cards_button" type="Button" parent="buttons"]
 custom_minimum_size = Vector2(230, 40)
@@ -100,6 +237,7 @@ layout_mode = 2
 text = "Quit"
 
 [node name="rewards_box" type="HBoxContainer" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 64.0
 offset_top = 448.0
@@ -123,6 +261,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="rewards_button" type="Button" parent="."]
+visible = false
 custom_minimum_size = Vector2(0, 128)
 layout_mode = 1
 anchors_preset = 8
@@ -142,6 +281,12 @@ text = "Rewards Available!"
 visible = false
 layout_mode = 1
 
+[connection signal="pressed" from="main/main_region/main_margin/button_section/main_button" to="." method="_on_main_button_pressed"]
+[connection signal="pressed" from="main/main_region/main_margin/button_section/button_subsection/button_1" to="." method="_on_button_1_pressed"]
+[connection signal="pressed" from="main/main_region/main_margin/button_section/button_subsection/button_2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="main/main_region/main_margin/button_section/button_subsection/button_3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="main/main_region/play_section/build_button" to="." method="_on_build_button_pressed"]
+[connection signal="pressed" from="main/main_region/play_section/fight_button" to="." method="_on_fight_button_pressed"]
 [connection signal="pressed" from="buttons/battle/search_for_a_pvp_game_button" to="." method="_on_search_for_a_pvp_game_button_pressed"]
 [connection signal="pressed" from="buttons/battle/search_for_a_pve_game" to="." method="_on_search_for_a_pve_game_pressed"]
 [connection signal="pressed" from="buttons/view_cards_button" to="." method="_on_view_cards_button_pressed"]

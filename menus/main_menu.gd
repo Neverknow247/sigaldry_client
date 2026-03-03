@@ -6,18 +6,22 @@ var stats = Stats
 
 const REWARD = preload("res://items/reward.tscn")
 
-@onready var background_color = $background_color
+@onready var background_color: ColorRect = $background/background_color
 @onready var game_finished_screen = $game_finished_screen
 @onready var rewards_button: Button = $rewards_button
 
 signal logout
 signal search_for_pvp_game
 signal search_for_pve_game
+signal new_game
 signal view_all_cards
 signal start_card_builder
 signal start_card_editor
 signal start_deck_editor
 signal start_rewards_screen
+signal button_1
+signal button_2
+signal button_3
 
 func _ready():
 	background_color.color = stats.background_color
@@ -70,6 +74,7 @@ func update_rewards(payload):
 		print(reward)
 
 func check_rewards(payload):
+	return
 	#print(payload)
 	if payload["containers"].size() > 0:
 		rewards_button.show()
@@ -78,3 +83,21 @@ func check_rewards(payload):
 
 func _on_rewards_button_pressed() -> void:
 	start_rewards_screen.emit()
+
+func _on_build_button_pressed() -> void:
+	start_card_builder.emit()
+
+func _on_main_button_pressed() -> void:
+	OS.shell_open("https://discord.gg/54mqjQpK6p")
+
+func _on_fight_button_pressed() -> void:
+	new_game.emit()
+
+func _on_button_1_pressed() -> void:
+	button_1.emit()
+
+func _on_button_2_pressed() -> void:
+	button_2.emit()
+
+func _on_button_3_pressed() -> void:
+	button_3.emit()

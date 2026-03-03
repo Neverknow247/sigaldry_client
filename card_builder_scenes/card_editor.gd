@@ -9,12 +9,12 @@ const CARD_SCENE = preload("res://items/card.tscn")
 const CARD_EDITOR_CARD_SELECT = preload("res://card_builder_scenes/card_editor_card_select.tscn")
 
 signal back_to_menu
-signal imagegen_get_unit_classes_and_races(_card_id)
-signal imagegen_make_unit_image(_data)
 signal start_card_name_edit(_card_id)
 signal validate_card_name(_data)
 signal save_card_name(_data)
 signal imagegen_get_unit_options(_data)
+signal imagegen_get_requirements(_card_id,card_subtype)
+signal imagegen_make_image(_data,_card_subtype)
 
 @onready var background_color: ColorRect = $background_color
 @onready var v_box_container: VBoxContainer = $scroll_container/v_box_container
@@ -29,7 +29,9 @@ func _ready():
 
 func reset_editor():
 	card_image_edit.hide()
+	card_image_edit.full_reset()
 	card_name_edit.hide()
+	card_name_edit.reset()
 	changing_scene = false
 
 func _on_back_button_pressed() -> void:
@@ -49,7 +51,8 @@ func add_cards(payload):
 	var first_card = true
 	for card in payload["cards"]:
 		#print(card)
-		if (card["subtype"] != "unit" || card["subtype"] != "avatar") and str(card["name"]) != "<null>" and card["meta"]["can_change_name"] == false:
+		if (card["subtype"] != "unit" || card["subtype"] != "avatar" || card["subtype"] != "spell") and str(card["name"]) != "<null>":
+		#if (card["subtype"] != "unit" || card["subtype"] != "avatar" || card["subtype"] != "spell") and str(card["name"]) != "<null>" and card["meta"]["can_change_name"] == false:
 			continue
 		if card["meta"]["designer"]["user_id"] != card["meta"]["owner"]["user_id"]:
 			continue
@@ -58,7 +61,7 @@ func add_cards(payload):
 		if card_number == 0:
 			row_node = HBoxContainer.new()
 			v_box_container.add_child(row_node)
-			row_node.alignment = BoxContainer.ALIGNMENT_CENTER
+			#row_node.alignment = BoxContainer.ALIGNMENT_CENTER
 			row_node.add_theme_constant_override("separation", 25)
 		var new_card_editor_card = CARD_EDITOR_CARD_SELECT.instantiate()
 		row_node.add_child(new_card_editor_card)
@@ -69,10 +72,12 @@ func add_cards(payload):
 		if card_number == binder_width:
 			card_number = 0
 
-func start_add_card_image(card_id):
+func start_add_card_image(card_id,card_subtype):
+	#card_image_edit.full_reset()
 	if !changing_scene:
 		changing_scene = true
-		imagegen_get_unit_classes_and_races.emit(card_id)
+		imagegen_get_requirements.emit(card_id,card_subtype)
+		#imagegen_get_unit_classes_and_races.emit(card_id)
 
 #func start_card_image_editor(payload):
 	#card_image_edit.show()
@@ -94,9 +99,6 @@ func _on_card_name_edit_back_to_editor() -> void:
 	changing_scene = false
 	card_name_edit.hide()
 
-func _on_card_image_edit_imagegen_make_unit_image(_data: Variant) -> void:
-	imagegen_make_unit_image.emit(_data)
-
 func _on_card_name_edit_validate_card_name(_data: Variant) -> void:
 	validate_card_name.emit(_data)
 
@@ -105,3 +107,6 @@ func _on_card_name_edit_save_card_name(_data: Variant) -> void:
 
 func _on_card_image_edit_imagegen_get_unit_options(_data: Variant) -> void:
 	imagegen_get_unit_options.emit(_data)
+
+func _on_card_image_edit_imagegen_make_image(_data: Variant, _card_subtype: Variant) -> void:
+	imagegen_make_image.emit(_data, _card_subtype)

@@ -87,7 +87,6 @@ horizontal_alignment = 2
 
 [node name="start_color_bonus_square" parent="color_bonus_container/start_bonus_container" instance=ExtResource("4_b34p4")]
 layout_mode = 2
-mouse_filter = 2
 
 [node name="end_bonus_container" type="HBoxContainer" parent="color_bonus_container"]
 layout_mode = 2
@@ -111,6 +110,5 @@ horizontal_alignment = 2
 
 [node name="end_color_bonus_square" parent="color_bonus_container/end_bonus_container" instance=ExtResource("4_b34p4")]
 layout_mode = 2
-mouse_filter = 2
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

@@ -16,6 +16,7 @@ signal mouse_focus(_pos,_focus,card_id)
 signal add_avatar_to_new_deck(id)
 signal get_info(data)
 signal compare_card(id)
+signal start_edit_card(id)
 
 @onready var center_point: Control = $content/card_texture/center_point
 
@@ -24,13 +25,16 @@ signal compare_card(id)
 @onready var card_image = $content/card_image
 @onready var card_color_profile = $content/card_image/color_banner/card_color_profile
 @onready var color_banner_animation_player: AnimationPlayer = $content/card_image/color_banner/color_banner_animation_player
+@onready var stat_banner: TextureRect = $content/card_texture/main_banner/stat_banner
+@onready var attack_badge: TextureRect = $content/card_texture/main_banner/stat_banner/attack_badge
+@onready var health_badge: TextureRect = $content/card_texture/main_banner/stat_banner/health_badge
 @onready var card_cost = $content/labels/card_cost
 @onready var card_name = $content/labels/card_name
 #@onready var card_effects = $content/labels/card_effects
 @onready var card_attack = $content/labels/card_attack
 @onready var card_health = $content/labels/card_health
-@onready var card_type: Label = $content/card_details/card_details_background/content/card_type
-@onready var card_author: Label = $content/card_details/card_details_background/content/card_author
+@onready var card_type: Label = $content/card_texture/main_banner/stat_banner/card_type
+@onready var card_author: Label = $content/card_author
 @onready var card_actions = $content/labels/card_actions
 @onready var card_rich_effects = $content/card_rich_effects
 @onready var card_details: Control = $content/card_details
@@ -129,23 +133,57 @@ func add_details(_card_details,_is_unit = false):
 		card_name.text = ""
 	type = _card_details["subtype"]
 	card_type.text = _card_details["subtype"].capitalize()
+	hide_card_effects()
+	#print(_card_details)
 	set_card_effects(_card_details["abilities"])
 	if !_is_unit:
 		card_author.text = _card_details["meta"]["designer"]["user_name"]
 	else:
+		#print(_card_details)
+		#card_author.text = _card_details["meta"]["designer"]["user_name"]
 		card_author.text = _card_details["card"]["meta"]["designer"]["user_name"]
 	
 	
 	var default_texture
 	match _card_details["subtype"]:
-		"unit","avatar":
+		"avatar":
 			default_texture = load("res://assets/missing-images/none-unit.png")
+			stat_banner.texture = load("res://assets/art/card/banners/vertical_white.png")
+			stat_banner.self_modulate = Color("b01cff")
+			#card_actions.self_modulate = Color("b01cff")
+			card_type.self_modulate = Color("b01cff")
+			#card_texture.texture = load("res://assets/art/card/avatar-front.png")
+			#stat_banner.texture = load("res://assets/art/card/banners/vertical-avatar.png")
+		"unit":
+			default_texture = load("res://assets/missing-images/none-unit.png")
+			stat_banner.texture = load("res://assets/art/card/banners/vertical_white.png")
+			stat_banner.self_modulate = Color("919191")
+			#card_actions.self_modulate = Color("919191")
+			card_type.self_modulate = Color("919191")
+			#card_texture.texture = load("res://assets/art/card/unit-front.png")
+			#stat_banner.texture = load("res://assets/art/card/banners/vertical-unit.png")
 		"spell":
 			default_texture = load("res://assets/missing-images/none-spell.png")
+			stat_banner.texture = load("res://assets/art/card/banners/vertical_white_half.png")
+			stat_banner.self_modulate = Color("0081ffff")
+			card_type.self_modulate = Color("0081ffff")
+			#card_texture.texture = load("res://assets/art/card/spell-front.png")
+			#stat_banner.texture = load("res://assets/art/card/banners/vertical-spell.png")
 		"trap":
 			default_texture = load("res://assets/missing-images/none-trap.png")
+			stat_banner.texture = load("res://assets/art/card/banners/vertical_white_half.png")
+			stat_banner.self_modulate = Color("ff0000")
+			card_type.self_modulate = Color("ff0000")
+			#card_texture.texture = load("res://assets/art/card/trap-front.png")
+			#stat_banner.texture = load("res://assets/art/card/banners/vertical-trap.png")
+			
 		"potion":
 			default_texture = load("res://assets/missing-images/none-potion.png")
+			stat_banner.texture = load("res://assets/art/card/banners/vertical_white.png")
+			stat_banner.self_modulate = Color("00c843")
+			card_type.self_modulate = Color("00c843")
+			#card_texture.texture = load("res://assets/art/card/potion-front.png")
+			#stat_banner.texture = load("res://assets/art/card/banners/vertical-potion.png")
 	var tex = await CardArtCache.get_texture_async(str(_card_details["image"]),default_texture,true)
 	#var tex = await CardArtCache.get_texture(_card_details["image"],default_texture)
 	card_image.texture = tex
@@ -187,6 +225,12 @@ func set_card_name(_card_name):
 				#card_image.texture = load("res://assets/missing-images/none-trap.png")
 			#"potion":
 				#card_image.texture = load("res://assets/missing-images/none-potion.png")
+func hide_card_effects():
+	card_actions.hide()
+	card_attack.hide()
+	card_health.hide()
+	attack_badge.hide()
+	health_badge.hide()
 
 func set_card_effects(abilities):
 	for child in card_details_box.get_children():
@@ -196,10 +240,21 @@ func set_card_effects(abilities):
 	for ability_key in abilities:
 		var ability = abilities[ability_key]
 		match ability["name"]:
-			"attack":
+			"strength":
+				card_attack.show()
+				attack_badge.show()
 				card_attack.text = str(int(ability["value"]))
+				if int(ability["value"]) < ability["value"]:
+					card_attack.text += "+"
+				#card_attack.text = str(ability["value"])
 			"health":
+				card_health.show()
+				health_badge.show()
 				card_health.text = str(int(ability["value"])) if ability["value"] > 0 else ""
+				#print(ability)
+				if int(ability["value"]) < ability["value"]:
+					card_health.text += "+"
+				#card_health.text = str(ability["value"]) if ability["value"] > 0 else ""
 			#"actions":
 				#card_actions.size.x = 36* (ability["value"])
 				
@@ -207,7 +262,9 @@ func set_card_effects(abilities):
 				#pass
 			_:
 				if ability["name"] == "actions":
-					card_actions.size.x = 36* (ability["value"])
+					card_actions.show()
+					card_actions.size.y = 36* (ability["value"])
+					#card_actions.size.x = 36* (ability["value"])
 					if type != "potion":
 						continue
 				var ability_value
@@ -257,6 +314,8 @@ func set_avatar():
 func _on_card_button_pressed():
 	print("Card Type: ",card_button_type," | Card ID: ",card_id)
 	match card_button_type:
+		"collection":
+			start_edit_card.emit(card_id)
 		"avatar_deck_editor_in_deck":
 			pass
 		"deck_editor_in_deck":

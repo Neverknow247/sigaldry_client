@@ -60,7 +60,7 @@ func _on_submit_button_pressed() -> void:
 
 func get_info_card_name_edit(payload):
 	show()
-	print(payload)
+	#print(payload)
 	card_id = payload["def"]["id"]
 	card_preview.add_details(payload["def"])
 	card_preview.show()

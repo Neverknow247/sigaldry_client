@@ -452,6 +452,10 @@ func choose_target(payload):
 			for col in row:
 				col.disable_button(true)
 				for target in valid_targets:
+					if target["id"]==col["tile_id"]:
+						col.target_type = "tile"
+					if target["id"]==col["occupant_id"]:
+						col.target_type = "unit"
 					if target["id"]==col["tile_id"] || target["id"]==col["occupant_id"]:
 						#enable grid button and apply graphic
 						col.disable_button(false)

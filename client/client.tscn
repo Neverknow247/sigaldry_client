@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dcjo6gkd7kxtk"]
+[gd_scene load_steps=25 format=3 uid="uid://dcjo6gkd7kxtk"]
 
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_bnrmd"]
 [ext_resource type="PackedScene" uid="uid://d3qyhudrdt78l" path="res://card_builder_scenes/card_builder.tscn" id="2_g4apw"]
@@ -18,8 +18,12 @@
 [ext_resource type="PackedScene" uid="uid://ggdt2yu0srx0" path="res://deck_builder_scenes/deck_editor.tscn" id="13_sbtbl"]
 [ext_resource type="PackedScene" uid="uid://ceyfwik0cosx8" path="res://game_scenes/game_finished_screen.tscn" id="14_lsi1p"]
 [ext_resource type="PackedScene" uid="uid://cfs43teibk45h" path="res://dev_tools/dev_screen.tscn" id="14_sbtbl"]
+[ext_resource type="PackedScene" uid="uid://bw6xreugrd2md" path="res://editor_screens/editor_select_screen.tscn" id="16_c1yvc"]
 [ext_resource type="PackedScene" uid="uid://b75q21lpkrmi4" path="res://menus/rewards_screen.tscn" id="16_l1pb1"]
 [ext_resource type="PackedScene" uid="uid://dl04pl45gg4at" path="res://tools/hud.tscn" id="16_wqbiw"]
+[ext_resource type="PackedScene" uid="uid://d2kvbn45eq1vj" path="res://editor_screens/card_edit_screen.tscn" id="20_66uhf"]
+[ext_resource type="PackedScene" uid="uid://b0a2pght6n743" path="res://card_builder_scenes/card_image_edit.tscn" id="21_dajov"]
+[ext_resource type="PackedScene" uid="uid://c2mu8515uiia0" path="res://card_builder_scenes/card_name_edit.tscn" id="22_dob4x"]
 
 [node name="client" type="Control" groups=["client"]]
 layout_mode = 3
@@ -95,6 +99,10 @@ layout_mode = 1
 visible = false
 layout_mode = 1
 
+[node name="editor_select_screen" parent="scenes" instance=ExtResource("16_c1yvc")]
+visible = false
+layout_mode = 1
+
 [node name="card_editor" parent="scenes" instance=ExtResource("13_c62ra")]
 visible = false
 layout_mode = 1
@@ -104,6 +112,18 @@ visible = false
 layout_mode = 1
 
 [node name="rewards_screen" parent="scenes" instance=ExtResource("16_l1pb1")]
+visible = false
+layout_mode = 1
+
+[node name="card_edit_screen" parent="scenes" instance=ExtResource("20_66uhf")]
+visible = false
+layout_mode = 1
+
+[node name="card_image_edit" parent="scenes" instance=ExtResource("21_dajov")]
+visible = false
+layout_mode = 1
+
+[node name="card_name_edit" parent="scenes" instance=ExtResource("22_dob4x")]
 visible = false
 layout_mode = 1
 
@@ -129,13 +149,15 @@ grow_vertical = 2
 theme_override_constants/separation = 0
 
 [node name="error_label" type="Label" parent="."]
+z_index = 1000
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -20.0
+offset_top = 61.0
 offset_right = 20.0
-offset_bottom = 50.0
+offset_bottom = 119.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0.917691, 0.000458734, 0.0859799, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -146,11 +168,16 @@ visible = false
 z_index = 100
 layout_mode = 1
 
+[connection signal="change_ip" from="scenes/login_screen" to="." method="_on_login_screen_change_ip"]
 [connection signal="change_screen_to_register" from="scenes/login_screen" to="." method="_on_login_screen_change_screen_to_register"]
 [connection signal="login" from="scenes/login_screen" to="." method="_on_login_screen_login"]
 [connection signal="change_screen_to_login" from="scenes/register_screen" to="." method="_on_register_screen_change_screen_to_login"]
 [connection signal="register" from="scenes/register_screen" to="." method="_on_register_screen_register"]
+[connection signal="button_1" from="scenes/main_menu" to="." method="_on_main_menu_button_1"]
+[connection signal="button_2" from="scenes/main_menu" to="." method="_on_main_menu_button_2"]
+[connection signal="button_3" from="scenes/main_menu" to="." method="_on_main_menu_button_3"]
 [connection signal="logout" from="scenes/main_menu" to="." method="_on_main_menu_logout"]
+[connection signal="new_game" from="scenes/main_menu" to="." method="_on_main_menu_new_game"]
 [connection signal="search_for_pve_game" from="scenes/main_menu" to="." method="_on_main_menu_search_for_pve_game"]
 [connection signal="search_for_pvp_game" from="scenes/main_menu" to="." method="_on_main_menu_search_for_pvp_game"]
 [connection signal="start_card_builder" from="scenes/main_menu" to="." method="_on_main_menu_start_card_builder"]
@@ -164,12 +191,15 @@ layout_mode = 1
 [connection signal="cancel_validation" from="scenes/waiting_for_game_screen" to="." method="_on_waiting_for_game_screen_cancel_validation"]
 [connection signal="card_select" from="scenes/card_select_screen" to="." method="_on_card_select_screen_card_select"]
 [connection signal="card_select_done" from="scenes/card_select_screen" to="." method="_on_card_select_screen_card_select_done"]
-[connection signal="close_game_select" from="scenes/game_select_screen" to="." method="_on_game_select_screen_close_game_select"]
+[connection signal="look_for_game" from="scenes/game_select_screen" to="." method="_on_game_select_screen_look_for_game"]
+[connection signal="pve_game_options" from="scenes/game_select_screen" to="." method="_on_game_select_screen_pve_game_options"]
+[connection signal="pvp_game_options" from="scenes/game_select_screen" to="." method="_on_game_select_screen_pvp_game_options"]
 [connection signal="card_selected" from="scenes/game_screen" to="." method="_on_game_screen_card_selected"]
 [connection signal="concede" from="scenes/game_screen" to="." method="_on_game_screen_concede"]
 [connection signal="end_turn" from="scenes/game_screen" to="." method="_on_game_screen_end_turn"]
 [connection signal="get_info" from="scenes/game_screen" to="." method="_on_game_screen_get_info"]
 [connection signal="exit_menu" from="scenes/card_view_screen" to="." method="_on_card_view_screen_exit_menu"]
+[connection signal="start_edit_card" from="scenes/card_view_screen" to="." method="_on_card_view_screen_start_edit_card"]
 [connection signal="back_to_menu" from="scenes/card_builder" to="." method="_on_card_builder_back_to_menu"]
 [connection signal="change_name" from="scenes/card_builder" to="." method="_on_card_builder_change_name"]
 [connection signal="compare_card_select" from="scenes/card_builder" to="." method="_on_card_builder_compare_card_select"]
@@ -180,12 +210,16 @@ layout_mode = 1
 [connection signal="piece_rotate" from="scenes/card_builder" to="." method="_on_card_builder_piece_rotate"]
 [connection signal="restart" from="scenes/card_builder" to="." method="_on_card_builder_restart"]
 [connection signal="save_card" from="scenes/card_builder" to="." method="_on_card_builder_save_card"]
+[connection signal="set_new_card" from="scenes/card_builder" to="." method="_on_card_builder_set_new_card"]
 [connection signal="template_selected" from="scenes/card_builder" to="." method="_on_card_builder_template_selected"]
 [connection signal="undo" from="scenes/card_builder" to="." method="_on_card_builder_undo"]
+[connection signal="card_editor" from="scenes/editor_select_screen" to="." method="_on_editor_select_screen_card_editor"]
+[connection signal="card_fusion" from="scenes/editor_select_screen" to="." method="_on_editor_select_screen_card_fusion"]
+[connection signal="deck_editor" from="scenes/editor_select_screen" to="." method="_on_editor_select_screen_deck_editor"]
 [connection signal="back_to_menu" from="scenes/card_editor" to="." method="_on_card_editor_back_to_menu"]
-[connection signal="imagegen_get_unit_classes_and_races" from="scenes/card_editor" to="." method="_on_card_editor_imagegen_get_unit_classes_and_races"]
+[connection signal="imagegen_get_requirements" from="scenes/card_editor" to="." method="_on_card_editor_imagegen_get_requirements"]
 [connection signal="imagegen_get_unit_options" from="scenes/card_editor" to="." method="_on_card_editor_imagegen_get_unit_options"]
-[connection signal="imagegen_make_unit_image" from="scenes/card_editor" to="." method="_on_card_editor_imagegen_make_unit_image"]
+[connection signal="imagegen_make_image" from="scenes/card_editor" to="." method="_on_card_editor_imagegen_make_image"]
 [connection signal="save_card_name" from="scenes/card_editor" to="." method="_on_card_editor_save_card_name"]
 [connection signal="start_card_name_edit" from="scenes/card_editor" to="." method="_on_card_editor_start_card_name_edit"]
 [connection signal="validate_card_name" from="scenes/card_editor" to="." method="_on_card_editor_validate_card_name"]
@@ -200,9 +234,25 @@ layout_mode = 1
 [connection signal="start_create_new_deck" from="scenes/deck_editor" to="." method="_on_deck_editor_start_create_new_deck"]
 [connection signal="close_rewards" from="scenes/rewards_screen" to="." method="_on_rewards_screen_close_rewards"]
 [connection signal="selected_reward" from="scenes/rewards_screen" to="." method="_on_rewards_screen_selected_reward"]
-[connection signal="back" from="hud" to="." method="_on_hud_back"]
+[connection signal="start_fusion_edit" from="scenes/card_edit_screen" to="." method="_on_card_edit_screen_start_fusion_edit"]
+[connection signal="start_image_edit" from="scenes/card_edit_screen" to="." method="_on_card_edit_screen_start_image_edit"]
+[connection signal="start_name_edit" from="scenes/card_edit_screen" to="." method="_on_card_edit_screen_start_name_edit"]
+[connection signal="imagegen_get_unit_options" from="scenes/card_image_edit" to="." method="_on_card_image_edit_imagegen_get_unit_options"]
+[connection signal="imagegen_make_image" from="scenes/card_image_edit" to="." method="_on_card_image_edit_imagegen_make_image"]
+[connection signal="save_card_name" from="scenes/card_name_edit" to="." method="_on_card_name_edit_save_card_name"]
+[connection signal="validate_card_name" from="scenes/card_name_edit" to="." method="_on_card_name_edit_validate_card_name"]
+[connection signal="battle" from="hud" to="." method="_on_hud_battle"]
+[connection signal="build" from="hud" to="." method="_on_hud_build"]
+[connection signal="cancel" from="hud" to="." method="_on_hud_cancel"]
+[connection signal="collection" from="hud" to="." method="_on_hud_collection"]
 [connection signal="concede" from="hud" to="." method="_on_hud_concede"]
+[connection signal="edit" from="hud" to="." method="_on_hud_edit"]
+[connection signal="home" from="hud" to="." method="_on_hud_home"]
 [connection signal="logout" from="hud" to="." method="_on_hud_logout"]
+[connection signal="pve_battle" from="hud" to="." method="_on_hud_pve_battle"]
+[connection signal="pvp_battle" from="hud" to="." method="_on_hud_pvp_battle"]
+[connection signal="rewards" from="hud" to="." method="_on_hud_rewards"]
+[connection signal="user_change_account" from="hud" to="." method="_on_hud_user_change_account"]
 [connection signal="add_components" from="dev_screen" to="." method="_on_dev_screen_add_components"]
 [connection signal="add_templates" from="dev_screen" to="." method="_on_dev_screen_add_templates"]
 [connection signal="auto_login" from="dev_screen" to="." method="_on_dev_screen_auto_login"]

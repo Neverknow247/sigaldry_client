@@ -54,7 +54,7 @@ offset_left = 1461.0
 offset_top = 80.0
 offset_right = 1900.0
 offset_bottom = 146.0
-alignment = 1
+alignment = 2
 
 [node name="validate_button" type="Button" parent="buttons_container"]
 custom_minimum_size = Vector2(140, 60)
@@ -69,6 +69,7 @@ disabled = true
 text = "Submit"
 
 [node name="back_button" type="Button" parent="buttons_container"]
+visible = false
 custom_minimum_size = Vector2(140, 60)
 layout_mode = 2
 text = "Back"

@@ -31,6 +31,8 @@ const COLOR_PROFILE_SQUARE_LARGE = preload("res://items/color_profile_square_lar
 @onready var new_deck_screen = $new_deck_screen
 @onready var new_deck_name = $new_deck_screen/CenterContainer/HBoxContainer/new_deck_name
 
+@onready var cards_in_deck_count_label: Label = $cards_in_deck_count_label
+
 @onready var na_label = $new_deck_screen/CenterContainer2/HBoxContainer/VBoxContainer/na_label
 @onready var avatar_preview: Control = $new_deck_screen/CenterContainer2/HBoxContainer/VBoxContainer/CenterContainer/avatar_card_box/avatar_preview
 
@@ -49,6 +51,10 @@ func _on_back_button_pressed():
 	close_deck_editor.emit()
 
 func update_cards_in_deck(payload):
+	#print(payload)
+	if payload["cards"]:
+		cards_in_deck_count_label.text = str(int(payload["card_count"]))+"/"+\
+		str(int(payload["cards_required"]))
 	clear_cards(cards_in_deck_box)
 	if payload:
 		add_cards(cards_in_deck_box,payload,"deck_editor_in_deck")
@@ -83,7 +89,7 @@ func add_cards(parent,payload,type):
 		if card_number == 0:
 			row_node = HBoxContainer.new()
 			parent.add_child(row_node)
-			row_node.alignment = BoxContainer.ALIGNMENT_CENTER
+			#row_node.alignment = BoxContainer.ALIGNMENT_CENTER
 			row_node.add_theme_constant_override("separation",10)
 		var new_card = CARD_SCENE.instantiate()
 		row_node.add_child(new_card)
@@ -115,7 +121,7 @@ func add_unit_only_cards(parent,payload,type):
 		if card_number == 0:
 			row_node = HBoxContainer.new()
 			parent.add_child(row_node)
-			row_node.alignment = BoxContainer.ALIGNMENT_CENTER
+			#row_node.alignment = BoxContainer.ALIGNMENT_CENTER
 			row_node.add_theme_constant_override("separation",10)
 		var new_card = CARD_SCENE.instantiate()
 		row_node.add_child(new_card)
@@ -147,6 +153,7 @@ func start_deck_editor(payload):
 		pass
 
 func update_decks(payload):
+	cards_in_deck_count_label.text = ""
 	deck_select.clear()
 	deck_select.add_item("Select A Deck", -1)
 	deck_select.add_separator()

@@ -4,12 +4,12 @@
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_xc1rc"]
 [ext_resource type="Script" uid="uid://b08lga87axavw" path="res://game_scenes/battlefield.gd" id="3_am5je"]
 [ext_resource type="Texture2D" uid="uid://bu8c2odv7254p" path="res://assets/art/tiles/battlefield_3.png" id="3_nliwj"]
-[ext_resource type="PackedScene" uid="uid://bncybjplfwfu6" path="res://game_scenes/grid_space.tscn" id="5_ow6xo"]
-[ext_resource type="Texture2D" uid="uid://dd7y027ilc48f" path="res://assets/art/icons/energy_icon.png" id="5_ykyht"]
+[ext_resource type="PackedScene" uid="uid://bnrivi82xph37" path="res://game_scenes/unit.tscn" id="5_nliwj"]
 [ext_resource type="Texture2D" uid="uid://dr66ml401d1xq" path="res://assets/art/icons/cards_in_hand_icon.png" id="6_hqoc0"]
+[ext_resource type="Texture2D" uid="uid://5twys1t716cj" path="res://assets/art/game_timer_black.png" id="6_nliwj"]
 [ext_resource type="Texture2D" uid="uid://bb7rw6dflntj6" path="res://assets/art/icons/cards_in_deck_icon.png" id="7_k7dnc"]
-[ext_resource type="Texture2D" uid="uid://dyq0ntiwuu4y2" path="res://assets/art/game_timer.png" id="7_kmdyf"]
 [ext_resource type="Texture2D" uid="uid://4u7lkx0cpuoc" path="res://assets/art/icons/victory_point_icon.png" id="8_cj54s"]
+[ext_resource type="Texture2D" uid="uid://biy1cfbxa2174" path="res://assets/art/icons/energy_icon_white.png" id="11_g2dah"]
 [ext_resource type="PackedScene" uid="uid://urgkw5d0kikx" path="res://items/card_preview.tscn" id="11_tqtnu"]
 [ext_resource type="PackedScene" uid="uid://di0881y716irt" path="res://items/card.tscn" id="12_nliwj"]
 
@@ -69,7 +69,7 @@ theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 5
 
-[node name="0,0" parent="battlefield/GridContainer" instance=ExtResource("5_ow6xo")]
+[node name="unit" parent="battlefield/GridContainer" instance=ExtResource("5_nliwj")]
 layout_mode = 2
 
 [node name="turn_timer" type="Control" parent="battlefield"]
@@ -83,6 +83,15 @@ offset_top = -8.0
 offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="timer_background" type="ColorRect" parent="battlefield/turn_timer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="turn_timer_left" type="ProgressBar" parent="battlefield/turn_timer"]
 layout_mode = 1
@@ -126,7 +135,7 @@ offset_left = 658.0
 offset_top = -28.0
 offset_right = 722.0
 offset_bottom = 36.0
-texture = ExtResource("7_kmdyf")
+texture = ExtResource("6_nliwj")
 
 [node name="turn_timer_count" type="Label" parent="battlefield/turn_timer/turn_timer_graphic"]
 layout_mode = 1
@@ -135,7 +144,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "96"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -208,7 +216,7 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="side_panel/side_tabs/Game/enemy_panel/energy"]
 layout_mode = 2
-texture = ExtResource("5_ykyht")
+texture = ExtResource("11_g2dah")
 expand_mode = 3
 
 [node name="enemy_energy" type="Label" parent="side_panel/side_tabs/Game/enemy_panel/energy"]
@@ -308,7 +316,7 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="side_panel/side_tabs/Game/player_panel/info/energy"]
 layout_mode = 2
-texture = ExtResource("5_ykyht")
+texture = ExtResource("11_g2dah")
 expand_mode = 3
 
 [node name="my_energy" type="Label" parent="side_panel/side_tabs/Game/player_panel/info/energy"]

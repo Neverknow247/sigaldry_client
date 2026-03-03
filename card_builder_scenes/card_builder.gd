@@ -3,23 +3,51 @@ extends Control
 var scene_name = "card_builder"
 
 var stats = Stats
+var utils = Utils
 
 var KEYWORD_GLOSS = KeyWordGlossary
 
+const ARE_YOU_SURE_POPUP = preload("res://items/are_you_sure_popup.tscn")
 const COLOR_PROFILE_SQUARE_LARGE = preload("res://items/color_profile_square_large.tscn")
 const COMPONENT_BUTTON = preload("res://card_builder_scenes/component_button.tscn")
 
+@onready var red_button: CheckButton = $grid_container/red_button
+@onready var orange_button: CheckButton = $grid_container/orange_button
+@onready var yellow_button: CheckButton = $grid_container/yellow_button
+@onready var green_button: CheckButton = $grid_container/green_button
+@onready var blue_button: CheckButton = $grid_container/blue_button
+@onready var purple_button: CheckButton = $grid_container/purple_button
+@onready var white_button: CheckButton = $grid_container/white_button
+@onready var black_button: CheckButton = $grid_container/black_button
+@onready var gray_button: CheckButton = $grid_container/gray_button
+@onready var brown_button: CheckButton = $grid_container/brown_button
+@onready var pink_button: CheckButton = $grid_container/pink_button
+@onready var all_button: CheckButton = $grid_container/all_button
+
+@onready var all_color_buttons = [
+	red_button,orange_button,yellow_button,green_button,blue_button,
+	purple_button,white_button,black_button,gray_button,brown_button,
+	pink_button,all_button
+]
+
 @onready var next_bonuses = {
-	"r" : $card_grid/next_bonus_row/color_bonus_square,
-	"o" : $card_grid/next_bonus_row/color_bonus_square2,
-	"y" : $card_grid/next_bonus_row/color_bonus_square3,
-	"g" : $card_grid/next_bonus_row/color_bonus_square4,
-	"u" : $card_grid/next_bonus_row/color_bonus_square5,
-	"p" : $card_grid/next_bonus_row/color_bonus_square6,
-	"w" : $card_grid/next_bonus_row/color_bonus_square7,
-	"b" : $card_grid/next_bonus_row/color_bonus_square8,
-	"a" : $card_grid/next_bonus_row/color_bonus_square9
+	"r" : $next_bonus_row/color_bonus_square,
+	"o" : $next_bonus_row/color_bonus_square2,
+	"y" : $next_bonus_row/color_bonus_square3,
+	"g" : $next_bonus_row/color_bonus_square4,
+	"u" : $next_bonus_row/color_bonus_square5,
+	"p" : $next_bonus_row/color_bonus_square6,
+	"w" : $next_bonus_row/color_bonus_square7,
+	"b" : $next_bonus_row/color_bonus_square8,
+	"a" : $next_bonus_row/color_bonus_square9,
+	"n" : $next_bonus_row/color_bonus_square9,
+	"k" : $next_bonus_row/color_bonus_square9,
 }
+
+@onready var start_color_square: ColorRect = $start_end_colors/start_color/start_color_square
+@onready var start_color_label: Label = $start_end_colors/start_color/start_color_square/start_color_label
+@onready var end_color_square: ColorRect = $start_end_colors/end_color/end_color_square
+@onready var end_color_label: Label = $start_end_colors/end_color/end_color_square/end_color_label
 
 signal back_to_menu
 signal template_selected(id)
@@ -35,6 +63,7 @@ signal move_set(data)
 signal undo
 signal restart
 signal compare_card_select
+signal set_new_card(_new_card)
 
 @onready var background_color = $background_color
 @onready var template_select_background: ColorRect = $template_select_overlay/template_select_background
@@ -45,7 +74,7 @@ signal compare_card_select
 
 @onready var card_grid = $card_grid
 @onready var active_component = $card_grid/active_component
-@onready var next_bonus_row = $card_grid/next_bonus_row
+@onready var next_bonus_row = $next_bonus_row
 
 #@onready var template_select = $template_select
 
@@ -70,6 +99,7 @@ var selected_template_num = 0
 var selected_template_type = ""
 var active_component_id = 0
 var infinity_symbol = char(8734)
+var new_card = true
 
 var components_color_dict = {
 	"red":false,
@@ -80,7 +110,9 @@ var components_color_dict = {
 	"purple":false,
 	"white":false,
 	"black":false,
-	"gray":false
+	"gray":false,
+	"brown":false,
+	"pink":false
 }
 
 func _ready():
@@ -110,6 +142,8 @@ func reset_card_builder():
 	#template_select.selected = 0
 	card_grid.reset_card_grid()
 	active_component.reset_active_component()
+	card_select_screen.hide()
+	compare_card.hide()
 
 var templates_dict = {}
 
@@ -117,7 +151,6 @@ func load_build_templates(payload):
 	template_select_overlay.set_templates_dict(payload["templates"])
 
 func load_builder_components(payload):
-	#print(payload)
 	var component_container_children = component_v_box.get_children()
 	for child in component_container_children:
 		child.queue_free()
@@ -132,45 +165,41 @@ func load_builder_components(payload):
 					continue
 			#if component["disabled"] or !KEYWORD_GLOSS.neverknow_approved_items.has(component["name"]):
 				#continue
-			print("**********************")
-			print(component)
-			print("**********************")
+			#print("**********************")
+			#print(component)
+			#print("**********************")
 			
 			var new_component_button = COMPONENT_BUTTON.instantiate()
 			component_v_box.add_child(new_component_button)
 			var button_text_array = component["name"].capitalize().split(" ", true, 2)
-			#print(button_text_array[1])
-			var modified_bonus = float(button_text_array[1]) + (float(button_text_array[1]) * component["bonus"])
-			new_component_button.button_label.text = button_text_array[0]+" "+button_text_array[1]
-			#if float(button_text_array[1]) != modified_bonus:
-			new_component_button.modifier_label.text = "+"+str(modified_bonus)
-			#else:
-				#new_component_button.modifier_label.text = ""
+			if button_text_array.size() > 1:
+				var modified_bonus = float(button_text_array[1]) + (float(button_text_array[1]) * component["bonus"])
+				new_component_button.button_label.text = button_text_array[0]+" "+button_text_array[1]
+				new_component_button.modifier_label.text = "+"+str(modified_bonus)
+			else:
+				new_component_button.button_label.text = button_text_array[0]
+				new_component_button.modifier_label.text = ""
 			#new_component_button.text = "\n"+component["name"].capitalize()
 			new_component_button.cost_label.text = str(component["cost"])
 			#new_component_button.text = str(int(component["cost"]))+"\n"+component["name"].capitalize()
 			new_component_button.amount_label.text = infinity_symbol if component["always_available"] else "X"+str(int(component["available"])-int(component["used"]))
-			#new_component_button.amount_label.text = "X"+str(int(component["amount"]))
-			#print(KEYWORD_GLOSS["key_glossary"])
-			#if KEYWORD_GLOSS["key_glossary"].has([component["abilities"][0]["key"]]):
-			
-			#new_component_button.tooltip_text = KEYWORD_GLOSS["key_glossary"][component["abilities"][0]["key"]]["description"]
 			var _tooltip_text = ""
-			var words = KeyWordGlossary.key_glossary[component["abilities"][0]["key"]]["description"].split(" ")
-			for word in words:
-				var is_dependent = false
-				var dependent_keyword
-				var dependent_key
-				if word[0] == "<": #and word[word.length()-1] == ">":
-					#var key = word.substr(1,word.length() - 2)
-					var key = word.substr(1,word.length() - (word.length() - word.find(">")) -1)
-					is_dependent = true
-					dependent_key = key
-					dependent_keyword = KeyWordGlossary.key_glossary[key]["name"]
-				if is_dependent:
-					_tooltip_text += dependent_keyword.capitalize() + " "
-				else:
-					_tooltip_text += word + " "
+			if component["abilities"].size() > 0:
+				var words = KeyWordGlossary.key_glossary[component["abilities"][0]["key"]]["description"].split(" ")
+				for word in words:
+					var is_dependent = false
+					var dependent_keyword
+					var dependent_key
+					if word[0] == "<": #and word[word.length()-1] == ">":
+						#var key = word.substr(1,word.length() - 2)
+						var key = word.substr(1,word.length() - (word.length() - word.find(">")) -1)
+						is_dependent = true
+						dependent_key = key
+						dependent_keyword = KeyWordGlossary.key_glossary[key]["name"]
+					if is_dependent:
+						_tooltip_text += dependent_keyword.capitalize() + " "
+					else:
+						_tooltip_text += word + " "
 			new_component_button.tooltip_text = _tooltip_text
 			
 			
@@ -217,8 +246,8 @@ func set_up_component_select():
 			component.hide()
 
 func card_builder_update_grid(payload):
+	#print(payload["components"])
 	if payload:
-		#print("update grid: ",payload)
 		card_grid.create_card_grid(payload["grid"],payload["components"])
 		if payload["active_component"]:
 			card_grid.create_component_shapes(payload["active_component"])
@@ -228,11 +257,15 @@ func card_builder_update_grid(payload):
 		update_next_color_bonus(payload["last_color"])
 
 func card_builder_update_card(payload):
+	#print(payload)
 	if payload["card"] == null:
 		return
 	var card_payload = payload
 	card_payload["id"] = payload["card"]["id"]
-	#print(payload)
+	if payload["card"]["meta"]["designer"]["user_id"] != 0:
+		new_card = false
+	else:
+		new_card = true
 	#print("HERE IS WHERE I NEED AN UPDATE:")
 	card_preview.show()
 	reset_card()
@@ -244,7 +277,6 @@ func update_next_color_bonus(last_color):
 	if !last_color:
 		next_bonus_row.hide()
 		return
-	print("Last Color: ",last_color["bonus_to"])
 	next_bonus_row.show()
 	for color in last_color["bonus_to"]:
 		next_bonuses[color].bonus_color.color = stats.COLOR_KEY[color]
@@ -263,9 +295,6 @@ func update_next_color_bonus(last_color):
 				next_bonuses[color].bonus_label.text = "100%"
 			_:
 				print("Unused Bonus: ",str(last_color["bonus_to"][color]))
-				#print(str(last_color["bonus_to"][color]))
-		#next_bonuses[color].bonus_label.text = str(last_color["bonus_to"][color])
-		#next_bonuses[color].bonus_label.text = str(int(last_color["bonus_to"][color]))
 
 func on_component_selected(id):
 	active_component_id = id
@@ -274,13 +303,11 @@ func on_component_selected(id):
 func _on_clear_component_piece_button_pressed():
 	component_removed.emit()
 
-#func _on_place_component_button_pressed():
-	#place_component.emit()
-
 func _on_save_button_pressed():
-	save_card.emit()
-	#if $card_preview/name_card_edit.text != "":
-		#save_card.emit()
+	var popup_window = utils.instantiate_popup_on_world(ARE_YOU_SURE_POPUP)
+	popup_window.are_you_sure_label.text = "are you sure you want to save this card?"
+	popup_window.connect("yes",save_card.emit)
+	set_new_card.emit(new_card)
 
 func reset_card():
 	card_name.text = ""
@@ -333,19 +360,33 @@ func _on_compare_card_select_button_pressed():
 	compare_card_select.emit()
 
 func view_cards(payload):
-	#print("compare_card: ",payload," ******")
 	card_select_screen.show()
-	card_compare_screen.add_cards(payload)
+	card_compare_screen.add_cards(payload["cards"])
 
 func close():
 	card_select_screen.hide()
 	compare_card.hide()
 
-func _on_template_select_overlay_template_selected(template_id: Variant, template_type: Variant) -> void:
+func _on_template_select_overlay_template_selected(template_id: Variant, template_type: Variant, start_color: Variant, end_color: Variant) -> void:
+	set_up_color_squares(start_color,end_color)
 	selected_template_num = template_id
 	selected_template_type = template_type
 	template_selected.emit(template_id)
 	template_select_overlay.hide()
+
+func set_up_color_squares(start_color,end_color):
+	if start_color:
+		start_color_square.color = stats.COLOR_KEY[start_color]
+		start_color_label.text = start_color.capitalize()
+	else:
+		start_color_square.color = Color(0.0, 0.0, 0.0, 0.0)
+		start_color_label.text = "N/A"
+	if end_color:
+		end_color_square.color = stats.COLOR_KEY[end_color]
+		end_color_label.text = end_color.capitalize()
+	else:
+		end_color_square.color = Color(0.0, 0.0, 0.0, 0.0)
+		end_color_label.text = "N/A"
 
 func _on_red_button_toggled(toggled_on: bool) -> void:
 	components_color_dict["red"] = toggled_on
@@ -379,6 +420,18 @@ func _on_black_button_toggled(toggled_on: bool) -> void:
 	components_color_dict["black"] = toggled_on
 	set_up_component_select()
 
-func _on_grey_button_toggled(toggled_on: bool) -> void:
+func _on_gray_button_toggled(toggled_on: bool) -> void:
 	components_color_dict["gray"] = toggled_on
 	set_up_component_select()
+
+func _on_brown_button_toggled(toggled_on: bool) -> void:
+	components_color_dict["brown"] = toggled_on
+	set_up_component_select()
+
+func _on_pink_button_toggled(toggled_on: bool) -> void:
+	components_color_dict["pink"] = toggled_on
+	set_up_component_select()
+
+func _on_all_button_toggled(toggled_on: bool) -> void:
+	for button in all_color_buttons:
+		button.button_pressed = toggled_on

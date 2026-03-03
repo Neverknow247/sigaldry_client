@@ -2,6 +2,20 @@ extends Node
 
 const TOOLTIP_SCENE = preload("res://items/tooltip.tscn")
 
+const AETHERGLACE_TUNDRA = preload("res://assets/art/background/aetherglace_tundra.png")
+const ASHREND_STEPPE = preload("res://assets/art/background/ashrend_steppe.png")
+const CRUCIBLE = preload("res://assets/art/background/crucible.png")
+const DUNESMAR = preload("res://assets/art/background/dunesmar.png")
+const EVERSPRING_VALE = preload("res://assets/art/background/everspring_vale.png")
+const FLORENTIDE = preload("res://assets/art/background/florentide.png")
+const SERAPHELLE = preload("res://assets/art/background/seraphelle.png")
+const UMBRAVEIL = preload("res://assets/art/background/umbraveil.png")
+
+var backgrounds = [
+	AETHERGLACE_TUNDRA,ASHREND_STEPPE,CRUCIBLE,DUNESMAR,
+	EVERSPRING_VALE,FLORENTIDE,SERAPHELLE,UMBRAVEIL
+]
+
 var tooltips
 
 var persistant_popups = true
@@ -52,3 +66,21 @@ func clear_tooltips():
 		for child in tooltips.get_children():
 			tooltips.remove_child(child)
 			child.queue_free()
+
+func instantiate_scene_on_world(scene:PackedScene, position:Vector2):
+	var world = get_tree().current_scene
+	var instance = scene.instantiate()
+	world.add_child(instance)
+	instance.global_position = position
+	return instance
+
+func instantiate_popup_on_world(scene:PackedScene):
+	var world = get_tree().current_scene
+	var instance = scene.instantiate()
+	world.add_child(instance)
+	return instance
+
+func random_background():
+	var rand = Stats.rng.randi_range(0,backgrounds.size()-1)
+	return backgrounds[rand]
+	

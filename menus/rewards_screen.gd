@@ -58,6 +58,15 @@ func show_rewards(payload):
 		new_reward.label.text = reward["name"]
 		new_reward.reward_shape_grid.create_template_shapes(reward["component_grid"])
 		new_reward.set_rarity_label(reward["rarity"])
+		new_reward.color_bonuses.show()
+		new_reward.start_color.hide()
+		new_reward.end_color.hide()
+		if str(reward["start_color"]) != "<null>":
+			new_reward.start_color.color = stats["COLOR_KEY"][reward["start_color"]]
+			new_reward.start_color.show()
+		if str(reward["end_color"]) != "<null>":
+			new_reward.end_color.color = stats["COLOR_KEY"][reward["end_color"]]
+			new_reward.end_color.show()
 	var component_rewards = payload["rewards"]["components"]
 	component_rewards.shuffle()
 	for reward in component_rewards:
@@ -67,3 +76,4 @@ func show_rewards(payload):
 		new_reward.label.text = reward["name"]
 		new_reward.reward_shape_grid.create_component_shapes(reward)
 		new_reward.set_rarity_label(reward["rarity"])
+		new_reward.color_bonuses.hide()

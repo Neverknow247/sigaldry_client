@@ -61,3 +61,51 @@ offset_bottom = -8.0
 grow_horizontal = 0
 grow_vertical = 2
 script = ExtResource("3_586vq")
+
+[node name="color_bonuses" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = 8.0
+offset_right = -16.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="start_color" type="ColorRect" parent="color_bonuses"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="start_color_label" type="Label" parent="color_bonuses/start_color"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 23
+text = "S"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="end_color" type="ColorRect" parent="color_bonuses"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="end_color_label" type="Label" parent="color_bonuses/end_color"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 23
+text = "E"
+horizontal_alignment = 1
+vertical_alignment = 1

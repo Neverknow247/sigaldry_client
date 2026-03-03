@@ -1,8 +1,34 @@
-[gd_scene load_steps=9 format=3 uid="uid://dl04pl45gg4at"]
+[gd_scene load_steps=29 format=3 uid="uid://dl04pl45gg4at"]
 
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_npvic"]
 [ext_resource type="Script" uid="uid://cnk53oj8mhcb0" path="res://tools/hud.gd" id="2_toebf"]
-[ext_resource type="Texture2D" uid="uid://bagqh4l2nwgsu" path="res://assets/art/icons/cog.png" id="3_8uqv4"]
+[ext_resource type="Texture2D" uid="uid://unb5m6kibxyv" path="res://assets/art/background/hud_2.png" id="3_8lntg"]
+[ext_resource type="Texture2D" uid="uid://bmnoxmfj2faj" path="res://assets/art/hud_icons/pve_1.png" id="4_8lntg"]
+[ext_resource type="Texture2D" uid="uid://ys5ts3kp6c3h" path="res://assets/art/hud_icons/pvp_1.png" id="4_54lcn"]
+[ext_resource type="Texture2D" uid="uid://ci50d7085qowb" path="res://assets/art/icons/larger_icons/Icon_Currency_Amethyst.png" id="6_54lcn"]
+[ext_resource type="Texture2D" uid="uid://cxm525m8jfyku" path="res://assets/art/icons/larger_icons/Icon_Currency_GoldCoin.png" id="7_54lcn"]
+[ext_resource type="Texture2D" uid="uid://bbfqisbvcdha2" path="res://assets/art/icons/larger_icons/Icon_Currency_Diamond.png" id="8_2mayt"]
+[ext_resource type="Texture2D" uid="uid://c3ey8kg8rjwwv" path="res://assets/art/icons/larger_icons/cancel_button_icon.png" id="9_54lcn"]
+[ext_resource type="Texture2D" uid="uid://dy37sovym653" path="res://assets/art/icons/larger_icons/home_button.png" id="10_2mayt"]
+[ext_resource type="Texture2D" uid="uid://cr68hf12q5afl" path="res://assets/art/icons/larger_icons/Icon_Weapon_Grimoire.png" id="11_63t6x"]
+[ext_resource type="Texture2D" uid="uid://crn5tsuscu0tg" path="res://assets/art/icons/builder_rune.png" id="12_54lcn"]
+[ext_resource type="Texture2D" uid="uid://bp2j4vrauyfip" path="res://assets/art/icons/deck_of_cards.png" id="13_54lcn"]
+[ext_resource type="Shader" uid="uid://dusqnr1fjcodt" path="res://tools/notification_glow.gdshader" id="13_yap0p"]
+[ext_resource type="Texture2D" uid="uid://c1lm6ngxhilyp" path="res://assets/art/icons/notification_icon.png" id="14_11pgm"]
+[ext_resource type="Texture2D" uid="uid://c434dfdymc2py" path="res://assets/art/icons/larger_icons/Icon_Weapon_ShortSword.png" id="14_lg682"]
+[ext_resource type="Script" uid="uid://022yctqft4iu" path="res://REMOVE/notification.gd" id="15_11pgm"]
+[ext_resource type="Texture2D" uid="uid://bcgi0rlrnmx52" path="res://assets/art/icons/larger_icons/Icon_Quest_TreasureBox.png" id="15_qdxu7"]
+[ext_resource type="Texture2D" uid="uid://onxjjyty70no" path="res://assets/art/icons/larger_icons/Icon_Currency_Pouch.png" id="19_urpyl"]
+[ext_resource type="Texture2D" uid="uid://24t41e8oggij" path="res://assets/art/icons/larger_icons/Icon_Armor_WizardHat2.png" id="20_utjxi"]
+[ext_resource type="Texture2D" uid="uid://q4y2ddgryd7j" path="res://assets/art/icons/cog_2.png" id="21_54lcn"]
+
+[sub_resource type="Environment" id="Environment_tenk1"]
+background_mode = 3
+glow_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_11pgm"]
+shader = ExtResource("13_yap0p")
+shader_parameter/glow_strength = 2.50000011875
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_onhpx"]
 
@@ -36,20 +62,114 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.235294, 0.235294, 0.235294, 1)
 
+[node name="background" type="TextureRect" parent="."]
+modulate = Color(0.3217278, 0.321728, 0.32172793, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_8lntg")
+expand_mode = 1
+
+[node name="player_info" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 63)
+layout_mode = 0
+offset_left = 8.0
+offset_right = 744.0
+offset_bottom = 64.0
+theme_override_constants/separation = 10
+
+[node name="pve_rank_icon" type="TextureRect" parent="player_info"]
+layout_mode = 2
+tooltip_text = "PVE Rank"
+texture = ExtResource("4_8lntg")
+
+[node name="pve_rank_label" type="Label" parent="player_info/pve_rank_icon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 42
+text = "1"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="pve_button" type="Button" parent="player_info/pve_rank_icon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="pvp_rank_icon" type="TextureRect" parent="player_info"]
+layout_mode = 2
+tooltip_text = "PVP Rank"
+texture = ExtResource("4_54lcn")
+
+[node name="pvp_rank_label" type="Label" parent="player_info/pvp_rank_icon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 42
+text = "1"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="pvp_button" type="Button" parent="player_info/pvp_rank_icon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="screen_name_label" type="Label" parent="player_info"]
+layout_mode = 2
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 40
+text = "000000000000000000000000000000"
+vertical_alignment = 1
+
 [node name="resources" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.83300006
 anchor_right = 0.9620001
 anchor_bottom = 1.0
-offset_left = 0.6398926
+offset_left = -214.3601
 offset_top = -1.0
-offset_right = 0.95983887
+offset_right = -207.04016
 offset_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_constants/separation = 32
 alignment = 2
+
+[node name="fusion_crystals" type="HBoxContainer" parent="resources"]
+layout_mode = 2
+
+[node name="fusion_icon" type="TextureRect" parent="resources/fusion_crystals"]
+layout_mode = 2
+tooltip_text = "Fusion Crystals"
+texture = ExtResource("6_54lcn")
+expand_mode = 3
+
+[node name="fusion_number" type="Label" parent="resources/fusion_crystals"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 44
+text = "0"
 
 [node name="materials" type="VBoxContainer" parent="resources"]
 layout_mode = 2
@@ -58,7 +178,14 @@ alignment = 1
 [node name="standard_materials" type="HBoxContainer" parent="resources/materials"]
 layout_mode = 2
 
+[node name="standard_icon" type="TextureRect" parent="resources/materials/standard_materials"]
+layout_mode = 2
+tooltip_text = "Gold"
+texture = ExtResource("7_54lcn")
+expand_mode = 3
+
 [node name="standard_label" type="Label" parent="resources/materials/standard_materials"]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "M:"
@@ -71,7 +198,14 @@ text = "100000000"
 [node name="premium_materials" type="HBoxContainer" parent="resources/materials"]
 layout_mode = 2
 
+[node name="premium_icon" type="TextureRect" parent="resources/materials/premium_materials"]
+layout_mode = 2
+tooltip_text = "Diamonds"
+texture = ExtResource("8_2mayt")
+expand_mode = 3
+
 [node name="premium_label" type="Label" parent="resources/materials/premium_materials"]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "P:"
@@ -81,19 +215,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "100000000"
 
-[node name="screen_name_label" type="Label" parent="."]
-custom_minimum_size = Vector2(160, 48)
-layout_mode = 0
-offset_left = 16.0
-offset_right = 640.0
-offset_bottom = 63.0
-theme_override_constants/line_spacing = 0
-theme_override_font_sizes/font_size = 40
-text = "000000000000000000000000000000"
-vertical_alignment = 1
-autowrap_mode = 3
-
-[node name="h_box_container" type="HBoxContainer" parent="."]
+[node name="menu_buttons" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -106,41 +228,183 @@ offset_right = 37.0
 offset_bottom = 26.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 
-[node name="back_button" type="Button" parent="h_box_container"]
-custom_minimum_size = Vector2(105, 0)
+[node name="cancel_button" type="Button" parent="menu_buttons"]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+tooltip_text = "Cancel"
+theme_type_variation = &"FlatButton"
 theme_override_font_sizes/font_size = 32
-text = "Back"
+icon = ExtResource("9_54lcn")
+flat = true
+expand_icon = true
 
-[node name="settings_button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 1860.0
+[node name="home_button" type="Button" parent="menu_buttons"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+tooltip_text = "Home"
+theme_type_variation = &"FlatButton"
+theme_override_font_sizes/font_size = 32
+icon = ExtResource("10_2mayt")
+flat = true
+expand_icon = true
+
+[node name="collection_button" type="Button" parent="menu_buttons"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+tooltip_text = "Collection"
+theme_type_variation = &"FlatButton"
+theme_override_font_sizes/font_size = 32
+icon = ExtResource("11_63t6x")
+flat = true
+expand_icon = true
+
+[node name="builder_button" type="Button" parent="menu_buttons"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+tooltip_text = "Builder"
+theme_type_variation = &"FlatButton"
+theme_override_font_sizes/font_size = 32
+icon = ExtResource("12_54lcn")
+flat = true
+expand_icon = true
+
+[node name="editor_button" type="Button" parent="menu_buttons"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+tooltip_text = "Deck Editor"
+theme_type_variation = &"FlatButton"
+theme_override_font_sizes/font_size = 32
+icon = ExtResource("13_54lcn")
+flat = true
+expand_icon = true
+
+[node name="battle_button" type="Button" parent="menu_buttons"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+tooltip_text = "Battle"
+theme_type_variation = &"FlatButton"
+theme_override_font_sizes/font_size = 32
+icon = ExtResource("14_lg682")
+flat = true
+expand_icon = true
+
+[node name="world_environment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tenk1")
+
+[node name="main_buttons" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
 offset_top = 4.0
-offset_right = 1916.0
-offset_bottom = 60.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 2
+alignment = 2
+
+[node name="rewards_button" type="Button" parent="main_buttons"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+tooltip_text = "Rewards"
+theme_type_variation = &"FlatButton"
+theme_override_font_sizes/font_size = 32
+icon = ExtResource("15_qdxu7")
+flat = true
+expand_icon = true
+
+[node name="control" type="Control" parent="main_buttons/rewards_button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="reward_notification" type="TextureRect" parent="main_buttons/rewards_button/control"]
+material = SubResource("ShaderMaterial_11pgm")
+layout_mode = 0
+offset_left = -14.0
+offset_top = 18.0
+offset_right = 14.0
+offset_bottom = 46.0
+mouse_filter = 2
+texture = ExtResource("14_11pgm")
+expand_mode = 3
+script = ExtResource("15_11pgm")
+pulse_speed = 1.2
+glow_min = 1.5
+ease_power = 2.5
+
+[node name="shop_button" type="Button" parent="main_buttons"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+tooltip_text = "Store"
+theme_type_variation = &"FlatButton"
+theme_override_font_sizes/font_size = 32
+icon = ExtResource("19_urpyl")
+flat = true
+expand_icon = true
+
+[node name="profile_button" type="Button" parent="main_buttons"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+tooltip_text = "Profile"
+theme_type_variation = &"FlatButton"
+theme_override_font_sizes/font_size = 32
+disabled = true
+icon = ExtResource("20_utjxi")
+flat = true
+expand_icon = true
+
+[node name="settings" type="Control" parent="main_buttons"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="settings_button" type="Button" parent="main_buttons/settings"]
+layout_mode = 0
+offset_right = 56.0
+offset_bottom = 56.0
+tooltip_text = "Settings"
 theme_override_styles/normal = SubResource("StyleBoxEmpty_onhpx")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_cfvk6")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_4f0ee")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_3bjwa")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_2bmni")
 toggle_mode = true
-icon = ExtResource("3_8uqv4")
+icon = ExtResource("21_54lcn")
 icon_alignment = 1
 
-[node name="settings_dropdown" type="PopupMenu" parent="."]
+[node name="settings_dropdown" type="PopupMenu" parent="main_buttons/settings"]
 oversampling_override = 1.0
-position = Vector2i(1735, 16)
+position = Vector2i(1720, 32)
 size = Vector2i(164, 194)
 item_count = 3
 item_0/text = "Settings"
 item_0/id = 3
+item_0/disabled = true
 item_1/text = "Logout"
 item_1/id = 1
 item_2/text = "Quit"
 item_2/id = 0
 
-[connection signal="pressed" from="h_box_container/back_button" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="settings_button" to="." method="_on_settings_button_pressed"]
-[connection signal="toggled" from="settings_button" to="." method="_on_settings_button_toggled"]
-[connection signal="index_pressed" from="settings_dropdown" to="." method="_on_settings_dropdown_index_pressed"]
+[connection signal="pressed" from="player_info/pve_rank_icon/pve_button" to="." method="_on_pve_button_pressed"]
+[connection signal="pressed" from="player_info/pvp_rank_icon/pvp_button" to="." method="_on_pvp_button_pressed"]
+[connection signal="pressed" from="menu_buttons/cancel_button" to="." method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="menu_buttons/home_button" to="." method="_on_home_button_pressed"]
+[connection signal="pressed" from="menu_buttons/collection_button" to="." method="_on_collection_button_pressed"]
+[connection signal="pressed" from="menu_buttons/builder_button" to="." method="_on_builder_button_pressed"]
+[connection signal="pressed" from="menu_buttons/editor_button" to="." method="_on_editor_button_pressed"]
+[connection signal="pressed" from="menu_buttons/battle_button" to="." method="_on_battle_button_pressed"]
+[connection signal="pressed" from="main_buttons/rewards_button" to="." method="_on_rewards_button_pressed"]
+[connection signal="pressed" from="main_buttons/profile_button" to="." method="_on_profile_button_pressed"]
+[connection signal="pressed" from="main_buttons/settings/settings_button" to="." method="_on_settings_button_pressed"]
+[connection signal="toggled" from="main_buttons/settings/settings_button" to="." method="_on_settings_button_toggled"]
+[connection signal="index_pressed" from="main_buttons/settings/settings_dropdown" to="." method="_on_settings_dropdown_index_pressed"]

@@ -31,8 +31,8 @@ func reset():
 	finish_selection_screen_2.hide()
 
 func update_cards(payload):
-	for i in payload:
-		print(i)
+	#for i in payload:
+		#print(i)
 	$Label.text = "Select up to %s cards for your opening hand"%[str(int(payload["max_cards"]))]
 	for n in select_container.get_children():
 		select_container.remove_child(n)

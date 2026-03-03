@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://d3qyhudrdt78l"]
+[gd_scene load_steps=67 format=3 uid="uid://d3qyhudrdt78l"]
 
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_jhejr"]
 [ext_resource type="Script" uid="uid://b204xh82wwll" path="res://card_builder_scenes/card_builder.gd" id="1_t82xy"]
@@ -8,10 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://bsgob0n35w5qe" path="res://card_builder_scenes/next_bonus_row.tscn" id="5_ntmml"]
 [ext_resource type="PackedScene" uid="uid://6qvg33j8nb5a" path="res://items/color_profile_square_large.tscn" id="6_1sycy"]
 [ext_resource type="Script" uid="uid://b4p33ccxv3uyk" path="res://card_builder_scenes/card_compare_select_screen.gd" id="7_8oy6r"]
-[ext_resource type="Texture2D" uid="uid://bshu3o85op7sq" path="res://assets/art/test.png" id="8_q08ur"]
 [ext_resource type="Theme" uid="uid://by8ew0t4rulwy" path="res://assets/themes/card_theme.tres" id="9_c4brr"]
 [ext_resource type="Texture2D" uid="uid://p6xjhte5i6uv" path="res://assets/art/color_squares/button_squars/red_selected.png" id="9_knpjq"]
-[ext_resource type="FontFile" uid="uid://b2vvtmi4jxkl5" path="res://assets/fonts/fantasque-sans-mono.bold.otf" id="9_nacf6"]
 [ext_resource type="Texture2D" uid="uid://c38377j3suce7" path="res://assets/art/color_squares/button_squars/black_selected.png" id="9_scv2d"]
 [ext_resource type="Texture2D" uid="uid://cd31q6i6rh5ul" path="res://assets/art/color_squares/button_squars/red_unselected.png" id="10_xxwcu"]
 [ext_resource type="Texture2D" uid="uid://ifafbg1kj83i" path="res://assets/art/color_squares/button_squars/orange_selected.png" id="11_i7ypo"]
@@ -44,6 +42,30 @@
 [ext_resource type="Texture2D" uid="uid://btlg10j27rd7" path="res://assets/art/color_squares/button_squars/black_unselected.png" id="24_jmnga"]
 [ext_resource type="Texture2D" uid="uid://if14ukw24gg4" path="res://assets/art/color_squares/button_squars/grey_selected.png" id="25_1wn6a"]
 [ext_resource type="Texture2D" uid="uid://c6ai6fno30go3" path="res://assets/art/color_squares/button_squars/grey_unselected.png" id="26_sifsy"]
+[ext_resource type="Texture2D" uid="uid://bxwbt2fgvcbrm" path="res://assets/art/color_squares/button_squars/brown_selected.png" id="27_dj1eh"]
+[ext_resource type="Texture2D" uid="uid://ddbcumd101eun" path="res://assets/art/color_squares/button_squars/brown_unselected.png" id="28_8xr3m"]
+[ext_resource type="Texture2D" uid="uid://shtek3543qf1" path="res://assets/art/color_squares/button_squars/pink_selected.png" id="29_1rr7l"]
+[ext_resource type="Texture2D" uid="uid://dv030if2ek6lg" path="res://assets/art/color_squares/button_squars/pink_unselected.png" id="30_y2njv"]
+[ext_resource type="Texture2D" uid="uid://cdybb7lkxcma8" path="res://assets/art/color_squares/button_squars/transparent_selected.png" id="36_1rr7l"]
+[ext_resource type="Texture2D" uid="uid://d3fnnm6neyg0" path="res://assets/art/card/compare_card.png" id="36_js7vi"]
+[ext_resource type="Texture2D" uid="uid://b2pxo6km7g63r" path="res://assets/art/card/banners/horizontal-1.png" id="37_ccula"]
+[ext_resource type="Texture2D" uid="uid://p8bdcts2ia5d" path="res://assets/art/color_squares/button_squars/transparent_unselected.png" id="37_y2njv"]
+[ext_resource type="FontFile" uid="uid://8b66omd77r0f" path="res://assets/fonts/alegreya/Alegreya-Medium.ttf" id="38_2ioou"]
+[ext_resource type="Texture2D" uid="uid://c6atm047bxlm8" path="res://assets/art/card/badges/large v3/square.png" id="38_ccula"]
+[ext_resource type="Texture2D" uid="uid://bo131wlyta2r3" path="res://assets/art/icons/Icon_Armor_Crown.png" id="39_2ioou"]
+[ext_resource type="Texture2D" uid="uid://dox67g4boq7vc" path="res://assets/art/card/badges/large v3/circle.png" id="40_sifsy"]
+[ext_resource type="Texture2D" uid="uid://bkbaxxgcpbpmx" path="res://assets/art/card/badges/small/circle.png" id="41_3xm80"]
+[ext_resource type="Texture2D" uid="uid://b6jg1xgy562kl" path="res://assets/art/card/badges/large v1/hex.png" id="41_b8qmc"]
+[ext_resource type="Texture2D" uid="uid://k3paya1hewit" path="res://assets/art/card/2d icons/sword.png" id="42_8aobj"]
+[ext_resource type="Texture2D" uid="uid://dowmuxfgoe5dx" path="res://assets/art/card/2d icons/heart.png" id="43_1hddd"]
+[ext_resource type="FontFile" uid="uid://cjg26hsv3itq1" path="res://assets/fonts/alegreya/Alegreya-Bold.ttf" id="43_81hc5"]
+[ext_resource type="FontFile" uid="uid://cfi00ok31jiiu" path="res://assets/fonts/alegreya/Alegreya-BoldItalic.ttf" id="44_dia80"]
+[ext_resource type="FontFile" uid="uid://bd3bjcsi7ogrh" path="res://assets/fonts/alegreya/Alegreya-Italic.ttf" id="45_3xm80"]
+[ext_resource type="Texture2D" uid="uid://biy1cfbxa2174" path="res://assets/art/icons/energy_icon_white.png" id="45_xlv4u"]
+[ext_resource type="FontFile" uid="uid://b6alpq4r15r5s" path="res://assets/fonts/alegreya/Alegreya-Black.ttf" id="46_8aobj"]
+[ext_resource type="FontFile" uid="uid://c32o87n2oxwbt" path="res://assets/fonts/alegreya/Alegreya-Regular.ttf" id="47_1hddd"]
+[ext_resource type="Script" uid="uid://bs3sddjowfnua" path="res://items/card_rich_effects.gd" id="51_1hddd"]
+[ext_resource type="Texture2D" uid="uid://djh563r6sirv5" path="res://assets/art/action_icon_white.png" id="52_8aobj"]
 
 [node name="card_builder" type="Control"]
 layout_mode = 3
@@ -71,15 +93,83 @@ anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 
+[node name="next_bonus_row" parent="." instance=ExtResource("5_ntmml")]
+layout_mode = 1
+offset_left = -463.0
+offset_top = -984.0
+offset_right = 368.0
+offset_bottom = -920.0
+
+[node name="start_end_colors" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 1480.0
+offset_top = 184.0
+offset_right = 1848.0
+offset_bottom = 248.0
+theme_override_constants/separation = 46
+alignment = 1
+
+[node name="start_color" type="HBoxContainer" parent="start_end_colors"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="start_label" type="Label" parent="start_end_colors/start_color"]
+layout_mode = 2
+theme_override_constants/outline_size = 12
+text = "Start:"
+
+[node name="start_color_square" type="ColorRect" parent="start_end_colors/start_color"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="start_color_label" type="Label" parent="start_end_colors/start_color/start_color_square"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 32
+text = "N/A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="end_color" type="HBoxContainer" parent="start_end_colors"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="end_color" type="Label" parent="start_end_colors/end_color"]
+layout_mode = 2
+theme_override_constants/outline_size = 12
+text = "End:"
+
+[node name="end_color_square" type="ColorRect" parent="start_end_colors/end_color"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="end_color_label" type="Label" parent="start_end_colors/end_color/end_color_square"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 32
+text = "N/A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="card_grid" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 576.0
-offset_top = 96.0
-offset_right = -512.0
-offset_bottom = -160.0
+offset_top = 176.0
+offset_right = -480.0
+offset_bottom = -56.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_gupog")
@@ -91,13 +181,6 @@ offset_bottom = 40.0
 
 [node name="active_component" parent="card_grid" instance=ExtResource("3_7yvkw")]
 layout_mode = 1
-
-[node name="next_bonus_row" parent="card_grid" instance=ExtResource("5_ntmml")]
-layout_mode = 1
-offset_left = -352.0
-offset_top = 64.0
-offset_right = 543.0
-offset_bottom = 128.0
 
 [node name="place_component_button" type="Button" parent="."]
 visible = false
@@ -204,84 +287,311 @@ layout_mode = 1
 offset_left = 1482.0
 offset_top = 195.0
 offset_right = 1482.0
-offset_bottom = 235.0
+offset_bottom = 195.0
 scale = Vector2(0.45, 0.45)
 last_card = true
 
 [node name="compare_card_select_button" type="Button" parent="card_preview"]
-visible = false
 layout_mode = 0
-offset_left = 1544.0
-offset_top = 712.0
-offset_right = 1778.0
-offset_bottom = 770.0
+offset_left = 1554.0
+offset_top = 709.0
+offset_right = 1780.0
+offset_bottom = 767.0
+theme_override_font_sizes/font_size = 36
 text = "Compare Card"
 
 [node name="grid_container" type="GridContainer" parent="."]
 layout_mode = 0
 offset_left = 24.0
-offset_top = 96.0
-offset_right = 564.0
-offset_bottom = 152.0
+offset_top = 88.0
+offset_right = 384.0
+offset_bottom = 204.0
 theme_override_constants/h_separation = 0
-columns = 9
+columns = 6
 
 [node name="red_button" type="CheckButton" parent="grid_container"]
 layout_mode = 2
 theme_override_icons/checked = ExtResource("9_knpjq")
 theme_override_icons/unchecked = ExtResource("10_xxwcu")
 
+[node name="label" type="Label" parent="grid_container/red_button"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 4.0
+offset_right = -20.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 24
+text = "R"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="orange_button" type="CheckButton" parent="grid_container"]
 layout_mode = 2
 theme_override_icons/checked = ExtResource("11_i7ypo")
 theme_override_icons/unchecked = ExtResource("12_ftr1p")
+
+[node name="label" type="Label" parent="grid_container/orange_button"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 4.0
+offset_right = -20.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 24
+text = "O"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="yellow_button" type="CheckButton" parent="grid_container"]
 layout_mode = 2
 theme_override_icons/checked = ExtResource("13_dj1eh")
 theme_override_icons/unchecked = ExtResource("14_8xr3m")
 
+[node name="label" type="Label" parent="grid_container/yellow_button"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 4.0
+offset_right = -20.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 24
+text = "Y"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="green_button" type="CheckButton" parent="grid_container"]
 layout_mode = 2
 theme_override_icons/checked = ExtResource("15_1rr7l")
 theme_override_icons/unchecked = ExtResource("16_y2njv")
+
+[node name="label" type="Label" parent="grid_container/green_button"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 4.0
+offset_right = -20.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 24
+text = "G"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="blue_button" type="CheckButton" parent="grid_container"]
 layout_mode = 2
 theme_override_icons/checked = ExtResource("17_js7vi")
 theme_override_icons/unchecked = ExtResource("18_ccula")
 
+[node name="label" type="Label" parent="grid_container/blue_button"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 4.0
+offset_right = -20.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 24
+text = "U"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="purple_button" type="CheckButton" parent="grid_container"]
 layout_mode = 2
 theme_override_icons/checked = ExtResource("19_2ioou")
 theme_override_icons/unchecked = ExtResource("20_uxo38")
+
+[node name="label" type="Label" parent="grid_container/purple_button"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 4.0
+offset_right = -20.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 24
+text = "P"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="white_button" type="CheckButton" parent="grid_container"]
 layout_mode = 2
 theme_override_icons/checked = ExtResource("21_ya1el")
 theme_override_icons/unchecked = ExtResource("22_ykqso")
 
+[node name="label" type="Label" parent="grid_container/white_button"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 4.0
+offset_right = -20.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 24
+text = "W"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="black_button" type="CheckButton" parent="grid_container"]
 layout_mode = 2
 theme_override_icons/checked = ExtResource("9_scv2d")
 theme_override_icons/unchecked = ExtResource("24_jmnga")
 
-[node name="grey_button" type="CheckButton" parent="grid_container"]
+[node name="label" type="Label" parent="grid_container/black_button"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 4.0
+offset_right = -20.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 24
+text = "B"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="gray_button" type="CheckButton" parent="grid_container"]
 layout_mode = 2
 theme_override_icons/checked = ExtResource("25_1wn6a")
 theme_override_icons/unchecked = ExtResource("26_sifsy")
 
+[node name="label" type="Label" parent="grid_container/gray_button"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 4.0
+offset_right = -20.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 24
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="brown_button" type="CheckButton" parent="grid_container"]
+layout_mode = 2
+theme_override_icons/checked = ExtResource("27_dj1eh")
+theme_override_icons/unchecked = ExtResource("28_8xr3m")
+
+[node name="label" type="Label" parent="grid_container/brown_button"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 4.0
+offset_right = -20.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 24
+text = "N"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="pink_button" type="CheckButton" parent="grid_container"]
+layout_mode = 2
+theme_override_icons/checked = ExtResource("29_1rr7l")
+theme_override_icons/unchecked = ExtResource("30_y2njv")
+
+[node name="label" type="Label" parent="grid_container/pink_button"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 4.0
+offset_right = -20.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 24
+text = "K"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="all_button" type="CheckButton" parent="grid_container"]
+layout_mode = 2
+theme_override_icons/checked = ExtResource("36_1rr7l")
+theme_override_icons/unchecked = ExtResource("37_y2njv")
+
+[node name="label" type="Label" parent="grid_container/all_button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+text = "ALL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="search_bar" type="LineEdit" parent="."]
 layout_mode = 0
 offset_left = 24.0
-offset_top = 192.0
+offset_top = 224.0
 offset_right = 552.0
-offset_bottom = 258.0
+offset_bottom = 290.0
 
 [node name="component_container" type="ScrollContainer" parent="."]
 layout_mode = 0
 offset_left = 24.0
-offset_top = 264.0
+offset_top = 296.0
 offset_right = 552.0
 offset_bottom = 1059.0
 
@@ -296,164 +606,6 @@ offset_top = 205.0
 offset_right = 529.0
 offset_bottom = 995.0
 text = "Clear Piece"
-
-[node name="card_compare_screen" type="Control" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("7_8oy6r")
-
-[node name="compare_card" type="Control" parent="card_compare_screen"]
-visible = false
-anchors_preset = 0
-offset_left = 1482.0
-offset_top = 779.0
-offset_right = 1842.0
-offset_bottom = 1075.0
-mouse_filter = 2
-theme = ExtResource("9_c4brr")
-
-[node name="card_texture" type="TextureRect" parent="card_compare_screen/compare_card"]
-layout_mode = 0
-offset_right = 256.0
-offset_bottom = 208.0
-scale = Vector2(1.4, 1.4)
-texture = ExtResource("8_q08ur")
-
-[node name="card_name" type="Label" parent="card_compare_screen/compare_card"]
-layout_mode = 0
-offset_left = 22.0
-offset_top = 8.0
-offset_right = 334.0
-offset_bottom = 64.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 40
-text = "Card Name Here"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="card_effects" type="Label" parent="card_compare_screen/compare_card"]
-layout_mode = 0
-offset_left = 31.0
-offset_top = 93.0
-offset_right = 371.0
-offset_bottom = 264.0
-scale = Vector2(0.75, 0.75)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("9_nacf6")
-theme_override_font_sizes/font_size = 30
-text = "Card Effects"
-autowrap_mode = 3
-
-[node name="card_price" type="Label" parent="card_compare_screen/compare_card"]
-layout_mode = 0
-offset_left = 301.0
-offset_top = 67.0
-offset_right = 349.0
-offset_bottom = 115.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 28
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="card_attack" type="Label" parent="card_compare_screen/compare_card"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 0
-offset_left = -2.0
-offset_top = 226.0
-offset_right = 70.0
-offset_bottom = 290.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 28
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="card_health" type="Label" parent="card_compare_screen/compare_card"]
-layout_mode = 0
-offset_left = 292.0
-offset_top = 226.0
-offset_right = 356.0
-offset_bottom = 290.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 28
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="card_type" type="Label" parent="card_compare_screen/compare_card"]
-layout_mode = 0
-offset_left = 67.0
-offset_top = 242.0
-offset_right = 291.0
-offset_bottom = 267.0
-theme_override_colors/font_color = Color(0.666667, 0.666667, 0.666667, 1)
-theme_override_fonts/font = ExtResource("9_nacf6")
-theme_override_font_sizes/font_size = 24
-text = "Type"
-horizontal_alignment = 1
-autowrap_mode = 3
-
-[node name="card_color_profile" type="GridContainer" parent="card_compare_screen/compare_card"]
-layout_mode = 0
-offset_left = 22.0
-offset_top = 57.0
-offset_right = 3142.0
-offset_bottom = 297.0
-scale = Vector2(0.15, 0.15)
-theme_override_constants/h_separation = 0
-columns = 9
-
-[node name="color_profile_square" parent="card_compare_screen/compare_card/card_color_profile" instance=ExtResource("6_1sycy")]
-layout_mode = 2
-
-[node name="color_profile_square2" parent="card_compare_screen/compare_card/card_color_profile" instance=ExtResource("6_1sycy")]
-layout_mode = 2
-
-[node name="color_profile_square3" parent="card_compare_screen/compare_card/card_color_profile" instance=ExtResource("6_1sycy")]
-layout_mode = 2
-
-[node name="color_profile_square4" parent="card_compare_screen/compare_card/card_color_profile" instance=ExtResource("6_1sycy")]
-layout_mode = 2
-
-[node name="card_select_screen" type="Control" parent="card_compare_screen"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="card_select_background" type="ColorRect" parent="card_compare_screen/card_select_screen"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.290196, 0.478431, 0.588235, 1)
-
-[node name="ScrollContainer" type="ScrollContainer" parent="card_compare_screen/card_select_screen"]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 120.0
-offset_right = 1888.0
-offset_bottom = 1048.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="card_compare_screen/card_select_screen/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 25
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
@@ -480,6 +632,331 @@ custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 text = "Restart"
 
+[node name="card_compare_screen" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("7_8oy6r")
+
+[node name="compare_card" type="Control" parent="card_compare_screen"]
+visible = false
+anchors_preset = 0
+offset_left = 1480.0
+offset_top = 840.0
+offset_right = 1848.0
+offset_bottom = 1064.0
+mouse_filter = 2
+theme = ExtResource("9_c4brr")
+
+[node name="card_image" type="TextureRect" parent="card_compare_screen/compare_card"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 59.0
+offset_right = 150.0
+offset_bottom = 195.0
+texture = ExtResource("14_h3m1n")
+expand_mode = 5
+
+[node name="card_texture" type="TextureRect" parent="card_compare_screen/compare_card"]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 208.0
+texture = ExtResource("36_js7vi")
+
+[node name="main_banner" type="TextureRect" parent="card_compare_screen/compare_card/card_texture"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 11.0
+offset_right = 274.0
+offset_bottom = 52.524967
+texture = ExtResource("37_ccula")
+expand_mode = 2
+
+[node name="stat_banner" type="Control" parent="card_compare_screen/compare_card/card_texture"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="avatar_icon_badge" type="TextureRect" parent="card_compare_screen/compare_card/card_texture/stat_banner"]
+visible = false
+layout_mode = 0
+offset_left = 9.0
+offset_top = 55.0
+offset_right = 35.126125
+offset_bottom = 80.0
+texture = ExtResource("38_ccula")
+expand_mode = 3
+
+[node name="avatar_icon" type="TextureRect" parent="card_compare_screen/compare_card/card_texture/stat_banner/avatar_icon_badge"]
+layout_mode = 1
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 20.75
+offset_bottom = 19.0
+texture = ExtResource("39_2ioou")
+expand_mode = 3
+
+[node name="attack_badge" type="TextureRect" parent="card_compare_screen/compare_card/card_texture/stat_banner"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 167.0
+offset_right = 53.0
+offset_bottom = 205.33333
+texture = ExtResource("40_sifsy")
+expand_mode = 5
+
+[node name="attack_icon_badge" type="TextureRect" parent="card_compare_screen/compare_card/card_texture/stat_banner/attack_badge"]
+layout_mode = 0
+offset_left = 20.999947
+offset_top = 22.0
+offset_right = 41.712273
+offset_bottom = 43.0
+texture = ExtResource("41_3xm80")
+expand_mode = 3
+
+[node name="attack_icon" type="TextureRect" parent="card_compare_screen/compare_card/card_texture/stat_banner/attack_badge/attack_icon_badge"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 16.289474
+offset_bottom = 16.0
+texture = ExtResource("42_8aobj")
+expand_mode = 3
+
+[node name="health_badge" type="TextureRect" parent="card_compare_screen/compare_card/card_texture/stat_banner"]
+layout_mode = 0
+offset_left = 111.0
+offset_top = 167.0
+offset_right = 149.0
+offset_bottom = 205.33333
+texture = ExtResource("40_sifsy")
+expand_mode = 5
+
+[node name="health_icon_badge" type="TextureRect" parent="card_compare_screen/compare_card/card_texture/stat_banner/health_badge"]
+layout_mode = 0
+offset_left = -6.0
+offset_top = 22.0
+offset_right = 14.712328
+offset_bottom = 43.0
+texture = ExtResource("41_3xm80")
+expand_mode = 3
+
+[node name="health_icon" type="TextureRect" parent="card_compare_screen/compare_card/card_texture/stat_banner/health_badge/health_icon_badge"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 6.0
+offset_right = 15.882353
+offset_bottom = 16.0
+texture = ExtResource("43_1hddd")
+expand_mode = 3
+
+[node name="cost_badge" type="TextureRect" parent="card_compare_screen/compare_card/card_texture/stat_banner"]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 55.0
+offset_right = 153.33588
+offset_bottom = 87.0
+texture = ExtResource("41_b8qmc")
+expand_mode = 3
+
+[node name="cost_icon_badge" type="TextureRect" parent="card_compare_screen/compare_card/card_texture/stat_banner/cost_badge"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 18.0
+offset_right = 31.167938
+offset_bottom = 34.0
+texture = ExtResource("41_b8qmc")
+expand_mode = 3
+
+[node name="cost_icon" type="TextureRect" parent="card_compare_screen/compare_card/card_texture/stat_banner/cost_badge/cost_icon_badge"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 3.0
+offset_right = 12.0
+offset_bottom = 13.0
+texture = ExtResource("45_xlv4u")
+expand_mode = 3
+
+[node name="labels" type="Control" parent="card_compare_screen/compare_card"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="card_name" type="Label" parent="card_compare_screen/compare_card/labels"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 15.0
+offset_right = 271.0
+offset_bottom = 49.0
+theme_override_colors/font_outline_color = Color(0.15686275, 0.19215687, 0.23529412, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("38_2ioou")
+theme_override_font_sizes/font_size = 22
+text = "Card Name Here"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="card_rich_effects" type="RichTextLabel" parent="card_compare_screen/compare_card/labels"]
+layout_mode = 0
+offset_left = 163.00006
+offset_top = 62.00006
+offset_right = 419.00006
+offset_bottom = 255.33331
+scale = Vector2(0.75, 0.75)
+theme_override_fonts/normal_font = ExtResource("38_2ioou")
+theme_override_fonts/bold_font = ExtResource("43_81hc5")
+theme_override_fonts/bold_italics_font = ExtResource("44_dia80")
+theme_override_fonts/italics_font = ExtResource("45_3xm80")
+theme_override_fonts/mono_font = ExtResource("46_8aobj")
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+bbcode_enabled = true
+text = "Card Effects"
+script = ExtResource("51_1hddd")
+
+[node name="card_price" type="Label" parent="card_compare_screen/compare_card/labels"]
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 0
+offset_left = 123.0
+offset_top = 51.0
+offset_right = 157.0
+offset_bottom = 85.0
+theme_override_colors/font_outline_color = Color(0.14901961, 0.1254902, 0.101960786, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("47_1hddd")
+theme_override_font_sizes/font_size = 24
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="card_attack" type="Label" parent="card_compare_screen/compare_card/labels"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 14.0
+offset_top = 165.0
+offset_right = 54.0
+offset_bottom = 205.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.3372549, 0.30588236, 0.19215687, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("47_1hddd")
+theme_override_font_sizes/font_size = 28
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="card_health" type="Label" parent="card_compare_screen/compare_card/labels"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 110.0
+offset_top = 165.0
+offset_right = 150.0
+offset_bottom = 205.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.3372549, 0.30588236, 0.19215687, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("47_1hddd")
+theme_override_font_sizes/font_size = 28
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="card_type" type="Label" parent="card_compare_screen/compare_card/labels"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 195.0
+offset_right = 153.0
+offset_bottom = 218.0
+theme_override_colors/font_color = Color(0.666667, 0.666667, 0.666667, 1)
+theme_override_fonts/font = ExtResource("43_81hc5")
+theme_override_font_sizes/font_size = 16
+text = "Type"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="card_actions" type="TextureRect" parent="card_compare_screen/compare_card/labels"]
+self_modulate = Color(0.30980393, 0.39607844, 0.5019608, 1)
+layout_mode = 0
+offset_left = 13.0
+offset_top = 17.0
+offset_right = 49.0
+offset_bottom = 161.0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("52_8aobj")
+stretch_mode = 1
+
+[node name="card_color_profile" type="GridContainer" parent="card_compare_screen/compare_card"]
+layout_mode = 0
+offset_left = 276.0
+offset_top = 10.0
+offset_right = 1236.0
+offset_bottom = 494.0
+scale = Vector2(0.09, 0.09)
+theme_override_constants/h_separation = 0
+columns = 4
+
+[node name="color_profile_square" parent="card_compare_screen/compare_card/card_color_profile" instance=ExtResource("6_1sycy")]
+layout_mode = 2
+
+[node name="color_profile_square2" parent="card_compare_screen/compare_card/card_color_profile" instance=ExtResource("6_1sycy")]
+layout_mode = 2
+
+[node name="color_profile_square3" parent="card_compare_screen/compare_card/card_color_profile" instance=ExtResource("6_1sycy")]
+layout_mode = 2
+
+[node name="color_profile_square4" parent="card_compare_screen/compare_card/card_color_profile" instance=ExtResource("6_1sycy")]
+layout_mode = 2
+
+[node name="color_profile_square5" parent="card_compare_screen/compare_card/card_color_profile" instance=ExtResource("6_1sycy")]
+layout_mode = 2
+
+[node name="color_profile_square6" parent="card_compare_screen/compare_card/card_color_profile" instance=ExtResource("6_1sycy")]
+layout_mode = 2
+
+[node name="color_profile_square7" parent="card_compare_screen/compare_card/card_color_profile" instance=ExtResource("6_1sycy")]
+layout_mode = 2
+
+[node name="color_profile_square8" parent="card_compare_screen/compare_card/card_color_profile" instance=ExtResource("6_1sycy")]
+layout_mode = 2
+
+[node name="card_select_screen" type="Control" parent="card_compare_screen"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="card_select_background" type="ColorRect" parent="card_compare_screen/card_select_screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.290196, 0.478431, 0.588235, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="card_compare_screen/card_select_screen"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 1888.0
+offset_bottom = 984.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="card_compare_screen/card_select_screen/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 25
+
 [node name="card" parent="." instance=ExtResource("12_0t5fn")]
 visible = false
 layout_mode = 1
@@ -490,6 +967,7 @@ offset_bottom = 232.0
 scale = Vector2(0.5, 0.5)
 
 [node name="template_select_overlay" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -586,13 +1064,45 @@ layout_mode = 2
 theme_override_constants/separation = 4
 alignment = 1
 
+[node name="start_label" type="Label" parent="template_select_overlay/h_box_container/v_box_container/start_color_container"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 36
+text = "Start"
+horizontal_alignment = 1
+
+[node name="start_null_button" type="CheckButton" parent="template_select_overlay/h_box_container/v_box_container/start_color_container"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 36
+theme_override_icons/checked = ExtResource("36_1rr7l")
+theme_override_icons/unchecked = ExtResource("37_y2njv")
+alignment = 1
+
+[node name="start_null_label" type="Label" parent="template_select_overlay/h_box_container/v_box_container/start_color_container/start_null_button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+text = "N/A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="start_red_button" type="CheckButton" parent="template_select_overlay/h_box_container/v_box_container/start_color_container"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 36
-button_pressed = true
-text = "R"
+theme_override_icons/checked = ExtResource("9_knpjq")
+theme_override_icons/unchecked = ExtResource("10_xxwcu")
 alignment = 1
 
 [node name="start_orange_button" type="CheckButton" parent="template_select_overlay/h_box_container/v_box_container/start_color_container"]
@@ -600,8 +1110,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 36
-button_pressed = true
-text = "O"
+theme_override_icons/checked = ExtResource("11_i7ypo")
+theme_override_icons/unchecked = ExtResource("12_ftr1p")
 alignment = 1
 
 [node name="start_yellow_button" type="CheckButton" parent="template_select_overlay/h_box_container/v_box_container/start_color_container"]
@@ -609,8 +1119,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 36
-button_pressed = true
-text = "Y"
+theme_override_icons/checked = ExtResource("13_dj1eh")
+theme_override_icons/unchecked = ExtResource("14_8xr3m")
 alignment = 1
 
 [node name="start_green_button" type="CheckButton" parent="template_select_overlay/h_box_container/v_box_container/start_color_container"]
@@ -618,8 +1128,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 36
-button_pressed = true
-text = "G"
+theme_override_icons/checked = ExtResource("15_1rr7l")
+theme_override_icons/unchecked = ExtResource("16_y2njv")
 alignment = 1
 
 [node name="start_blue_button" type="CheckButton" parent="template_select_overlay/h_box_container/v_box_container/start_color_container"]
@@ -627,8 +1137,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 36
-button_pressed = true
-text = "B"
+theme_override_icons/checked = ExtResource("17_js7vi")
+theme_override_icons/unchecked = ExtResource("18_ccula")
 alignment = 1
 
 [node name="start_purple_button" type="CheckButton" parent="template_select_overlay/h_box_container/v_box_container/start_color_container"]
@@ -636,8 +1146,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 36
-button_pressed = true
-text = "P"
+theme_override_icons/checked = ExtResource("19_2ioou")
+theme_override_icons/unchecked = ExtResource("20_uxo38")
 alignment = 1
 
 [node name="start_white_button" type="CheckButton" parent="template_select_overlay/h_box_container/v_box_container/start_color_container"]
@@ -645,8 +1155,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 36
-button_pressed = true
-text = "W"
+theme_override_icons/checked = ExtResource("21_ya1el")
+theme_override_icons/unchecked = ExtResource("22_ykqso")
 alignment = 1
 
 [node name="start_black_button" type="CheckButton" parent="template_select_overlay/h_box_container/v_box_container/start_color_container"]
@@ -654,31 +1164,77 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 36
-button_pressed = true
-text = "Black"
+theme_override_icons/checked = ExtResource("9_scv2d")
+theme_override_icons/unchecked = ExtResource("24_jmnga")
 alignment = 1
 
-[node name="start_gray_button" type="CheckButton" parent="template_select_overlay/h_box_container/v_box_container/start_color_container"]
+[node name="start_all_button" type="CheckButton" parent="template_select_overlay/h_box_container/v_box_container/start_color_container"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 36
-button_pressed = true
-text = "Gray"
+theme_override_icons/checked = ExtResource("36_1rr7l")
+theme_override_icons/unchecked = ExtResource("37_y2njv")
 alignment = 1
+
+[node name="start_all_label" type="Label" parent="template_select_overlay/h_box_container/v_box_container/start_color_container/start_all_button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+text = "ALL"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="end_color_container" type="HBoxContainer" parent="template_select_overlay/h_box_container/v_box_container"]
 layout_mode = 2
 theme_override_constants/separation = 4
 alignment = 1
 
+[node name="end_label" type="Label" parent="template_select_overlay/h_box_container/v_box_container/end_color_container"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 36
+text = "End"
+horizontal_alignment = 1
+
+[node name="end_null_button" type="CheckButton" parent="template_select_overlay/h_box_container/v_box_container/end_color_container"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 36
+theme_override_icons/checked = ExtResource("36_1rr7l")
+theme_override_icons/unchecked = ExtResource("37_y2njv")
+alignment = 1
+
+[node name="end_null_label" type="Label" parent="template_select_overlay/h_box_container/v_box_container/end_color_container/end_null_button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+text = "N/A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="end_red_button" type="CheckButton" parent="template_select_overlay/h_box_container/v_box_container/end_color_container"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 36
-button_pressed = true
-text = "R"
+theme_override_icons/checked = ExtResource("9_knpjq")
+theme_override_icons/unchecked = ExtResource("10_xxwcu")
 alignment = 1
 
 [node name="end_orange_button" type="CheckButton" parent="template_select_overlay/h_box_container/v_box_container/end_color_container"]
@@ -686,8 +1242,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 36
-button_pressed = true
-text = "O"
+theme_override_icons/checked = ExtResource("11_i7ypo")
+theme_override_icons/unchecked = ExtResource("12_ftr1p")
 alignment = 1
 
 [node name="end_yellow_button" type="CheckButton" parent="template_select_overlay/h_box_container/v_box_container/end_color_container"]
@@ -695,8 +1251,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 36
-button_pressed = true
-text = "Y"
+theme_override_icons/checked = ExtResource("13_dj1eh")
+theme_override_icons/unchecked = ExtResource("14_8xr3m")
 alignment = 1
 
 [node name="end_green_button" type="CheckButton" parent="template_select_overlay/h_box_container/v_box_container/end_color_container"]
@@ -704,8 +1260,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 36
-button_pressed = true
-text = "G"
+theme_override_icons/checked = ExtResource("15_1rr7l")
+theme_override_icons/unchecked = ExtResource("16_y2njv")
 alignment = 1
 
 [node name="end_blue_button" type="CheckButton" parent="template_select_overlay/h_box_container/v_box_container/end_color_container"]
@@ -713,8 +1269,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 36
-button_pressed = true
-text = "B"
+theme_override_icons/checked = ExtResource("17_js7vi")
+theme_override_icons/unchecked = ExtResource("18_ccula")
 alignment = 1
 
 [node name="end_purple_button" type="CheckButton" parent="template_select_overlay/h_box_container/v_box_container/end_color_container"]
@@ -722,8 +1278,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 36
-button_pressed = true
-text = "P"
+theme_override_icons/checked = ExtResource("19_2ioou")
+theme_override_icons/unchecked = ExtResource("20_uxo38")
 alignment = 1
 
 [node name="end_white_button" type="CheckButton" parent="template_select_overlay/h_box_container/v_box_container/end_color_container"]
@@ -731,8 +1287,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 36
-button_pressed = true
-text = "W"
+theme_override_icons/checked = ExtResource("21_ya1el")
+theme_override_icons/unchecked = ExtResource("22_ykqso")
 alignment = 1
 
 [node name="end_black_button" type="CheckButton" parent="template_select_overlay/h_box_container/v_box_container/end_color_container"]
@@ -740,18 +1296,32 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 36
-button_pressed = true
-text = "Black"
+theme_override_icons/checked = ExtResource("9_scv2d")
+theme_override_icons/unchecked = ExtResource("24_jmnga")
 alignment = 1
 
-[node name="end_gray_button" type="CheckButton" parent="template_select_overlay/h_box_container/v_box_container/end_color_container"]
+[node name="end_all_button" type="CheckButton" parent="template_select_overlay/h_box_container/v_box_container/end_color_container"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 36
-button_pressed = true
-text = "Gray"
+theme_override_icons/checked = ExtResource("36_1rr7l")
+theme_override_icons/unchecked = ExtResource("37_y2njv")
 alignment = 1
+
+[node name="end_all_label" type="Label" parent="template_select_overlay/h_box_container/v_box_container/end_color_container/end_all_button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+text = "ALL"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="h_box_container2" type="HBoxContainer" parent="template_select_overlay/h_box_container/v_box_container"]
 visible = false
@@ -1057,7 +1627,10 @@ layout_mode = 2
 [connection signal="toggled" from="grid_container/purple_button" to="." method="_on_purple_button_toggled"]
 [connection signal="toggled" from="grid_container/white_button" to="." method="_on_white_button_toggled"]
 [connection signal="toggled" from="grid_container/black_button" to="." method="_on_black_button_toggled"]
-[connection signal="toggled" from="grid_container/grey_button" to="." method="_on_grey_button_toggled"]
+[connection signal="toggled" from="grid_container/gray_button" to="." method="_on_gray_button_toggled"]
+[connection signal="toggled" from="grid_container/brown_button" to="." method="_on_brown_button_toggled"]
+[connection signal="toggled" from="grid_container/pink_button" to="." method="_on_pink_button_toggled"]
+[connection signal="toggled" from="grid_container/all_button" to="." method="_on_all_button_toggled"]
 [connection signal="text_changed" from="search_bar" to="." method="_on_search_bar_text_changed"]
 [connection signal="pressed" from="clear_component_piece_button" to="." method="_on_clear_component_piece_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/undo_button" to="." method="_on_undo_button_pressed"]
@@ -1070,6 +1643,7 @@ layout_mode = 2
 [connection signal="toggled" from="template_select_overlay/h_box_container/v_box_container/h_box_container/rare_button" to="template_select_overlay" method="_on_rare_button_toggled"]
 [connection signal="toggled" from="template_select_overlay/h_box_container/v_box_container/h_box_container/epic_button" to="template_select_overlay" method="_on_epic_button_toggled"]
 [connection signal="toggled" from="template_select_overlay/h_box_container/v_box_container/h_box_container/legendary_button" to="template_select_overlay" method="_on_legendary_button_toggled"]
+[connection signal="toggled" from="template_select_overlay/h_box_container/v_box_container/start_color_container/start_null_button" to="template_select_overlay" method="_on_start_null_button_toggled"]
 [connection signal="toggled" from="template_select_overlay/h_box_container/v_box_container/start_color_container/start_red_button" to="template_select_overlay" method="_on_start_red_button_toggled"]
 [connection signal="toggled" from="template_select_overlay/h_box_container/v_box_container/start_color_container/start_orange_button" to="template_select_overlay" method="_on_start_orange_button_toggled"]
 [connection signal="toggled" from="template_select_overlay/h_box_container/v_box_container/start_color_container/start_yellow_button" to="template_select_overlay" method="_on_start_yellow_button_toggled"]
@@ -1078,7 +1652,8 @@ layout_mode = 2
 [connection signal="toggled" from="template_select_overlay/h_box_container/v_box_container/start_color_container/start_purple_button" to="template_select_overlay" method="_on_start_purple_button_toggled"]
 [connection signal="toggled" from="template_select_overlay/h_box_container/v_box_container/start_color_container/start_white_button" to="template_select_overlay" method="_on_start_white_button_toggled"]
 [connection signal="toggled" from="template_select_overlay/h_box_container/v_box_container/start_color_container/start_black_button" to="template_select_overlay" method="_on_start_black_button_toggled"]
-[connection signal="toggled" from="template_select_overlay/h_box_container/v_box_container/start_color_container/start_gray_button" to="template_select_overlay" method="_on_start_gray_button_toggled"]
+[connection signal="toggled" from="template_select_overlay/h_box_container/v_box_container/start_color_container/start_all_button" to="template_select_overlay" method="_on_start_all_button_toggled"]
+[connection signal="toggled" from="template_select_overlay/h_box_container/v_box_container/end_color_container/end_null_button" to="template_select_overlay" method="_on_end_null_button_toggled"]
 [connection signal="toggled" from="template_select_overlay/h_box_container/v_box_container/end_color_container/end_red_button" to="template_select_overlay" method="_on_end_red_button_toggled"]
 [connection signal="toggled" from="template_select_overlay/h_box_container/v_box_container/end_color_container/end_orange_button" to="template_select_overlay" method="_on_end_orange_button_toggled"]
 [connection signal="toggled" from="template_select_overlay/h_box_container/v_box_container/end_color_container/end_yellow_button" to="template_select_overlay" method="_on_end_yellow_button_toggled"]
@@ -1087,7 +1662,7 @@ layout_mode = 2
 [connection signal="toggled" from="template_select_overlay/h_box_container/v_box_container/end_color_container/end_purple_button" to="template_select_overlay" method="_on_end_purple_button_toggled"]
 [connection signal="toggled" from="template_select_overlay/h_box_container/v_box_container/end_color_container/end_white_button" to="template_select_overlay" method="_on_end_white_button_toggled"]
 [connection signal="toggled" from="template_select_overlay/h_box_container/v_box_container/end_color_container/end_black_button" to="template_select_overlay" method="_on_end_black_button_toggled"]
-[connection signal="toggled" from="template_select_overlay/h_box_container/v_box_container/end_color_container/end_gray_button" to="template_select_overlay" method="_on_end_gray_button_toggled"]
+[connection signal="toggled" from="template_select_overlay/h_box_container/v_box_container/end_color_container/end_all_button" to="template_select_overlay" method="_on_end_all_button_toggled"]
 [connection signal="item_selected" from="template_select_overlay/h_box_container/v_box_container/h_box_container2/start_color_container/start_color_button" to="template_select_overlay" method="_on_start_color_button_item_selected"]
 [connection signal="item_selected" from="template_select_overlay/h_box_container/v_box_container/h_box_container2/h_box_container2/end_color_button" to="template_select_overlay" method="_on_end_color_button_item_selected"]
 [connection signal="pressed" from="template_select_overlay/h_box_container/v_box_container/v_box_container/order_select_button" to="template_select_overlay" method="_on_unit_select_button_pressed"]

@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvy7ds0aebacq"]
+[gd_scene load_steps=7 format=3 uid="uid://dvy7ds0aebacq"]
 
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_jkk3d"]
 [ext_resource type="Script" uid="uid://xl4q5ot0l2yj" path="res://menus/game_select_screen.gd" id="1_pu4oj"]
+[ext_resource type="Texture2D" uid="uid://2ah2ks47ouj8" path="res://assets/art/background/battlefield.png" id="3_8vne3"]
+[ext_resource type="Texture2D" uid="uid://cb2y5e8d1qyn7" path="res://assets/art/buttons/pvp_button.png" id="4_abj2e"]
+[ext_resource type="Texture2D" uid="uid://do5m1ol56t82a" path="res://assets/art/buttons/pve_button.png" id="4_eb75y"]
+[ext_resource type="Texture2D" uid="uid://be805y870el26" path="res://assets/art/buttons/story_mode_button.png" id="4_fn5mo"]
 
 [node name="game_select_screen" type="Control"]
 layout_mode = 3
@@ -22,6 +26,16 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.2901961, 0.47843137, 0.5882353, 1)
 
+[node name="background" type="TextureRect" parent="color_background"]
+self_modulate = Color(0.30980393, 0.30980393, 0.30980393, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_8vne3")
+
 [node name="fake_hud" type="ColorRect" parent="color_background"]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 1
@@ -29,26 +43,214 @@ anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 
-[node name="back_button" type="Button" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 1767.0
-offset_top = 24.0
-offset_right = 1861.0
-offset_bottom = 90.0
-text = "Back"
+[node name="margin_container" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.059000004
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 0.27999496
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 128
 
-[node name="h_box_container" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 64.0
-offset_top = 128.0
-offset_right = 1848.0
-offset_bottom = 932.0
+[node name="v_box_container" type="VBoxContainer" parent="margin_container"]
+layout_mode = 2
+theme_override_constants/separation = 64
 
-[node name="h_box_container" type="HBoxContainer" parent="h_box_container"]
+[node name="look_for_game_button" type="Button" parent="margin_container/v_box_container"]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+text = "To Deck Select"
+
+[node name="h_box_container" type="HBoxContainer" parent="margin_container/v_box_container"]
+layout_mode = 2
+theme_override_constants/separation = 128
+
+[node name="rarity_col" type="VBoxContainer" parent="margin_container/v_box_container/h_box_container"]
 layout_mode = 2
 
-[node name="rarities" type="OptionButton" parent="h_box_container/h_box_container"]
+[node name="rarity_col_label" type="Label" parent="margin_container/v_box_container/h_box_container/rarity_col"]
+layout_mode = 2
+text = "Opponent Rarity"
+horizontal_alignment = 1
+
+[node name="min_rarity" type="HBoxContainer" parent="margin_container/v_box_container/h_box_container/rarity_col"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="min_rarity_label" type="Label" parent="margin_container/v_box_container/h_box_container/rarity_col/min_rarity"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "Minimum Rarity"
+
+[node name="min_rarity_option" type="OptionButton" parent="margin_container/v_box_container/h_box_container/rarity_col/min_rarity"]
+layout_mode = 2
+disabled = true
+selected = 0
+item_count = 1
+popup/item_0/text = "Legendary"
+popup/item_0/id = 0
+
+[node name="max_rarity" type="HBoxContainer" parent="margin_container/v_box_container/h_box_container/rarity_col"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="max_rarity_label" type="Label" parent="margin_container/v_box_container/h_box_container/rarity_col/max_rarity"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "Maximum Rarity"
+
+[node name="max_rarity_option" type="OptionButton" parent="margin_container/v_box_container/h_box_container/rarity_col/max_rarity"]
+layout_mode = 2
+disabled = true
+selected = 0
+item_count = 1
+popup/item_0/text = "Legendary"
+popup/item_0/id = 0
+
+[node name="deck_col" type="VBoxContainer" parent="margin_container/v_box_container/h_box_container"]
 layout_mode = 2
 
-[connection signal="pressed" from="back_button" to="." method="_on_back_button_pressed"]
+[node name="deck_col_label" type="Label" parent="margin_container/v_box_container/h_box_container/deck_col"]
+layout_mode = 2
+text = "Opponent Deck"
+horizontal_alignment = 1
+
+[node name="deck_option" type="OptionButton" parent="margin_container/v_box_container/h_box_container/deck_col"]
+layout_mode = 2
+selected = 0
+item_count = 1
+popup/item_0/text = "Beastmaster"
+popup/item_0/id = 0
+
+[node name="region_col" type="VBoxContainer" parent="margin_container/v_box_container/h_box_container"]
+layout_mode = 2
+
+[node name="region_col_label" type="Label" parent="margin_container/v_box_container/h_box_container/region_col"]
+layout_mode = 2
+text = "Region Select"
+horizontal_alignment = 1
+
+[node name="region_option" type="OptionButton" parent="margin_container/v_box_container/h_box_container/region_col"]
+layout_mode = 2
+selected = 0
+item_count = 1
+popup/item_0/text = "Aetherglace Tundra"
+popup/item_0/id = 0
+
+[node name="pvp_timeout_col" type="VBoxContainer" parent="margin_container/v_box_container/h_box_container"]
+layout_mode = 2
+
+[node name="pvp_timeout_col_label" type="Label" parent="margin_container/v_box_container/h_box_container/pvp_timeout_col"]
+layout_mode = 2
+text = "PVP Timeout"
+horizontal_alignment = 1
+
+[node name="pvp_timeout_option" type="OptionButton" parent="margin_container/v_box_container/h_box_container/pvp_timeout_col"]
+layout_mode = 2
+alignment = 1
+selected = 0
+item_count = 2
+popup/item_0/text = "Never"
+popup/item_0/id = 0
+popup/item_1/text = "120 Seconds"
+popup/item_1/id = 1
+
+[node name="game_type_select" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="color_background" type="ColorRect" parent="game_type_select"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2901961, 0.47843137, 0.5882353, 1)
+
+[node name="background" type="TextureRect" parent="game_type_select/color_background"]
+self_modulate = Color(0.30980393, 0.30980393, 0.30980393, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_8vne3")
+
+[node name="fake_hud" type="ColorRect" parent="game_type_select/color_background"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="game_type_select_screen" type="Control" parent="game_type_select"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="margin_container" type="MarginContainer" parent="game_type_select/game_type_select_screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 128
+
+[node name="h_box_container" type="HBoxContainer" parent="game_type_select/game_type_select_screen/margin_container"]
+layout_mode = 2
+theme_override_constants/separation = 128
+alignment = 1
+
+[node name="pve_button" type="Button" parent="game_type_select/game_type_select_screen/margin_container/h_box_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+icon = ExtResource("4_eb75y")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="story_button" type="Button" parent="game_type_select/game_type_select_screen/margin_container/h_box_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+icon = ExtResource("4_fn5mo")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="pvp_button" type="Button" parent="game_type_select/game_type_select_screen/margin_container/h_box_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+icon = ExtResource("4_abj2e")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="margin_container/v_box_container/look_for_game_button" to="." method="_on_look_for_game_button_pressed"]
+[connection signal="item_selected" from="margin_container/v_box_container/h_box_container/rarity_col/min_rarity/min_rarity_option" to="." method="_on_min_rarity_option_item_selected"]
+[connection signal="item_selected" from="margin_container/v_box_container/h_box_container/rarity_col/max_rarity/max_rarity_option" to="." method="_on_max_rarity_option_item_selected"]
+[connection signal="item_selected" from="margin_container/v_box_container/h_box_container/deck_col/deck_option" to="." method="_on_deck_option_item_selected"]
+[connection signal="item_selected" from="margin_container/v_box_container/h_box_container/region_col/region_option" to="." method="_on_region_option_item_selected"]
+[connection signal="item_selected" from="margin_container/v_box_container/h_box_container/pvp_timeout_col/pvp_timeout_option" to="." method="_on_pvp_timeout_option_item_selected"]
+[connection signal="pressed" from="game_type_select/game_type_select_screen/margin_container/h_box_container/pve_button" to="." method="_on_pve_button_pressed"]
+[connection signal="pressed" from="game_type_select/game_type_select_screen/margin_container/h_box_container/story_button" to="." method="_on_story_button_pressed"]
+[connection signal="pressed" from="game_type_select/game_type_select_screen/margin_container/h_box_container/pvp_button" to="." method="_on_pvp_button_pressed"]

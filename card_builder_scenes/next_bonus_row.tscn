@@ -47,4 +47,5 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="color_bonus_square9" parent="." instance=ExtResource("1_4jam4")]
+visible = false
 layout_mode = 2
