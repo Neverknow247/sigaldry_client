@@ -1,0 +1,232 @@
+[gd_scene load_steps=5 format=3 uid="uid://djaik8yy8vfby"]
+
+[ext_resource type="Script" uid="uid://dhsjcc6qpku3n" path="res://editor_screens/fusion_screen.gd" id="1_dr5nj"]
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_vi5xt"]
+[ext_resource type="PackedScene" uid="uid://di0881y716irt" path="res://items/card.tscn" id="3_208fk"]
+[ext_resource type="Texture2D" uid="uid://bvpkms040biif" path="res://assets/art/card/card-back.png" id="4_208fk"]
+
+[node name="fusion_screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_vi5xt")
+script = ExtResource("1_dr5nj")
+
+[node name="background_color" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.49411765, 0.49411765, 0.49411765, 1)
+
+[node name="fake_hud" type="ColorRect" parent="background_color"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="fusion_area" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="margin_container" type="MarginContainer" parent="fusion_area"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="v_box_container" type="VBoxContainer" parent="fusion_area/margin_container"]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="h_box_container2" type="HBoxContainer" parent="fusion_area/margin_container/v_box_container"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="reset_button" type="Button" parent="fusion_area/margin_container/v_box_container/h_box_container2"]
+layout_mode = 2
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 48
+text = "Reset Cards"
+
+[node name="fuse_button" type="Button" parent="fusion_area/margin_container/v_box_container/h_box_container2"]
+layout_mode = 2
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 48
+text = "Fuse Cards"
+
+[node name="h_box_container" type="HBoxContainer" parent="fusion_area/margin_container/v_box_container"]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="card_1_v_box" type="VBoxContainer" parent="fusion_area/margin_container/v_box_container/h_box_container"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="card_1_area" type="Control" parent="fusion_area/margin_container/v_box_container/h_box_container/card_1_v_box"]
+custom_minimum_size = Vector2(489.6, 672)
+layout_mode = 2
+
+[node name="card_1" parent="fusion_area/margin_container/v_box_container/h_box_container/card_1_v_box/card_1_area" instance=ExtResource("3_208fk")]
+custom_minimum_size = Vector2(816, 1120)
+layout_mode = 1
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 816.0
+offset_bottom = 1120.0
+grow_horizontal = 1
+grow_vertical = 1
+scale = Vector2(0.6, 0.6)
+
+[node name="card_1_back" type="TextureRect" parent="fusion_area/margin_container/v_box_container/h_box_container/card_1_v_box/card_1_area"]
+layout_mode = 1
+offset_right = 816.0
+offset_bottom = 1120.0
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("4_208fk")
+expand_mode = 1
+
+[node name="select_card_1_button" type="Button" parent="fusion_area/margin_container/v_box_container/h_box_container/card_1_v_box"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 48
+text = "Select Fusion Card 1"
+
+[node name="card_2_v_box" type="VBoxContainer" parent="fusion_area/margin_container/v_box_container/h_box_container"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="card_2_area" type="Control" parent="fusion_area/margin_container/v_box_container/h_box_container/card_2_v_box"]
+custom_minimum_size = Vector2(489.6, 672)
+layout_mode = 2
+
+[node name="card_2" parent="fusion_area/margin_container/v_box_container/h_box_container/card_2_v_box/card_2_area" instance=ExtResource("3_208fk")]
+custom_minimum_size = Vector2(816, 1120)
+layout_mode = 1
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 816.0
+offset_bottom = 1120.0
+grow_horizontal = 1
+grow_vertical = 1
+scale = Vector2(0.6, 0.6)
+
+[node name="card_2_back" type="TextureRect" parent="fusion_area/margin_container/v_box_container/h_box_container/card_2_v_box/card_2_area"]
+layout_mode = 1
+offset_right = 816.0
+offset_bottom = 1120.0
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("4_208fk")
+expand_mode = 1
+
+[node name="select_card_2_button" type="Button" parent="fusion_area/margin_container/v_box_container/h_box_container/card_2_v_box"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 48
+text = "Select Fusion Card 2"
+
+[node name="fusion_preview" type="VBoxContainer" parent="fusion_area/margin_container/v_box_container/h_box_container"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="fusion_card_preview_area" type="Control" parent="fusion_area/margin_container/v_box_container/h_box_container/fusion_preview"]
+custom_minimum_size = Vector2(489.6, 672)
+layout_mode = 2
+
+[node name="fusion_card_preview" parent="fusion_area/margin_container/v_box_container/h_box_container/fusion_preview/fusion_card_preview_area" instance=ExtResource("3_208fk")]
+custom_minimum_size = Vector2(816, 1120)
+layout_mode = 1
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 816.0
+offset_bottom = 1120.0
+grow_horizontal = 1
+grow_vertical = 1
+scale = Vector2(0.6, 0.6)
+
+[node name="fusion_card_back" type="TextureRect" parent="fusion_area/margin_container/v_box_container/h_box_container/fusion_preview/fusion_card_preview_area"]
+layout_mode = 1
+offset_right = 816.0
+offset_bottom = 1120.0
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("4_208fk")
+expand_mode = 1
+
+[node name="label" type="Label" parent="fusion_area/margin_container/v_box_container/h_box_container/fusion_preview"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 48
+text = "Fusion Preview"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="select_card_screen" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="select_card_background" type="ColorRect" parent="select_card_screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.39071527, 0.65896934, 0.7045805, 1)
+
+[node name="margin_container" type="MarginContainer" parent="select_card_screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="scroll_container" type="ScrollContainer" parent="select_card_screen/margin_container"]
+layout_mode = 2
+
+[node name="v_box_container" type="VBoxContainer" parent="select_card_screen/margin_container/scroll_container"]
+layout_mode = 2
+
+[connection signal="pressed" from="fusion_area/margin_container/v_box_container/h_box_container2/reset_button" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="fusion_area/margin_container/v_box_container/h_box_container2/fuse_button" to="." method="_on_fuse_button_pressed"]
+[connection signal="pressed" from="fusion_area/margin_container/v_box_container/h_box_container/card_1_v_box/select_card_1_button" to="." method="_on_select_card_1_button_pressed"]
+[connection signal="pressed" from="fusion_area/margin_container/v_box_container/h_box_container/card_2_v_box/select_card_2_button" to="." method="_on_select_card_2_button_pressed"]

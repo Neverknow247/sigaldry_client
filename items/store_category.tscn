@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://jq2ygo1xixg6"]
+
+[ext_resource type="Script" uid="uid://bv67464igtana" path="res://items/store_category.gd" id="1_20kwh"]
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_tpgfp"]
+[ext_resource type="Texture2D" uid="uid://cbr3s3t36h8hx" path="res://assets/art/icons/Icon_Consumables_ReturnScroll.png" id="1_xhygw"]
+
+[node name="store_category" type="Button" unique_id=492946926]
+custom_minimum_size = Vector2(256, 318)
+offset_right = 40.0
+offset_bottom = 40.0
+tooltip_text = "Shop for builder components"
+theme = ExtResource("1_tpgfp")
+script = ExtResource("1_20kwh")
+
+[node name="color_rect" type="ColorRect" parent="." unique_id=140694536]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="margin_container" type="MarginContainer" parent="." unique_id=978920406]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="v_box_container" type="VBoxContainer" parent="margin_container" unique_id=1246504541]
+custom_minimum_size = Vector2(224, 286)
+layout_mode = 2
+
+[node name="category_label" type="Label" parent="margin_container/v_box_container" unique_id=2116208423]
+layout_mode = 2
+text = "Components"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="category_icon" type="TextureRect" parent="margin_container/v_box_container" unique_id=1598010688]
+layout_mode = 2
+texture = ExtResource("1_xhygw")
+expand_mode = 5
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

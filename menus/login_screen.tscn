@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://d2mvewu0gwxc6"]
+[gd_scene format=3 uid="uid://d2mvewu0gwxc6"]
 
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_dj5xg"]
 [ext_resource type="Script" uid="uid://e3ws3mcyjspk" path="res://menus/login_screen.gd" id="1_iahym"]
 [ext_resource type="Texture2D" uid="uid://cscuonbas5878" path="res://assets/art/card_art/BG_3.png" id="3_jdtxs"]
 [ext_resource type="Texture2D" uid="uid://cdufykrexx2j3" path="res://assets/art/sigaldry.png" id="4_cusra"]
 
-[node name="login_screen" type="Control"]
+[node name="login_screen" type="Control" unique_id=1656495092]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,7 +16,7 @@ mouse_filter = 2
 theme = ExtResource("1_dj5xg")
 script = ExtResource("1_iahym")
 
-[node name="background" type="TextureRect" parent="."]
+[node name="background" type="TextureRect" parent="." unique_id=1330507300]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,7 +25,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_jdtxs")
 
-[node name="background_color" type="ColorRect" parent="."]
+[node name="background_color" type="ColorRect" parent="." unique_id=643383543]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -35,7 +35,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.290196, 0.478431, 0.588235, 1)
 
-[node name="login_label" type="Label" parent="."]
+[node name="login_label" type="Label" parent="." unique_id=572797542]
 visible = false
 layout_mode = 1
 anchors_preset = 5
@@ -50,7 +50,7 @@ theme_override_constants/outline_size = 24
 theme_override_font_sizes/font_size = 120
 text = "Login"
 
-[node name="title" type="TextureRect" parent="."]
+[node name="title" type="TextureRect" parent="." unique_id=200953005]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -62,7 +62,7 @@ offset_bottom = 352.0
 grow_horizontal = 2
 texture = ExtResource("4_cusra")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1859526806]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -70,73 +70,73 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=869006020]
 layout_mode = 2
 theme_override_constants/separation = 60
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=1342713087]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=1689049576]
 layout_mode = 2
 alignment = 2
 
-[node name="username" type="LineEdit" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="username" type="LineEdit" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=2106555402]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 theme_override_constants/outline_size = 8
 placeholder_text = "username"
 
-[node name="password" type="LineEdit" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="password" type="LineEdit" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=2055611902]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 theme_override_constants/outline_size = 8
 placeholder_text = "password"
 secret = true
 
-[node name="sign_in_button" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+[node name="sign_in_button" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=1777393510]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_constants/outline_size = 12
 text = "Sign In"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=659917801]
 layout_mode = 2
 theme_override_constants/separation = 45
 alignment = 1
 
-[node name="register_new_user_button" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
+[node name="register_new_user_button" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer2" unique_id=1861090593]
 custom_minimum_size = Vector2(310, 0)
 layout_mode = 2
 theme_override_constants/outline_size = 12
 text = "Register New User"
 
-[node name="quit_button" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
+[node name="quit_button" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer2" unique_id=1030015746]
 custom_minimum_size = Vector2(310, 0)
 layout_mode = 2
 theme_override_constants/outline_size = 12
 text = "Quit"
 
-[node name="remember_me" type="HBoxContainer" parent="."]
+[node name="remember_me" type="HBoxContainer" parent="." unique_id=1014289091]
 layout_mode = 0
 offset_left = 1308.0
 offset_top = 491.0
 offset_right = 1542.0
 offset_bottom = 541.0
 
-[node name="Label" type="Label" parent="remember_me"]
+[node name="Label" type="Label" parent="remember_me" unique_id=1330277959]
 visible = false
 layout_mode = 2
 theme_override_constants/outline_size = 12
 text = "Remember Me?"
 
-[node name="remember_me_checkbox" type="CheckBox" parent="remember_me"]
+[node name="remember_me_checkbox" type="CheckBox" parent="remember_me" unique_id=387187427]
 layout_mode = 2
 theme_override_constants/outline_size = 12
 text = "Remember Me?"
 
-[node name="custom_ip_container" type="HBoxContainer" parent="."]
+[node name="custom_ip_container" type="HBoxContainer" parent="." unique_id=698722081]
 layout_mode = 0
 offset_left = 1424.0
 offset_top = 24.0
@@ -144,12 +144,13 @@ offset_right = 1894.0
 offset_bottom = 90.0
 theme_override_constants/separation = 16
 
-[node name="line_edit" type="LineEdit" parent="custom_ip_container"]
+[node name="line_edit" type="LineEdit" parent="custom_ip_container" unique_id=2119717101]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+text = "127.0.0.1:3000"
 placeholder_text = "127.0.0.1:3000"
 
-[node name="connect_button" type="Button" parent="custom_ip_container"]
+[node name="connect_button" type="Button" parent="custom_ip_container" unique_id=324078609]
 layout_mode = 2
 text = "Connect"
 

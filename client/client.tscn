@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dcjo6gkd7kxtk"]
+[gd_scene format=3 uid="uid://dcjo6gkd7kxtk"]
 
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_bnrmd"]
 [ext_resource type="PackedScene" uid="uid://d3qyhudrdt78l" path="res://card_builder_scenes/card_builder.tscn" id="2_g4apw"]
@@ -24,8 +24,11 @@
 [ext_resource type="PackedScene" uid="uid://d2kvbn45eq1vj" path="res://editor_screens/card_edit_screen.tscn" id="20_66uhf"]
 [ext_resource type="PackedScene" uid="uid://b0a2pght6n743" path="res://card_builder_scenes/card_image_edit.tscn" id="21_dajov"]
 [ext_resource type="PackedScene" uid="uid://c2mu8515uiia0" path="res://card_builder_scenes/card_name_edit.tscn" id="22_dob4x"]
+[ext_resource type="PackedScene" uid="uid://djaik8yy8vfby" path="res://editor_screens/fusion_screen.tscn" id="23_dob4x"]
+[ext_resource type="PackedScene" uid="uid://b0jmnnxxr3w7h" path="res://menus/store_screen.tscn" id="24_38jlj"]
+[ext_resource type="PackedScene" uid="uid://hbuas2jopiqk" path="res://menus/salvage_screen.tscn" id="25_x8oks"]
 
-[node name="client" type="Control" groups=["client"]]
+[node name="client" type="Control" unique_id=1593494328 groups=["client"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,16 +38,16 @@ grow_vertical = 2
 theme = ExtResource("1_bnrmd")
 script = ExtResource("2_r6rot")
 
-[node name="transition" parent="." instance=ExtResource("13_au68s")]
+[node name="transition" parent="." unique_id=1923404780 instance=ExtResource("13_au68s")]
 z_index = 1000
 layout_mode = 1
 
-[node name="tooltips" type="Control" parent="."]
+[node name="tooltips" type="Control" parent="." unique_id=907874939]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="scenes" type="Control" parent="."]
+[node name="scenes" type="Control" parent="." unique_id=793509619]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -52,82 +55,94 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="wrong_version_screen" parent="scenes" instance=ExtResource("4_wb1ry")]
+[node name="wrong_version_screen" parent="scenes" unique_id=1244103120 instance=ExtResource("4_wb1ry")]
 visible = false
 layout_mode = 1
 
-[node name="login_screen" parent="scenes" instance=ExtResource("3_mdu8e")]
+[node name="login_screen" parent="scenes" unique_id=1697942329 instance=ExtResource("3_mdu8e")]
 layout_mode = 1
 
-[node name="register_screen" parent="scenes" instance=ExtResource("4_aa44q")]
+[node name="register_screen" parent="scenes" unique_id=1646020372 instance=ExtResource("4_aa44q")]
 visible = false
 layout_mode = 1
 
-[node name="main_menu" parent="scenes" instance=ExtResource("3_l7bh6")]
+[node name="main_menu" parent="scenes" unique_id=161168201 instance=ExtResource("3_l7bh6")]
 visible = false
 layout_mode = 1
 
-[node name="deck_select_screen" parent="scenes" instance=ExtResource("6_buhrw")]
+[node name="deck_select_screen" parent="scenes" unique_id=540269196 instance=ExtResource("6_buhrw")]
 visible = false
 layout_mode = 1
 
-[node name="waiting_for_game_screen" parent="scenes" instance=ExtResource("7_3mey6")]
+[node name="waiting_for_game_screen" parent="scenes" unique_id=573358115 instance=ExtResource("7_3mey6")]
 visible = false
 layout_mode = 1
 
-[node name="card_select_screen" parent="scenes" instance=ExtResource("6_mv13i")]
+[node name="card_select_screen" parent="scenes" unique_id=1940956042 instance=ExtResource("6_mv13i")]
 visible = false
 layout_mode = 1
 
-[node name="game_select_screen" parent="scenes" instance=ExtResource("11_fow2w")]
+[node name="game_select_screen" parent="scenes" unique_id=1298089005 instance=ExtResource("11_fow2w")]
 visible = false
 layout_mode = 1
 
-[node name="game_screen" parent="scenes" instance=ExtResource("9_ycmdf")]
+[node name="game_screen" parent="scenes" unique_id=1634424319 instance=ExtResource("9_ycmdf")]
 visible = false
 layout_mode = 1
 
-[node name="game_finished_screen" parent="scenes" instance=ExtResource("14_lsi1p")]
+[node name="game_finished_screen" parent="scenes" unique_id=292678549 instance=ExtResource("14_lsi1p")]
 visible = false
 layout_mode = 1
 
-[node name="card_view_screen" parent="scenes" instance=ExtResource("4_7j88m")]
+[node name="card_view_screen" parent="scenes" unique_id=979136999 instance=ExtResource("4_7j88m")]
 visible = false
 layout_mode = 1
 
-[node name="card_builder" parent="scenes" instance=ExtResource("2_g4apw")]
+[node name="card_builder" parent="scenes" unique_id=1419336212 instance=ExtResource("2_g4apw")]
 visible = false
 layout_mode = 1
 
-[node name="editor_select_screen" parent="scenes" instance=ExtResource("16_c1yvc")]
+[node name="editor_select_screen" parent="scenes" unique_id=1610002997 instance=ExtResource("16_c1yvc")]
 visible = false
 layout_mode = 1
 
-[node name="card_editor" parent="scenes" instance=ExtResource("13_c62ra")]
+[node name="card_editor" parent="scenes" unique_id=1417507673 instance=ExtResource("13_c62ra")]
 visible = false
 layout_mode = 1
 
-[node name="deck_editor" parent="scenes" instance=ExtResource("13_sbtbl")]
+[node name="deck_editor" parent="scenes" unique_id=1216425722 instance=ExtResource("13_sbtbl")]
 visible = false
 layout_mode = 1
 
-[node name="rewards_screen" parent="scenes" instance=ExtResource("16_l1pb1")]
+[node name="rewards_screen" parent="scenes" unique_id=667216249 instance=ExtResource("16_l1pb1")]
 visible = false
 layout_mode = 1
 
-[node name="card_edit_screen" parent="scenes" instance=ExtResource("20_66uhf")]
+[node name="card_edit_screen" parent="scenes" unique_id=1647372815 instance=ExtResource("20_66uhf")]
 visible = false
 layout_mode = 1
 
-[node name="card_image_edit" parent="scenes" instance=ExtResource("21_dajov")]
+[node name="card_image_edit" parent="scenes" unique_id=110925431 instance=ExtResource("21_dajov")]
 visible = false
 layout_mode = 1
 
-[node name="card_name_edit" parent="scenes" instance=ExtResource("22_dob4x")]
+[node name="card_name_edit" parent="scenes" unique_id=1982104442 instance=ExtResource("22_dob4x")]
 visible = false
 layout_mode = 1
 
-[node name="hud" parent="." instance=ExtResource("16_wqbiw")]
+[node name="fusion_screen" parent="scenes" unique_id=1379247449 instance=ExtResource("23_dob4x")]
+visible = false
+layout_mode = 1
+
+[node name="salvage_screen" parent="scenes" unique_id=1620819395 instance=ExtResource("25_x8oks")]
+visible = false
+layout_mode = 1
+
+[node name="store_screen" parent="scenes" unique_id=1602593064 instance=ExtResource("24_38jlj")]
+visible = false
+layout_mode = 1
+
+[node name="hud" parent="." unique_id=124748437 instance=ExtResource("16_wqbiw")]
 visible = false
 layout_mode = 0
 anchors_preset = 0
@@ -138,7 +153,7 @@ offset_bottom = 64.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="v_box_container" type="VBoxContainer" parent="."]
+[node name="v_box_container" type="VBoxContainer" parent="." unique_id=2042026573]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -148,7 +163,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="error_label" type="Label" parent="."]
+[node name="error_label" type="Label" parent="." unique_id=584453718]
 z_index = 1000
 layout_mode = 1
 anchors_preset = 5
@@ -163,7 +178,7 @@ theme_override_colors/font_color = Color(0.917691, 0.000458734, 0.0859799, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 
-[node name="dev_screen" parent="." instance=ExtResource("14_sbtbl")]
+[node name="dev_screen" parent="." unique_id=747023175 instance=ExtResource("14_sbtbl")]
 visible = false
 z_index = 100
 layout_mode = 1
@@ -234,6 +249,9 @@ layout_mode = 1
 [connection signal="start_create_new_deck" from="scenes/deck_editor" to="." method="_on_deck_editor_start_create_new_deck"]
 [connection signal="close_rewards" from="scenes/rewards_screen" to="." method="_on_rewards_screen_close_rewards"]
 [connection signal="selected_reward" from="scenes/rewards_screen" to="." method="_on_rewards_screen_selected_reward"]
+[connection signal="duplicate_card" from="scenes/card_edit_screen" to="." method="_on_card_edit_screen_duplicate_card"]
+[connection signal="salvage_card" from="scenes/card_edit_screen" to="." method="_on_card_edit_screen_salvage_card"]
+[connection signal="scrap_card" from="scenes/card_edit_screen" to="." method="_on_card_edit_screen_scrap_card"]
 [connection signal="start_fusion_edit" from="scenes/card_edit_screen" to="." method="_on_card_edit_screen_start_fusion_edit"]
 [connection signal="start_image_edit" from="scenes/card_edit_screen" to="." method="_on_card_edit_screen_start_image_edit"]
 [connection signal="start_name_edit" from="scenes/card_edit_screen" to="." method="_on_card_edit_screen_start_name_edit"]
@@ -241,6 +259,11 @@ layout_mode = 1
 [connection signal="imagegen_make_image" from="scenes/card_image_edit" to="." method="_on_card_image_edit_imagegen_make_image"]
 [connection signal="save_card_name" from="scenes/card_name_edit" to="." method="_on_card_name_edit_save_card_name"]
 [connection signal="validate_card_name" from="scenes/card_name_edit" to="." method="_on_card_name_edit_validate_card_name"]
+[connection signal="fuse_cards" from="scenes/fusion_screen" to="." method="_on_fusion_screen_fuse_cards"]
+[connection signal="preview_fused_card" from="scenes/fusion_screen" to="." method="_on_fusion_screen_preview_fused_card"]
+[connection signal="select_fusion_card" from="scenes/fusion_screen" to="." method="_on_fusion_screen_select_fusion_card"]
+[connection signal="buy_item" from="scenes/store_screen" to="." method="_on_store_screen_buy_item"]
+[connection signal="category_selected" from="scenes/store_screen" to="." method="_on_store_screen_category_selected"]
 [connection signal="battle" from="hud" to="." method="_on_hud_battle"]
 [connection signal="build" from="hud" to="." method="_on_hud_build"]
 [connection signal="cancel" from="hud" to="." method="_on_hud_cancel"]
@@ -252,6 +275,7 @@ layout_mode = 1
 [connection signal="pve_battle" from="hud" to="." method="_on_hud_pve_battle"]
 [connection signal="pvp_battle" from="hud" to="." method="_on_hud_pvp_battle"]
 [connection signal="rewards" from="hud" to="." method="_on_hud_rewards"]
+[connection signal="shop" from="hud" to="." method="_on_hud_shop"]
 [connection signal="user_change_account" from="hud" to="." method="_on_hud_user_change_account"]
 [connection signal="add_components" from="dev_screen" to="." method="_on_dev_screen_add_components"]
 [connection signal="add_templates" from="dev_screen" to="." method="_on_dev_screen_add_templates"]

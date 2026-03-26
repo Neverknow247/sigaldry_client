@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b75q21lpkrmi4"]
+[gd_scene format=3 uid="uid://b75q21lpkrmi4"]
 
 [ext_resource type="Script" uid="uid://bxvdynw6b0wcm" path="res://menus/rewards_screen.gd" id="1_gej4g"]
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_lmek6"]
 
-[node name="rewards_screen" type="Control"]
+[node name="rewards_screen" type="Control" unique_id=263238764]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,7 +13,7 @@ grow_vertical = 2
 theme = ExtResource("1_lmek6")
 script = ExtResource("1_gej4g")
 
-[node name="color_background" type="ColorRect" parent="."]
+[node name="color_background" type="ColorRect" parent="." unique_id=1791814118]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,14 +22,14 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.5647059, 0.5647059, 0.5647059, 1)
 
-[node name="fake_hud" type="ColorRect" parent="color_background"]
+[node name="fake_hud" type="ColorRect" parent="color_background" unique_id=1383439913]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 
-[node name="back_button" type="Button" parent="."]
+[node name="back_button" type="Button" parent="." unique_id=532156995]
 visible = false
 layout_mode = 0
 offset_left = 1767.0
@@ -38,20 +38,20 @@ offset_right = 1861.0
 offset_bottom = 90.0
 text = "Back"
 
-[node name="h_box_container" type="HBoxContainer" parent="."]
+[node name="h_box_container" type="HBoxContainer" parent="." unique_id=933714145]
 layout_mode = 0
-offset_left = 64.0
+offset_left = 32.0
 offset_top = 128.0
-offset_right = 1856.0
+offset_right = 1888.0
 offset_bottom = 1016.0
-theme_override_constants/separation = 32
+theme_override_constants/separation = 16
 
-[node name="rewards_container" type="VBoxContainer" parent="h_box_container"]
-custom_minimum_size = Vector2(432, 0)
+[node name="rewards_container" type="VBoxContainer" parent="h_box_container" unique_id=207613707]
+custom_minimum_size = Vector2(528, 0)
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="label" type="Label" parent="h_box_container/rewards_container"]
+[node name="label" type="Label" parent="h_box_container/rewards_container" unique_id=82421194]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
@@ -59,20 +59,20 @@ theme_override_font_sizes/font_size = 48
 text = "Rewards"
 horizontal_alignment = 1
 
-[node name="rewards_scroll" type="ScrollContainer" parent="h_box_container/rewards_container"]
+[node name="rewards_scroll" type="ScrollContainer" parent="h_box_container/rewards_container" unique_id=764957232]
 custom_minimum_size = Vector2(0, 806)
 layout_mode = 2
 
-[node name="rewards" type="VBoxContainer" parent="h_box_container/rewards_container/rewards_scroll"]
+[node name="rewards" type="VBoxContainer" parent="h_box_container/rewards_container/rewards_scroll" unique_id=787133546]
 custom_minimum_size = Vector2(432, 0)
 layout_mode = 2
 
-[node name="templates_container" type="VBoxContainer" parent="h_box_container"]
+[node name="templates_container" type="VBoxContainer" parent="h_box_container" unique_id=1571484196]
 custom_minimum_size = Vector2(648, 0)
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="label" type="Label" parent="h_box_container/templates_container"]
+[node name="label" type="Label" parent="h_box_container/templates_container" unique_id=398383673]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
@@ -80,20 +80,20 @@ theme_override_font_sizes/font_size = 48
 text = "Templates"
 horizontal_alignment = 1
 
-[node name="template_scroll" type="ScrollContainer" parent="h_box_container/templates_container"]
+[node name="template_scroll" type="ScrollContainer" parent="h_box_container/templates_container" unique_id=810132718]
 custom_minimum_size = Vector2(0, 806)
 layout_mode = 2
 
-[node name="templates" type="VBoxContainer" parent="h_box_container/templates_container/template_scroll"]
+[node name="templates" type="VBoxContainer" parent="h_box_container/templates_container/template_scroll" unique_id=307401851]
 custom_minimum_size = Vector2(648, 0)
 layout_mode = 2
 
-[node name="components_container" type="VBoxContainer" parent="h_box_container"]
+[node name="components_container" type="VBoxContainer" parent="h_box_container" unique_id=26815515]
 custom_minimum_size = Vector2(648, 0)
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="label" type="Label" parent="h_box_container/components_container"]
+[node name="label" type="Label" parent="h_box_container/components_container" unique_id=1935072553]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
@@ -101,11 +101,11 @@ theme_override_font_sizes/font_size = 48
 text = "Components"
 horizontal_alignment = 1
 
-[node name="components_scroll" type="ScrollContainer" parent="h_box_container/components_container"]
+[node name="components_scroll" type="ScrollContainer" parent="h_box_container/components_container" unique_id=156785691]
 custom_minimum_size = Vector2(0, 806)
 layout_mode = 2
 
-[node name="components" type="VBoxContainer" parent="h_box_container/components_container/components_scroll"]
+[node name="components" type="VBoxContainer" parent="h_box_container/components_container/components_scroll" unique_id=786886581]
 custom_minimum_size = Vector2(648, 0)
 layout_mode = 2
 

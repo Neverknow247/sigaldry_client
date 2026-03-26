@@ -1,16 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://ckthh455tbbug"]
+[gd_scene format=3 uid="uid://ckthh455tbbug"]
 
 [ext_resource type="Script" uid="uid://cjj5pyak2xd0e" path="res://items/are_you_sure_popup.gd" id="1_jncfj"]
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_onb4s"]
 
-[node name="are_you_sure_popup" type="Popup"]
+[node name="are_you_sure_popup" type="Popup" unique_id=1749210068]
 transparent_bg = true
 oversampling_override = 1.0
 initial_position = 2
 size = Vector2i(800, 400)
 visible = true
+theme = ExtResource("1_onb4s")
 script = ExtResource("1_jncfj")
 
-[node name="color_rect" type="ColorRect" parent="."]
+[node name="color_rect" type="ColorRect" parent="." unique_id=622007493]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -18,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.83500004)
 
-[node name="margin_container" type="MarginContainer" parent="color_rect"]
+[node name="margin_container" type="MarginContainer" parent="color_rect" unique_id=236008691]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,11 +32,11 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="color_rect" type="ColorRect" parent="color_rect/margin_container"]
+[node name="color_rect" type="ColorRect" parent="color_rect/margin_container" unique_id=1911264933]
 layout_mode = 2
 color = Color(0.60933006, 0.6093301, 0.60933006, 0.518)
 
-[node name="center_container" type="CenterContainer" parent="color_rect"]
+[node name="center_container" type="CenterContainer" parent="color_rect" unique_id=836704633]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -42,13 +44,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="v_box_container" type="VBoxContainer" parent="color_rect/center_container"]
+[node name="v_box_container" type="VBoxContainer" parent="color_rect/center_container" unique_id=167431871]
 layout_mode = 2
 theme_override_constants/separation = 32
 alignment = 1
 
-[node name="are_you_sure_label" type="Label" parent="color_rect/center_container/v_box_container"]
-custom_minimum_size = Vector2(400, 0)
+[node name="are_you_sure_label" type="Label" parent="color_rect/center_container/v_box_container" unique_id=1315421148]
+custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 36
@@ -58,19 +60,19 @@ vertical_alignment = 1
 autowrap_mode = 3
 uppercase = true
 
-[node name="h_box_container" type="HBoxContainer" parent="color_rect/center_container/v_box_container"]
+[node name="h_box_container" type="HBoxContainer" parent="color_rect/center_container/v_box_container" unique_id=1790662986]
 layout_mode = 2
 theme_override_constants/separation = 32
 alignment = 1
 
-[node name="yes_button" type="Button" parent="color_rect/center_container/v_box_container/h_box_container"]
+[node name="yes_button" type="Button" parent="color_rect/center_container/v_box_container/h_box_container" unique_id=857783140]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 36
 text = "YES"
 
-[node name="no_button" type="Button" parent="color_rect/center_container/v_box_container/h_box_container"]
+[node name="no_button" type="Button" parent="color_rect/center_container/v_box_container/h_box_container" unique_id=1870824770]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 theme_override_constants/outline_size = 8

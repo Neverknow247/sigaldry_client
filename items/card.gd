@@ -42,6 +42,9 @@ signal start_edit_card(id)
 @onready var card_details_timer: Timer = $content/card_details/card_details_timer
 @onready var card_details_animation_player: AnimationPlayer = $content/card_details/card_details_animation_player
 
+@onready var card_duplicate_number: ColorRect = $content/card_texture/card_duplicate_number
+@onready var card_duplicate_number_label: Label = $content/card_texture/card_duplicate_number/card_duplicate_number_label
+
 var type = ""
 var source_type = ""
 var card_id = 0
@@ -310,6 +313,9 @@ func set_color_profile(colors):
 func set_avatar():
 	print("Add Avatar Image")
 
+func set_card_duplicate_number(number):
+	card_duplicate_number.show()
+	card_duplicate_number_label.text = "X%s" %[str(number)]
 
 func _on_card_button_pressed():
 	print("Card Type: ",card_button_type," | Card ID: ",card_id)
@@ -327,6 +333,8 @@ func _on_card_button_pressed():
 		"game_type":
 			game_select_card.emit()
 		"builder_compare_select":
+			compare_card.emit(card_id)
+		"preview_select":
 			compare_card.emit(card_id)
 		"select":
 			select_card.emit(card_id)

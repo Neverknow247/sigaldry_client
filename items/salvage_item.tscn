@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://cqdv2xysysie5"]
+
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_8q4ql"]
+[ext_resource type="Script" uid="uid://b02of5lh6txcv" path="res://items/salvage_item.gd" id="2_h8uoq"]
+
+[node name="salvage_item" type="Control" unique_id=191429245]
+custom_minimum_size = Vector2(610, 98)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1310.0
+offset_bottom = -982.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_8q4ql")
+script = ExtResource("2_h8uoq")
+
+[node name="color_rect" type="ColorRect" parent="." unique_id=1052926013]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.20511743, 0.20511743, 0.20511743, 1)
+
+[node name="margin_container" type="MarginContainer" parent="." unique_id=1688978111]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="h_box_container" type="HBoxContainer" parent="margin_container" unique_id=2101412754]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="item_label" type="Label" parent="margin_container/h_box_container" unique_id=509067958]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+text = "Surpress +1.5"
+vertical_alignment = 1
+
+[node name="spin_box" type="SpinBox" parent="margin_container/h_box_container" unique_id=1881504201]
+layout_mode = 2
+
+[node name="amount_label" type="Label" parent="margin_container/h_box_container" unique_id=137498817]
+custom_minimum_size = Vector2(42, 66)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "X10"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[connection signal="value_changed" from="margin_container/h_box_container/spin_box" to="." method="_on_spin_box_value_changed"]

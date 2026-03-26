@@ -1,0 +1,142 @@
+[gd_scene format=3 uid="uid://hbuas2jopiqk"]
+
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_b6oa4"]
+[ext_resource type="Script" uid="uid://bn8lv6ysk5480" path="res://menus/salvage_screen.gd" id="1_tv6l1"]
+[ext_resource type="PackedScene" uid="uid://cqdv2xysysie5" path="res://items/salvage_item.tscn" id="3_1rrub"]
+[ext_resource type="PackedScene" uid="uid://di0881y716irt" path="res://items/card.tscn" id="4_nua8m"]
+
+[node name="salvage_screen" type="Control" unique_id=1620819395]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_b6oa4")
+script = ExtResource("1_tv6l1")
+
+[node name="background_color" type="ColorRect" parent="." unique_id=176669393]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5647059, 0.5647059, 0.5647059, 1)
+
+[node name="fake_hud" type="ColorRect" parent="background_color" unique_id=1002649242]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="salvage_area" type="Control" parent="." unique_id=1830785180]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="margin_container" type="MarginContainer" parent="salvage_area" unique_id=83476355]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="v_box_container" type="VBoxContainer" parent="salvage_area/margin_container" unique_id=60748132]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="h_box_container" type="HBoxContainer" parent="salvage_area/margin_container/v_box_container" unique_id=590801524]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="v_box_container" type="VBoxContainer" parent="salvage_area/margin_container/v_box_container/h_box_container" unique_id=1977447037]
+custom_minimum_size = Vector2(610, 0)
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="label" type="Label" parent="salvage_area/margin_container/v_box_container/h_box_container/v_box_container" unique_id=2001119794]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Components"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="scroll_container" type="ScrollContainer" parent="salvage_area/margin_container/v_box_container/h_box_container/v_box_container" unique_id=1161286923]
+custom_minimum_size = Vector2(0, 652)
+layout_mode = 2
+
+[node name="components_box" type="VBoxContainer" parent="salvage_area/margin_container/v_box_container/h_box_container/v_box_container/scroll_container" unique_id=235266015]
+layout_mode = 2
+
+[node name="salvage_item" parent="salvage_area/margin_container/v_box_container/h_box_container/v_box_container/scroll_container/components_box" unique_id=191429245 instance=ExtResource("3_1rrub")]
+layout_mode = 2
+
+[node name="salvage_item2" parent="salvage_area/margin_container/v_box_container/h_box_container/v_box_container/scroll_container/components_box" unique_id=278187081 instance=ExtResource("3_1rrub")]
+layout_mode = 2
+
+[node name="salvage_item3" parent="salvage_area/margin_container/v_box_container/h_box_container/v_box_container/scroll_container/components_box" unique_id=1645888280 instance=ExtResource("3_1rrub")]
+layout_mode = 2
+
+[node name="salvage_item4" parent="salvage_area/margin_container/v_box_container/h_box_container/v_box_container/scroll_container/components_box" unique_id=1572503330 instance=ExtResource("3_1rrub")]
+layout_mode = 2
+
+[node name="salvage_item5" parent="salvage_area/margin_container/v_box_container/h_box_container/v_box_container/scroll_container/components_box" unique_id=1847265652 instance=ExtResource("3_1rrub")]
+layout_mode = 2
+
+[node name="salvage_item6" parent="salvage_area/margin_container/v_box_container/h_box_container/v_box_container/scroll_container/components_box" unique_id=1445449881 instance=ExtResource("3_1rrub")]
+layout_mode = 2
+
+[node name="salvage_item7" parent="salvage_area/margin_container/v_box_container/h_box_container/v_box_container/scroll_container/components_box" unique_id=1269606119 instance=ExtResource("3_1rrub")]
+layout_mode = 2
+
+[node name="v_box_container2" type="VBoxContainer" parent="salvage_area/margin_container/v_box_container/h_box_container" unique_id=33789061]
+custom_minimum_size = Vector2(610, 0)
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="label" type="Label" parent="salvage_area/margin_container/v_box_container/h_box_container/v_box_container2" unique_id=1578566539]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Template"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="scroll_container2" type="ScrollContainer" parent="salvage_area/margin_container/v_box_container/h_box_container/v_box_container2" unique_id=1640228153]
+custom_minimum_size = Vector2(0, 652)
+layout_mode = 2
+
+[node name="templates_box" type="VBoxContainer" parent="salvage_area/margin_container/v_box_container/h_box_container/v_box_container2/scroll_container2" unique_id=72466427]
+layout_mode = 2
+
+[node name="salvage_item" parent="salvage_area/margin_container/v_box_container/h_box_container/v_box_container2/scroll_container2/templates_box" unique_id=2010203540 instance=ExtResource("3_1rrub")]
+layout_mode = 2
+
+[node name="card_preview" type="Control" parent="salvage_area/margin_container/v_box_container/h_box_container" unique_id=1236686268]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+
+[node name="card" parent="salvage_area/margin_container/v_box_container/h_box_container/card_preview" unique_id=832416852 instance=ExtResource("4_nua8m")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 0.0
+offset_bottom = 766.0
+scale = Vector2(0.5, 0.5)
+
+[node name="button" type="Button" parent="salvage_area/margin_container/v_box_container" unique_id=656491898]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Salvage Card"

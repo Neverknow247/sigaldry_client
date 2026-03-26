@@ -9,7 +9,7 @@ const CARD_SCENE = preload("res://items/card.tscn")
 var binder = []
 var binder_sorted = []
 var hide_duplicates = true
-var all_card_ids = []
+var all_card_ids = {}
 
 var binder_ascending = true
 var binder_width = 5
@@ -42,7 +42,7 @@ func store_items(payload):
 	#add_cards()
 
 func add_cards():
-	all_card_ids = []
+	all_card_ids = {}
 	for n in v_box_container.get_children():
 		v_box_container.remove_child(n)
 		n.queue_free()
@@ -54,8 +54,11 @@ func add_cards():
 	for card in true_binder:
 		#print(card)
 		if all_card_ids.has(card["key"]) and hide_duplicates:
+			#print(all_card_ids[card["key"]])
+			all_card_ids[card["key"]]["amount"]+=1
+			all_card_ids[card["key"]]["card"].set_card_duplicate_number(all_card_ids[card["key"]]["amount"])
 			continue
-		all_card_ids.append(card["key"])
+		#all_card_ids.append(card["key"])
 		if first_card:
 			first_card = false
 		if card_number == 0:
@@ -73,6 +76,9 @@ func add_cards():
 		if card_number == binder_width:
 			new_card.last_card  = true
 			card_number = 0
+		all_card_ids[card["key"]] = {"amount":1,"card":new_card}
+		if hide_duplicates:
+			new_card.set_card_duplicate_number(1)
 
 func edit_card(_id):
 	start_edit_card.emit(_id)

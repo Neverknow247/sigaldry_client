@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://di0881y716irt"]
+[gd_scene format=3 uid="uid://di0881y716irt"]
 
 [ext_resource type="Theme" uid="uid://by8ew0t4rulwy" path="res://assets/themes/card_theme.tres" id="1_7bo1f"]
 [ext_resource type="Script" uid="uid://ctjau1hpet627" path="res://items/card.gd" id="1_ijhri"]
@@ -359,7 +359,7 @@ _data = {
 &"open_card_details_right": SubResource("Animation_5pqy3")
 }
 
-[node name="card" type="Control"]
+[node name="card" type="Control" unique_id=832416852]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -372,7 +372,7 @@ mouse_filter = 2
 theme = ExtResource("1_7bo1f")
 script = ExtResource("1_ijhri")
 
-[node name="card_button" type="Button" parent="."]
+[node name="card_button" type="Button" parent="." unique_id=1165210562]
 z_index = 1
 layout_mode = 1
 anchors_preset = 15
@@ -393,7 +393,7 @@ theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_1c5nx")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_4804b")
 script = ExtResource("3_wq0el")
 
-[node name="content" type="Control" parent="."]
+[node name="content" type="Control" parent="." unique_id=1635455196]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -402,7 +402,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="card_image" type="TextureRect" parent="content"]
+[node name="card_image" type="TextureRect" parent="content" unique_id=424569256]
 clip_children = 2
 layout_mode = 0
 offset_left = 63.0
@@ -413,7 +413,7 @@ mouse_filter = 2
 texture = ExtResource("4_owe1f")
 expand_mode = 5
 
-[node name="color_banner" type="TextureRect" parent="content/card_image"]
+[node name="color_banner" type="TextureRect" parent="content/card_image" unique_id=835620751]
 layout_mode = 0
 offset_left = 32.0
 offset_top = -83.0
@@ -422,7 +422,7 @@ offset_bottom = 45.0
 texture = ExtResource("4_wq0el")
 expand_mode = 5
 
-[node name="card_color_profile" type="GridContainer" parent="content/card_image/color_banner"]
+[node name="card_color_profile" type="GridContainer" parent="content/card_image/color_banner" unique_id=1256834282]
 layout_mode = 0
 offset_left = 29.0
 offset_top = 24.0
@@ -432,39 +432,37 @@ scale = Vector2(0.5, 0.5)
 theme_override_constants/h_separation = 0
 columns = 9
 
-[node name="magnitude_square" parent="content/card_image/color_banner/card_color_profile" instance=ExtResource("4_d525o")]
+[node name="magnitude_square" parent="content/card_image/color_banner/card_color_profile" unique_id=1979028039 instance=ExtResource("4_d525o")]
 layout_mode = 2
 
-[node name="magnitude_square2" parent="content/card_image/color_banner/card_color_profile" instance=ExtResource("4_d525o")]
+[node name="magnitude_square2" parent="content/card_image/color_banner/card_color_profile" unique_id=1330349789 instance=ExtResource("4_d525o")]
 layout_mode = 2
 
-[node name="magnitude_square3" parent="content/card_image/color_banner/card_color_profile" instance=ExtResource("4_d525o")]
+[node name="magnitude_square3" parent="content/card_image/color_banner/card_color_profile" unique_id=1963216214 instance=ExtResource("4_d525o")]
 layout_mode = 2
 
-[node name="magnitude_square4" parent="content/card_image/color_banner/card_color_profile" instance=ExtResource("4_d525o")]
+[node name="magnitude_square4" parent="content/card_image/color_banner/card_color_profile" unique_id=1511634547 instance=ExtResource("4_d525o")]
 layout_mode = 2
 
-[node name="magnitude_square5" parent="content/card_image/color_banner/card_color_profile" instance=ExtResource("4_d525o")]
+[node name="magnitude_square5" parent="content/card_image/color_banner/card_color_profile" unique_id=1286900365 instance=ExtResource("4_d525o")]
 layout_mode = 2
 
-[node name="magnitude_square6" parent="content/card_image/color_banner/card_color_profile" instance=ExtResource("4_d525o")]
+[node name="magnitude_square6" parent="content/card_image/color_banner/card_color_profile" unique_id=391918472 instance=ExtResource("4_d525o")]
 layout_mode = 2
 
-[node name="magnitude_square7" parent="content/card_image/color_banner/card_color_profile" instance=ExtResource("4_d525o")]
+[node name="magnitude_square7" parent="content/card_image/color_banner/card_color_profile" unique_id=909889872 instance=ExtResource("4_d525o")]
 layout_mode = 2
 
-[node name="magnitude_square8" parent="content/card_image/color_banner/card_color_profile" instance=ExtResource("4_d525o")]
+[node name="magnitude_square8" parent="content/card_image/color_banner/card_color_profile" unique_id=1252171276 instance=ExtResource("4_d525o")]
 layout_mode = 2
 
-[node name="magnitude_square9" parent="content/card_image/color_banner/card_color_profile" instance=ExtResource("4_d525o")]
+[node name="magnitude_square9" parent="content/card_image/color_banner/card_color_profile" unique_id=461616742 instance=ExtResource("4_d525o")]
 layout_mode = 2
 
-[node name="color_banner_animation_player" type="AnimationPlayer" parent="content/card_image/color_banner"]
-libraries = {
-&"": SubResource("AnimationLibrary_owe1f")
-}
+[node name="color_banner_animation_player" type="AnimationPlayer" parent="content/card_image/color_banner" unique_id=411780601]
+libraries/ = SubResource("AnimationLibrary_owe1f")
 
-[node name="color_banner_button" type="Button" parent="content/card_image/color_banner"]
+[node name="color_banner_button" type="Button" parent="content/card_image/color_banner" unique_id=430837689]
 z_index = 1
 layout_mode = 1
 anchors_preset = 15
@@ -484,14 +482,14 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_h5ekm")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_vhpwo")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_5pqy3")
 
-[node name="card_texture" type="TextureRect" parent="content"]
+[node name="card_texture" type="TextureRect" parent="content" unique_id=1389056312]
 layout_mode = 0
 offset_right = 816.0
 offset_bottom = 1120.0
 mouse_filter = 2
 texture = ExtResource("3_20yvs")
 
-[node name="center_point" type="Control" parent="content/card_texture"]
+[node name="center_point" type="Control" parent="content/card_texture" unique_id=1401306517]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -502,7 +500,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="main_banner" type="TextureRect" parent="content/card_texture"]
+[node name="main_banner" type="TextureRect" parent="content/card_texture" unique_id=996789030]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 648.0
@@ -512,7 +510,7 @@ mouse_filter = 2
 texture = ExtResource("4_wingh")
 expand_mode = 5
 
-[node name="stat_banner" type="TextureRect" parent="content/card_texture/main_banner"]
+[node name="stat_banner" type="TextureRect" parent="content/card_texture/main_banner" unique_id=881040429]
 layout_mode = 0
 offset_left = 48.0
 offset_right = 215.0
@@ -520,7 +518,7 @@ offset_bottom = 479.0
 mouse_filter = 2
 texture = ExtResource("9_wq0el")
 
-[node name="card_type" type="Label" parent="content/card_texture/main_banner/stat_banner"]
+[node name="card_type" type="Label" parent="content/card_texture/main_banner/stat_banner" unique_id=286789001]
 self_modulate = Color(0.5686275, 0.5686275, 0.5686275, 1)
 layout_mode = 0
 offset_left = 8.0
@@ -534,7 +532,7 @@ text = "Unit"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="attack_badge" type="TextureRect" parent="content/card_texture/main_banner/stat_banner"]
+[node name="attack_badge" type="TextureRect" parent="content/card_texture/main_banner/stat_banner" unique_id=1584748912]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 80.0
@@ -543,7 +541,7 @@ offset_bottom = 195.0
 mouse_filter = 2
 texture = ExtResource("6_owe1f")
 
-[node name="attack_icon_badge" type="TextureRect" parent="content/card_texture/main_banner/stat_banner/attack_badge"]
+[node name="attack_icon_badge" type="TextureRect" parent="content/card_texture/main_banner/stat_banner/attack_badge" unique_id=690210248]
 layout_mode = 0
 offset_left = 56.0
 offset_top = 72.0
@@ -552,7 +550,7 @@ offset_bottom = 145.0
 mouse_filter = 2
 texture = ExtResource("7_5pqy3")
 
-[node name="attack_icon" type="TextureRect" parent="content/card_texture/main_banner/stat_banner/attack_badge/attack_icon_badge"]
+[node name="attack_icon" type="TextureRect" parent="content/card_texture/main_banner/stat_banner/attack_badge/attack_icon_badge" unique_id=283124951]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
@@ -561,7 +559,7 @@ offset_bottom = 56.0
 mouse_filter = 2
 texture = ExtResource("8_vhpwo")
 
-[node name="health_badge" type="TextureRect" parent="content/card_texture/main_banner/stat_banner"]
+[node name="health_badge" type="TextureRect" parent="content/card_texture/main_banner/stat_banner" unique_id=1945893811]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 256.0
@@ -570,7 +568,7 @@ offset_bottom = 371.0
 mouse_filter = 2
 texture = ExtResource("6_owe1f")
 
-[node name="health_icon_badge" type="TextureRect" parent="content/card_texture/main_banner/stat_banner/health_badge"]
+[node name="health_icon_badge" type="TextureRect" parent="content/card_texture/main_banner/stat_banner/health_badge" unique_id=458452017]
 layout_mode = 0
 offset_left = 56.0
 offset_top = 72.0
@@ -579,7 +577,7 @@ offset_bottom = 145.0
 mouse_filter = 2
 texture = ExtResource("7_5pqy3")
 
-[node name="health_icon" type="TextureRect" parent="content/card_texture/main_banner/stat_banner/health_badge/health_icon_badge"]
+[node name="health_icon" type="TextureRect" parent="content/card_texture/main_banner/stat_banner/health_badge/health_icon_badge" unique_id=969517817]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
@@ -588,7 +586,7 @@ offset_bottom = 56.0
 mouse_filter = 2
 texture = ExtResource("13_wq0el")
 
-[node name="cost_badge" type="TextureRect" parent="content/card_texture/main_banner"]
+[node name="cost_badge" type="TextureRect" parent="content/card_texture/main_banner" unique_id=506587877]
 layout_mode = 0
 offset_left = 632.0
 offset_top = 16.0
@@ -597,7 +595,7 @@ offset_bottom = 147.0
 mouse_filter = 2
 texture = ExtResource("10_q5wdc")
 
-[node name="cost_icon_badge" type="TextureRect" parent="content/card_texture/main_banner/cost_badge"]
+[node name="cost_icon_badge" type="TextureRect" parent="content/card_texture/main_banner/cost_badge" unique_id=406484192]
 layout_mode = 0
 offset_left = 64.0
 offset_top = 68.0
@@ -607,7 +605,7 @@ mouse_filter = 2
 texture = ExtResource("10_q5wdc")
 expand_mode = 5
 
-[node name="cost_icon" type="TextureRect" parent="content/card_texture/main_banner/cost_badge/cost_icon_badge"]
+[node name="cost_icon" type="TextureRect" parent="content/card_texture/main_banner/cost_badge/cost_icon_badge" unique_id=1798115404]
 layout_mode = 0
 offset_left = 11.0
 offset_top = 16.0
@@ -617,7 +615,7 @@ mouse_filter = 2
 texture = ExtResource("15_owe1f")
 expand_mode = 3
 
-[node name="card_details_button" type="Button" parent="content/card_texture"]
+[node name="card_details_button" type="Button" parent="content/card_texture" unique_id=1874396310]
 visible = false
 z_index = 1
 layout_mode = 0
@@ -637,7 +635,29 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_o2lex")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_xss71")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_owe1f")
 
-[node name="card_author" type="Label" parent="content"]
+[node name="card_duplicate_number" type="ColorRect" parent="content/card_texture" unique_id=1121032047]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_left = 624.0
+offset_top = 492.0
+offset_right = 752.0
+offset_bottom = 620.0
+color = Color(0, 0, 0, 0.75000006)
+
+[node name="card_duplicate_number_label" type="Label" parent="content/card_texture/card_duplicate_number" unique_id=14739915]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 24
+theme_override_font_sizes/font_size = 84
+text = "X3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="card_author" type="Label" parent="content" unique_id=1115904082]
 layout_mode = 0
 offset_left = 232.0
 offset_top = 812.0
@@ -650,7 +670,7 @@ text = "Neverknow247"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="labels" type="Control" parent="content"]
+[node name="labels" type="Control" parent="content" unique_id=1567085459]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -659,7 +679,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="card_cost" type="Label" parent="content/labels"]
+[node name="card_cost" type="Label" parent="content/labels" unique_id=850389466]
 layout_mode = 0
 offset_left = 661.0
 offset_top = 661.0
@@ -673,7 +693,7 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="card_name" type="Label" parent="content/labels"]
+[node name="card_name" type="Label" parent="content/labels" unique_id=579775421]
 layout_mode = 0
 offset_left = 232.0
 offset_top = 668.0
@@ -689,7 +709,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="card_effects" type="Label" parent="content/labels"]
+[node name="card_effects" type="Label" parent="content/labels" unique_id=45214139]
 visible = false
 layout_mode = 0
 offset_left = 64.0
@@ -703,7 +723,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="card_attack" type="Label" parent="content/labels"]
+[node name="card_attack" type="Label" parent="content/labels" unique_id=1933225942]
 layout_mode = 0
 offset_left = 64.0
 offset_top = 696.0
@@ -718,7 +738,7 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="card_health" type="Label" parent="content/labels"]
+[node name="card_health" type="Label" parent="content/labels" unique_id=373322724]
 layout_mode = 0
 offset_left = 64.0
 offset_top = 876.0
@@ -733,7 +753,7 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="card_actions" type="TextureRect" parent="content/labels"]
+[node name="card_actions" type="TextureRect" parent="content/labels" unique_id=443233002]
 self_modulate = Color(0.3089423, 0.39761806, 0.50260925, 1)
 layout_mode = 0
 offset_left = 36.0
@@ -743,7 +763,7 @@ offset_bottom = 808.0
 texture = ExtResource("17_wq0el")
 stretch_mode = 1
 
-[node name="card_actions2" type="TextureRect" parent="content/labels"]
+[node name="card_actions2" type="TextureRect" parent="content/labels" unique_id=685491317]
 visible = false
 layout_mode = 0
 offset_left = 80.0
@@ -753,7 +773,7 @@ offset_bottom = 736.0
 texture = ExtResource("17_wq0el")
 stretch_mode = 1
 
-[node name="card_rich_effects" type="RichTextLabel" parent="content"]
+[node name="card_rich_effects" type="RichTextLabel" parent="content" unique_id=2093034261]
 layout_mode = 0
 offset_left = 232.0
 offset_top = 840.0
@@ -774,14 +794,14 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("8_1wx62")
 
-[node name="labels" type="Control" parent="content/card_rich_effects"]
+[node name="labels" type="Control" parent="content/card_rich_effects" unique_id=1225736699]
 layout_mode = 1
 anchors_preset = 0
 offset_right = 720.0
 offset_bottom = 320.0
 mouse_filter = 2
 
-[node name="card_details" type="Control" parent="content"]
+[node name="card_details" type="Control" parent="content" unique_id=554143889]
 clip_children = 2
 z_index = 100
 y_sort_enabled = true
@@ -791,7 +811,7 @@ offset_top = 88.0
 offset_right = 800.0
 offset_bottom = 1032.0
 
-[node name="card_details_background" type="TextureRect" parent="content/card_details"]
+[node name="card_details_background" type="TextureRect" parent="content/card_details" unique_id=506031724]
 clip_children = 2
 layout_mode = 1
 anchors_preset = 15
@@ -803,7 +823,7 @@ mouse_filter = 0
 texture = ExtResource("24_owe1f")
 expand_mode = 1
 
-[node name="content" type="Control" parent="content/card_details/card_details_background"]
+[node name="content" type="Control" parent="content/card_details/card_details_background" unique_id=1314297728]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -812,7 +832,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="scroll_container" type="ScrollContainer" parent="content/card_details/card_details_background/content"]
+[node name="scroll_container" type="ScrollContainer" parent="content/card_details/card_details_background/content" unique_id=309901418]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -825,7 +845,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 0
 
-[node name="card_details_box" type="VBoxContainer" parent="content/card_details/card_details_background/content/scroll_container"]
+[node name="card_details_box" type="VBoxContainer" parent="content/card_details/card_details_background/content/scroll_container" unique_id=550413936]
 z_index = 100
 y_sort_enabled = true
 custom_minimum_size = Vector2(568, 0)
@@ -833,13 +853,11 @@ layout_mode = 2
 mouse_filter = 0
 theme_override_constants/separation = 16
 
-[node name="card_details_timer" type="Timer" parent="content/card_details"]
+[node name="card_details_timer" type="Timer" parent="content/card_details" unique_id=551869205]
 one_shot = true
 
-[node name="card_details_animation_player" type="AnimationPlayer" parent="content/card_details"]
-libraries = {
-&"": SubResource("AnimationLibrary_vhpwo")
-}
+[node name="card_details_animation_player" type="AnimationPlayer" parent="content/card_details" unique_id=1842320158]
+libraries/ = SubResource("AnimationLibrary_vhpwo")
 
 [connection signal="get_info" from="card_button" to="." method="_on_card_button_get_info"]
 [connection signal="mouse_entered" from="card_button" to="." method="_on_card_button_mouse_entered"]

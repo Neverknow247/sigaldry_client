@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://uwykwxtltnla"]
+
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_76rld"]
+[ext_resource type="Script" uid="uid://bwwapal12nt66" path="res://items/store_item.gd" id="2_id14e"]
+[ext_resource type="Texture2D" uid="uid://bttqg3ojc674t" path="res://assets/art/icons/standard_currency_1.png" id="3_dgmey"]
+
+[node name="store_item" type="HBoxContainer" unique_id=965160078]
+custom_minimum_size = Vector2(640, 64)
+offset_right = 640.0
+offset_bottom = 64.0
+theme = ExtResource("1_76rld")
+script = ExtResource("2_id14e")
+
+[node name="item_button" type="Button" parent="." unique_id=272797325]
+custom_minimum_size = Vector2(560, 64)
+layout_mode = 2
+
+[node name="name_label" type="Label" parent="item_button" unique_id=1668765135]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 8.0
+offset_right = 448.0
+offset_bottom = 56.0
+theme_override_font_sizes/font_size = 30
+text = "Legendary Components Box"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="h_box_container2" type="HBoxContainer" parent="item_button" unique_id=1307349437]
+custom_minimum_size = Vector2(0, 31)
+layout_mode = 0
+offset_left = 456.0
+offset_right = 552.0
+offset_bottom = 32.0
+size_flags_vertical = 4
+alignment = 2
+
+[node name="cost_icon" type="TextureRect" parent="item_button/h_box_container2" unique_id=1140517108]
+layout_mode = 2
+tooltip_text = "Gold"
+texture = ExtResource("3_dgmey")
+expand_mode = 3
+
+[node name="cost_label" type="Label" parent="item_button/h_box_container2" unique_id=1480667497]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "10000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="spin_box" type="SpinBox" parent="." unique_id=522859101]
+layout_mode = 2
+size_flags_horizontal = 0
+min_value = 1.0
+value = 1.0
+
+[connection signal="pressed" from="item_button" to="." method="_on_item_button_pressed"]

@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2kvbn45eq1vj"]
+[gd_scene format=3 uid="uid://d2kvbn45eq1vj"]
 
 [ext_resource type="Script" uid="uid://w05hxwb1l6kn" path="res://editor_screens/card_edit_screen.gd" id="1_1ymqv"]
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_4bnlw"]
 [ext_resource type="PackedScene" uid="uid://di0881y716irt" path="res://items/card.tscn" id="2_kgk7y"]
 
-[node name="card_edit_screen" type="Control"]
+[node name="card_edit_screen" type="Control" unique_id=1393513263]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +14,7 @@ grow_vertical = 2
 theme = ExtResource("1_4bnlw")
 script = ExtResource("1_1ymqv")
 
-[node name="background_color" type="ColorRect" parent="."]
+[node name="background_color" type="ColorRect" parent="." unique_id=696235972]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,14 +23,14 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.35686275, 0.35686275, 0.35686275, 1)
 
-[node name="fake_hud" type="ColorRect" parent="background_color"]
+[node name="fake_hud" type="ColorRect" parent="background_color" unique_id=1968998916]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 
-[node name="card" parent="." instance=ExtResource("2_kgk7y")]
+[node name="card" parent="." unique_id=1235669695 instance=ExtResource("2_kgk7y")]
 layout_mode = 1
 offset_left = 1193.9999
 offset_top = 96.0
@@ -38,34 +38,55 @@ offset_right = 89.99988
 offset_bottom = 136.0
 scale = Vector2(0.85, 0.85)
 
-[node name="edit_buttons" type="VBoxContainer" parent="."]
+[node name="edit_buttons" type="VBoxContainer" parent="." unique_id=698892210]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 96.0
 offset_right = 1160.0
 offset_bottom = 1048.0
-theme_override_constants/separation = 16
+theme_override_constants/separation = 32
 alignment = 1
 
-[node name="edit_image_button" type="Button" parent="edit_buttons"]
-custom_minimum_size = Vector2(0, 160)
+[node name="edit_image_button" type="Button" parent="edit_buttons" unique_id=752677845]
+custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "Edit Image"
 
-[node name="edit_name_button" type="Button" parent="edit_buttons"]
-custom_minimum_size = Vector2(0, 160)
+[node name="edit_name_button" type="Button" parent="edit_buttons" unique_id=1908608848]
+custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "Edit Name"
 
-[node name="fusion_button" type="Button" parent="edit_buttons"]
-custom_minimum_size = Vector2(0, 160)
+[node name="fusion_button" type="Button" parent="edit_buttons" unique_id=278573976]
+custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
 disabled = true
 text = "Fusion"
 
+[node name="duplicate_button" type="Button" parent="edit_buttons" unique_id=301541393]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Duplicate"
+
+[node name="salvage_button" type="Button" parent="edit_buttons" unique_id=1554898107]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Salvage"
+
+[node name="scrap_button" type="Button" parent="edit_buttons" unique_id=2027364447]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Scrap"
+
 [connection signal="pressed" from="edit_buttons/edit_image_button" to="." method="_on_edit_image_button_pressed"]
 [connection signal="pressed" from="edit_buttons/edit_name_button" to="." method="_on_edit_name_button_pressed"]
 [connection signal="pressed" from="edit_buttons/fusion_button" to="." method="_on_fusion_button_pressed"]
+[connection signal="pressed" from="edit_buttons/duplicate_button" to="." method="_on_duplicate_button_pressed"]
+[connection signal="pressed" from="edit_buttons/salvage_button" to="." method="_on_salvage_button_pressed"]
+[connection signal="pressed" from="edit_buttons/scrap_button" to="." method="_on_scrap_button_pressed"]

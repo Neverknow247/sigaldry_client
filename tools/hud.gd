@@ -79,6 +79,7 @@ signal rewards
 signal battle
 signal pve_battle
 signal pvp_battle
+signal shop
 
 signal back
 signal logout
@@ -289,3 +290,6 @@ func _on_pve_button_pressed() -> void:
 
 func _on_pvp_button_pressed() -> void:
 	pvp_battle.emit()
+
+func _on_shop_button_pressed() -> void:
+	shop.emit()

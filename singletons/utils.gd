@@ -83,4 +83,6 @@ func instantiate_popup_on_world(scene:PackedScene):
 func random_background():
 	var rand = Stats.rng.randi_range(0,backgrounds.size()-1)
 	return backgrounds[rand]
-	
+
+func j_print(payload):
+	print(JSON.stringify(payload, "\t"))

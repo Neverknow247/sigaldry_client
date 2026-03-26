@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://b0jmnnxxr3w7h"]
+
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_bjyiw"]
+[ext_resource type="Script" uid="uid://dyoroeia2ejm8" path="res://menus/store_screen.gd" id="1_q8ryq"]
+[ext_resource type="PackedScene" uid="uid://uwykwxtltnla" path="res://items/store_item.tscn" id="2_ov822"]
+[ext_resource type="PackedScene" uid="uid://jq2ygo1xixg6" path="res://items/store_category.tscn" id="4_mf8ra"]
+
+[node name="store_screen" type="Control" unique_id=1602593064]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bjyiw")
+script = ExtResource("1_q8ryq")
+
+[node name="background_color" type="ColorRect" parent="." unique_id=33226969]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5647059, 0.5647059, 0.5647059, 1)
+
+[node name="fake_hud" type="ColorRect" parent="background_color" unique_id=1283830258]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="store_area" type="Control" parent="." unique_id=28311659]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="margin_container" type="MarginContainer" parent="store_area" unique_id=471076590]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="scroll_container" type="ScrollContainer" parent="store_area/margin_container" unique_id=1057680763]
+layout_mode = 2
+
+[node name="store_items_container" type="VBoxContainer" parent="store_area/margin_container/scroll_container" unique_id=1672268823]
+layout_mode = 2
+
+[node name="store_item" parent="store_area/margin_container/scroll_container/store_items_container" unique_id=96574236 instance=ExtResource("2_ov822")]
+layout_mode = 2
+
+[node name="store_item2" parent="store_area/margin_container/scroll_container/store_items_container" unique_id=892811894 instance=ExtResource("2_ov822")]
+layout_mode = 2
+
+[node name="store_item3" parent="store_area/margin_container/scroll_container/store_items_container" unique_id=825837631 instance=ExtResource("2_ov822")]
+layout_mode = 2
+
+[node name="store_category_area" type="Control" parent="." unique_id=1577612604]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="store_category_background" type="ColorRect" parent="store_category_area" unique_id=1239932795]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5647059, 0.5647059, 0.5647059, 1)
+
+[node name="margin_container" type="MarginContainer" parent="store_category_area" unique_id=367592332]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="scroll_container" type="ScrollContainer" parent="store_category_area/margin_container" unique_id=1451884207]
+layout_mode = 2
+
+[node name="store_categories_container" type="HBoxContainer" parent="store_category_area/margin_container/scroll_container" unique_id=1885052753]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="store_category" parent="store_category_area/margin_container/scroll_container/store_categories_container" unique_id=1273470576 instance=ExtResource("4_mf8ra")]
+layout_mode = 2
+
+[node name="store_category2" parent="store_category_area/margin_container/scroll_container/store_categories_container" unique_id=492946926 instance=ExtResource("4_mf8ra")]
+layout_mode = 2

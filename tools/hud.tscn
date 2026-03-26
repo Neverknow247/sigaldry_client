@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dl04pl45gg4at"]
+[gd_scene format=3 uid="uid://dl04pl45gg4at"]
 
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_npvic"]
 [ext_resource type="Script" uid="uid://cnk53oj8mhcb0" path="res://tools/hud.gd" id="2_toebf"]
@@ -40,7 +40,7 @@ shader_parameter/glow_strength = 2.50000011875
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2bmni"]
 
-[node name="hud" type="Control"]
+[node name="hud" type="Control" unique_id=82657676]
 z_index = 4096
 custom_minimum_size = Vector2(1920, 64)
 layout_mode = 3
@@ -53,7 +53,7 @@ grow_vertical = 2
 theme = ExtResource("1_npvic")
 script = ExtResource("2_toebf")
 
-[node name="color_rect" type="ColorRect" parent="."]
+[node name="color_rect" type="ColorRect" parent="." unique_id=1098952826]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -62,7 +62,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.235294, 0.235294, 0.235294, 1)
 
-[node name="background" type="TextureRect" parent="."]
+[node name="background" type="TextureRect" parent="." unique_id=147697369]
 modulate = Color(0.3217278, 0.321728, 0.32172793, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -73,7 +73,7 @@ grow_vertical = 2
 texture = ExtResource("3_8lntg")
 expand_mode = 1
 
-[node name="player_info" type="HBoxContainer" parent="."]
+[node name="player_info" type="HBoxContainer" parent="." unique_id=557833055]
 custom_minimum_size = Vector2(0, 63)
 layout_mode = 0
 offset_left = 8.0
@@ -81,12 +81,12 @@ offset_right = 744.0
 offset_bottom = 64.0
 theme_override_constants/separation = 10
 
-[node name="pve_rank_icon" type="TextureRect" parent="player_info"]
+[node name="pve_rank_icon" type="TextureRect" parent="player_info" unique_id=534232804]
 layout_mode = 2
 tooltip_text = "PVE Rank"
 texture = ExtResource("4_8lntg")
 
-[node name="pve_rank_label" type="Label" parent="player_info/pve_rank_icon"]
+[node name="pve_rank_label" type="Label" parent="player_info/pve_rank_icon" unique_id=1287218730]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -99,7 +99,7 @@ text = "1"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="pve_button" type="Button" parent="player_info/pve_rank_icon"]
+[node name="pve_button" type="Button" parent="player_info/pve_rank_icon" unique_id=177569209]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -108,12 +108,12 @@ grow_horizontal = 2
 grow_vertical = 2
 flat = true
 
-[node name="pvp_rank_icon" type="TextureRect" parent="player_info"]
+[node name="pvp_rank_icon" type="TextureRect" parent="player_info" unique_id=655664872]
 layout_mode = 2
 tooltip_text = "PVP Rank"
 texture = ExtResource("4_54lcn")
 
-[node name="pvp_rank_label" type="Label" parent="player_info/pvp_rank_icon"]
+[node name="pvp_rank_label" type="Label" parent="player_info/pvp_rank_icon" unique_id=575412505]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -126,7 +126,7 @@ text = "1"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="pvp_button" type="Button" parent="player_info/pvp_rank_icon"]
+[node name="pvp_button" type="Button" parent="player_info/pvp_rank_icon" unique_id=1922477902]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -135,14 +135,14 @@ grow_horizontal = 2
 grow_vertical = 2
 flat = true
 
-[node name="screen_name_label" type="Label" parent="player_info"]
+[node name="screen_name_label" type="Label" parent="player_info" unique_id=1068304474]
 layout_mode = 2
 theme_override_constants/line_spacing = 0
 theme_override_font_sizes/font_size = 40
 text = "000000000000000000000000000000"
 vertical_alignment = 1
 
-[node name="resources" type="HBoxContainer" parent="."]
+[node name="resources" type="HBoxContainer" parent="." unique_id=1242921844]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.83300006
@@ -157,65 +157,65 @@ grow_vertical = 2
 theme_override_constants/separation = 32
 alignment = 2
 
-[node name="fusion_crystals" type="HBoxContainer" parent="resources"]
+[node name="fusion_crystals" type="HBoxContainer" parent="resources" unique_id=110286718]
 layout_mode = 2
 
-[node name="fusion_icon" type="TextureRect" parent="resources/fusion_crystals"]
+[node name="fusion_icon" type="TextureRect" parent="resources/fusion_crystals" unique_id=1703738564]
 layout_mode = 2
 tooltip_text = "Fusion Crystals"
 texture = ExtResource("6_54lcn")
 expand_mode = 3
 
-[node name="fusion_number" type="Label" parent="resources/fusion_crystals"]
+[node name="fusion_number" type="Label" parent="resources/fusion_crystals" unique_id=857198216]
 layout_mode = 2
 theme_override_font_sizes/font_size = 44
 text = "0"
 
-[node name="materials" type="VBoxContainer" parent="resources"]
+[node name="materials" type="VBoxContainer" parent="resources" unique_id=817407081]
 layout_mode = 2
 alignment = 1
 
-[node name="standard_materials" type="HBoxContainer" parent="resources/materials"]
+[node name="standard_materials" type="HBoxContainer" parent="resources/materials" unique_id=1688783555]
 layout_mode = 2
 
-[node name="standard_icon" type="TextureRect" parent="resources/materials/standard_materials"]
+[node name="standard_icon" type="TextureRect" parent="resources/materials/standard_materials" unique_id=336084092]
 layout_mode = 2
 tooltip_text = "Gold"
 texture = ExtResource("7_54lcn")
 expand_mode = 3
 
-[node name="standard_label" type="Label" parent="resources/materials/standard_materials"]
+[node name="standard_label" type="Label" parent="resources/materials/standard_materials" unique_id=1954136758]
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "M:"
 
-[node name="standard_number" type="Label" parent="resources/materials/standard_materials"]
+[node name="standard_number" type="Label" parent="resources/materials/standard_materials" unique_id=2096827691]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "100000000"
 
-[node name="premium_materials" type="HBoxContainer" parent="resources/materials"]
+[node name="premium_materials" type="HBoxContainer" parent="resources/materials" unique_id=687478567]
 layout_mode = 2
 
-[node name="premium_icon" type="TextureRect" parent="resources/materials/premium_materials"]
+[node name="premium_icon" type="TextureRect" parent="resources/materials/premium_materials" unique_id=573658367]
 layout_mode = 2
 tooltip_text = "Diamonds"
 texture = ExtResource("8_2mayt")
 expand_mode = 3
 
-[node name="premium_label" type="Label" parent="resources/materials/premium_materials"]
+[node name="premium_label" type="Label" parent="resources/materials/premium_materials" unique_id=1406654384]
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "P:"
 
-[node name="premium_number" type="Label" parent="resources/materials/premium_materials"]
+[node name="premium_number" type="Label" parent="resources/materials/premium_materials" unique_id=1314069727]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "100000000"
 
-[node name="menu_buttons" type="HBoxContainer" parent="."]
+[node name="menu_buttons" type="HBoxContainer" parent="." unique_id=534940812]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -230,7 +230,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="cancel_button" type="Button" parent="menu_buttons"]
+[node name="cancel_button" type="Button" parent="menu_buttons" unique_id=1697821090]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 tooltip_text = "Cancel"
@@ -240,7 +240,7 @@ icon = ExtResource("9_54lcn")
 flat = true
 expand_icon = true
 
-[node name="home_button" type="Button" parent="menu_buttons"]
+[node name="home_button" type="Button" parent="menu_buttons" unique_id=519974902]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 tooltip_text = "Home"
@@ -250,7 +250,7 @@ icon = ExtResource("10_2mayt")
 flat = true
 expand_icon = true
 
-[node name="collection_button" type="Button" parent="menu_buttons"]
+[node name="collection_button" type="Button" parent="menu_buttons" unique_id=379328179]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 tooltip_text = "Collection"
@@ -260,7 +260,7 @@ icon = ExtResource("11_63t6x")
 flat = true
 expand_icon = true
 
-[node name="builder_button" type="Button" parent="menu_buttons"]
+[node name="builder_button" type="Button" parent="menu_buttons" unique_id=740892949]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 tooltip_text = "Builder"
@@ -270,7 +270,7 @@ icon = ExtResource("12_54lcn")
 flat = true
 expand_icon = true
 
-[node name="editor_button" type="Button" parent="menu_buttons"]
+[node name="editor_button" type="Button" parent="menu_buttons" unique_id=269164129]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 tooltip_text = "Deck Editor"
@@ -280,7 +280,7 @@ icon = ExtResource("13_54lcn")
 flat = true
 expand_icon = true
 
-[node name="battle_button" type="Button" parent="menu_buttons"]
+[node name="battle_button" type="Button" parent="menu_buttons" unique_id=332757764]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 tooltip_text = "Battle"
@@ -290,10 +290,10 @@ icon = ExtResource("14_lg682")
 flat = true
 expand_icon = true
 
-[node name="world_environment" type="WorldEnvironment" parent="."]
+[node name="world_environment" type="WorldEnvironment" parent="." unique_id=807368212]
 environment = SubResource("Environment_tenk1")
 
-[node name="main_buttons" type="HBoxContainer" parent="."]
+[node name="main_buttons" type="HBoxContainer" parent="." unique_id=1267271015]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -307,7 +307,7 @@ grow_horizontal = 0
 grow_vertical = 2
 alignment = 2
 
-[node name="rewards_button" type="Button" parent="main_buttons"]
+[node name="rewards_button" type="Button" parent="main_buttons" unique_id=1559407954]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 tooltip_text = "Rewards"
@@ -317,7 +317,7 @@ icon = ExtResource("15_qdxu7")
 flat = true
 expand_icon = true
 
-[node name="control" type="Control" parent="main_buttons/rewards_button"]
+[node name="control" type="Control" parent="main_buttons/rewards_button" unique_id=1419800263]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -328,7 +328,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="reward_notification" type="TextureRect" parent="main_buttons/rewards_button/control"]
+[node name="reward_notification" type="TextureRect" parent="main_buttons/rewards_button/control" unique_id=707359474]
 material = SubResource("ShaderMaterial_11pgm")
 layout_mode = 0
 offset_left = -14.0
@@ -343,7 +343,7 @@ pulse_speed = 1.2
 glow_min = 1.5
 ease_power = 2.5
 
-[node name="shop_button" type="Button" parent="main_buttons"]
+[node name="shop_button" type="Button" parent="main_buttons" unique_id=221251790]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 tooltip_text = "Store"
@@ -353,7 +353,7 @@ icon = ExtResource("19_urpyl")
 flat = true
 expand_icon = true
 
-[node name="profile_button" type="Button" parent="main_buttons"]
+[node name="profile_button" type="Button" parent="main_buttons" unique_id=1421955836]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 tooltip_text = "Profile"
@@ -364,11 +364,11 @@ icon = ExtResource("20_utjxi")
 flat = true
 expand_icon = true
 
-[node name="settings" type="Control" parent="main_buttons"]
+[node name="settings" type="Control" parent="main_buttons" unique_id=2015894818]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 
-[node name="settings_button" type="Button" parent="main_buttons/settings"]
+[node name="settings_button" type="Button" parent="main_buttons/settings" unique_id=1687035251]
 layout_mode = 0
 offset_right = 56.0
 offset_bottom = 56.0
@@ -382,7 +382,7 @@ toggle_mode = true
 icon = ExtResource("21_54lcn")
 icon_alignment = 1
 
-[node name="settings_dropdown" type="PopupMenu" parent="main_buttons/settings"]
+[node name="settings_dropdown" type="PopupMenu" parent="main_buttons/settings" unique_id=1686264472]
 oversampling_override = 1.0
 position = Vector2i(1720, 32)
 size = Vector2i(164, 194)
@@ -404,6 +404,7 @@ item_2/id = 0
 [connection signal="pressed" from="menu_buttons/editor_button" to="." method="_on_editor_button_pressed"]
 [connection signal="pressed" from="menu_buttons/battle_button" to="." method="_on_battle_button_pressed"]
 [connection signal="pressed" from="main_buttons/rewards_button" to="." method="_on_rewards_button_pressed"]
+[connection signal="pressed" from="main_buttons/shop_button" to="." method="_on_shop_button_pressed"]
 [connection signal="pressed" from="main_buttons/profile_button" to="." method="_on_profile_button_pressed"]
 [connection signal="pressed" from="main_buttons/settings/settings_button" to="." method="_on_settings_button_pressed"]
 [connection signal="toggled" from="main_buttons/settings/settings_button" to="." method="_on_settings_button_toggled"]

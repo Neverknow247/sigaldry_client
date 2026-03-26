@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://bmaw7yf1gsfov"]
+[gd_scene format=3 uid="uid://bmaw7yf1gsfov"]
 
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_fmb5o"]
 [ext_resource type="Script" uid="uid://bj2fyacgare38" path="res://menus/card_view_screen.gd" id="1_r84ue"]
 [ext_resource type="PackedScene" uid="uid://di0881y716irt" path="res://items/card.tscn" id="3_buyj0"]
 [ext_resource type="Texture2D" uid="uid://nrmg1qnwd5h0" path="res://assets/art/background/stone_table_3.png" id="3_o2bs5"]
 
-[node name="card_view_screen" type="Control"]
+[node name="card_view_screen" type="Control" unique_id=1699943648]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,7 +15,7 @@ grow_vertical = 2
 theme = ExtResource("1_fmb5o")
 script = ExtResource("1_r84ue")
 
-[node name="background_color" type="ColorRect" parent="."]
+[node name="background_color" type="ColorRect" parent="." unique_id=2012673532]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,7 +24,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.290196, 0.478431, 0.588235, 1)
 
-[node name="background" type="TextureRect" parent="background_color"]
+[node name="background" type="TextureRect" parent="background_color" unique_id=1253745983]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,14 +35,14 @@ grow_vertical = 2
 texture = ExtResource("3_o2bs5")
 expand_mode = 1
 
-[node name="fake_hud" type="ColorRect" parent="background_color"]
+[node name="fake_hud" type="ColorRect" parent="background_color" unique_id=1528069914]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 
-[node name="collection_sort" type="HBoxContainer" parent="."]
+[node name="collection_sort" type="HBoxContainer" parent="." unique_id=1589671253]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -56,7 +56,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="sort_style_button" type="OptionButton" parent="collection_sort"]
+[node name="sort_style_button" type="OptionButton" parent="collection_sort" unique_id=478065090]
 layout_mode = 2
 selected = 0
 item_count = 3
@@ -67,7 +67,7 @@ popup/item_1/id = 1
 popup/item_2/text = "Card Type"
 popup/item_2/id = 2
 
-[node name="sort_order_button" type="OptionButton" parent="collection_sort"]
+[node name="sort_order_button" type="OptionButton" parent="collection_sort" unique_id=600760777]
 layout_mode = 2
 selected = 0
 item_count = 2
@@ -76,7 +76,7 @@ popup/item_0/id = 0
 popup/item_1/text = "Descending"
 popup/item_1/id = 1
 
-[node name="sort_restrictions_button" type="OptionButton" parent="collection_sort"]
+[node name="sort_restrictions_button" type="OptionButton" parent="collection_sort" unique_id=812873650]
 layout_mode = 2
 selected = 0
 item_count = 9
@@ -99,7 +99,7 @@ popup/item_7/id = 7
 popup/item_8/text = "Is Designer"
 popup/item_8/id = 8
 
-[node name="no_repeat_button" type="OptionButton" parent="collection_sort"]
+[node name="no_repeat_button" type="OptionButton" parent="collection_sort" unique_id=97932091]
 layout_mode = 2
 selected = 0
 item_count = 2
@@ -108,136 +108,136 @@ popup/item_0/id = 0
 popup/item_1/text = "Show Duplicates"
 popup/item_1/id = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=915232954]
 layout_mode = 0
 offset_left = 72.0
 offset_top = 144.0
 offset_right = 1864.0
 offset_bottom = 1032.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=841803971]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 25
 
-[node name="h_box_container" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+[node name="h_box_container" type="HBoxContainer" parent="ScrollContainer/VBoxContainer" unique_id=2067825393]
 layout_mode = 2
 theme_override_constants/separation = 36
 
-[node name="card" parent="ScrollContainer/VBoxContainer/h_box_container" instance=ExtResource("3_buyj0")]
+[node name="card" parent="ScrollContainer/VBoxContainer/h_box_container" unique_id=1315574214 instance=ExtResource("3_buyj0")]
 custom_minimum_size = Vector2(326.4, 448)
 layout_mode = 2
 
-[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container/card" index="1"]
+[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container/card" index="1" unique_id=1635455196]
 scale = Vector2(0.4, 0.4)
 
-[node name="card2" parent="ScrollContainer/VBoxContainer/h_box_container" instance=ExtResource("3_buyj0")]
+[node name="card2" parent="ScrollContainer/VBoxContainer/h_box_container" unique_id=1992959812 instance=ExtResource("3_buyj0")]
 custom_minimum_size = Vector2(326.4, 448)
 layout_mode = 2
 
-[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container/card2" index="1"]
+[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container/card2" index="1" unique_id=1635455196]
 scale = Vector2(0.4, 0.4)
 
-[node name="card3" parent="ScrollContainer/VBoxContainer/h_box_container" instance=ExtResource("3_buyj0")]
+[node name="card3" parent="ScrollContainer/VBoxContainer/h_box_container" unique_id=1171475366 instance=ExtResource("3_buyj0")]
 custom_minimum_size = Vector2(326.4, 448)
 layout_mode = 2
 
-[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container/card3" index="1"]
+[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container/card3" index="1" unique_id=1635455196]
 scale = Vector2(0.4, 0.4)
 
-[node name="card4" parent="ScrollContainer/VBoxContainer/h_box_container" instance=ExtResource("3_buyj0")]
+[node name="card4" parent="ScrollContainer/VBoxContainer/h_box_container" unique_id=2095213798 instance=ExtResource("3_buyj0")]
 custom_minimum_size = Vector2(326.4, 448)
 layout_mode = 2
 
-[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container/card4" index="1"]
+[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container/card4" index="1" unique_id=1635455196]
 scale = Vector2(0.4, 0.4)
 
-[node name="card5" parent="ScrollContainer/VBoxContainer/h_box_container" instance=ExtResource("3_buyj0")]
+[node name="card5" parent="ScrollContainer/VBoxContainer/h_box_container" unique_id=1723367195 instance=ExtResource("3_buyj0")]
 custom_minimum_size = Vector2(326.4, 448)
 layout_mode = 2
 
-[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container/card5" index="1"]
+[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container/card5" index="1" unique_id=1635455196]
 scale = Vector2(0.4, 0.4)
 
-[node name="h_box_container2" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+[node name="h_box_container2" type="HBoxContainer" parent="ScrollContainer/VBoxContainer" unique_id=634461346]
 layout_mode = 2
 theme_override_constants/separation = 36
 
-[node name="card" parent="ScrollContainer/VBoxContainer/h_box_container2" instance=ExtResource("3_buyj0")]
+[node name="card" parent="ScrollContainer/VBoxContainer/h_box_container2" unique_id=63646110 instance=ExtResource("3_buyj0")]
 custom_minimum_size = Vector2(326.4, 448)
 layout_mode = 2
 
-[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container2/card" index="1"]
+[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container2/card" index="1" unique_id=1635455196]
 scale = Vector2(0.4, 0.4)
 
-[node name="card2" parent="ScrollContainer/VBoxContainer/h_box_container2" instance=ExtResource("3_buyj0")]
+[node name="card2" parent="ScrollContainer/VBoxContainer/h_box_container2" unique_id=1521681631 instance=ExtResource("3_buyj0")]
 custom_minimum_size = Vector2(326.4, 448)
 layout_mode = 2
 
-[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container2/card2" index="1"]
+[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container2/card2" index="1" unique_id=1635455196]
 scale = Vector2(0.4, 0.4)
 
-[node name="card3" parent="ScrollContainer/VBoxContainer/h_box_container2" instance=ExtResource("3_buyj0")]
+[node name="card3" parent="ScrollContainer/VBoxContainer/h_box_container2" unique_id=948796757 instance=ExtResource("3_buyj0")]
 custom_minimum_size = Vector2(326.4, 448)
 layout_mode = 2
 
-[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container2/card3" index="1"]
+[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container2/card3" index="1" unique_id=1635455196]
 scale = Vector2(0.4, 0.4)
 
-[node name="card4" parent="ScrollContainer/VBoxContainer/h_box_container2" instance=ExtResource("3_buyj0")]
+[node name="card4" parent="ScrollContainer/VBoxContainer/h_box_container2" unique_id=323036668 instance=ExtResource("3_buyj0")]
 custom_minimum_size = Vector2(326.4, 448)
 layout_mode = 2
 
-[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container2/card4" index="1"]
+[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container2/card4" index="1" unique_id=1635455196]
 scale = Vector2(0.4, 0.4)
 
-[node name="card5" parent="ScrollContainer/VBoxContainer/h_box_container2" instance=ExtResource("3_buyj0")]
+[node name="card5" parent="ScrollContainer/VBoxContainer/h_box_container2" unique_id=415603874 instance=ExtResource("3_buyj0")]
 custom_minimum_size = Vector2(326.4, 448)
 layout_mode = 2
 
-[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container2/card5" index="1"]
+[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container2/card5" index="1" unique_id=1635455196]
 scale = Vector2(0.4, 0.4)
 
-[node name="h_box_container3" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+[node name="h_box_container3" type="HBoxContainer" parent="ScrollContainer/VBoxContainer" unique_id=218393010]
 layout_mode = 2
 theme_override_constants/separation = 36
 
-[node name="card" parent="ScrollContainer/VBoxContainer/h_box_container3" instance=ExtResource("3_buyj0")]
+[node name="card" parent="ScrollContainer/VBoxContainer/h_box_container3" unique_id=1813692010 instance=ExtResource("3_buyj0")]
 custom_minimum_size = Vector2(326.4, 448)
 layout_mode = 2
 
-[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container3/card" index="1"]
+[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container3/card" index="1" unique_id=1635455196]
 scale = Vector2(0.4, 0.4)
 
-[node name="card2" parent="ScrollContainer/VBoxContainer/h_box_container3" instance=ExtResource("3_buyj0")]
+[node name="card2" parent="ScrollContainer/VBoxContainer/h_box_container3" unique_id=2128359304 instance=ExtResource("3_buyj0")]
 custom_minimum_size = Vector2(326.4, 448)
 layout_mode = 2
 
-[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container3/card2" index="1"]
+[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container3/card2" index="1" unique_id=1635455196]
 scale = Vector2(0.4, 0.4)
 
-[node name="card3" parent="ScrollContainer/VBoxContainer/h_box_container3" instance=ExtResource("3_buyj0")]
+[node name="card3" parent="ScrollContainer/VBoxContainer/h_box_container3" unique_id=623653271 instance=ExtResource("3_buyj0")]
 custom_minimum_size = Vector2(326.4, 448)
 layout_mode = 2
 
-[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container3/card3" index="1"]
+[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container3/card3" index="1" unique_id=1635455196]
 scale = Vector2(0.4, 0.4)
 
-[node name="card4" parent="ScrollContainer/VBoxContainer/h_box_container3" instance=ExtResource("3_buyj0")]
+[node name="card4" parent="ScrollContainer/VBoxContainer/h_box_container3" unique_id=541340237 instance=ExtResource("3_buyj0")]
 custom_minimum_size = Vector2(326.4, 448)
 layout_mode = 2
 
-[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container3/card4" index="1"]
+[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container3/card4" index="1" unique_id=1635455196]
 scale = Vector2(0.4, 0.4)
 
-[node name="card5" parent="ScrollContainer/VBoxContainer/h_box_container3" instance=ExtResource("3_buyj0")]
+[node name="card5" parent="ScrollContainer/VBoxContainer/h_box_container3" unique_id=2079670519 instance=ExtResource("3_buyj0")]
 custom_minimum_size = Vector2(326.4, 448)
 layout_mode = 2
 
-[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container3/card5" index="1"]
+[node name="content" parent="ScrollContainer/VBoxContainer/h_box_container3/card5" index="1" unique_id=1635455196]
 scale = Vector2(0.4, 0.4)
 
-[node name="back_button" type="Button" parent="."]
+[node name="back_button" type="Button" parent="." unique_id=877977487]
 visible = false
 layout_mode = 0
 offset_left = 1808.0

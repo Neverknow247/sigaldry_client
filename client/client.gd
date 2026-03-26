@@ -58,6 +58,9 @@ var card_art_cache = CardArtCache
 @onready var card_edit_screen: Control = $scenes/card_edit_screen
 @onready var card_image_edit: Control = $scenes/card_image_edit
 @onready var card_name_edit: Control = $scenes/card_name_edit
+@onready var fusion_screen: Control = $scenes/fusion_screen
+@onready var salvage_screen: Control = $scenes/salvage_screen
+@onready var store_screen: Control = $scenes/store_screen
 
 var current_scene = ""
 var new_card = true
@@ -259,6 +262,7 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 		"card-view-all":
 			change_scene("card_view")
 			card_view_screen.store_items(payload)
+			fusion_screen.store_items(payload)
 			#print(payload)
 		#"editor-view-cards":
 			#change_scene("card_view")
@@ -372,11 +376,65 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 		"start_card_edit_screen":
 			card_edit_screen.get_info_card_edit(payload)
 			change_scene("card_edit")
+			fusion_screen.set_fusion_card("card_1",payload)
 		"get-card-image-files","get-card-image-keys","get-opponent-card-image-keys":
 			if typeof(payload) == TYPE_DICTIONARY:
 				card_art_cache.route_server_message({"type": event_name, "data": payload})
 			else:
 				card_art_cache.route_server_message({"type": event_name, "data": {}})
+		"fusion-card-1":
+			fusion_screen.set_fusion_card("card_1",payload)
+		"fusion-card-2":
+			fusion_screen.set_fusion_card("card_2",payload)
+		"preview-fused-card":
+			fusion_screen.set_fusion_card("fusion_card",payload)
+		"fuse-cards":
+			client.socketio_send("card-view-all",{
+			#"on_success":"start-card-editor",
+			"query":{
+				#"subtype":"unit",
+				#"image_status":"none",
+				#"name_status":"none"
+				#"image_or_name_status":"none",
+				#"unique_key":""
+				}
+			})
+		"store-get-categories":
+			#utils.j_print(payload)
+			store_screen.store_get_categories(payload)
+			change_scene("store")
+		"store-get-containers":
+			store_screen.store_get_containers(payload)
+		"store-purchase-containers":
+			client.socketio_send("rewards-get-containers")
+			store_screen.reset_containers()
+			#utils.j_print(payload)
+		"salvage-card-options":
+			utils.j_print(payload)
+			salvage_screen.salvage_card_options(payload)
+			change_scene("salvage_screen")
+		"scrap-card":
+			client.socketio_send("card-view-all",{
+			#"on_success":"start-card-editor",
+			"query":{
+				#"subtype":"unit",
+				#"image_status":"none",
+				#"name_status":"none"
+				#"image_or_name_status":"none",
+				#"unique_key":""
+				}
+			})
+		"duplicate-card":
+			client.socketio_send("card-view-all",{
+			#"on_success":"start-card-editor",
+			"query":{
+				#"subtype":"unit",
+				#"image_status":"none",
+				#"name_status":"none"
+				#"image_or_name_status":"none",
+				#"unique_key":""
+				}
+			})
 		_:
 			print("Unknown Event: ", event_name)
 
@@ -940,7 +998,7 @@ func _on_login_screen_change_ip(_new_ip: Variant) -> void:
 
 
 func _on_card_edit_screen_start_fusion_edit(_card_id: Variant) -> void:
-	pass # Replace with function body.
+	change_scene("card_fusion")
 
 func _on_card_edit_screen_start_image_edit(_card_id: Variant, _card_subtype: Variant) -> void:
 	match _card_subtype:
@@ -1000,3 +1058,34 @@ func _on_hud_pvp_battle() -> void:
 		"deck_editor":
 			client.socketio_send("close-deck-editor")
 	client.socketio_send("new-game-options",{"on_success":"set_up_pvp"})
+
+func _on_fusion_screen_preview_fused_card(_card_id_1: Variant, _card_id_2: Variant) -> void:
+	client.socketio_send("preview-fused-card",{"card_id1":_card_id_1,"card_id2":_card_id_2})
+
+func _on_fusion_screen_select_fusion_card(_card_num: Variant, _id: Variant) -> void:
+	match _card_num:
+		"card_1":
+			client.socketio_send("get-info",{"id":_id,"type":"card","on_success":"fusion-card-1"})
+		"card_2":
+			client.socketio_send("get-info",{"id":_id,"type":"card","on_success":"fusion-card-2"})
+
+func _on_fusion_screen_fuse_cards(_card_id_1: Variant, _card_id_2: Variant) -> void:
+	client.socketio_send("fuse-cards",{"card_id1":_card_id_1,"card_id2":_card_id_2})
+
+func _on_hud_shop() -> void:
+	client.socketio_send("store-get-categories")
+
+func _on_card_edit_screen_duplicate_card(_card_id: Variant) -> void:
+	client.socketio_send("duplicate-card",{"card_id":_card_id})
+
+func _on_card_edit_screen_salvage_card(_card_id: Variant) -> void:
+	client.socketio_send("salvage-card-options",{"card_id":_card_id})
+
+func _on_card_edit_screen_scrap_card(_card_id: Variant) -> void:
+	client.socketio_send("scrap-card",{"card_id":_card_id})
+
+func _on_store_screen_buy_item(_item_key: Variant, _item_quantity: Variant) -> void:
+	client.socketio_send("store-purchase-containers",{"container":_item_key,"quantity":_item_quantity})
+
+func _on_store_screen_category_selected(_category_id: Variant) -> void:
+	client.socketio_send("store-get-containers",{"category_id":_category_id})

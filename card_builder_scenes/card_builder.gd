@@ -274,6 +274,7 @@ func card_builder_update_card(payload):
 	
 
 func update_next_color_bonus(last_color):
+	print("here color",last_color)
 	if !last_color:
 		next_bonus_row.hide()
 		return
@@ -283,12 +284,16 @@ func update_next_color_bonus(last_color):
 		match str(last_color["bonus_to"][color]):
 			"-0.5":
 				next_bonuses[color].bonus_label.text = "-50%"
+			"-0.25":
+				next_bonuses[color].bonus_label.text = "-25%"
 			"-0.15":
 				next_bonuses[color].bonus_label.text = "-15%"
 			"0.0":
 				next_bonuses[color].bonus_label.text = "0%"
 			"0.15":
 				next_bonuses[color].bonus_label.text = "15%"
+			"0.25":
+				next_bonuses[color].bonus_label.text = "25%"
 			"0.5":
 				next_bonuses[color].bonus_label.text = "50%"
 			"1.0":
