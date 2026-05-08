@@ -461,6 +461,22 @@ offset_right = 40.0
 offset_bottom = 40.0
 color = Color(1, 0.498039, 0, 1)
 
+[node name="card_popup_layer" type="CanvasLayer" parent="." unique_id=1691031476]
+
+[node name="my_card_popup_anchor" type="HBoxContainer" parent="card_popup_layer" unique_id=1667458419]
+offset_left = 40.0
+offset_top = 620.0
+offset_right = 80.0
+offset_bottom = 660.0
+mouse_filter = 2
+
+[node name="opponent_card_popup_anchor" type="HBoxContainer" parent="card_popup_layer" unique_id=1235636439]
+offset_left = 40.0
+offset_top = 104.0
+offset_right = 80.0
+offset_bottom = 144.0
+mouse_filter = 2
+
 [connection signal="focus" from="." to="." method="_on_focus"]
 [connection signal="mouse_released" from="." to="." method="_on_mouse_released"]
 [connection signal="tab_clicked" from="side_panel/side_tabs" to="." method="_on_side_tabs_tab_clicked"]

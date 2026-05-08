@@ -32,9 +32,9 @@ const GRAY_SHADER = preload("res://assets/shaders/gray_unit.gdshader")
 var grayscale_array : Array
 
 @export var default_color : Color = Color("00000000")
-@export var friendly_color : Color = Color("00ff007d")
-@export var unfriendly_color : Color = Color("ff00007d")
-@export var move_color : Color = Color("0000ff7d")
+@export var friendly_color : Color = Color("00ff0056")
+@export var unfriendly_color : Color = Color("ff000056")
+@export var move_color : Color = Color("0000ff56")
 
 var original_unit_data = {}
 var updated_unit_data = {}
@@ -52,14 +52,124 @@ var unit_id = 0
 var abilities = {}
 var health = ""
 
+var target_payload = {}
+var is_previewing_result := false
+var preview_original_health_text := ""
+var preview_original_health_color := Color.BLACK
+var preview_original_effects_text := ""
+
+signal target_preview_started(target_payload)
+signal target_preview_ended
+
 signal tile_chosen(id)
 signal mouse_focus(_pos,_focus,card_id,type)
 #signal get_info(data)
+
+#func _ready() -> void:
+	#set_up_grayscale_array()
+	#apply_gray_shader()
+	#set_grayscale(false)
 
 func _ready() -> void:
 	set_up_grayscale_array()
 	apply_gray_shader()
 	set_grayscale(false)
+
+	if not unit_button.mouse_entered.is_connected(_on_unit_button_mouse_entered):
+		unit_button.mouse_entered.connect(_on_unit_button_mouse_entered)
+
+	if not unit_button.mouse_exited.is_connected(_on_unit_button_mouse_exited):
+		unit_button.mouse_exited.connect(_on_unit_button_mouse_exited)
+
+func set_target_payload(payload: Dictionary) -> void:
+	target_payload = payload
+
+
+func clear_target_payload() -> void:
+	target_payload = {}
+
+
+func _on_unit_button_mouse_entered() -> void:
+	if unit_button.disabled:
+		return
+
+	if target_payload.is_empty():
+		return
+
+	target_preview_started.emit(target_payload)
+
+
+func _on_unit_button_mouse_exited() -> void:
+	target_preview_ended.emit()
+
+
+func preview_affected_result(affected: Dictionary) -> void:
+	if is_previewing_result:
+		clear_affected_preview()
+
+	is_previewing_result = true
+	preview_original_health_text = unit_health.text
+	preview_original_health_color = unit_health.get_theme_color("font_color")
+	preview_original_effects_text = unit_effects.text
+
+	var preview_lines: Array[String] = []
+
+	for change in affected.get("changes", []):
+		var change_name := str(change.get("name", ""))
+		var change_value := float(change.get("value", 0))
+
+		match change_name:
+			"health":
+				var current_health := 0.0
+
+				if unit_health.text.strip_edges() != "":
+					current_health = float(unit_health.text)
+
+				var preview_health := current_health + change_value
+				unit_health.text = _format_preview_number(preview_health)
+				unit_health.add_theme_color_override("font_color", Color.ORANGE_RED)
+
+				var sign := "+" if change_value > 0 else ""
+				preview_lines.append("Health %s%s" % [sign, _format_preview_number(change_value)])
+
+			"actions":
+				var sign := "+" if change_value > 0 else ""
+				preview_lines.append("Actions %s%s" % [sign, _format_preview_number(change_value)])
+
+			_:
+				var sign := "+" if change_value > 0 else ""
+				preview_lines.append("%s %s%s" % [
+					change_name.capitalize(),
+					sign,
+					_format_preview_number(change_value)
+				])
+
+	if preview_lines.size() > 0:
+		var preview_text := "[color=orange]Preview: " + ", ".join(preview_lines) + "[/color]"
+
+		if unit_effects.text.strip_edges() == "":
+			unit_effects.text = preview_text
+		else:
+			unit_effects.text = preview_original_effects_text + "\n" + preview_text
+
+
+func clear_affected_preview() -> void:
+	if not is_previewing_result:
+		return
+
+	is_previewing_result = false
+	unit_health.text = preview_original_health_text
+	unit_health.add_theme_color_override("font_color", preview_original_health_color)
+	unit_effects.text = preview_original_effects_text
+
+
+func _format_preview_number(value: float) -> String:
+	if is_equal_approx(value, int(value)):
+		return str(int(value))
+
+	return str(value)
+
+
 
 func set_up_grayscale_array():
 	grayscale_array = [
@@ -239,9 +349,16 @@ func _on_unit_button_pressed() -> void:
 	#else:
 		#tile_chosen.emit(tile_id,tile_type)
 
-func disable_button(disable:bool):
+#func disable_button(disable:bool):
+	#unit_button.disabled = disable
+	#unit_button_color.color = default_color
+
+func disable_button(disable: bool):
 	unit_button.disabled = disable
-	unit_button_color.color = default_color
+	if disable:
+		unit_button_color.color = default_color
+		clear_target_payload()
+		clear_affected_preview()
 
 func edit_theme_graphic(_target):
 	var target = _target

@@ -3,6 +3,7 @@ extends Control
 var scene_name = "game"
 
 var stats = Stats
+var utils = Utils
 
 #const card_preview = preload("res://items/card_preview.tscn")
 const CARD_SCENE = preload("res://items/card.tscn")
@@ -80,6 +81,23 @@ signal mouse_released
 #signal picked_up_changed(picked)
 signal focus(_focus)
 
+var previewed_grid_spaces: Array = []
+@onready var card_popup_layer := $card_popup_layer
+@onready var my_card_popup_anchor := $card_popup_layer/my_card_popup_anchor
+@onready var opponent_card_popup_anchor := $card_popup_layer/opponent_card_popup_anchor
+
+var pending_effects_from_selected_target: Array = []
+var effect_popup_queue: Array = []
+var effect_popup_playing := false
+var last_known_unit_positions := {}
+var known_unit_abilities := {}
+var recently_shown_effect_keys := {}
+
+var my_avatar_id := ""
+var active_card_popups: Array = []
+var known_occupants := {}
+var shown_played_card_popups := {}
+
 func _ready():
 	set_color_backgrounds()
 	path_2d.curve = Curve2D.new()
@@ -142,13 +160,18 @@ func join_game(payload):
 		#grid_space.connect("get_info",_on_card_get_info)
 		grid_space["unit_select_button"].connect("pressed",_on_card_select_pressed)
 		grid_space.connect("mouse_focus",_on_card_select_mouse_focus)
-		
+		if not grid_space.target_preview_started.is_connected(_on_target_preview_started):
+			grid_space.target_preview_started.connect(_on_target_preview_started)
+		if not grid_space.target_preview_ended.is_connected(_on_target_preview_ended):
+			grid_space.target_preview_ended.connect(_on_target_preview_ended)
 		
 
 @warning_ignore("unused_parameter")
 func quit_game(payload):
 	card_view_card.hide()
 	card_view_id = ""
+	shown_played_card_popups.clear()
+	known_occupants.clear()
 	for tile in battlefield_data:
 		#var grid_space = battlefield["grid"][tile["game_y"]][tile["game_x"]]
 		var grid_space = battlefield["grid"][tile["display_y"]][tile["display_x"]]
@@ -171,18 +194,29 @@ func quit_game(payload):
 			grid_space.disconnect("mouse_focus",_on_card_select_mouse_focus)
 
 func update_unit(payload):
-	#print("unit selected: ", card_view_id)
-	#print("update unit: ",payload)
-	#print("here")
-	#print(str(payload["unit"]["id"]),":",card_view_id)
-	if str(payload["unit"]["id"]) == card_view_id:
-		card_view_card.add_details(payload["unit"],true)
-		#update_card_view(payload["unit"])
-	#print("update unit: ",payload["unit"]["x"])
+	var unit = payload["unit"]
+	var unit_id := str(unit["id"])
+	_queue_unit_stat_change_popups(unit)
+	known_unit_abilities[unit_id] = unit["abilities"].duplicate(true)
+	if str(unit["id"]) == card_view_id:
+		card_view_card.add_details(unit, true)
 	battlefield.update_unit(payload)
-	pass
+
+#func update_unit(payload):
+	##print("unit selected: ", card_view_id)
+	##print("update unit: ",payload)
+	##print("here")
+	##print(str(payload["unit"]["id"]),":",card_view_id)
+	#if str(payload["unit"]["id"]) == card_view_id:
+		#card_view_card.add_details(payload["unit"],true)
+		##update_card_view(payload["unit"])
+	##print("update unit: ",payload["unit"]["x"])
+	#battlefield.update_unit(payload)
+	#pass
 
 func update_turn(payload):
+	if payload.has("my_avatar_id"):
+		my_avatar_id = str(payload["my_avatar_id"])
 	#print("update turn: ",payload)
 	if payload["active_avatar_id"]:
 		if payload["active_avatar_id"] == payload["my_avatar_id"]:
@@ -200,15 +234,21 @@ func update_turn(payload):
 		turn_timer_left.max_value = payload["ticks_in_turn"]
 		turn_timer_left.value = payload["ticks_remaining"]
 
+#func add_combat_log(payload):
+	##utils.j_print(payload)
+	#var new_log = preload("res://items/game_log_label.tscn").instantiate()
+	#first_log.add_sibling(new_log)
+	#new_log.text = payload["statement"]
+	##print("add combat log: ")
+	##print("add combat log: ",payload["arguments"])
+	##print("argument size: ",payload["arguments"].size())
+	##for item in payload["arguments"]:
+		##print(item)
+
 func add_combat_log(payload):
 	var new_log = preload("res://items/game_log_label.tscn").instantiate()
 	first_log.add_sibling(new_log)
-	new_log.text = payload["statement"]
-	#print("add combat log: ")
-	#print("add combat log: ",payload["arguments"])
-	#print("argument size: ",payload["arguments"].size())
-	#for item in payload["arguments"]:
-		#print(item)
+	new_log.text = _format_combat_log_statement(payload)
 
 func update_energy(payload):
 	my_energy.text = str(int(payload["energy"]))
@@ -326,14 +366,44 @@ func update_players(payload):
 			new_card.last_card  = true
 			card_number = 0
 
+#func update_tile(payload):
+	##print("update tile: ",payload)
+	#battlefield.update_grid_space(payload)
+	#
+	#if payload["action"] == "play":
+		#if payload.has("card"):
+			#show_played_card_popup(payload["card"], is_card_played_by_me(payload))
+		#elif payload.has("unit") and payload["unit"].has("card"):
+			#show_played_card_popup(payload["unit"]["card"], is_card_played_by_me(payload))
+	##for tile in payload["tile"]:
+		##print(tile)
+		##battlefield.update_grid_space(tile)
+	##pass
+
 func update_tile(payload):
-	return
-	#print("update tile: ",payload)
+	var tile = payload["tile"]
+	if tile["occupied"] and tile.has("occupant"):
+		var tile_id = str(tile["id"])
+		var new_occupant_id = str(tile["occupant"]["id"])
+		last_known_unit_positions[new_occupant_id] = {
+			"global_position": _get_tile_global_position_by_tile_id(tile_id),
+			"tile_id": tile_id
+		}
+		var is_new_unit_on_tile := false
+		if not known_occupants.has(tile_id):
+			is_new_unit_on_tile = true
+		elif known_occupants[tile_id] != new_occupant_id:
+			is_new_unit_on_tile = true
+		known_occupants[tile_id] = new_occupant_id
+		if is_new_unit_on_tile:
+			var popup_unit_id := str(tile["occupant"]["id"])
+			if not shown_played_card_popups.has(popup_unit_id):
+				shown_played_card_popups[popup_unit_id] = true
+				show_played_card_popup(tile["occupant"], is_occupant_mine(tile["occupant"]))
+	elif tile.has("id"):
+		known_occupants.erase(str(tile["id"]))
 	battlefield.update_grid_space(payload)
-	#for tile in payload["tile"]:
-		#print(tile)
-		#battlefield.update_grid_space(tile)
-	#pass
+
 
 func _on_end_turn_button_pressed():
 	end_turn.emit()
@@ -346,9 +416,6 @@ signal card_selected(play_info)
 var selected_tile_id = ""
 func _on__set_tile_id(id):
 	selected_tile_id = id
-
-#@onready var game_card_select_ui = $game_card_select_ui
-#@onready var card_select = $game_card_select_ui/card_select
 
 var picked_up : bool = false:
 	set(b):
@@ -381,19 +448,8 @@ func _on_card_select_mouse_focus(_pos,_focus,_id,_focused_type):
 		on_focus(_focus)
 		if _focus:
 			start_curve_point = _pos
-			#path_2d.curve = Curve2D.new()
-			#path_2d.curve.add_point(_pos)
-			#path_2d.curve.add_point(_pos)
 			focused_card = _id
 			focused_type = _focused_type
-
-#func _on_card_select_mouse_entered():
-	#if not Input.is_action_pressed("M1") && click_hover == false:
-		#on_focus(true)
-#
-#func _on_card_select_mouse_exited():
-	#if not Input.is_action_pressed("M1") && click_hover == false:
-		#on_focus(false)
 
 func _on_card_select_pressed():
 	#print("source_id: ", focused_card)
@@ -427,14 +483,131 @@ func _on_focus(_focus):
 		focused_type = ""
 		#print("UNFOCUSING: ",focused_card)
 
-func _set_battle_field_tile(target_id,target_type,):
-	#print("*******************************************************")
-	#print("focused_card: ",focused_card)
+func _set_battle_field_tile(target_id, target_type):
 	if focused_card != null:
-		card_selected.emit({"source_id":str(focused_card),"source_type":focused_type,"disposition_override":disposition_override,"dest_id":target_id,"dest_type":target_type})
+		_capture_pending_effects_for_target(target_id)
+		card_selected.emit({
+			"source_id": str(focused_card),
+			"source_type": focused_type,
+			"disposition_override": disposition_override,
+			"dest_id": target_id,
+			"dest_type": target_type
+		})
 		disposition_override = false
-		#print("source id: ",str(focused_card), ", target: ",target_id,", target type: ",target_type)
-	#print(tile_id)
+
+func _capture_pending_effects_for_target(target_id) -> void:
+	pending_effects_from_selected_target.clear()
+	for row in battlefield["grid"]:
+		for col in row:
+			if str(col.tile_id) == str(target_id) or str(col.occupant_id) == str(target_id):
+				if col.has_method("get") and col.get("target_payload") != null:
+					var target_payload = col.get("target_payload")
+					if target_payload is Dictionary and target_payload.has("affected"):
+						pending_effects_from_selected_target = target_payload["affected"].duplicate(true)
+				return
+
+func _play_pending_effects_after_action_line() -> void:
+	if pending_effects_from_selected_target.is_empty():
+		return
+	var effects_to_play := pending_effects_from_selected_target.duplicate(true)
+	pending_effects_from_selected_target.clear()
+	await get_tree().create_timer(0.25).timeout
+	for affected in effects_to_play:
+		_queue_affected_popup(affected)
+	_play_effect_popup_queue()
+
+#func _queue_affected_popup(affected: Dictionary) -> void:
+	#var affected_id := str(affected.get("id", ""))
+	#var popup_position := _find_effect_popup_position(affected)
+	#for change in affected.get("changes", []):
+		#var text := _get_change_popup_text(change)
+		#if text != "":
+			#effect_popup_queue.append({
+				#"position": popup_position,
+				#"text": text,
+				#"value": float(change.get("value", 0))
+			#})
+
+func _queue_affected_popup(affected: Dictionary) -> void:
+	var affected_id := str(affected.get("id", ""))
+	var popup_position := _find_effect_popup_position(affected)
+	for change in affected.get("changes", []):
+		var text := _get_change_popup_text(change)
+		if text == "":
+			continue
+		var effect_key := affected_id + ":" + str(change.get("name", ""))
+		if recently_shown_effect_keys.has(effect_key):
+			continue
+		recently_shown_effect_keys[effect_key] = true
+		_clear_recent_effect_key_later(effect_key)
+		effect_popup_queue.append({
+			"position": popup_position,
+			"text": text,
+			"value": float(change.get("value", 0))
+		})
+
+func _play_effect_popup_queue() -> void:
+	if effect_popup_playing:
+		return
+	effect_popup_playing = true
+	while effect_popup_queue.size() > 0:
+		var effect_data = effect_popup_queue.pop_front()
+		_show_single_effect_popup(effect_data)
+		await get_tree().create_timer(0.3).timeout
+	effect_popup_playing = false
+
+func _show_single_effect_popup(effect_data: Dictionary) -> void:
+	var popup_position: Vector2 = effect_data["position"]
+	var label := Label.new()
+	card_popup_layer.add_child(label)
+	label.text = str(effect_data["text"])
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.add_theme_font_size_override("font_size", 42)
+	label.add_theme_color_override("font_color", Color.WHITE)
+	label.add_theme_color_override("font_shadow_color", Color.BLACK)
+	label.add_theme_constant_override("shadow_offset_x", 3)
+	label.add_theme_constant_override("shadow_offset_y", 3)
+	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	label.z_index = 999
+	label.global_position = popup_position
+	label.modulate.a = 0.0
+	var tween := create_tween()
+	tween.tween_property(label, "modulate:a", 1.0, 0.12)
+	tween.tween_interval(0.7)
+	var move_tween := create_tween()
+	move_tween.tween_property(
+		label,
+		"global_position",
+		label.global_position + Vector2(0, -70),
+		1.0
+	)
+	tween.tween_property(label, "modulate:a", 0.0, 0.4)
+	await tween.finished
+	if is_instance_valid(label):
+		label.queue_free()
+
+func _get_change_popup_text(change: Dictionary) -> String:
+	var change_name := str(change.get("name", ""))
+	var value := float(change.get("value", 0))
+	if is_equal_approx(value, 0.0):
+		return ""
+	var sign := "+" if value > 0 else ""
+	match change_name:
+		"health":
+			return "%s%s HP" % [sign, _format_effect_number(value)]
+		"actions":
+			return ""
+		"strength":
+			return "%s%s ATK" % [sign, _format_effect_number(value)]
+		_:
+			return "%s%s %s" % [sign, _format_effect_number(value), change_name.capitalize()]
+
+func _format_effect_number(value: float) -> String:
+	if is_equal_approx(value, int(value)):
+		return str(int(value))
+	return str(value)
+
 
 func _on_card_preview_mouse_focus(_pos, _focus, card_id):
 	#print(_pos, _focus, card_id)
@@ -446,33 +619,72 @@ func set_grid_buttons_visible(_visible):
 			column.unit_button.visible = _visible
 			column.disable_button(true)
 
-func choose_target(payload):
-	if payload.has("valid_targets"):
-		var valid_targets = str_to_var(payload["valid_targets"])
-		for row in battlefield["grid"]:
-			for col in row:
-				col.disable_button(true)
-				for target in valid_targets:
-					if target["id"]==col["tile_id"]:
-						col.target_type = "tile"
-					if target["id"]==col["occupant_id"]:
-						col.target_type = "unit"
-					if target["id"]==col["tile_id"] || target["id"]==col["occupant_id"]:
-						#enable grid button and apply graphic
-						col.disable_button(false)
-						col.edit_theme_graphic(target)
-						#print("valid_target: ", target["id"])
-	#print(payload)
-	pass
+#func choose_target(payload):
+	#if payload.has("valid_targets"):
+		#var valid_targets = str_to_var(payload["valid_targets"])
+		#for row in battlefield["grid"]:
+			#for col in row:
+				#col.disable_button(true)
+				#for target in valid_targets:
+					#if target["id"]==col["tile_id"]:
+						#col.target_type = "tile"
+					#if target["id"]==col["occupant_id"]:
+						#col.target_type = "unit"
+					#if target["id"]==col["tile_id"] || target["id"]==col["occupant_id"]:
+						##enable grid button and apply graphic
+						#col.disable_button(false)
+						#col.edit_theme_graphic(target)
+						##print("valid_target: ", target["id"])
+	##print(payload)
+	#pass
 
 # Action Example
 #{ "action": "use", "source_type": "unit", "source_id": "e5025867-c211-bbe9-a382-545baa1ad614",
 #"dest_type": "unit", "dest_id": "cee40ccd-5585-8941-2953-199cc53e5465", "disposition": "unfriendly",
 #"sequence": 138.0 }
 
+func choose_target(payload):
+	clear_target_preview()
+	if payload.has("valid_targets"):
+		var valid_targets = str_to_var(payload["valid_targets"])
+		for row in battlefield["grid"]:
+			for col in row:
+				col.disable_button(true)
+		for target in valid_targets:
+			for row in battlefield["grid"]:
+				for col in row:
+					if target["id"] == col["tile_id"]:
+						col.target_type = "tile"
+					if target["id"] == col["occupant_id"]:
+						col.target_type = "unit"
+					if target["id"] == col["tile_id"] or target["id"] == col["occupant_id"]:
+						col.disable_button(false)
+						col.edit_theme_graphic(target)
+						col.set_target_payload(target)
+
+func _on_target_preview_started(target_payload: Dictionary) -> void:
+	clear_target_preview()
+
+	for affected in target_payload.get("affected", []):
+		var affected_id := str(affected.get("id", ""))
+
+		for row in battlefield["grid"]:
+			for col in row:
+				if affected_id == str(col.occupant_id) or affected_id == str(col.tile_id):
+					col.preview_affected_result(affected)
+					previewed_grid_spaces.append(col)
+
+
+func _on_target_preview_ended() -> void:
+	clear_target_preview()
+
+func clear_target_preview() -> void:
+	for col in previewed_grid_spaces:
+		if is_instance_valid(col):
+			col.clear_affected_preview()
+	previewed_grid_spaces.clear()
 
 func show_action(payload):
-	#print(payload)
 	combat_action_path.curve = Curve2D.new()
 	var pos_1 = Vector2.ZERO
 	if my_turn:
@@ -480,7 +692,6 @@ func show_action(payload):
 	else:
 		pos_1 = Vector2(1528,96)
 	var pos_2 = Vector2.ZERO
-	
 	if payload["action"] == "use":
 		if payload["disposition"] == "friendly":
 			combat_action_line.default_color = Color.GREEN
@@ -498,11 +709,9 @@ func show_action(payload):
 	for tile in battlefield_data:
 		var grid_space = battlefield["grid"][tile["game_y"]][tile["game_x"]]
 		if grid_space.tile_id == payload["dest_id"] || grid_space.occupant_id == payload["dest_id"]:
-			#pos_2 = grid_space.global_position + Vector2(135, 135)
 			pos_2 = grid_space.global_position + Vector2(127, 127)
 		if (payload["action"] == "use" || payload["action"] == "move") && payload.has("source_id"):
 			if grid_space.tile_id == payload["source_id"] || grid_space.occupant_id == payload["source_id"]:
-				#pos_1 = grid_space.global_position + Vector2(135, 135)
 				pos_1 = grid_space.global_position + Vector2(127, 127)
 	combat_action_path.curve.add_point(pos_1)
 	combat_action_path.curve.add_point(pos_1)
@@ -512,6 +721,10 @@ func show_action(payload):
 	for point in combat_action_path.curve.get_baked_points():
 		combat_action_line.add_point(point)
 	combat_action_timer.start()
+	if payload.has("affected"):
+		_play_affected_effects(payload["affected"])
+	elif payload["action"] == "play" or payload["action"] == "use":
+		_play_pending_effects_after_action_line()
 
 func _on_combat_action_timer_timeout():
 	combat_action_path.curve.set_point_position(1,Vector2.ZERO)
@@ -537,3 +750,157 @@ func info_request(payload):
 func _on_side_tabs_tab_clicked(tab):
 	pass
 	#card_view_id = ""
+
+func show_played_card_popup(card_data: Dictionary, played_by_me: bool) -> void:
+	if card_data.is_empty():
+		return
+	var subtype := str(card_data.get("subtype", "")).to_lower()
+	if subtype == "" and card_data.has("card"):
+		subtype = str(card_data["card"].get("subtype", "")).to_lower()
+	if subtype == "trap" or subtype == "avatar":
+		return
+	var anchor = my_card_popup_anchor if played_by_me else opponent_card_popup_anchor
+	var popup_card = CARD_SCENE.instantiate()
+	anchor.add_child(popup_card)
+	popup_card.define_scale(4)
+	popup_card.add_details(card_data, card_data.has("card"))
+	popup_card.position = Vector2.ZERO
+	popup_card.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_make_control_tree_ignore_mouse(popup_card)
+	popup_card.modulate.a = 0.0
+	active_card_popups.append(popup_card)
+	var tween := create_tween()
+	tween.set_parallel(false)
+	tween.tween_property(popup_card, "modulate:a", 1.0, 0.2)
+	tween.tween_interval(1.4)
+	tween.tween_property(popup_card, "modulate:a", 0.0, 0.35)
+	tween.finished.connect(func():
+		active_card_popups.erase(popup_card)
+		if is_instance_valid(popup_card):
+			# Hide it first so the HBox reflow is not visually obvious.
+			popup_card.visible = false
+			# Wait briefly, then remove it after it is invisible.
+			await get_tree().create_timer(0.15).timeout
+			if is_instance_valid(popup_card):
+				popup_card.queue_free()
+	)
+
+func is_card_played_by_me(payload: Dictionary) -> bool:
+	if payload.has("player_id") and payload.has("my_player_id"):
+		return str(payload["player_id"]) == str(payload["my_player_id"])
+	if payload.has("avatar_id") and payload.has("my_avatar_id"):
+		return str(payload["avatar_id"]) == str(payload["my_avatar_id"])
+	if payload.has("owner_id") and payload.has("my_owner_id"):
+		return str(payload["owner_id"]) == str(payload["my_owner_id"])
+	return my_turn
+
+func is_occupant_mine(occupant: Dictionary) -> bool:
+	if my_avatar_id == "":
+		return my_turn
+	if occupant.has("owner") and occupant["owner"] is Dictionary:
+		if str(occupant["owner"].get("id", "")) == my_avatar_id:
+			return true
+	if str(occupant.get("owner_id", "")) == my_avatar_id:
+		return true
+	if str(occupant.get("avatar_id", "")) == my_avatar_id:
+		return true
+	if occupant.has("card") and occupant["card"] is Dictionary:
+		var card = occupant["card"]
+		if str(card.get("owner_id", "")) == my_avatar_id:
+			return true
+		if str(card.get("avatar_id", "")) == my_avatar_id:
+			return true
+	return false
+
+func _make_control_tree_ignore_mouse(node: Node) -> void:
+	if node is Control:
+		node.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	for child in node.get_children():
+		_make_control_tree_ignore_mouse(child)
+
+func _get_tile_global_position_by_tile_id(tile_id: String) -> Vector2:
+	for row in battlefield["grid"]:
+		for col in row:
+			if str(col.tile_id) == str(tile_id):
+				return col.global_position
+	return Vector2.ZERO
+
+func _play_affected_effects(affected_list) -> void:
+	if affected_list is String:
+		affected_list = str_to_var(affected_list)
+	if not affected_list is Array:
+		return
+	await get_tree().create_timer(0.25).timeout
+	for affected in affected_list:
+		_queue_affected_popup(affected)
+	_play_effect_popup_queue()
+
+func _find_effect_popup_position(affected: Dictionary) -> Vector2:
+	var affected_id := str(affected.get("id", ""))
+	for row in battlefield["grid"]:
+		for col in row:
+			if affected_id == str(col.occupant_id) or affected_id == str(col.tile_id):
+				return col.global_position + Vector2(80, 60)
+	if last_known_unit_positions.has(affected_id):
+		return last_known_unit_positions[affected_id]["global_position"] + Vector2(80, 60)
+	if affected.has("x") and affected.has("y"):
+		for row in battlefield["grid"]:
+			for col in row:
+				if int(col.get("x")) == int(affected["x"]) and int(col.get("y")) == int(affected["y"]):
+					return col.global_position + Vector2(80, 60)
+	return Vector2(960, 540)
+
+func _queue_unit_stat_change_popups(unit: Dictionary) -> void:
+	var unit_id := str(unit["id"])
+	if not known_unit_abilities.has(unit_id):
+		known_unit_abilities[unit_id] = unit["abilities"].duplicate(true)
+		return
+	var old_abilities: Dictionary = known_unit_abilities[unit_id]
+	var new_abilities: Dictionary = unit["abilities"]
+	for ability_key in new_abilities:
+		if not old_abilities.has(ability_key):
+			continue
+		var old_ability = old_abilities[ability_key]
+		var new_ability = new_abilities[ability_key]
+		var old_value := float(old_ability.get("value", 0))
+		var new_value := float(new_ability.get("value", 0))
+		var diff := new_value - old_value
+		if is_equal_approx(diff, 0.0):
+			continue
+		var fake_change := {
+			"name": str(new_ability.get("name", "")),
+			"value": diff
+		}
+		_queue_affected_popup({
+			"id": unit_id,
+			"x": unit.get("x", null),
+			"y": unit.get("y", null),
+			"changes": [fake_change]
+		})
+	_play_effect_popup_queue()
+
+func _format_combat_log_statement(payload: Dictionary) -> String:
+	var statement := str(payload.get("statement", ""))
+	if not payload.has("arguments"):
+		return statement
+	var args: Array = payload["arguments"]
+	for i in range(args.size()):
+		var placeholder := "$" + str(i + 1)
+		var replacement := _get_combat_log_arg_name(args[i])
+		statement = statement.replace(placeholder, replacement)
+	return statement
+
+func _get_combat_log_arg_name(arg) -> String:
+	if arg is Dictionary:
+		if arg.has("name"):
+			return str(arg["name"])
+		if arg.has("base_name"):
+			return str(arg["base_name"])
+		if arg.has("card") and arg["card"] is Dictionary:
+			if arg["card"].has("name"):
+				return str(arg["card"]["name"])
+	return str(arg)
+
+func _clear_recent_effect_key_later(effect_key: String) -> void:
+	await get_tree().create_timer(2.0).timeout
+	recently_shown_effect_keys.erase(effect_key)

@@ -370,6 +370,7 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 		"start-game":
 			change_scene("game")
 		"choose-target":
+			#utils.j_print(payload)
 			game_screen.choose_target(payload)
 		"quit-game":
 			hud.quit_game(payload)

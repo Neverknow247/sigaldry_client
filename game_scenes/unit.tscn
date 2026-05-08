@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bnrivi82xph37"]
+[gd_scene format=3 uid="uid://bnrivi82xph37"]
 
 [ext_resource type="Theme" uid="uid://by8ew0t4rulwy" path="res://assets/themes/card_theme.tres" id="1_ct3q6"]
 [ext_resource type="Script" uid="uid://c60qkltwaql8h" path="res://game_scenes/unit.gd" id="1_oi642"]
@@ -13,8 +13,10 @@
 [ext_resource type="FontFile" uid="uid://c32o87n2oxwbt" path="res://assets/fonts/alegreya/Alegreya-Regular.ttf" id="11_pbs8y"]
 [ext_resource type="FontFile" uid="uid://cfi00ok31jiiu" path="res://assets/fonts/alegreya/Alegreya-BoldItalic.ttf" id="12_e42tg"]
 [ext_resource type="FontFile" uid="uid://cjg26hsv3itq1" path="res://assets/fonts/alegreya/Alegreya-Bold.ttf" id="12_pwu8l"]
+[ext_resource type="FontFile" uid="uid://1r0q2ej4jgmk" path="res://assets/fonts/outfit/Outfit-Regular.ttf" id="13_3esw6"]
 [ext_resource type="FontFile" uid="uid://bd3bjcsi7ogrh" path="res://assets/fonts/alegreya/Alegreya-Italic.ttf" id="13_dxx3e"]
 [ext_resource type="FontFile" uid="uid://b6alpq4r15r5s" path="res://assets/fonts/alegreya/Alegreya-Black.ttf" id="14_k3cbc"]
+[ext_resource type="FontFile" uid="uid://vf2i7rdlod8c" path="res://assets/fonts/outfit/Outfit-Bold.ttf" id="14_kr5j2"]
 [ext_resource type="Script" uid="uid://bs3sddjowfnua" path="res://items/card_rich_effects.gd" id="15_dxx3e"]
 [ext_resource type="Texture2D" uid="uid://c6atm047bxlm8" path="res://assets/art/card/badges/large v3/square.png" id="17_widav"]
 [ext_resource type="Texture2D" uid="uid://bo131wlyta2r3" path="res://assets/art/icons/Icon_Armor_Crown.png" id="18_ppa03"]
@@ -57,7 +59,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lw3fd"]
 
-[node name="unit" type="Control"]
+[node name="unit" type="Control" unique_id=619279785]
 custom_minimum_size = Vector2(276, 254)
 layout_mode = 3
 anchors_preset = 15
@@ -70,7 +72,7 @@ grow_vertical = 2
 theme = ExtResource("1_ct3q6")
 script = ExtResource("1_oi642")
 
-[node name="trap_content" type="CenterContainer" parent="."]
+[node name="trap_content" type="CenterContainer" parent="." unique_id=321425345]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -78,19 +80,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="color_rect" type="ColorRect" parent="trap_content"]
+[node name="color_rect" type="ColorRect" parent="trap_content" unique_id=1682294480]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 color = Color(0.54509807, 0.02745098, 0.17254902, 0.5568628)
 
-[node name="label" type="Label" parent="trap_content"]
+[node name="label" type="Label" parent="trap_content" unique_id=214650444]
 layout_mode = 2
 text = "Hostile
 Trap"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="unit_content" type="Control" parent="."]
+[node name="unit_content" type="Control" parent="." unique_id=1017164386]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -98,7 +100,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="unit_image" type="TextureRect" parent="unit_content"]
+[node name="unit_image" type="TextureRect" parent="unit_content" unique_id=1855982632]
 custom_minimum_size = Vector2(136, 136)
 layout_mode = 0
 offset_left = 22.0
@@ -108,13 +110,13 @@ offset_bottom = 217.0
 texture = ExtResource("2_u7ixp")
 expand_mode = 5
 
-[node name="unit_texture" type="TextureRect" parent="unit_content"]
+[node name="unit_texture" type="TextureRect" parent="unit_content" unique_id=2005089718]
 layout_mode = 0
 offset_right = 276.0
 offset_bottom = 254.0
 texture = ExtResource("4_pbs8y")
 
-[node name="main_banner" type="TextureRect" parent="unit_content/unit_texture"]
+[node name="main_banner" type="TextureRect" parent="unit_content/unit_texture" unique_id=1038002982]
 layout_mode = 0
 offset_left = 18.0
 offset_top = 19.0
@@ -123,14 +125,14 @@ offset_bottom = 74.06073
 texture = ExtResource("4_osrdy")
 expand_mode = 5
 
-[node name="stat_banner" type="TextureRect" parent="unit_content/unit_texture"]
+[node name="stat_banner" type="TextureRect" parent="unit_content/unit_texture" unique_id=318894389]
 layout_mode = 0
 offset_left = 18.0
 offset_top = 189.0
 offset_right = 162.0
 offset_bottom = 238.0
 
-[node name="avatar_icon_badge" type="TextureRect" parent="unit_content/unit_texture/stat_banner"]
+[node name="avatar_icon_badge" type="TextureRect" parent="unit_content/unit_texture/stat_banner" unique_id=1771504716]
 layout_mode = 0
 offset_left = -1.0
 offset_top = -112.0
@@ -139,7 +141,7 @@ offset_bottom = -87.0
 texture = ExtResource("17_widav")
 expand_mode = 3
 
-[node name="avatar_icon" type="TextureRect" parent="unit_content/unit_texture/stat_banner/avatar_icon_badge"]
+[node name="avatar_icon" type="TextureRect" parent="unit_content/unit_texture/stat_banner/avatar_icon_badge" unique_id=41468969]
 layout_mode = 0
 offset_left = 5.0
 offset_top = 5.0
@@ -148,7 +150,7 @@ offset_bottom = 19.0
 texture = ExtResource("18_ppa03")
 expand_mode = 3
 
-[node name="attack_badge" type="TextureRect" parent="unit_content/unit_texture/stat_banner"]
+[node name="attack_badge" type="TextureRect" parent="unit_content/unit_texture/stat_banner" unique_id=1259783219]
 layout_mode = 0
 offset_left = 5.0
 offset_right = 43.0
@@ -156,7 +158,7 @@ offset_bottom = 38.333332
 texture = ExtResource("5_y3my5")
 expand_mode = 5
 
-[node name="attack_icon_badge" type="TextureRect" parent="unit_content/unit_texture/stat_banner/attack_badge"]
+[node name="attack_icon_badge" type="TextureRect" parent="unit_content/unit_texture/stat_banner/attack_badge" unique_id=547041718]
 layout_mode = 0
 offset_left = -4.6
 offset_top = 24.0
@@ -165,7 +167,7 @@ offset_bottom = 48.333332
 texture = ExtResource("6_ct3q6")
 expand_mode = 5
 
-[node name="attack_icon" type="TextureRect" parent="unit_content/unit_texture/stat_banner/attack_badge/attack_icon_badge"]
+[node name="attack_icon" type="TextureRect" parent="unit_content/unit_texture/stat_banner/attack_badge/attack_icon_badge" unique_id=1702203272]
 layout_mode = 0
 offset_left = 5.3
 offset_top = 5.3
@@ -174,7 +176,7 @@ offset_bottom = 18.599998
 texture = ExtResource("7_q5kcx")
 expand_mode = 3
 
-[node name="health_badge" type="TextureRect" parent="unit_content/unit_texture/stat_banner"]
+[node name="health_badge" type="TextureRect" parent="unit_content/unit_texture/stat_banner" unique_id=1456367756]
 layout_mode = 0
 offset_left = 101.0
 offset_right = 139.0
@@ -182,7 +184,7 @@ offset_bottom = 38.333332
 texture = ExtResource("5_y3my5")
 expand_mode = 5
 
-[node name="health_icon_badge" type="TextureRect" parent="unit_content/unit_texture/stat_banner/health_badge"]
+[node name="health_icon_badge" type="TextureRect" parent="unit_content/unit_texture/stat_banner/health_badge" unique_id=105102050]
 layout_mode = 0
 offset_left = 18.6
 offset_top = 24.0
@@ -191,7 +193,7 @@ offset_bottom = 48.333332
 texture = ExtResource("6_ct3q6")
 expand_mode = 5
 
-[node name="health_icon" type="TextureRect" parent="unit_content/unit_texture/stat_banner/health_badge/health_icon_badge"]
+[node name="health_icon" type="TextureRect" parent="unit_content/unit_texture/stat_banner/health_badge/health_icon_badge" unique_id=1520205820]
 layout_mode = 0
 offset_left = 5.3
 offset_top = 5.3
@@ -200,7 +202,7 @@ offset_bottom = 18.599998
 texture = ExtResource("8_pbs8y")
 expand_mode = 3
 
-[node name="unit_select_button" type="Button" parent="unit_content"]
+[node name="unit_select_button" type="Button" parent="unit_content" unique_id=1718526740]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -220,7 +222,7 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_ppa03")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_3esw6")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_kr5j2")
 
-[node name="labels" type="Control" parent="unit_content"]
+[node name="labels" type="Control" parent="unit_content" unique_id=986181299]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -229,13 +231,13 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="unit_cost" type="Label" parent="unit_content/labels"]
+[node name="unit_cost" type="Label" parent="unit_content/labels" unique_id=1813956382]
 visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 
-[node name="unit_name" type="Label" parent="unit_content/labels"]
+[node name="unit_name" type="Label" parent="unit_content/labels" unique_id=1068883235]
 layout_mode = 0
 offset_left = 30.0
 offset_top = 21.0
@@ -250,7 +252,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="unit_effects" type="RichTextLabel" parent="unit_content/labels"]
+[node name="unit_effects" type="RichTextLabel" parent="unit_content/labels" unique_id=179411689]
 layout_mode = 0
 offset_left = 170.0
 offset_top = 83.0
@@ -258,20 +260,21 @@ offset_right = 252.0
 offset_bottom = 230.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_constants/line_separation = -4
-theme_override_fonts/normal_font = ExtResource("10_q5kcx")
-theme_override_fonts/bold_font = ExtResource("12_pwu8l")
+theme_override_fonts/normal_font = ExtResource("13_3esw6")
+theme_override_fonts/bold_font = ExtResource("14_kr5j2")
 theme_override_fonts/bold_italics_font = ExtResource("12_e42tg")
 theme_override_fonts/italics_font = ExtResource("13_dxx3e")
 theme_override_fonts/mono_font = ExtResource("14_k3cbc")
-theme_override_font_sizes/normal_font_size = 14
-theme_override_font_sizes/bold_font_size = 14
-theme_override_font_sizes/bold_italics_font_size = 14
-theme_override_font_sizes/italics_font_size = 14
-theme_override_font_sizes/mono_font_size = 14
+theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/bold_font_size = 16
+theme_override_font_sizes/bold_italics_font_size = 16
+theme_override_font_sizes/italics_font_size = 16
+theme_override_font_sizes/mono_font_size = 16
 bbcode_enabled = true
+text = "Preview"
 script = ExtResource("15_dxx3e")
 
-[node name="unit_attack" type="Label" parent="unit_content/labels"]
+[node name="unit_attack" type="Label" parent="unit_content/labels" unique_id=812888596]
 layout_mode = 0
 offset_left = 22.0
 offset_top = 186.0
@@ -286,7 +289,7 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="unit_health" type="Label" parent="unit_content/labels"]
+[node name="unit_health" type="Label" parent="unit_content/labels" unique_id=1330961161]
 layout_mode = 0
 offset_left = 118.0
 offset_top = 186.0
@@ -301,7 +304,7 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="unit_trapped" type="Label" parent="unit_content/labels"]
+[node name="unit_trapped" type="Label" parent="unit_content/labels" unique_id=1007435970]
 visible = false
 layout_mode = 0
 offset_left = 50.0
@@ -318,14 +321,14 @@ text = "TRAPPED"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="unit_select_timer" type="Timer" parent="unit_content"]
+[node name="unit_select_timer" type="Timer" parent="unit_content" unique_id=754896046]
 
-[node name="unit_select_path" type="Path2D" parent="unit_content"]
+[node name="unit_select_path" type="Path2D" parent="unit_content" unique_id=377506788]
 curve = SubResource("Curve2D_dxx3e")
 
-[node name="unit_select_line" type="Line2D" parent="unit_content"]
+[node name="unit_select_line" type="Line2D" parent="unit_content" unique_id=627984240]
 
-[node name="unit_button" type="Button" parent="."]
+[node name="unit_button" type="Button" parent="." unique_id=1775999107]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -345,7 +348,7 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_ppa03")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_3esw6")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_lw3fd")
 
-[node name="unit_button_color" type="ColorRect" parent="unit_button"]
+[node name="unit_button_color" type="ColorRect" parent="unit_button" unique_id=270891418]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -353,7 +356,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0, 0, 0, 0.49019608)
+color = Color(0, 0, 0, 0.35686275)
 
 [connection signal="mouse_entered" from="unit_content/unit_texture" to="." method="_on_unit_texture_mouse_entered"]
 [connection signal="mouse_exited" from="unit_content/unit_texture" to="." method="_on_unit_texture_mouse_exited"]
