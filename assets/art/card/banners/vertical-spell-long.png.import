@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://57j5o3egj858"
-path="res://.godot/imported/vertical-spell-long.png-fa13b28faeac687325ac34f1ea8e0de0.ctex"
+path="res://godot/imported/vertical-spell-long.png-fa13b28faeac687325ac34f1ea8e0de0.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/art/card/banners/vertical-spell-long.png"
-dest_files=["res://.godot/imported/vertical-spell-long.png-fa13b28faeac687325ac34f1ea8e0de0.ctex"]
+dest_files=["res://godot/imported/vertical-spell-long.png-fa13b28faeac687325ac34f1ea8e0de0.ctex"]
 
 [params]
 

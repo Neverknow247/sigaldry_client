@@ -15,8 +15,9 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Sigaldry"
-config/version="000.000.023"
+config/version="000.000.031"
 run/main_scene="uid://sdqjb15ql8mj"
+config/use_hidden_project_data_directory=false
 config/use_custom_user_dir=true
 config/custom_user_dir_name="sigaldry"
 config/features=PackedStringArray("4.6", "Forward Plus")

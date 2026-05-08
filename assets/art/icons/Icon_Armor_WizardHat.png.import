@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bn6smhi7qeuv0"
-path="res://.godot/imported/Icon_Armor_WizardHat.png-62052722b2627793cd3e8e850d74c054.ctex"
+path="res://godot/imported/Icon_Armor_WizardHat.png-62052722b2627793cd3e8e850d74c054.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/art/icons/Icon_Armor_WizardHat.png"
-dest_files=["res://.godot/imported/Icon_Armor_WizardHat.png-62052722b2627793cd3e8e850d74c054.ctex"]
+dest_files=["res://godot/imported/Icon_Armor_WizardHat.png-62052722b2627793cd3e8e850d74c054.ctex"]
 
 [params]
 

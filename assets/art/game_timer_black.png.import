@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://5twys1t716cj"
-path="res://.godot/imported/game_timer_black.png-89aea4a15e3e0d9d6e4bfca01d5bfe34.ctex"
+path="res://godot/imported/game_timer_black.png-89aea4a15e3e0d9d6e4bfca01d5bfe34.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/art/game_timer_black.png"
-dest_files=["res://.godot/imported/game_timer_black.png-89aea4a15e3e0d9d6e4bfca01d5bfe34.ctex"]
+dest_files=["res://godot/imported/game_timer_black.png-89aea4a15e3e0d9d6e4bfca01d5bfe34.ctex"]
 
 [params]
 

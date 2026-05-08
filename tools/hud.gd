@@ -233,6 +233,7 @@ func _on_settings_dropdown_index_pressed(index: int) -> void:
 	#print(index)
 
 func quit_game(payload):
+	utils.j_print(payload)
 	if payload["loser_name"] == "Computer" || payload["winner_name"] == "Computer":
 		stats["game_type"] = "pve"
 	else:

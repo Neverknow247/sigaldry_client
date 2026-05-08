@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://e7fpdyuj245b"]
+
+[ext_resource type="Script" uid="uid://cyoy0l0eygc05" path="res://menus/disconnect_screen.gd" id="1_iqii6"]
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="2_313cl"]
+
+[node name="disconnect_screen" type="Control" unique_id=1184750768]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iqii6")
+
+[node name="background_color" type="ColorRect" parent="." unique_id=2079199217]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5647059, 0.5647059, 0.5647059, 1)
+
+[node name="fake_hud" type="ColorRect" parent="background_color" unique_id=1698137863]
+visible = false
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="disconnect_area" type="Control" parent="." unique_id=1462677832]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="margin_container" type="MarginContainer" parent="disconnect_area" unique_id=708415802]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="center_container" type="CenterContainer" parent="disconnect_area/margin_container" unique_id=437822639]
+layout_mode = 2
+
+[node name="label" type="Label" parent="disconnect_area/margin_container/center_container" unique_id=127260286]
+layout_mode = 2
+theme = ExtResource("2_313cl")
+theme_override_font_sizes/font_size = 120
+text = "Disconnected!
+
+Attempting to Reconnect..."
+horizontal_alignment = 1

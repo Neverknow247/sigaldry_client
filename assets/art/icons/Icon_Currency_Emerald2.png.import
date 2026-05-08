@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ck6h4fpe6kx4o"
-path="res://.godot/imported/Icon_Currency_Emerald2.png-6556f5cda46ab82c69ac9d65aca6e01a.ctex"
+path="res://godot/imported/Icon_Currency_Emerald2.png-6556f5cda46ab82c69ac9d65aca6e01a.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/art/icons/Icon_Currency_Emerald2.png"
-dest_files=["res://.godot/imported/Icon_Currency_Emerald2.png-6556f5cda46ab82c69ac9d65aca6e01a.ctex"]
+dest_files=["res://godot/imported/Icon_Currency_Emerald2.png-6556f5cda46ab82c69ac9d65aca6e01a.ctex"]
 
 [params]
 

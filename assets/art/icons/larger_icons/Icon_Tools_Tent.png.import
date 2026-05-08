@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c7elonornidi7"
-path="res://.godot/imported/Icon_Tools_Tent.png-3e84124b22c1fea84428e995562c3e82.ctex"
+path="res://godot/imported/Icon_Tools_Tent.png-3e84124b22c1fea84428e995562c3e82.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/art/icons/larger_icons/Icon_Tools_Tent.png"
-dest_files=["res://.godot/imported/Icon_Tools_Tent.png-3e84124b22c1fea84428e995562c3e82.ctex"]
+dest_files=["res://godot/imported/Icon_Tools_Tent.png-3e84124b22c1fea84428e995562c3e82.ctex"]
 
 [params]
 

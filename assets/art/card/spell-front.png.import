@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bb1oi2vh16lpx"
-path="res://.godot/imported/spell-front.png-289f79a85c55ff061c320dba904e0fe7.ctex"
+path="res://godot/imported/spell-front.png-289f79a85c55ff061c320dba904e0fe7.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/art/card/spell-front.png"
-dest_files=["res://.godot/imported/spell-front.png-289f79a85c55ff061c320dba904e0fe7.ctex"]
+dest_files=["res://godot/imported/spell-front.png-289f79a85c55ff061c320dba904e0fe7.ctex"]
 
 [params]
 

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://buc3wffsdnt0u"
-path="res://.godot/imported/dunesmar.png-8bedf64924e464745b361fddbbbab92e.ctex"
+path="res://godot/imported/dunesmar.png-8bedf64924e464745b361fddbbbab92e.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/art/background/dunesmar.png"
-dest_files=["res://.godot/imported/dunesmar.png-8bedf64924e464745b361fddbbbab92e.ctex"]
+dest_files=["res://godot/imported/dunesmar.png-8bedf64924e464745b361fddbbbab92e.ctex"]
 
 [params]
 

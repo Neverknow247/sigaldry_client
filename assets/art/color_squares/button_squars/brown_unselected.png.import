@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ddbcumd101eun"
-path="res://.godot/imported/brown_unselected.png-c82253d01a9b335dc5d80ab5ebfd3012.ctex"
+path="res://godot/imported/brown_unselected.png-c82253d01a9b335dc5d80ab5ebfd3012.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/art/color_squares/button_squars/brown_unselected.png"
-dest_files=["res://.godot/imported/brown_unselected.png-c82253d01a9b335dc5d80ab5ebfd3012.ctex"]
+dest_files=["res://godot/imported/brown_unselected.png-c82253d01a9b335dc5d80ab5ebfd3012.ctex"]
 
 [params]
 

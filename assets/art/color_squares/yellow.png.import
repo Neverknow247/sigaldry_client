@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c0fw4t6qfc41a"
-path="res://.godot/imported/yellow.png-7aebf08599ca6b48728556d4087f5406.ctex"
+path="res://godot/imported/yellow.png-7aebf08599ca6b48728556d4087f5406.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/art/color_squares/yellow.png"
-dest_files=["res://.godot/imported/yellow.png-7aebf08599ca6b48728556d4087f5406.ctex"]
+dest_files=["res://godot/imported/yellow.png-7aebf08599ca6b48728556d4087f5406.ctex"]
 
 [params]
 

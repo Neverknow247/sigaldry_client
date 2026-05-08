@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cdmpc3368o3gs"
-path="res://.godot/imported/stone_table_2.png-2078b986b9069d8774a8ce9b187e163c.ctex"
+path="res://godot/imported/stone_table_2.png-2078b986b9069d8774a8ce9b187e163c.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/art/background/stone_table_2.png"
-dest_files=["res://.godot/imported/stone_table_2.png-2078b986b9069d8774a8ce9b187e163c.ctex"]
+dest_files=["res://godot/imported/stone_table_2.png-2078b986b9069d8774a8ce9b187e163c.ctex"]
 
 [params]
 

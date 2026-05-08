@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://chgqtameip08l"
-path="res://.godot/imported/premium_currency.png-628e7fd86c89a6a1b999b8d8c4b73ccb.ctex"
+path="res://godot/imported/premium_currency.png-628e7fd86c89a6a1b999b8d8c4b73ccb.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/art/icons/premium_currency.png"
-dest_files=["res://.godot/imported/premium_currency.png-628e7fd86c89a6a1b999b8d8c4b73ccb.ctex"]
+dest_files=["res://godot/imported/premium_currency.png-628e7fd86c89a6a1b999b8d8c4b73ccb.ctex"]
 
 [params]
 

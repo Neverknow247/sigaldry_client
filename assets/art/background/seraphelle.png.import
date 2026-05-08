@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cacsent6ed5jk"
-path="res://.godot/imported/seraphelle.png-3e82b667504c2207642bd3f1c0a32f4c.ctex"
+path="res://godot/imported/seraphelle.png-3e82b667504c2207642bd3f1c0a32f4c.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/art/background/seraphelle.png"
-dest_files=["res://.godot/imported/seraphelle.png-3e82b667504c2207642bd3f1c0a32f4c.ctex"]
+dest_files=["res://godot/imported/seraphelle.png-3e82b667504c2207642bd3f1c0a32f4c.ctex"]
 
 [params]
 

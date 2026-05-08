@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cd31q6i6rh5ul"
-path="res://.godot/imported/red_unselected.png-dd9d215d7917ee7f260a6cf4c7781505.ctex"
+path="res://godot/imported/red_unselected.png-dd9d215d7917ee7f260a6cf4c7781505.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/art/color_squares/button_squars/red_unselected.png"
-dest_files=["res://.godot/imported/red_unselected.png-dd9d215d7917ee7f260a6cf4c7781505.ctex"]
+dest_files=["res://godot/imported/red_unselected.png-dd9d215d7917ee7f260a6cf4c7781505.ctex"]
 
 [params]
 

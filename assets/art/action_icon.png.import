@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://v7dy5aw5aubv"
-path="res://.godot/imported/action_icon.png-84f9ae59bd484256d18afe6324bd9dcf.ctex"
+path="res://godot/imported/action_icon.png-84f9ae59bd484256d18afe6324bd9dcf.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/art/action_icon.png"
-dest_files=["res://.godot/imported/action_icon.png-84f9ae59bd484256d18afe6324bd9dcf.ctex"]
+dest_files=["res://godot/imported/action_icon.png-84f9ae59bd484256d18afe6324bd9dcf.ctex"]
 
 [params]
 

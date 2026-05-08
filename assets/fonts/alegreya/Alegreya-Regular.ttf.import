@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://c32o87n2oxwbt"
-path="res://.godot/imported/Alegreya-Regular.ttf-7e67c503585193bd4fedbd7ecddea0b3.fontdata"
+path="res://godot/imported/Alegreya-Regular.ttf-7e67c503585193bd4fedbd7ecddea0b3.fontdata"
 
 [deps]
 
 source_file="res://assets/fonts/alegreya/Alegreya-Regular.ttf"
-dest_files=["res://.godot/imported/Alegreya-Regular.ttf-7e67c503585193bd4fedbd7ecddea0b3.fontdata"]
+dest_files=["res://godot/imported/Alegreya-Regular.ttf-7e67c503585193bd4fedbd7ecddea0b3.fontdata"]
 
 [params]
 
@@ -21,6 +21,7 @@ msdf_pixel_range=8
 msdf_size=48
 allow_system_fallback=true
 force_autohinter=false
+modulate_color_glyphs=false
 hinting=1
 subpixel_positioning=4
 keep_rounding_remainders=true

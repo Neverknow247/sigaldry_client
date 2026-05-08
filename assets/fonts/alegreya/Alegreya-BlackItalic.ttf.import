@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://b2yyilaak2qrn"
-path="res://.godot/imported/Alegreya-BlackItalic.ttf-7919d669ed5bb1729f76768c841fdf40.fontdata"
+path="res://godot/imported/Alegreya-BlackItalic.ttf-7919d669ed5bb1729f76768c841fdf40.fontdata"
 
 [deps]
 
 source_file="res://assets/fonts/alegreya/Alegreya-BlackItalic.ttf"
-dest_files=["res://.godot/imported/Alegreya-BlackItalic.ttf-7919d669ed5bb1729f76768c841fdf40.fontdata"]
+dest_files=["res://godot/imported/Alegreya-BlackItalic.ttf-7919d669ed5bb1729f76768c841fdf40.fontdata"]
 
 [params]
 
@@ -21,6 +21,7 @@ msdf_pixel_range=8
 msdf_size=48
 allow_system_fallback=true
 force_autohinter=false
+modulate_color_glyphs=false
 hinting=1
 subpixel_positioning=4
 keep_rounding_remainders=true

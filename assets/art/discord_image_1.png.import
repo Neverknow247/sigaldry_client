@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bykfi0fssis53"
-path="res://.godot/imported/discord_image_1.png-f3751aaa2956e6586b079906cc84753c.ctex"
+path="res://godot/imported/discord_image_1.png-f3751aaa2956e6586b079906cc84753c.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/art/discord_image_1.png"
-dest_files=["res://.godot/imported/discord_image_1.png-f3751aaa2956e6586b079906cc84753c.ctex"]
+dest_files=["res://godot/imported/discord_image_1.png-f3751aaa2956e6586b079906cc84753c.ctex"]
 
 [params]
 

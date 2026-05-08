@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bn4itc3q7k51g"
-path="res://.godot/imported/purple.png-c605ccd6cbe978109e9ce925e682def5.ctex"
+path="res://godot/imported/purple.png-c605ccd6cbe978109e9ce925e682def5.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/art/color_squares/purple.png"
-dest_files=["res://.godot/imported/purple.png-c605ccd6cbe978109e9ce925e682def5.ctex"]
+dest_files=["res://godot/imported/purple.png-c605ccd6cbe978109e9ce925e682def5.ctex"]
 
 [params]
 

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b44apc5kffs7s"
-path="res://.godot/imported/pvp_5.png-37a7dc9fc85bab9eddb2f31d72e662ed.ctex"
+path="res://godot/imported/pvp_5.png-37a7dc9fc85bab9eddb2f31d72e662ed.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/art/hud_icons/pvp_5.png"
-dest_files=["res://.godot/imported/pvp_5.png-37a7dc9fc85bab9eddb2f31d72e662ed.ctex"]
+dest_files=["res://godot/imported/pvp_5.png-37a7dc9fc85bab9eddb2f31d72e662ed.ctex"]
 
 [params]
 

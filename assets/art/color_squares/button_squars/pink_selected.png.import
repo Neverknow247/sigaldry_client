@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://shtek3543qf1"
-path="res://.godot/imported/pink_selected.png-88311ae7ab88404a3058e66356dfeb16.ctex"
+path="res://godot/imported/pink_selected.png-88311ae7ab88404a3058e66356dfeb16.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/art/color_squares/button_squars/pink_selected.png"
-dest_files=["res://.godot/imported/pink_selected.png-88311ae7ab88404a3058e66356dfeb16.ctex"]
+dest_files=["res://godot/imported/pink_selected.png-88311ae7ab88404a3058e66356dfeb16.ctex"]
 
 [params]
 

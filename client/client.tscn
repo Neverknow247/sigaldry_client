@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://djaik8yy8vfby" path="res://editor_screens/fusion_screen.tscn" id="23_dob4x"]
 [ext_resource type="PackedScene" uid="uid://b0jmnnxxr3w7h" path="res://menus/store_screen.tscn" id="24_38jlj"]
 [ext_resource type="PackedScene" uid="uid://hbuas2jopiqk" path="res://menus/salvage_screen.tscn" id="25_x8oks"]
+[ext_resource type="PackedScene" uid="uid://e7fpdyuj245b" path="res://menus/disconnect_screen.tscn" id="26_or4ek"]
 
 [node name="client" type="Control" unique_id=1593494328 groups=["client"]]
 layout_mode = 3
@@ -54,6 +55,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="disconnect_screen" parent="scenes" unique_id=1184750768 instance=ExtResource("26_or4ek")]
+visible = false
+layout_mode = 1
 
 [node name="wrong_version_screen" parent="scenes" unique_id=1244103120 instance=ExtResource("4_wb1ry")]
 visible = false
@@ -262,6 +267,7 @@ layout_mode = 1
 [connection signal="fuse_cards" from="scenes/fusion_screen" to="." method="_on_fusion_screen_fuse_cards"]
 [connection signal="preview_fused_card" from="scenes/fusion_screen" to="." method="_on_fusion_screen_preview_fused_card"]
 [connection signal="select_fusion_card" from="scenes/fusion_screen" to="." method="_on_fusion_screen_select_fusion_card"]
+[connection signal="salvage" from="scenes/salvage_screen" to="." method="_on_salvage_screen_salvage"]
 [connection signal="buy_item" from="scenes/store_screen" to="." method="_on_store_screen_buy_item"]
 [connection signal="category_selected" from="scenes/store_screen" to="." method="_on_store_screen_category_selected"]
 [connection signal="battle" from="hud" to="." method="_on_hud_battle"]

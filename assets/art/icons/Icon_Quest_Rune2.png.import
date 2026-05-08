@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://depja2u3wj0qs"
-path="res://.godot/imported/Icon_Quest_Rune2.png-a709713c6e85a794146487a2a073afff.ctex"
+path="res://godot/imported/Icon_Quest_Rune2.png-a709713c6e85a794146487a2a073afff.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/art/icons/Icon_Quest_Rune2.png"
-dest_files=["res://.godot/imported/Icon_Quest_Rune2.png-a709713c6e85a794146487a2a073afff.ctex"]
+dest_files=["res://godot/imported/Icon_Quest_Rune2.png-a709713c6e85a794146487a2a073afff.ctex"]
 
 [params]
 

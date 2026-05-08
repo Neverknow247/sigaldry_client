@@ -192,19 +192,19 @@ func add_details(_card_details,_is_unit = false):
 	card_image.texture = tex
 	
 func set_card_name(_card_name):
-	var font_size = 50
-	match _card_name.length():
-		14: font_size = 52
-		13: font_size = 58
-		12: font_size = 60
-		11: font_size = 66
-		10: font_size = 72
-		9: font_size = 78
-		_:
-			pass
-	if _card_name.length() < 9:
-		font_size = 88
-	card_name.add_theme_font_size_override("font_size",font_size)
+	#var font_size = 50
+	#match _card_name.length():
+		#14: font_size = 52
+		#13: font_size = 58
+		#12: font_size = 60
+		#11: font_size = 66
+		#10: font_size = 72
+		#9: font_size = 78
+		#_:
+			#pass
+	#if _card_name.length() < 9:
+		#font_size = 88
+	#card_name.add_theme_font_size_override("font_size",font_size)
 	card_name.text = _card_name
 	
 	#var image_path = "C:/sigaldry_images/%s" %[_card_details["image"]]

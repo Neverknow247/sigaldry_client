@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d0122advdbudr"
-path="res://.godot/imported/card_fusion_button.png-f2c29b014c994aefbed9729dc562703b.ctex"
+path="res://godot/imported/card_fusion_button.png-f2c29b014c994aefbed9729dc562703b.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/art/buttons/card_fusion_button.png"
-dest_files=["res://.godot/imported/card_fusion_button.png-f2c29b014c994aefbed9729dc562703b.ctex"]
+dest_files=["res://godot/imported/card_fusion_button.png-f2c29b014c994aefbed9729dc562703b.ctex"]
 
 [params]
 

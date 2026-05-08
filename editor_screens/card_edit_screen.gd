@@ -68,6 +68,7 @@ func set_up_buttons(payload, _name):
 		duplicate_button.text = "Cannot Duplicate"
 	if payload["can_salvage"]:
 		salvage_button.disabled = false
+		salvage_button.text = "Salvage Card"
 	else:
 		salvage_button.disabled = true
 		salvage_button.text = "Cannot Salvage Card"

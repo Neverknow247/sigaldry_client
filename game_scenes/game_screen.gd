@@ -327,6 +327,7 @@ func update_players(payload):
 			card_number = 0
 
 func update_tile(payload):
+	return
 	#print("update tile: ",payload)
 	battlefield.update_grid_space(payload)
 	#for tile in payload["tile"]:

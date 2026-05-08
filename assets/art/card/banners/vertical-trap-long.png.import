@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://boyivjnxjhl2u"
-path="res://.godot/imported/vertical-trap-long.png-ff38e73303c07416a1f662fc65ac715f.ctex"
+path="res://godot/imported/vertical-trap-long.png-ff38e73303c07416a1f662fc65ac715f.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/art/card/banners/vertical-trap-long.png"
-dest_files=["res://.godot/imported/vertical-trap-long.png-ff38e73303c07416a1f662fc65ac715f.ctex"]
+dest_files=["res://godot/imported/vertical-trap-long.png-ff38e73303c07416a1f662fc65ac715f.ctex"]
 
 [params]
 

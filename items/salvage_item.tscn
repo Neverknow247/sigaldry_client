@@ -45,6 +45,7 @@ theme_override_constants/separation = 16
 [node name="item_label" type="Label" parent="margin_container/h_box_container" unique_id=509067958]
 custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
+theme_override_constants/outline_size = 12
 text = "Surpress +1.5"
 vertical_alignment = 1
 
@@ -54,6 +55,7 @@ layout_mode = 2
 [node name="amount_label" type="Label" parent="margin_container/h_box_container" unique_id=137498817]
 custom_minimum_size = Vector2(42, 66)
 layout_mode = 2
+theme_override_constants/outline_size = 12
 theme_override_font_sizes/font_size = 24
 text = "X10"
 horizontal_alignment = 1

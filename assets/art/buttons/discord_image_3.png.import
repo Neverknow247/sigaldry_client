@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cws2nkipuu40"
-path="res://.godot/imported/discord_image_3.png-be2959d05e2b0fdd1305321fae54db55.ctex"
+path="res://godot/imported/discord_image_3.png-be2959d05e2b0fdd1305321fae54db55.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/art/buttons/discord_image_3.png"
-dest_files=["res://.godot/imported/discord_image_3.png-be2959d05e2b0fdd1305321fae54db55.ctex"]
+dest_files=["res://godot/imported/discord_image_3.png-be2959d05e2b0fdd1305321fae54db55.ctex"]
 
 [params]
 

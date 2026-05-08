@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cghmhvdew3trf"
-path="res://.godot/imported/black.png-98ee1aaba13bffb5557456c215314f5a.ctex"
+path="res://godot/imported/black.png-98ee1aaba13bffb5557456c215314f5a.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/art/color_squares/black.png"
-dest_files=["res://.godot/imported/black.png-98ee1aaba13bffb5557456c215314f5a.ctex"]
+dest_files=["res://godot/imported/black.png-98ee1aaba13bffb5557456c215314f5a.ctex"]
 
 [params]
 

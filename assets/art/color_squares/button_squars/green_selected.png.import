@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dpdy537rgpvcw"
-path="res://.godot/imported/green_selected.png-b07d5cc30d476f5e84f3fe97a1769136.ctex"
+path="res://godot/imported/green_selected.png-b07d5cc30d476f5e84f3fe97a1769136.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/art/color_squares/button_squars/green_selected.png"
-dest_files=["res://.godot/imported/green_selected.png-b07d5cc30d476f5e84f3fe97a1769136.ctex"]
+dest_files=["res://godot/imported/green_selected.png-b07d5cc30d476f5e84f3fe97a1769136.ctex"]
 
 [params]
 

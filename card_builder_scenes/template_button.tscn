@@ -1,18 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://dkbbwlr22vb6y"]
+[gd_scene format=3 uid="uid://dkbbwlr22vb6y"]
 
 [ext_resource type="Script" uid="uid://cwsc17mj06upo" path="res://card_builder_scenes/template_button.gd" id="1_onaqp"]
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_xtylh"]
 [ext_resource type="Script" uid="uid://lu1pg81qpull" path="res://card_builder_scenes/template_shape_grid.gd" id="2_71fcp"]
 [ext_resource type="PackedScene" uid="uid://nu8u1n14jovn" path="res://card_builder_scenes/color_bonus_square.tscn" id="4_b34p4"]
 
-[node name="template_button" type="Button"]
+[node name="template_button" type="Button" unique_id=1150327345]
 custom_minimum_size = Vector2(868, 128)
 offset_right = 868.0
 offset_bottom = 128.0
 theme = ExtResource("1_xtylh")
 script = ExtResource("1_onaqp")
 
-[node name="template_amount" type="Label" parent="."]
+[node name="template_amount" type="Label" parent="." unique_id=1231793832]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
@@ -25,7 +25,7 @@ text = "X1000"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="template_name" type="Label" parent="."]
+[node name="template_name" type="Label" parent="." unique_id=341558868]
 layout_mode = 0
 offset_left = 136.0
 offset_top = 16.0
@@ -38,7 +38,7 @@ text = "Legendary Blueprint"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="template_shape_grid" type="Control" parent="."]
+[node name="template_shape_grid" type="Control" parent="." unique_id=1958231177]
 anchors_preset = 0
 offset_left = 744.0
 offset_top = 8.0
@@ -47,7 +47,7 @@ offset_bottom = 120.0
 mouse_filter = 2
 script = ExtResource("2_71fcp")
 
-[node name="color_rect" type="ColorRect" parent="template_shape_grid"]
+[node name="color_rect" type="ColorRect" parent="template_shape_grid" unique_id=99155931]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -56,7 +56,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="color_bonus_container" type="VBoxContainer" parent="."]
+[node name="color_bonus_container" type="VBoxContainer" parent="." unique_id=999994075]
 layout_mode = 0
 offset_left = 576.0
 offset_top = 8.0
@@ -65,11 +65,11 @@ offset_bottom = 147.99998
 scale = Vector2(0.8, 0.8)
 alignment = 1
 
-[node name="start_bonus_container" type="HBoxContainer" parent="color_bonus_container"]
+[node name="start_bonus_container" type="HBoxContainer" parent="color_bonus_container" unique_id=235280069]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="start_label" type="Label" parent="color_bonus_container/start_bonus_container"]
+[node name="start_label" type="Label" parent="color_bonus_container/start_bonus_container" unique_id=1818814190]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -77,7 +77,7 @@ theme_override_constants/outline_size = 12
 text = "Start:"
 horizontal_alignment = 2
 
-[node name="start_label_2" type="Label" parent="color_bonus_container/start_bonus_container"]
+[node name="start_label_2" type="Label" parent="color_bonus_container/start_bonus_container" unique_id=1724744368]
 visible = false
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -85,14 +85,14 @@ theme_override_constants/outline_size = 12
 text = "N/A"
 horizontal_alignment = 2
 
-[node name="start_color_bonus_square" parent="color_bonus_container/start_bonus_container" instance=ExtResource("4_b34p4")]
+[node name="start_color_bonus_square" parent="color_bonus_container/start_bonus_container" unique_id=893865843 instance=ExtResource("4_b34p4")]
 layout_mode = 2
 
-[node name="end_bonus_container" type="HBoxContainer" parent="color_bonus_container"]
+[node name="end_bonus_container" type="HBoxContainer" parent="color_bonus_container" unique_id=837256141]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="end_label" type="Label" parent="color_bonus_container/end_bonus_container"]
+[node name="end_label" type="Label" parent="color_bonus_container/end_bonus_container" unique_id=1074611628]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -100,7 +100,7 @@ theme_override_constants/outline_size = 12
 text = "End:"
 horizontal_alignment = 2
 
-[node name="end_label_2" type="Label" parent="color_bonus_container/end_bonus_container"]
+[node name="end_label_2" type="Label" parent="color_bonus_container/end_bonus_container" unique_id=1399407099]
 visible = false
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -108,7 +108,7 @@ theme_override_constants/outline_size = 12
 text = "N/A"
 horizontal_alignment = 2
 
-[node name="end_color_bonus_square" parent="color_bonus_container/end_bonus_container" instance=ExtResource("4_b34p4")]
+[node name="end_color_bonus_square" parent="color_bonus_container/end_bonus_container" unique_id=1814226457 instance=ExtResource("4_b34p4")]
 layout_mode = 2
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

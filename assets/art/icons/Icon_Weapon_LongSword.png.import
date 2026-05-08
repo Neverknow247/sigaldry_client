@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dym8hi4uuhi5d"
-path="res://.godot/imported/Icon_Weapon_LongSword.png-49b5a39fd3e9f14bd1b4c3b43e46a20b.ctex"
+path="res://godot/imported/Icon_Weapon_LongSword.png-49b5a39fd3e9f14bd1b4c3b43e46a20b.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/art/icons/Icon_Weapon_LongSword.png"
-dest_files=["res://.godot/imported/Icon_Weapon_LongSword.png-49b5a39fd3e9f14bd1b4c3b43e46a20b.ctex"]
+dest_files=["res://godot/imported/Icon_Weapon_LongSword.png-49b5a39fd3e9f14bd1b4c3b43e46a20b.ctex"]
 
 [params]
 

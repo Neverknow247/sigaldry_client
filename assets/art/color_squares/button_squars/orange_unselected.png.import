@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c3o8gtkya5u3c"
-path="res://.godot/imported/orange_unselected.png-6b60f90f4d9ea6eacba8b97266ebe225.ctex"
+path="res://godot/imported/orange_unselected.png-6b60f90f4d9ea6eacba8b97266ebe225.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/art/color_squares/button_squars/orange_unselected.png"
-dest_files=["res://.godot/imported/orange_unselected.png-6b60f90f4d9ea6eacba8b97266ebe225.ctex"]
+dest_files=["res://godot/imported/orange_unselected.png-6b60f90f4d9ea6eacba8b97266ebe225.ctex"]
 
 [params]
 

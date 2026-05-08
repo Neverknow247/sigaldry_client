@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ialrjircakum"
-path="res://.godot/imported/pve_2.png-e1e703e56f9b6351b9ecae83b707ea0c.ctex"
+path="res://godot/imported/pve_2.png-e1e703e56f9b6351b9ecae83b707ea0c.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/art/hud_icons/pve_2.png"
-dest_files=["res://.godot/imported/pve_2.png-e1e703e56f9b6351b9ecae83b707ea0c.ctex"]
+dest_files=["res://godot/imported/pve_2.png-e1e703e56f9b6351b9ecae83b707ea0c.ctex"]
 
 [params]
 
