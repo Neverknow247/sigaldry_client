@@ -345,6 +345,8 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 		"join-game":
 			#print(payload["id"])
 			game_screen.join_game(payload)
+		"card-played":
+			print(payload)
 		"update-players":
 			#print(payload)
 			game_screen.update_players(payload)
@@ -355,6 +357,7 @@ func on_socket_event(event_name: String, payload: Variant, _name_space):
 				print(i)
 			print(payload["my_avatar_id"])
 		"update-tile":
+			print(payload)
 			game_screen.update_tile(payload)
 		"show-action":
 			game_screen.show_action(payload)

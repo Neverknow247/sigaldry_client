@@ -14,14 +14,14 @@ signal get_info(data)
 
 @onready var side_panel_background = $side_panel/side_panel_background
 @onready var game = $side_panel/side_tabs/Game
-@onready var card_view = $"side_panel/side_tabs/Card View"
+#@onready var card_view = $"side_panel/side_tabs/Card View"
 @onready var log_visuals = $side_panel/side_tabs/Log
 
 @onready var battlefield = $battlefield
 
 @onready var side_tabs = $side_panel/side_tabs
 
-@onready var card_view_card = $"side_panel/side_tabs/Card View/card_view_card"
+#@onready var card_view_card = $"side_panel/side_tabs/Card View/card_view_card"
 
 @onready var log_container = $side_panel/side_tabs/Log/ScrollContainer/log_container
 @onready var first_log = $side_panel/side_tabs/Log/ScrollContainer/log_container/first_log
@@ -52,6 +52,7 @@ signal get_info(data)
 
 var card_view_id = ""
 
+var known_units := {}
 var battlefield_data = null
 var click_hover = false
 #var card_middle = Vector2(128,176)
@@ -92,6 +93,19 @@ var effect_popup_playing := false
 var last_known_unit_positions := {}
 var known_unit_abilities := {}
 var recently_shown_effect_keys := {}
+
+var hover_card_popup = null
+var hover_card_popup_unit_id := ""
+var hover_card_requested_unit_id := ""
+var hover_card_requested_pos := Vector2.ZERO
+var hover_card_delay_seconds := 10.35
+var hover_hide_delay_seconds := 0.15
+var hover_token := 0
+var hover_source_rect := Rect2()
+var hover_unit_mouse_over := false
+var hover_popup_mouse_over := false
+var hover_card_pinned := false
+var hover_card_pinned_unit_id := ""
 
 var my_avatar_id := ""
 var active_card_popups: Array = []
@@ -139,7 +153,7 @@ func _process(delta):
 func set_color_backgrounds():
 	side_panel_background.color = stats.background_color
 	game.color = stats.background_color
-	card_view.color = stats.background_color
+	#card_view.color = stats.background_color
 	log_visuals.color = stats.background_color
 
 func join_game(payload):
@@ -160,15 +174,20 @@ func join_game(payload):
 		#grid_space.connect("get_info",_on_card_get_info)
 		grid_space["unit_select_button"].connect("pressed",_on_card_select_pressed)
 		grid_space.connect("mouse_focus",_on_card_select_mouse_focus)
+		if not grid_space.unit_hover_started.is_connected(_on_unit_hover_started):
+			grid_space.unit_hover_started.connect(_on_unit_hover_started)
+		if not grid_space.unit_hover_ended.is_connected(_on_unit_hover_ended):
+			grid_space.unit_hover_ended.connect(_on_unit_hover_ended)
 		if not grid_space.target_preview_started.is_connected(_on_target_preview_started):
 			grid_space.target_preview_started.connect(_on_target_preview_started)
 		if not grid_space.target_preview_ended.is_connected(_on_target_preview_ended):
 			grid_space.target_preview_ended.connect(_on_target_preview_ended)
-		
+		if not grid_space.unit_right_clicked.is_connected(_on_unit_right_clicked):
+			grid_space.unit_right_clicked.connect(_on_unit_right_clicked)
 
 @warning_ignore("unused_parameter")
 func quit_game(payload):
-	card_view_card.hide()
+	#card_view_card.hide()
 	card_view_id = ""
 	shown_played_card_popups.clear()
 	known_occupants.clear()
@@ -194,12 +213,13 @@ func quit_game(payload):
 			grid_space.disconnect("mouse_focus",_on_card_select_mouse_focus)
 
 func update_unit(payload):
+	known_units[str(payload["unit"]["id"])] = payload["unit"].duplicate(true)
 	var unit = payload["unit"]
 	var unit_id := str(unit["id"])
 	_queue_unit_stat_change_popups(unit)
 	known_unit_abilities[unit_id] = unit["abilities"].duplicate(true)
-	if str(unit["id"]) == card_view_id:
-		card_view_card.add_details(unit, true)
+	#if str(unit["id"]) == card_view_id:
+		#card_view_card.add_details(unit, true)
 	battlefield.update_unit(payload)
 
 #func update_unit(payload):
@@ -351,16 +371,12 @@ func update_players(payload):
 		new_card.define_scale(3)
 		new_card.add_details(unit)
 		new_card.card_button_type = "game_type"
-		
 		new_card["source_type"] = "card"
 		new_card["type"] = "game_type"
 		new_card.connect("game_select_card",_on_card_select_pressed)
 		new_card.connect("mouse_focus",_on_card_select_mouse_focus)
-		new_card.connect("get_info",_on_card_get_info)
-
-		
+		#new_card.connect("get_info",_on_card_get_info)
 		#new_card["card_select"].connect("pressed",_on_card_select_pressed)
-		
 		card_number+=1
 		if card_number == hand_width:
 			new_card.last_card  = true
@@ -383,6 +399,7 @@ func update_players(payload):
 func update_tile(payload):
 	var tile = payload["tile"]
 	if tile["occupied"] and tile.has("occupant"):
+		known_units[str(tile["occupant"]["id"])] = tile["occupant"].duplicate(true)
 		var tile_id = str(tile["id"])
 		var new_occupant_id = str(tile["occupant"]["id"])
 		last_known_unit_positions[new_occupant_id] = {
@@ -443,14 +460,34 @@ func on_focus(_focus):
 var start_curve_point
 var focused_card = 0
 var focused_type = ""
-func _on_card_select_mouse_focus(_pos,_focus,_id,_focused_type):
-	if not Input.is_action_pressed("M1") && click_hover == false:
-		on_focus(_focus)
-		if _focus:
-			start_curve_point = _pos
-			focused_card = _id
-			focused_type = _focused_type
 
+#func _on_card_select_mouse_focus(_pos,_focus,_id,_focused_type):
+	#if not Input.is_action_pressed("M1") && click_hover == false:
+		#on_focus(_focus)
+		#if _focus:
+			#start_curve_point = _pos
+			#focused_card = _id
+			#focused_type = _focused_type
+
+func _on_card_select_mouse_focus(_pos, _focus, _id, _focused_type):
+	if Input.is_action_pressed("M1") or click_hover:
+		return
+	on_focus(_focus)
+	if _focus:
+		start_curve_point = _pos
+		focused_card = _id
+		focused_type = _focused_type
+		#if _focused_type == "unit":
+			#get_info.emit({
+				#"type": "unit",
+				#"id": str(_id)
+			#})
+	else:
+		if _focused_type == "unit":
+			hide_hover_unit_card_popup(str(_id))
+
+		focused_card = null
+		focused_type = ""
 func _on_card_select_pressed():
 	#print("source_id: ", focused_card)
 	if not picked_up:
@@ -664,16 +701,13 @@ func choose_target(payload):
 
 func _on_target_preview_started(target_payload: Dictionary) -> void:
 	clear_target_preview()
-
 	for affected in target_payload.get("affected", []):
 		var affected_id := str(affected.get("id", ""))
-
 		for row in battlefield["grid"]:
 			for col in row:
 				if affected_id == str(col.occupant_id) or affected_id == str(col.tile_id):
 					col.preview_affected_result(affected)
 					previewed_grid_spaces.append(col)
-
 
 func _on_target_preview_ended() -> void:
 	clear_target_preview()
@@ -683,6 +717,69 @@ func clear_target_preview() -> void:
 		if is_instance_valid(col):
 			col.clear_affected_preview()
 	previewed_grid_spaces.clear()
+
+func _on_unit_right_clicked(_pos: Vector2, unit_id) -> void:
+	var id := str(unit_id)
+
+	if not known_units.has(id):
+		return
+
+	if hover_card_pinned and hover_card_pinned_unit_id == id:
+		hover_card_pinned = false
+		hover_card_pinned_unit_id = ""
+		hide_hover_unit_card_popup()
+		force_hide_hover_unit_card_popup()
+		return
+
+	hover_card_pinned = true
+	hover_card_pinned_unit_id = id
+	show_hover_unit_card_popup(id, _pos)
+
+func _on_unit_hover_started(_pos: Vector2, unit_id) -> void:
+	var id := str(unit_id)
+
+	if not known_units.has(id):
+		return
+
+	hover_token += 1
+	var my_token := hover_token
+
+	hover_card_requested_unit_id = id
+	hover_card_requested_pos = _pos
+	hover_source_rect = Rect2(_pos - Vector2(127, 137), Vector2(254, 274))
+
+	await get_tree().create_timer(hover_card_delay_seconds).timeout
+
+	if my_token != hover_token:
+		return
+
+	if hover_card_requested_unit_id != id:
+		return
+
+	show_hover_unit_card_popup(id, _pos)
+
+func _on_unit_hover_ended(unit_id) -> void:
+	hover_card_requested_unit_id = ""
+
+	await get_tree().create_timer(0.35).timeout
+
+	if _is_mouse_over_hover_area():
+		return
+
+	hover_token += 1
+	hide_hover_unit_card_popup()
+
+func _is_mouse_over_hover_area() -> bool:
+	var mouse_pos := get_global_mouse_position()
+
+	if hover_source_rect.has_point(mouse_pos):
+		return true
+
+	if is_instance_valid(hover_card_popup):
+		if hover_card_popup.get_global_rect().has_point(mouse_pos):
+			return true
+
+	return false
 
 func show_action(payload):
 	combat_action_path.curve = Curve2D.new()
@@ -732,24 +829,107 @@ func _on_combat_action_timer_timeout():
 	combat_action_line.clear_points()
 
 func _on_card_get_info(data):
-	#print("*************************")
 	if str(data["id"]) == card_view_id:
 		card_view_id = ""
 		side_tabs.current_tab = 0
 		return
 	get_info.emit(data)
 
-func info_request(payload):
-	card_view_card.show()
-	card_view_id = str(payload["def"]["id"])
-	#print(payload)
-	if payload["def"]:
-		card_view_card.add_details(payload["def"])
-	side_tabs.current_tab = 1
+#func info_request(payload):
+	#card_view_card.show()
+	#card_view_id = str(payload["def"]["id"])
+	##print(payload)
+	#if payload["def"]:
+		#card_view_card.add_details(payload["def"])
+	#side_tabs.current_tab = 1
 
 func _on_side_tabs_tab_clicked(tab):
 	pass
 	#card_view_id = ""
+
+func _show_hover_unit_card_popup_after_delay(unit_id: String, hover_pos: Vector2) -> void:
+	await get_tree().create_timer(hover_card_delay_seconds).timeout
+	if hover_card_requested_unit_id != unit_id:
+		return
+	if not known_units.has(unit_id):
+		return
+	show_hover_unit_card_popup(unit_id, hover_pos)
+
+func show_hover_unit_card_popup(unit_id: String, hover_pos: Vector2) -> void:
+	if hover_card_popup_unit_id == unit_id and is_instance_valid(hover_card_popup):
+		return
+	hide_hover_unit_card_popup()
+	if not known_units.has(unit_id):
+		return
+	var popup_card = CARD_SCENE.instantiate()
+	#popup_card.gui_input.connect(func(event: InputEvent):
+		#if event is InputEventMouseButton:
+			#if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+				#force_hide_hover_unit_card_popup()
+	#)
+	card_popup_layer.add_child(popup_card)
+	hover_card_popup = popup_card
+	hover_card_popup_unit_id = unit_id
+	#popup_card.mouse_entered.connect(func():
+		#hover_popup_mouse_over = true
+	#)
+	#popup_card.mouse_exited.connect(func():
+		#hover_popup_mouse_over = false
+		#_try_hide_hover_popup_after_delay(unit_id)
+	#)
+	popup_card.define_scale(4)
+	popup_card.add_details(known_units[unit_id], true)
+	#_add_right_click_close_overlay(popup_card)
+	#_connect_right_click_close_to_tree(popup_card)
+	# Do NOT ignore mouse here. We want card text / links/buttons to work.
+	_make_control_tree_ignore_mouse(popup_card)
+	_enable_hover_card_text_mouse(popup_card)
+	_connect_right_click_close_to_tree(popup_card)
+	popup_card.z_index = 1000
+	popup_card.modulate.a = 0.0
+	#popup_card.global_position = hover_pos + Vector2(40, -260)
+	popup_card.global_position = _get_hover_card_popup_position(hover_pos)
+	var tween := create_tween()
+	tween.tween_property(popup_card, "modulate:a", 1.0, 0.12)
+
+func _try_hide_hover_popup_after_delay(unit_id: String) -> void:
+	await get_tree().create_timer(hover_hide_delay_seconds).timeout
+	if hover_unit_mouse_over:
+		return
+	if hover_popup_mouse_over:
+		return
+	hide_hover_unit_card_popup(unit_id)
+
+func hide_hover_unit_card_popup(unit_id := "") -> void:
+	if hover_card_pinned:
+		return
+
+	if is_instance_valid(hover_card_popup):
+		hover_card_popup.queue_free()
+
+	hover_card_popup = null
+	hover_card_popup_unit_id = ""
+
+func force_hide_hover_unit_card_popup() -> void:
+	if is_instance_valid(hover_card_popup):
+		hover_card_popup.queue_free()
+
+	hover_card_popup = null
+	hover_card_popup_unit_id = ""
+	hover_card_pinned = false
+	hover_card_pinned_unit_id = ""
+
+func _get_hover_card_popup_position(hover_pos: Vector2) -> Vector2:
+	var popup_size := Vector2(326.4, 448)
+	var popup_pos := hover_pos + Vector2(180, -280)
+	var viewport_size := get_viewport_rect().size
+	if popup_pos.x + popup_size.x > viewport_size.x:
+		popup_pos.x = hover_pos.x - popup_size.x - 180
+	if popup_pos.y < 0:
+		popup_pos.y = 20
+	if popup_pos.y + popup_size.y > viewport_size.y:
+		popup_pos.y = viewport_size.y - popup_size.y - 20
+	return popup_pos
 
 func show_played_card_popup(card_data: Dictionary, played_by_me: bool) -> void:
 	if card_data.is_empty():
@@ -766,7 +946,8 @@ func show_played_card_popup(card_data: Dictionary, played_by_me: bool) -> void:
 	popup_card.add_details(card_data, card_data.has("card"))
 	popup_card.position = Vector2.ZERO
 	popup_card.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_make_control_tree_ignore_mouse(popup_card)
+	#_make_control_tree_ignore_mouse(popup_card)
+	popup_card.mouse_filter = Control.MOUSE_FILTER_PASS
 	popup_card.modulate.a = 0.0
 	active_card_popups.append(popup_card)
 	var tween := create_tween()
@@ -817,6 +998,13 @@ func _make_control_tree_ignore_mouse(node: Node) -> void:
 		node.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	for child in node.get_children():
 		_make_control_tree_ignore_mouse(child)
+
+func _enable_hover_card_text_mouse(node: Node) -> void:
+	if node is RichTextLabel:
+		node.mouse_filter = Control.MOUSE_FILTER_STOP
+
+	for child in node.get_children():
+		_enable_hover_card_text_mouse(child)
 
 func _get_tile_global_position_by_tile_id(tile_id: String) -> Vector2:
 	for row in battlefield["grid"]:
@@ -904,3 +1092,27 @@ func _get_combat_log_arg_name(arg) -> String:
 func _clear_recent_effect_key_later(effect_key: String) -> void:
 	await get_tree().create_timer(2.0).timeout
 	recently_shown_effect_keys.erase(effect_key)
+
+func _connect_right_click_close_to_tree(node: Node) -> void:
+	if node is Control:
+		node.mouse_filter = Control.MOUSE_FILTER_PASS
+		node.gui_input.connect(func(event: InputEvent):
+			if event is InputEventMouseButton:
+				if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+					force_hide_hover_unit_card_popup()
+		)
+	for child in node.get_children():
+		_connect_right_click_close_to_tree(child)
+
+func _add_right_click_close_overlay(popup_card: Control) -> void:
+	var close_overlay := Control.new()
+	close_overlay.name = "right_click_close_overlay"
+	close_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
+	close_overlay.z_index = 999
+	close_overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
+	popup_card.add_child(close_overlay)
+	close_overlay.gui_input.connect(func(event: InputEvent):
+		if event is InputEventMouseButton:
+			if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+				force_hide_hover_unit_card_popup()
+	)

@@ -63,6 +63,9 @@ signal target_preview_ended
 
 signal tile_chosen(id)
 signal mouse_focus(_pos,_focus,card_id,type)
+signal unit_hover_started(_pos, unit_id)
+signal unit_hover_ended(unit_id)
+signal unit_right_clicked(_pos, unit_id)
 #signal get_info(data)
 
 #func _ready() -> void:
@@ -74,12 +77,17 @@ func _ready() -> void:
 	set_up_grayscale_array()
 	apply_gray_shader()
 	set_grayscale(false)
+	if not unit_select_button.gui_input.is_connected(_on_unit_select_button_gui_input):
+		unit_select_button.gui_input.connect(_on_unit_select_button_gui_input)
 
 	if not unit_button.mouse_entered.is_connected(_on_unit_button_mouse_entered):
 		unit_button.mouse_entered.connect(_on_unit_button_mouse_entered)
-
 	if not unit_button.mouse_exited.is_connected(_on_unit_button_mouse_exited):
 		unit_button.mouse_exited.connect(_on_unit_button_mouse_exited)
+	if not unit_content.mouse_entered.is_connected(_on_unit_content_mouse_entered):
+		unit_content.mouse_entered.connect(_on_unit_content_mouse_entered)
+	if not unit_content.mouse_exited.is_connected(_on_unit_content_mouse_exited):
+		unit_content.mouse_exited.connect(_on_unit_content_mouse_exited)
 
 func set_target_payload(payload: Dictionary) -> void:
 	target_payload = payload
@@ -382,3 +390,19 @@ func _on_unit_texture_mouse_entered() -> void:
 func _on_unit_texture_mouse_exited() -> void:
 	#unit_select_button.show()
 	return
+
+func _on_unit_content_mouse_entered() -> void:
+	if not occupied:
+		return
+	unit_hover_started.emit(global_position + Vector2(127, 137), unit_id)
+
+func _on_unit_content_mouse_exited() -> void:
+	if not occupied:
+		return
+	unit_hover_ended.emit(unit_id)
+
+func _on_unit_select_button_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+			if occupied:
+				unit_right_clicked.emit(global_position + Vector2(127, 137), unit_id)

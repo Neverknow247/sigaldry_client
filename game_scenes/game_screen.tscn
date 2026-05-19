@@ -318,6 +318,30 @@ offset_top = 64.0
 grow_horizontal = 0
 grow_vertical = 2
 
+[node name="Card View" type="ColorRect" parent="side_panel" unique_id=1821217038]
+visible = false
+layout_mode = 0
+color = Color(0.290196, 0.478431, 0.588235, 1)
+
+[node name="_card_view_card" parent="side_panel/Card View" unique_id=1876602667 instance=ExtResource("11_tqtnu")]
+visible = false
+layout_mode = 0
+offset_left = 29.0
+offset_top = 159.0
+offset_right = 285.0
+offset_bottom = 511.0
+scale = Vector2(2, 2)
+
+[node name="card_view_card" parent="side_panel/Card View" unique_id=147166601 instance=ExtResource("12_nliwj")]
+visible = false
+layout_mode = 1
+offset_left = 16.0
+offset_top = 142.0
+offset_right = -554.0
+offset_bottom = 182.0
+scale = Vector2(0.65, 0.65)
+last_card = true
+
 [node name="side_panel_background" type="ColorRect" parent="side_panel" unique_id=1333859955]
 layout_mode = 1
 anchors_preset = 15
@@ -510,36 +534,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 52
 text = "0"
 
-[node name="Card View" type="ColorRect" parent="side_panel/side_tabs" unique_id=1821217038]
-visible = false
-layout_mode = 2
-color = Color(0.290196, 0.478431, 0.588235, 1)
-metadata/_tab_index = 1
-
-[node name="_card_view_card" parent="side_panel/side_tabs/Card View" unique_id=1876602667 instance=ExtResource("11_tqtnu")]
-visible = false
-layout_mode = 0
-offset_left = 29.0
-offset_top = 159.0
-offset_right = 285.0
-offset_bottom = 511.0
-scale = Vector2(2, 2)
-
-[node name="card_view_card" parent="side_panel/side_tabs/Card View" unique_id=147166601 instance=ExtResource("12_nliwj")]
-visible = false
-layout_mode = 1
-offset_left = 16.0
-offset_top = 142.0
-offset_right = -554.0
-offset_bottom = 182.0
-scale = Vector2(0.65, 0.65)
-last_card = true
-
 [node name="Log" type="ColorRect" parent="side_panel/side_tabs" unique_id=1824884831]
 visible = false
 layout_mode = 2
 color = Color(0.290196, 0.478431, 0.588235, 1)
-metadata/_tab_index = 2
+metadata/_tab_index = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="side_panel/side_tabs/Log" unique_id=912305967]
 layout_mode = 1

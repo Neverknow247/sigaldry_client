@@ -14,7 +14,7 @@ signal select_card(id)
 signal game_select_card()
 signal mouse_focus(_pos,_focus,card_id)
 signal add_avatar_to_new_deck(id)
-signal get_info(data)
+#signal get_info(data)
 signal compare_card(id)
 signal start_edit_card(id)
 
@@ -370,8 +370,9 @@ func _on_card_button_mouse_entered() -> void:
 
 func _on_card_button_mouse_exited() -> void:
 	if card_button_type == "game_type":
-		mouse_focus.emit(center_point.global_position,true,card_id,source_type)
+		mouse_focus.emit(center_point.global_position,false,card_id,source_type)
 
 func _on_card_button_get_info() -> void:
-	if card_button_type == "game_type":
-		get_info.emit({"type":"card","id":card_id})
+	return
+	#if card_button_type == "game_type":
+		#get_info.emit({"type":"card","id":card_id})
