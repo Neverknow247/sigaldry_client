@@ -599,7 +599,7 @@ func _get_change_popup_text(change: Dictionary) -> String:
 		"actions":
 			return ""
 		"strength":
-			return "%s%s ATK" % [sign, _format_effect_number(value)]
+			return "%s%s STR" % [sign, _format_effect_number(value)]
 		_:
 			return "%s%s %s" % [sign, _format_effect_number(value), change_name.capitalize()]
 

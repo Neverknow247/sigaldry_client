@@ -157,6 +157,155 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="control" type="GridContainer" parent="." unique_id=212959113]
+visible = false
+layout_mode = 0
+offset_left = 504.0
+offset_top = 64.0
+offset_right = 1376.0
+offset_bottom = 1076.0
+columns = 5
+
+[node name="card" parent="control" unique_id=832416852 instance=ExtResource("12_nliwj")]
+custom_minimum_size = Vector2(170, 250)
+layout_mode = 2
+
+[node name="content" parent="control/card" index="1" unique_id=1635455196]
+scale = Vector2(0.21, 0.21)
+
+[node name="card18" parent="control" unique_id=1630474188 instance=ExtResource("12_nliwj")]
+custom_minimum_size = Vector2(170, 250)
+layout_mode = 2
+
+[node name="content" parent="control/card18" index="1" unique_id=1635455196]
+scale = Vector2(0.21, 0.21)
+
+[node name="card19" parent="control" unique_id=459558172 instance=ExtResource("12_nliwj")]
+custom_minimum_size = Vector2(170, 250)
+layout_mode = 2
+
+[node name="content" parent="control/card19" index="1" unique_id=1635455196]
+scale = Vector2(0.21, 0.21)
+
+[node name="card20" parent="control" unique_id=858835154 instance=ExtResource("12_nliwj")]
+custom_minimum_size = Vector2(170, 250)
+layout_mode = 2
+
+[node name="content" parent="control/card20" index="1" unique_id=1635455196]
+scale = Vector2(0.21, 0.21)
+
+[node name="card2" parent="control" unique_id=2099477895 instance=ExtResource("12_nliwj")]
+custom_minimum_size = Vector2(170, 250)
+layout_mode = 2
+
+[node name="content" parent="control/card2" index="1" unique_id=1635455196]
+scale = Vector2(0.21, 0.21)
+
+[node name="card3" parent="control" unique_id=1612853825 instance=ExtResource("12_nliwj")]
+custom_minimum_size = Vector2(170, 250)
+layout_mode = 2
+
+[node name="content" parent="control/card3" index="1" unique_id=1635455196]
+scale = Vector2(0.21, 0.21)
+
+[node name="card4" parent="control" unique_id=2114438432 instance=ExtResource("12_nliwj")]
+custom_minimum_size = Vector2(170, 250)
+layout_mode = 2
+
+[node name="content" parent="control/card4" index="1" unique_id=1635455196]
+scale = Vector2(0.21, 0.21)
+
+[node name="card5" parent="control" unique_id=70573985 instance=ExtResource("12_nliwj")]
+custom_minimum_size = Vector2(170, 250)
+layout_mode = 2
+
+[node name="content" parent="control/card5" index="1" unique_id=1635455196]
+scale = Vector2(0.21, 0.21)
+
+[node name="card6" parent="control" unique_id=1423903139 instance=ExtResource("12_nliwj")]
+custom_minimum_size = Vector2(170, 250)
+layout_mode = 2
+
+[node name="content" parent="control/card6" index="1" unique_id=1635455196]
+scale = Vector2(0.21, 0.21)
+
+[node name="card7" parent="control" unique_id=1693598461 instance=ExtResource("12_nliwj")]
+custom_minimum_size = Vector2(170, 250)
+layout_mode = 2
+
+[node name="content" parent="control/card7" index="1" unique_id=1635455196]
+scale = Vector2(0.21, 0.21)
+
+[node name="card8" parent="control" unique_id=2146226268 instance=ExtResource("12_nliwj")]
+custom_minimum_size = Vector2(170, 250)
+layout_mode = 2
+
+[node name="content" parent="control/card8" index="1" unique_id=1635455196]
+scale = Vector2(0.21, 0.21)
+
+[node name="card9" parent="control" unique_id=1880765797 instance=ExtResource("12_nliwj")]
+custom_minimum_size = Vector2(170, 250)
+layout_mode = 2
+
+[node name="content" parent="control/card9" index="1" unique_id=1635455196]
+scale = Vector2(0.21, 0.21)
+
+[node name="card10" parent="control" unique_id=692849094 instance=ExtResource("12_nliwj")]
+custom_minimum_size = Vector2(170, 250)
+layout_mode = 2
+
+[node name="content" parent="control/card10" index="1" unique_id=1635455196]
+scale = Vector2(0.21, 0.21)
+
+[node name="card11" parent="control" unique_id=1384156777 instance=ExtResource("12_nliwj")]
+custom_minimum_size = Vector2(170, 250)
+layout_mode = 2
+
+[node name="content" parent="control/card11" index="1" unique_id=1635455196]
+scale = Vector2(0.21, 0.21)
+
+[node name="card12" parent="control" unique_id=2006769190 instance=ExtResource("12_nliwj")]
+custom_minimum_size = Vector2(170, 250)
+layout_mode = 2
+
+[node name="content" parent="control/card12" index="1" unique_id=1635455196]
+scale = Vector2(0.21, 0.21)
+
+[node name="card13" parent="control" unique_id=663499218 instance=ExtResource("12_nliwj")]
+custom_minimum_size = Vector2(170, 250)
+layout_mode = 2
+
+[node name="content" parent="control/card13" index="1" unique_id=1635455196]
+scale = Vector2(0.21, 0.21)
+
+[node name="card14" parent="control" unique_id=1714325171 instance=ExtResource("12_nliwj")]
+custom_minimum_size = Vector2(170, 250)
+layout_mode = 2
+
+[node name="content" parent="control/card14" index="1" unique_id=1635455196]
+scale = Vector2(0.21, 0.21)
+
+[node name="card15" parent="control" unique_id=672440478 instance=ExtResource("12_nliwj")]
+custom_minimum_size = Vector2(170, 250)
+layout_mode = 2
+
+[node name="content" parent="control/card15" index="1" unique_id=1635455196]
+scale = Vector2(0.21, 0.21)
+
+[node name="card16" parent="control" unique_id=328649877 instance=ExtResource("12_nliwj")]
+custom_minimum_size = Vector2(170, 250)
+layout_mode = 2
+
+[node name="content" parent="control/card16" index="1" unique_id=1635455196]
+scale = Vector2(0.21, 0.21)
+
+[node name="card17" parent="control" unique_id=1064835448 instance=ExtResource("12_nliwj")]
+custom_minimum_size = Vector2(170, 250)
+layout_mode = 2
+
+[node name="content" parent="control/card17" index="1" unique_id=1635455196]
+scale = Vector2(0.21, 0.21)
+
 [node name="side_panel" type="Control" parent="." unique_id=401471864]
 custom_minimum_size = Vector2(540, 1016)
 layout_mode = 1
@@ -463,14 +612,14 @@ color = Color(1, 0.498039, 0, 1)
 
 [node name="card_popup_layer" type="CanvasLayer" parent="." unique_id=1691031476]
 
-[node name="my_card_popup_anchor" type="HBoxContainer" parent="card_popup_layer" unique_id=1667458419]
+[node name="opponent_card_popup_anchor" type="HBoxContainer" parent="card_popup_layer" unique_id=1667458419]
 offset_left = 40.0
 offset_top = 620.0
 offset_right = 80.0
 offset_bottom = 660.0
 mouse_filter = 2
 
-[node name="opponent_card_popup_anchor" type="HBoxContainer" parent="card_popup_layer" unique_id=1235636439]
+[node name="my_card_popup_anchor" type="HBoxContainer" parent="card_popup_layer" unique_id=1235636439]
 offset_left = 40.0
 offset_top = 104.0
 offset_right = 80.0
@@ -484,3 +633,24 @@ mouse_filter = 2
 [connection signal="pressed" from="side_panel/side_tabs/Game/player_panel/buttons/concede_button" to="." method="_on_concede_button_pressed"]
 [connection signal="timeout" from="card_controller/Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="combat_action_controller/combat_action_timer" to="." method="_on_combat_action_timer_timeout"]
+
+[editable path="control/card"]
+[editable path="control/card18"]
+[editable path="control/card19"]
+[editable path="control/card20"]
+[editable path="control/card2"]
+[editable path="control/card3"]
+[editable path="control/card4"]
+[editable path="control/card5"]
+[editable path="control/card6"]
+[editable path="control/card7"]
+[editable path="control/card8"]
+[editable path="control/card9"]
+[editable path="control/card10"]
+[editable path="control/card11"]
+[editable path="control/card12"]
+[editable path="control/card13"]
+[editable path="control/card14"]
+[editable path="control/card15"]
+[editable path="control/card16"]
+[editable path="control/card17"]
