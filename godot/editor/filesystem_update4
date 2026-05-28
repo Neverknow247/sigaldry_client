@@ -1,3 +1,5 @@
-res://assets/themes/theme.tres
 res://items/log_card_entry.tscn
+res://assets/themes/theme.tres
 res://items/log_card_entry.gd
+res://game_scenes/game_screen.tscn
+res://game_scenes/game_screen.gd

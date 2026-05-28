@@ -2,13 +2,23 @@
 
 [ext_resource type="Script" uid="uid://c0jb56w32wp73" path="res://items/log_card_entry.gd" id="1_2yhpb"]
 
-[node name="log_card_entry" type="HBoxContainer" unique_id=26903548]
+[node name="log_card_entry" type="Button" unique_id=1509220513]
 offset_right = 40.0
 offset_bottom = 40.0
+icon_alignment = 1
 script = ExtResource("1_2yhpb")
 
-[node name="texture_button" type="TextureButton" parent="." unique_id=314002631]
-layout_mode = 2
+[node name="card_thumbnail" type="TextureRect" parent="." unique_id=269057816]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="rich_text_label" type="RichTextLabel" parent="." unique_id=2042749473]
-layout_mode = 2
+[node name="card_name" type="Label" parent="." unique_id=694854341]
+visible = false
+layout_mode = 0
+offset_left = 4.0
+offset_right = 5.0
+offset_bottom = 40.0

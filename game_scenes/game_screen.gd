@@ -7,6 +7,7 @@ var utils = Utils
 
 #const card_preview = preload("res://items/card_preview.tscn")
 const CARD_SCENE = preload("res://items/card.tscn")
+const LOG_CARD_ENTRY_SCENE = preload("res://items/log_card_entry.tscn")
 
 signal end_turn
 signal concede
@@ -77,6 +78,10 @@ var my_turn = true:
 		my_turn = value
 		side_panel_background.color = Color("3f845c") if value else Color("843f5c")
 		game.color = Color("3f845c") if value else Color("843f5c")
+
+var unread_log_count := 0
+var log_tab_index := 1
+var last_logged_turn_avatar_id := ""
 
 signal mouse_released
 #signal picked_up_changed(picked)
@@ -165,6 +170,12 @@ func join_game(payload):
 	for tile in battlefield_data:
 		#print(tile)
 		battlefield.set_grid_space(tile)
+		if tile.get("occupied", false) and tile.has("occupant"):
+			var start_occupant_id := str(tile["occupant"]["id"])
+			known_units[start_occupant_id] = tile["occupant"].duplicate(true)
+
+			known_occupants[str(tile["id"])] = start_occupant_id
+			shown_played_card_popups[start_occupant_id] = true
 		#battlefield.grid[tile["game_y"]][tile["game_x"]].connect("tile_chosen",_set_battle_field_tile)
 		battlefield.grid[tile["display_y"]][tile["display_x"]].connect("tile_chosen",_set_battle_field_tile)
 		
@@ -249,12 +260,27 @@ func update_turn(payload):
 			my_turn = false
 			end_turn_button.text = "Opponent's Turn"
 			end_turn_button.disabled = true
+		_add_turn_log_separator_if_needed(str(payload["active_avatar_id"]))
 	if payload.has("ticks_remaining"):
 		turn_timer_count.text = str(int(payload["ticks_remaining"]))
 		turn_timer_right.max_value = payload["ticks_in_turn"]
 		turn_timer_right.value = payload["ticks_remaining"]
 		turn_timer_left.max_value = payload["ticks_in_turn"]
 		turn_timer_left.value = payload["ticks_remaining"]
+
+func _add_turn_log_separator_if_needed(active_avatar_id: String) -> void:
+	if active_avatar_id == "":
+		return
+	if last_logged_turn_avatar_id == active_avatar_id:
+		return
+	last_logged_turn_avatar_id = active_avatar_id
+	var separator := Label.new()
+	first_log.add_sibling(separator)
+	separator.text = "— Your Turn —" if active_avatar_id == my_avatar_id else "— Opponent's Turn —"
+	separator.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	separator.add_theme_font_size_override("font_size", 18)
+	separator.add_theme_color_override("font_color", Color.WHITE)
+	separator.custom_minimum_size = Vector2(0, 32)
 
 #func add_combat_log(payload):
 	##utils.j_print(payload)
@@ -268,13 +294,113 @@ func update_turn(payload):
 		##print(item)
 
 func add_combat_log(payload):
-	var new_log = preload("res://items/game_log_label.tscn").instantiate()
-	first_log.add_sibling(new_log)
+	var panel := PanelContainer.new()
+	first_log.add_sibling(panel)
+	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	panel.add_theme_stylebox_override("panel", _make_log_panel_style(is_log_from_me(payload)))
+	var row := HBoxContainer.new()
+	panel.add_child(row)
+	row.custom_minimum_size = Vector2(0, 72)
+	row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_theme_constant_override("separation", 8)
+	var text := _format_combat_log_statement(payload)
+	var label := Label.new()
+	label.text = text
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.add_theme_font_size_override("font_size", 24)
+	row.add_child(label)
+	_add_combat_log_card_entries(row, payload)
+	if side_tabs.current_tab != log_tab_index:
+		unread_log_count += 1
+		_update_log_tab_title()
 
-	new_log.bbcode_enabled = true
-	new_log.text = _format_combat_log_statement_clickable(payload)
+func is_log_from_me(payload: Dictionary) -> bool:
+	if payload.has("avatar_id") and my_avatar_id != "":
+		return str(payload["avatar_id"]) == my_avatar_id
+	if payload.has("source") and payload["source"] is Dictionary:
+		var source = payload["source"]
+		if source.has("owner_id"):
+			return str(source["owner_id"]) == my_avatar_id
+		if source.has("avatar_id"):
+			return str(source["avatar_id"]) == my_avatar_id
+	return my_turn
 
-	new_log.meta_clicked.connect(_on_combat_log_meta_clicked)
+func _make_log_panel_style(from_me: bool) -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color("2f6f4f88") if from_me else Color("6f2f4f88")
+	style.corner_radius_top_left = 6
+	style.corner_radius_top_right = 6
+	style.corner_radius_bottom_left = 6
+	style.corner_radius_bottom_right = 6
+	style.content_margin_left = 6
+	style.content_margin_right = 6
+	style.content_margin_top = 4
+	style.content_margin_bottom = 4
+	return style
+
+func _update_log_tab_title() -> void:
+	if unread_log_count > 0:
+		side_tabs.set_tab_title(log_tab_index, "Log (" + str(unread_log_count) + ")")
+	else:
+		side_tabs.set_tab_title(log_tab_index, "Log")
+
+func _build_combat_log_row(row: HBoxContainer, payload: Dictionary) -> String:
+	var statement := str(payload.get("statement", ""))
+	if not payload.has("arguments"):
+		return statement
+	var args: Array = payload["arguments"]
+	for i in range(args.size()):
+		var placeholder := "$" + str(i + 1)
+		var arg = args[i]
+		if arg is Dictionary and _combat_log_arg_has_card(arg):
+			var card_name := _get_combat_log_arg_name(arg)
+			statement = statement.replace(placeholder, card_name)
+			var entry = LOG_CARD_ENTRY_SCENE.instantiate()
+			row.add_child(entry)
+			entry.set_card_data(arg)
+			entry.card_entry_clicked.connect(_on_log_card_entry_clicked)
+		else:
+			statement = statement.replace(placeholder, _get_combat_log_arg_name(arg))
+	return statement
+
+func _add_combat_log_card_entries(row: HBoxContainer, payload: Dictionary) -> void:
+	if not payload.has("arguments"):
+		return
+	for arg in payload["arguments"]:
+		if arg is Dictionary and _combat_log_arg_has_card(arg):
+			var entry = LOG_CARD_ENTRY_SCENE.instantiate()
+			entry.custom_minimum_size = Vector2(48, 48)
+			entry.size_flags_horizontal = Control.SIZE_SHRINK_END
+			row.add_child(entry)
+			entry.set_card_data(arg)
+			entry.card_entry_clicked.connect(_on_log_card_entry_clicked)
+
+func _on_log_card_entry_clicked(card_data: Dictionary) -> void:
+	clear_all_hover_card_popups()
+	var popup_card = CARD_SCENE.instantiate()
+	popup_card.add_to_group("hover_card_popups")
+	card_popup_layer.add_child(popup_card)
+	hover_card_popup = popup_card
+	hover_card_popup_unit_id = str(card_data.get("id", Time.get_ticks_msec()))
+	hover_card_pinned = true
+	hover_card_pinned_unit_id = hover_card_popup_unit_id
+	popup_card.define_scale(4)
+	popup_card.add_details(card_data, card_data.has("card"))
+	popup_card.global_position = log_visuals.global_position + Vector2(-360, 40)
+	popup_card.z_index = 1000
+	_connect_right_click_close_to_tree(popup_card)
+
+#func add_combat_log(payload):
+	#var new_log = preload("res://items/game_log_label.tscn").instantiate()
+	#first_log.add_sibling(new_log)
+#
+	#new_log.bbcode_enabled = true
+	#new_log.text = _format_combat_log_statement_clickable(payload)
+#
+	#new_log.meta_clicked.connect(_on_combat_log_meta_clicked)
 
 func _get_first_combat_log_card_ref(payload: Dictionary) -> String:
 	if not payload.has("arguments"):
@@ -708,7 +834,8 @@ func _play_pending_effects_after_action_line() -> void:
 				#"value": float(change.get("value", 0))
 			#})
 
-func _queue_affected_popup(affected: Dictionary) -> void:
+#func _queue_affected_popup(affected: Dictionary) -> void:
+func _queue_affected_popup(affected: Dictionary, force_show := false) -> void:
 	var affected_id := str(affected.get("id", ""))
 	var popup_position := _find_effect_popup_position(affected)
 	for change in affected.get("changes", []):
@@ -716,7 +843,8 @@ func _queue_affected_popup(affected: Dictionary) -> void:
 		if text == "":
 			continue
 		var effect_key := affected_id + ":" + str(change.get("name", ""))
-		if recently_shown_effect_keys.has(effect_key):
+		#if recently_shown_effect_keys.has(effect_key):
+		if not force_show and recently_shown_effect_keys.has(effect_key):
 			continue
 		recently_shown_effect_keys[effect_key] = true
 		_clear_recent_effect_key_later(effect_key)
@@ -960,8 +1088,10 @@ func show_action(payload):
 	for point in combat_action_path.curve.get_baked_points():
 		combat_action_line.add_point(point)
 	combat_action_timer.start()
+	#if payload.has("affected"):
+		#_play_affected_effects(payload["affected"])
 	if payload.has("affected"):
-		_play_affected_effects(payload["affected"])
+		_play_affected_effects(payload["affected"], true)
 	elif payload["action"] == "play" or payload["action"] == "use":
 		_play_pending_effects_after_action_line()
 
@@ -986,8 +1116,9 @@ func _on_card_get_info(data):
 	#side_tabs.current_tab = 1
 
 func _on_side_tabs_tab_clicked(tab):
-	pass
-	#card_view_id = ""
+	if tab == log_tab_index:
+		unread_log_count = 0
+		_update_log_tab_title()
 
 func _show_hover_unit_card_popup_after_delay(unit_id: String, hover_pos: Vector2) -> void:
 	await get_tree().create_timer(hover_card_delay_seconds).timeout
@@ -1158,15 +1289,25 @@ func _get_tile_global_position_by_tile_id(tile_id: String) -> Vector2:
 				return col.global_position
 	return Vector2.ZERO
 
-func _play_affected_effects(affected_list) -> void:
+func _play_affected_effects(affected_list, force_show := false) -> void:
 	if affected_list is String:
 		affected_list = str_to_var(affected_list)
 	if not affected_list is Array:
 		return
 	await get_tree().create_timer(0.25).timeout
 	for affected in affected_list:
-		_queue_affected_popup(affected)
+		_queue_affected_popup(affected, force_show)
 	_play_effect_popup_queue()
+
+#func _play_affected_effects(affected_list) -> void:
+	#if affected_list is String:
+		#affected_list = str_to_var(affected_list)
+	#if not affected_list is Array:
+		#return
+	#await get_tree().create_timer(0.25).timeout
+	#for affected in affected_list:
+		#_queue_affected_popup(affected)
+	#_play_effect_popup_queue()
 
 func _find_effect_popup_position(affected: Dictionary) -> Vector2:
 	var affected_id := str(affected.get("id", ""))
