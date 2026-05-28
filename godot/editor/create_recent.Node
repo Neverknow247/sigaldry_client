@@ -1,4 +1,6 @@
+RichTextLabel
+TextureButton
+HBoxContainer
 GridContainer
 Control
-HBoxContainer
 CanvasLayer

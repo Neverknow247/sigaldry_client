@@ -93,12 +93,14 @@ var effect_popup_playing := false
 var last_known_unit_positions := {}
 var known_unit_abilities := {}
 var recently_shown_effect_keys := {}
+var combat_log_card_refs := {}
+var combat_log_hover_token := 0
 
 var hover_card_popup = null
 var hover_card_popup_unit_id := ""
 var hover_card_requested_unit_id := ""
 var hover_card_requested_pos := Vector2.ZERO
-var hover_card_delay_seconds := 10.35
+var hover_card_delay_seconds := 0.35
 var hover_hide_delay_seconds := 0.15
 var hover_token := 0
 var hover_source_rect := Rect2()
@@ -268,7 +270,133 @@ func update_turn(payload):
 func add_combat_log(payload):
 	var new_log = preload("res://items/game_log_label.tscn").instantiate()
 	first_log.add_sibling(new_log)
-	new_log.text = _format_combat_log_statement(payload)
+
+	new_log.bbcode_enabled = true
+	new_log.text = _format_combat_log_statement_clickable(payload)
+
+	new_log.meta_clicked.connect(_on_combat_log_meta_clicked)
+
+func _get_first_combat_log_card_ref(payload: Dictionary) -> String:
+	if not payload.has("arguments"):
+		return ""
+
+	var args: Array = payload["arguments"]
+
+	for i in range(args.size()):
+		var arg = args[i]
+
+		if arg is Dictionary and _combat_log_arg_has_card(arg):
+			return "combat_log_card_" + str(payload.get("sequence", Time.get_ticks_msec())) + "_" + str(i)
+
+	return ""
+
+func _on_combat_log_line_hover_started(ref_id: String) -> void:
+	if not combat_log_card_refs.has(ref_id):
+		return
+
+	combat_log_hover_token += 1
+	show_hover_combat_log_card_popup(ref_id)
+
+func _format_combat_log_statement_clickable(payload: Dictionary) -> String:
+	var statement := str(payload.get("statement", ""))
+
+	if not payload.has("arguments"):
+		return statement
+
+	var args: Array = payload["arguments"]
+
+	for i in range(args.size()):
+		var placeholder := "$" + str(i + 1)
+		var arg = args[i]
+		var replacement := _get_combat_log_arg_name(arg)
+
+		if arg is Dictionary and _combat_log_arg_has_card(arg):
+			var ref_id := "combat_log_card_" + str(payload.get("sequence", Time.get_ticks_msec())) + "_" + str(i)
+			combat_log_card_refs[ref_id] = arg.duplicate(true)
+			replacement = "[url=" + ref_id + "]" + replacement + "[/url]"
+
+		statement = statement.replace(placeholder, replacement)
+
+	return statement
+
+func _combat_log_arg_has_card(arg: Dictionary) -> bool:
+	return arg.has("card") or arg.get("type", "") == "card" or arg.get("type", "") == "unit"
+
+
+func _on_combat_log_meta_hover_started(meta) -> void:
+	var ref_id := str(meta)
+
+	if not combat_log_card_refs.has(ref_id):
+		return
+
+	combat_log_hover_token += 1
+	show_hover_combat_log_card_popup(ref_id)
+
+
+func _on_combat_log_meta_hover_ended(meta) -> void:
+	var ref_id := str(meta)
+	var my_token := combat_log_hover_token
+
+	await get_tree().create_timer(0.15).timeout
+
+	if my_token != combat_log_hover_token:
+		return
+
+	if ref_id != hover_card_popup_unit_id:
+		return
+
+	if hover_card_pinned:
+		return
+
+	hide_hover_unit_card_popup()
+
+func _on_combat_log_mouse_exited() -> void:
+	combat_log_hover_token += 1
+	await get_tree().create_timer(0.12).timeout
+	if hover_card_pinned:
+		return
+	hide_hover_unit_card_popup()
+
+func _on_combat_log_meta_clicked(meta) -> void:
+	var ref_id := str(meta)
+
+	if not combat_log_card_refs.has(ref_id):
+		return
+
+	if hover_card_pinned and hover_card_pinned_unit_id == ref_id:
+		clear_all_hover_card_popups()
+		return
+
+	clear_all_hover_card_popups()
+
+	hover_card_pinned = true
+	hover_card_pinned_unit_id = ref_id
+	show_hover_combat_log_card_popup(ref_id)
+
+func show_hover_combat_log_card_popup(ref_id: String) -> void:
+	if hover_card_popup_unit_id == ref_id and is_instance_valid(hover_card_popup):
+		return
+	if not combat_log_card_refs.has(ref_id):
+		return
+
+	#clear_all_hover_card_popups()
+
+	var popup_card = CARD_SCENE.instantiate()
+	popup_card.add_to_group("hover_card_popups")
+	card_popup_layer.add_child(popup_card)
+
+	hover_card_popup = popup_card
+	hover_card_popup_unit_id = ref_id
+
+	var card_data = combat_log_card_refs[ref_id]
+	popup_card.define_scale(4)
+	popup_card.add_details(card_data, card_data.has("card"))
+
+	_make_control_tree_ignore_mouse(popup_card)
+
+	popup_card.z_index = 1000
+	popup_card.modulate.a = 1.0
+	popup_card.global_position = log_visuals.global_position + Vector2(-360, 40)
 
 func update_energy(payload):
 	my_energy.text = str(int(payload["energy"]))
@@ -469,25 +597,40 @@ var focused_type = ""
 			#focused_card = _id
 			#focused_type = _focused_type
 
+#func _on_card_select_mouse_focus(_pos, _focus, _id, _focused_type):
+	#if Input.is_action_pressed("M1") or click_hover:
+		#return
+	#on_focus(_focus)
+	#if _focus:
+		#start_curve_point = _pos
+		#focused_card = _id
+		#focused_type = _focused_type
+		##if _focused_type == "unit":
+			##get_info.emit({
+				##"type": "unit",
+				##"id": str(_id)
+			##})
+	#else:
+		#if _focused_type == "unit":
+			#hide_hover_unit_card_popup(str(_id))
+
+		#focused_card = null
+		#focused_type = ""
+
 func _on_card_select_mouse_focus(_pos, _focus, _id, _focused_type):
 	if Input.is_action_pressed("M1") or click_hover:
 		return
+
 	on_focus(_focus)
+
 	if _focus:
 		start_curve_point = _pos
 		focused_card = _id
 		focused_type = _focused_type
-		#if _focused_type == "unit":
-			#get_info.emit({
-				#"type": "unit",
-				#"id": str(_id)
-			#})
 	else:
-		if _focused_type == "unit":
-			hide_hover_unit_card_popup(str(_id))
-
 		focused_card = null
 		focused_type = ""
+
 func _on_card_select_pressed():
 	#print("source_id: ", focused_card)
 	if not picked_up:
@@ -725,11 +868,10 @@ func _on_unit_right_clicked(_pos: Vector2, unit_id) -> void:
 		return
 
 	if hover_card_pinned and hover_card_pinned_unit_id == id:
-		hover_card_pinned = false
-		hover_card_pinned_unit_id = ""
-		hide_hover_unit_card_popup()
-		force_hide_hover_unit_card_popup()
+		clear_all_hover_card_popups()
 		return
+
+	clear_all_hover_card_popups()
 
 	hover_card_pinned = true
 	hover_card_pinned_unit_id = id
@@ -760,13 +902,13 @@ func _on_unit_hover_started(_pos: Vector2, unit_id) -> void:
 
 func _on_unit_hover_ended(unit_id) -> void:
 	hover_card_requested_unit_id = ""
+	hover_token += 1
 
-	await get_tree().create_timer(0.35).timeout
+	await get_tree().create_timer(hover_hide_delay_seconds).timeout
 
-	if _is_mouse_over_hover_area():
+	if hover_card_pinned:
 		return
 
-	hover_token += 1
 	hide_hover_unit_card_popup()
 
 func _is_mouse_over_hover_area() -> bool:
@@ -858,37 +1000,40 @@ func _show_hover_unit_card_popup_after_delay(unit_id: String, hover_pos: Vector2
 func show_hover_unit_card_popup(unit_id: String, hover_pos: Vector2) -> void:
 	if hover_card_popup_unit_id == unit_id and is_instance_valid(hover_card_popup):
 		return
+
 	hide_hover_unit_card_popup()
+
 	if not known_units.has(unit_id):
 		return
+
 	var popup_card = CARD_SCENE.instantiate()
-	#popup_card.gui_input.connect(func(event: InputEvent):
-		#if event is InputEventMouseButton:
-			#if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-				#force_hide_hover_unit_card_popup()
-	#)
+	popup_card.add_to_group("hover_card_popups")
 	card_popup_layer.add_child(popup_card)
+
 	hover_card_popup = popup_card
 	hover_card_popup_unit_id = unit_id
-	#popup_card.mouse_entered.connect(func():
-		#hover_popup_mouse_over = true
-	#)
-	#popup_card.mouse_exited.connect(func():
-		#hover_popup_mouse_over = false
-		#_try_hide_hover_popup_after_delay(unit_id)
-	#)
+
 	popup_card.define_scale(4)
 	popup_card.add_details(known_units[unit_id], true)
-	#_add_right_click_close_overlay(popup_card)
-	#_connect_right_click_close_to_tree(popup_card)
-	# Do NOT ignore mouse here. We want card text / links/buttons to work.
+
 	_make_control_tree_ignore_mouse(popup_card)
+
+	# Let the card root catch right-clicks anywhere.
+	popup_card.mouse_filter = Control.MOUSE_FILTER_STOP
+
+	# Let rich text still catch/click links.
 	_enable_hover_card_text_mouse(popup_card)
-	_connect_right_click_close_to_tree(popup_card)
+
+	popup_card.gui_input.connect(func(event: InputEvent):
+		if event is InputEventMouseButton:
+			if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+				force_hide_hover_unit_card_popup()
+	)
+
 	popup_card.z_index = 1000
 	popup_card.modulate.a = 0.0
-	#popup_card.global_position = hover_pos + Vector2(40, -260)
 	popup_card.global_position = _get_hover_card_popup_position(hover_pos)
+
 	var tween := create_tween()
 	tween.tween_property(popup_card, "modulate:a", 1.0, 0.12)
 
@@ -1095,24 +1240,34 @@ func _clear_recent_effect_key_later(effect_key: String) -> void:
 
 func _connect_right_click_close_to_tree(node: Node) -> void:
 	if node is Control:
-		node.mouse_filter = Control.MOUSE_FILTER_PASS
 		node.gui_input.connect(func(event: InputEvent):
 			if event is InputEventMouseButton:
 				if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 					force_hide_hover_unit_card_popup()
 		)
+
 	for child in node.get_children():
 		_connect_right_click_close_to_tree(child)
 
-func _add_right_click_close_overlay(popup_card: Control) -> void:
-	var close_overlay := Control.new()
-	close_overlay.name = "right_click_close_overlay"
-	close_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
-	close_overlay.z_index = 999
-	close_overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
-	popup_card.add_child(close_overlay)
-	close_overlay.gui_input.connect(func(event: InputEvent):
-		if event is InputEventMouseButton:
-			if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-				force_hide_hover_unit_card_popup()
-	)
+#func _add_right_click_close_overlay(popup_card: Control) -> void:
+	#var close_overlay := Control.new()
+	#close_overlay.name = "right_click_close_overlay"
+	#close_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
+	#close_overlay.z_index = 999
+	#close_overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
+	#popup_card.add_child(close_overlay)
+	#close_overlay.gui_input.connect(func(event: InputEvent):
+		#if event is InputEventMouseButton:
+			#if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+				#force_hide_hover_unit_card_popup()
+	#)
+
+func clear_all_hover_card_popups() -> void:
+	for popup in get_tree().get_nodes_in_group("hover_card_popups"):
+		if is_instance_valid(popup):
+			popup.queue_free()
+
+	hover_card_popup = null
+	hover_card_popup_unit_id = ""
+	hover_card_pinned = false
+	hover_card_pinned_unit_id = ""

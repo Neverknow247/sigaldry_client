@@ -379,10 +379,12 @@ func edit_theme_graphic(_target):
 			unit_button_color.color = unfriendly_color
 
 func _on_unit_select_button_mouse_entered() -> void:
-	mouse_focus.emit(global_position+Vector2(127,137),true,unit_id,source_type)
+	mouse_focus.emit(global_position + Vector2(127,137), true, unit_id, source_type)
+	unit_hover_started.emit(global_position + Vector2(127,137), unit_id)
 
 func _on_unit_select_button_mouse_exited() -> void:
-	mouse_focus.emit(global_position+Vector2(127,137),false,unit_id,source_type)
+	mouse_focus.emit(global_position + Vector2(127,137), false, unit_id, source_type)
+	unit_hover_ended.emit(unit_id)
 
 func _on_unit_texture_mouse_entered() -> void:
 	unit_select_button.show()
