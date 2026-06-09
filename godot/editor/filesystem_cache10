@@ -1,5 +1,5 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1780588872
+::res://::1781019334
 deck_editor.gd::GDScript::7957966250916716211::1749439276::0::1::::<>Control<><>0<>0<><>::
 deck_editor.tscn::PackedScene::3316717512536265948::1753209946::0::1::::<><><>0<>0<><>::uid://cgjvtmk54s78p::::res://assets/themes/theme.tres<>uid://dlm5sn7kebv7x::::res://deck_editor.gd<>uid://cdhredoprpsoi::::res://assets/art/card_template.png<>uid://c4ndy0nfdsb0b::::res://items/card_preview.gd<>uid://b2vvtmi4jxkl5::::res://assets/fonts/fantasque-sans-mono.bold.otf<>uid://cu1b5sje7w6kb::::res://items/game_card_select_ui.gd
 export_presets.cfg::TextFile::-1::1774985050::0::1::::<><><>0<>0<><>::
@@ -369,13 +369,13 @@ c3bea4cc-f922-38d8-3511-f5605ed37431.png::CompressedTexture2D::38791792422879664
 cf7a18b5-233c-b808-ed60-e5ac0cc3deaf.png::CompressedTexture2D::9189035215140342482::1756903994::1774974141::1::::<><><>0<>0<>e3ac89baf6a403924695a1a7b5d5d0d5<>res://godot/imported/cf7a18b5-233c-b808-ed60-e5ac0cc3deaf.png-dc945bec37848890d861b66012d9fdaf.ctex::
 ee1b4a39-51ce-414f-2ac5-e336e2ae50c9.png::CompressedTexture2D::2570702193331151092::1756928707::1774974141::1::::<><><>0<>0<>3bc6c4925e84e78afc1d95583f4bc006<>res://godot/imported/ee1b4a39-51ce-414f-2ac5-e336e2ae50c9.png-a146e66ff189a5367f147d039da17156.ctex::
 ffeecfbe-9a7f-4d31-53a0-ae1f31d24f82.png::CompressedTexture2D::7410392139105191832::1756837848::1774974141::1::::<><><>0<>0<>bd63c25a8c8cb8ca904f9b60d1fca6ee<>res://godot/imported/ffeecfbe-9a7f-4d31-53a0-ae1f31d24f82.png-a67ef66876b5505a04efe02cb4140071.ctex::
-::res://assets/themes/::1779991292
+::res://assets/themes/::1780589553
 card_theme.tres::Theme::4139360896103006528::1744577824::0::1::::<><><>0<>0<><>::uid://c30qxhuiee44b::::res://assets/fonts/OpenSans-Bold.ttf
 grid_space_button_theme.tres::StyleBoxFlat::4058081185090670617::1740910600::0::1::::<><><>0<>0<><>::
 grid_space_friendly_theme.tres::StyleBoxFlat::6277185556119865669::1740911204::0::1::::<><><>0<>0<><>::
 grid_space_move_theme.tres::StyleBoxFlat::5902089561511524044::1740911182::0::1::::<><><>0<>0<><>::
 grid_space_unfriendly_theme.tres::StyleBoxFlat::8204081484443287756::1740911296::0::1::::<><><>0<>0<><>::
-theme.tres::Theme::5213863463064031121::1779991292::0::1::::<><><>0<>0<><>::
+theme.tres::Theme::5213863463064031121::1780589553::0::1::::<><><>0<>0<><>::
 ::res://card_builder_scenes/::1774972258
 active_component.gd::GDScript::2605437515773025746::1768530401::0::1::::<>Control<><>0<>0<><>::
 active_component.tscn::PackedScene::8716635516939399471::1742026706::0::1::::<><><>0<>0<><>::uid://bdedf7tcjjve5::::res://card_builder_scenes/active_component.gd
@@ -418,7 +418,7 @@ editor_select_screen.gd::GDScript::5799435773099543532::1768772938::0::1::::<>Co
 editor_select_screen.tscn::PackedScene::3995998044720647151::1768772939::0::1::::<><><>0<>0<><>::uid://covj4iarvf0we::::res://editor_screens/editor_select_screen.gd<>uid://da2he7y1i6ncx::::res://assets/art/card_art/BG_2.png<>uid://bmwdg326j2t78::::res://assets/art/buttons/deck_editor_button.png<>uid://u2rro53kbq01::::res://assets/art/buttons/card_editor_button.png<>uid://d0122advdbudr::::res://assets/art/buttons/card_fusion_button.png
 fusion_screen.gd::GDScript::7688292934324379925::1772573945::0::1::::<>Control<><>0<>0<><>::
 fusion_screen.tscn::PackedScene::7791467009184016518::1772573945::0::1::::<><><>0<>0<><>::uid://dhsjcc6qpku3n::::res://editor_screens/fusion_screen.gd<>uid://cgjvtmk54s78p::::res://assets/themes/theme.tres<>uid://di0881y716irt::::res://items/card.tscn<>uid://bvpkms040biif::::res://assets/art/card/card-back.png
-::res://game_scenes/::1779993810
+::res://game_scenes/::1780594981
 battlefield.gd::GDScript::4209944894645127768::1766469339::0::1::::<>TextureRect<><>0<>0<><>::
 battlefield_unit.gd::GDScript::4354556141369999464::1740898858::0::1::::<>TextureRect<><>0<>0<><>::
 card_select_screen.gd::GDScript::2788617201786823621::1766463513::0::1::::<>Control<><>0<>0<><>::
@@ -432,8 +432,8 @@ game_effect_queue.gd::GDScript::1964198354218171951::1752603032::0::1::::<>Contr
 game_effect_queue.tscn::PackedScene::3918056768736005397::1753209868::0::1::::<><><>0<>0<><>::uid://cgjvtmk54s78p::::res://assets/themes/theme.tres<>uid://28qcbjeue6l4::::res://game_scenes/game_effect_queue.gd
 game_finished_screen.gd::GDScript::1000107020204061103::1757180904::0::1::::<>Control<><>0<>0<><>::
 game_finished_screen.tscn::PackedScene::5103485117239481767::1763540134::0::1::::<><><>0<>0<><>::uid://cgjvtmk54s78p::::res://assets/themes/theme.tres<>uid://oipu7xehsvtv::::res://game_scenes/game_finished_screen.gd<>uid://urgkw5d0kikx::::res://items/card_preview.tscn<>uid://di0881y716irt::::res://items/card.tscn
-game_screen.gd::GDScript::7870717973052008810::1779993810::0::1::::<>Control<><>0<>0<><>::
-game_screen.tscn::PackedScene::4274335534271616376::1779993786::0::1::::<><><>0<>0<><>::uid://dkevts2lkrjpa::::res://game_scenes/game_screen.gd<>uid://cgjvtmk54s78p::::res://assets/themes/theme.tres<>uid://b08lga87axavw::::res://game_scenes/battlefield.gd<>uid://bu8c2odv7254p::::res://assets/art/tiles/battlefield_3.png<>uid://bnrivi82xph37::::res://game_scenes/unit.tscn<>uid://dr66ml401d1xq::::res://assets/art/icons/cards_in_hand_icon.png<>uid://5twys1t716cj::::res://assets/art/game_timer_black.png<>uid://bb7rw6dflntj6::::res://assets/art/icons/cards_in_deck_icon.png<>uid://4u7lkx0cpuoc::::res://assets/art/icons/victory_point_icon.png<>uid://biy1cfbxa2174::::res://assets/art/icons/energy_icon_white.png<>uid://urgkw5d0kikx::::res://items/card_preview.tscn<>uid://di0881y716irt::::res://items/card.tscn
+game_screen.gd::GDScript::7870717973052008810::1780594981::0::1::::<>Control<><>0<>0<><>::
+game_screen.tscn::PackedScene::4274335534271616376::1780590735::0::1::::<><><>0<>0<><>::uid://dkevts2lkrjpa::::res://game_scenes/game_screen.gd<>uid://cgjvtmk54s78p::::res://assets/themes/theme.tres<>uid://b08lga87axavw::::res://game_scenes/battlefield.gd<>uid://bu8c2odv7254p::::res://assets/art/tiles/battlefield_3.png<>uid://bnrivi82xph37::::res://game_scenes/unit.tscn<>uid://dr66ml401d1xq::::res://assets/art/icons/cards_in_hand_icon.png<>uid://5twys1t716cj::::res://assets/art/game_timer_black.png<>uid://bb7rw6dflntj6::::res://assets/art/icons/cards_in_deck_icon.png<>uid://4u7lkx0cpuoc::::res://assets/art/icons/victory_point_icon.png<>uid://biy1cfbxa2174::::res://assets/art/icons/energy_icon_white.png<>uid://urgkw5d0kikx::::res://items/card_preview.tscn<>uid://di0881y716irt::::res://items/card.tscn
 game_unit.gd::GDScript::1347505239459226540::1758731425::0::1::::<>CenterContainer<><>0<>0<><>::
 game_unit.tscn::PackedScene::3822487598618142016::1758828097::0::1::::<><><>0<>0<><>::uid://tg0hj4une88w::::res://game_scenes/game_unit.gd
 grid_space.gd::GDScript::8153130114234493869::1763492174::0::1::::<>CenterContainer<><>0<>0<><>::
@@ -443,7 +443,7 @@ unit.gd::GDScript::7001294901948370325::1779212484::0::1::::<>Control<><>0<>0<><
 unit.tscn::PackedScene::3334493782844110460::1779212484::0::1::::<><><>0<>0<><>::uid://by8ew0t4rulwy::::res://assets/themes/card_theme.tres<>uid://c60qkltwaql8h::::res://game_scenes/unit.gd<>uid://lvc545bqs6wt::::res://assets/missing-images/none-unit.png<>uid://b2pxo6km7g63r::::res://assets/art/card/banners/horizontal-1.png<>uid://ccv7iplw4tjl4::::res://assets/art/card/unit.png<>uid://dox67g4boq7vc::::res://assets/art/card/badges/large v3/circle.png<>uid://bkbaxxgcpbpmx::::res://assets/art/card/badges/small/circle.png<>uid://k3paya1hewit::::res://assets/art/card/2d icons/sword.png<>uid://dowmuxfgoe5dx::::res://assets/art/card/2d icons/heart.png<>uid://8b66omd77r0f::::res://assets/fonts/alegreya/Alegreya-Medium.ttf<>uid://c32o87n2oxwbt::::res://assets/fonts/alegreya/Alegreya-Regular.ttf<>uid://cfi00ok31jiiu::::res://assets/fonts/alegreya/Alegreya-BoldItalic.ttf<>uid://cjg26hsv3itq1::::res://assets/fonts/alegreya/Alegreya-Bold.ttf<>uid://1r0q2ej4jgmk::::res://assets/fonts/outfit/Outfit-Regular.ttf<>uid://bd3bjcsi7ogrh::::res://assets/fonts/alegreya/Alegreya-Italic.ttf<>uid://b6alpq4r15r5s::::res://assets/fonts/alegreya/Alegreya-Black.ttf<>uid://vf2i7rdlod8c::::res://assets/fonts/outfit/Outfit-Bold.ttf<>uid://bs3sddjowfnua::::res://items/card_rich_effects.gd<>uid://c6atm047bxlm8::::res://assets/art/card/badges/large v3/square.png<>uid://bo131wlyta2r3::::res://assets/art/icons/Icon_Armor_Crown.png
 waiting_for_game_screen.gd::GDScript::298552699513903089::1743917074::0::1::::<>Control<><>0<>0<><>::
 waiting_for_game_screen.tscn::PackedScene::1928022533576541747::1763540012::0::1::::<><><>0<>0<><>::uid://eiveb7u41d3n::::res://game_scenes/waiting_for_game_screen.gd<>uid://cgjvtmk54s78p::::res://assets/themes/theme.tres
-::res://items/::1779993016
+::res://items/::1780595032
 are_you_sure_popup.gd::GDScript::5424969917658345994::1768598094::0::1::::<>Popup<><>0<>0<><>::
 are_you_sure_popup.tscn::PackedScene::5514392071510142122::1773780538::0::1::::<><><>0<>0<><>::uid://cjj5pyak2xd0e::::res://items/are_you_sure_popup.gd<>uid://cgjvtmk54s78p::::res://assets/themes/theme.tres
 card.gd::GDScript::6125045889281848234::1779206402::0::1::::<>Control<><>0<>0<><>::
@@ -460,8 +460,8 @@ color_profile_square_large.tscn::PackedScene::2210171482817344152::1746041134::0
 component_shape_grid.gd::GDScript::9093134054869466471::1749491234::0::1::::<>Control<><>0<>0<><>::
 game_card_select_ui.gd::GDScript::6230407312111264961::1752507668::0::1::::<>ColorRect<><>0<>0<><>::
 game_log_label.tscn::PackedScene::8705657795600655180::1779214258::0::1::::<><><>0<>0<><>::
-log_card_entry.gd::GDScript::6546257812452170744::1779992937::0::1::::<>Button<><>0<>0<><>::
-log_card_entry.tscn::PackedScene::7387122505340665214::1779993016::0::1::::<><><>0<>0<><>::uid://c0jb56w32wp73::::res://items/log_card_entry.gd
+log_card_entry.gd::GDScript::6546257812452170744::1780590573::0::1::::<>Button<><>0<>0<><>::
+log_card_entry.tscn::PackedScene::7387122505340665214::1780595032::0::1::::<><><>0<>0<><>::uid://c0jb56w32wp73::::res://items/log_card_entry.gd
 magnitude_square.gd::GDScript::5855686339288886663::1746040756::0::1::::<>ColorRect<><>0<>0<><>::
 magnitude_square.tscn::PackedScene::2240668732610075795::1749439386::0::1::::<><><>0<>0<><>::uid://cposkfbrymnpv::::res://items/magnitude_square.gd
 plus_one_icon.tscn::PackedScene::5889433887614002561::1742026706::0::1::::<><><>0<>0<><>::uid://bhrmlh15tdkew::::res://assets/art/plus_one.png

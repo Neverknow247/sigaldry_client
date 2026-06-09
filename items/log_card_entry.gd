@@ -1,11 +1,29 @@
 extends Button
 
 signal card_entry_clicked(card_data)
+signal card_entry_hover_started(card_data)
+signal card_entry_hover_ended
+signal card_entry_right_clicked(card_data)
 
 @onready var card_thumbnail: TextureRect = $card_thumbnail
 @onready var card_name: Label = $card_name
 
 var card_data := {}
+
+func _ready() -> void:
+	mouse_entered.connect(func():
+		if not card_data.is_empty():
+			card_entry_hover_started.emit(card_data)
+	)
+	mouse_exited.connect(func():
+		card_entry_hover_ended.emit()
+	)
+	gui_input.connect(func(event: InputEvent):
+		if event is InputEventMouseButton:
+			if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+				if not card_data.is_empty():
+					card_entry_right_clicked.emit(card_data)
+	)
 
 func set_card_data(data: Dictionary) -> void:
 	custom_minimum_size = Vector2(72, 72)

@@ -113,6 +113,8 @@ var hover_unit_mouse_over := false
 var hover_popup_mouse_over := false
 var hover_card_pinned := false
 var hover_card_pinned_unit_id := ""
+var log_card_hover_token := 0
+var recent_tile_popup_positions := {}
 
 var my_avatar_id := ""
 var active_card_popups: Array = []
@@ -144,10 +146,6 @@ func _process(delta):
 		path_2d.curve.clear_points()
 		path_2d.curve.add_point(start_curve_point,Vector2.ZERO, out0)
 		path_2d.curve.add_point(get_global_mouse_position(),in1,Vector2.ZERO)
-		#path_2d.curve.set_point_position(1,get_local_mouse_position())
-		#path_2d.curve.set_point_in(1,(Vector2(get_local_mouse_position().x-1000,get_local_mouse_position().y)/2)*-1)
-		#path_2d.curve.set_point_in(1,(Vector2(get_local_mouse_position().x,get_local_mouse_position().y)))
-		#path_2d.curve.set_point_in(1,Vector2(get_local_mouse_position().x,(get_local_mouse_position().y-card_middle.y)/2)*-1)
 		_draw_line()
 	if Input.is_action_just_released("M1"):
 		mouse_released.emit()
@@ -229,23 +227,14 @@ func update_unit(payload):
 	known_units[str(payload["unit"]["id"])] = payload["unit"].duplicate(true)
 	var unit = payload["unit"]
 	var unit_id := str(unit["id"])
-	_queue_unit_stat_change_popups(unit)
+	if recent_tile_popup_positions.has(unit_id):
+		_queue_unit_stat_change_popups(unit, recent_tile_popup_positions[unit_id])
+	else:
+		_queue_unit_stat_change_popups(unit)
 	known_unit_abilities[unit_id] = unit["abilities"].duplicate(true)
 	#if str(unit["id"]) == card_view_id:
 		#card_view_card.add_details(unit, true)
 	battlefield.update_unit(payload)
-
-#func update_unit(payload):
-	##print("unit selected: ", card_view_id)
-	##print("update unit: ",payload)
-	##print("here")
-	##print(str(payload["unit"]["id"]),":",card_view_id)
-	#if str(payload["unit"]["id"]) == card_view_id:
-		#card_view_card.add_details(payload["unit"],true)
-		##update_card_view(payload["unit"])
-	##print("update unit: ",payload["unit"]["x"])
-	#battlefield.update_unit(payload)
-	#pass
 
 func update_turn(payload):
 	if payload.has("my_avatar_id"):
@@ -281,17 +270,6 @@ func _add_turn_log_separator_if_needed(active_avatar_id: String) -> void:
 	separator.add_theme_font_size_override("font_size", 18)
 	separator.add_theme_color_override("font_color", Color.WHITE)
 	separator.custom_minimum_size = Vector2(0, 32)
-
-#func add_combat_log(payload):
-	##utils.j_print(payload)
-	#var new_log = preload("res://items/game_log_label.tscn").instantiate()
-	#first_log.add_sibling(new_log)
-	#new_log.text = payload["statement"]
-	##print("add combat log: ")
-	##print("add combat log: ",payload["arguments"])
-	##print("argument size: ",payload["arguments"].size())
-	##for item in payload["arguments"]:
-		##print(item)
 
 func add_combat_log(payload):
 	var panel := PanelContainer.new()
@@ -377,103 +355,80 @@ func _add_combat_log_card_entries(row: HBoxContainer, payload: Dictionary) -> vo
 			row.add_child(entry)
 			entry.set_card_data(arg)
 			entry.card_entry_clicked.connect(_on_log_card_entry_clicked)
+			entry.card_entry_hover_started.connect(_on_log_card_entry_hover_started)
+			entry.card_entry_hover_ended.connect(_on_log_card_entry_hover_ended)
+			entry.card_entry_right_clicked.connect(_on_log_card_entry_right_clicked)
 
 func _on_log_card_entry_clicked(card_data: Dictionary) -> void:
-	clear_all_hover_card_popups()
-	var popup_card = CARD_SCENE.instantiate()
-	popup_card.add_to_group("hover_card_popups")
-	card_popup_layer.add_child(popup_card)
-	hover_card_popup = popup_card
-	hover_card_popup_unit_id = str(card_data.get("id", Time.get_ticks_msec()))
-	hover_card_pinned = true
-	hover_card_pinned_unit_id = hover_card_popup_unit_id
-	popup_card.define_scale(4)
-	popup_card.add_details(card_data, card_data.has("card"))
-	popup_card.global_position = log_visuals.global_position + Vector2(-360, 40)
-	popup_card.z_index = 1000
-	_connect_right_click_close_to_tree(popup_card)
+	_on_log_card_entry_right_clicked(card_data)
 
-#func add_combat_log(payload):
-	#var new_log = preload("res://items/game_log_label.tscn").instantiate()
-	#first_log.add_sibling(new_log)
-#
-	#new_log.bbcode_enabled = true
-	#new_log.text = _format_combat_log_statement_clickable(payload)
-#
-	#new_log.meta_clicked.connect(_on_combat_log_meta_clicked)
+#func _on_log_card_entry_clicked(card_data: Dictionary) -> void:
+	#clear_all_hover_card_popups()
+	#var popup_card = CARD_SCENE.instantiate()
+	#popup_card.add_to_group("hover_card_popups")
+	#card_popup_layer.add_child(popup_card)
+	#hover_card_popup = popup_card
+	#hover_card_popup_unit_id = str(card_data.get("id", Time.get_ticks_msec()))
+	#hover_card_pinned = true
+	#hover_card_pinned_unit_id = hover_card_popup_unit_id
+	#popup_card.define_scale(4)
+	#popup_card.add_details(card_data, card_data.has("card"))
+	#popup_card.global_position = log_visuals.global_position + Vector2(-360, 40)
+	#popup_card.z_index = 1000
+	#_connect_right_click_close_to_tree(popup_card)
 
 func _get_first_combat_log_card_ref(payload: Dictionary) -> String:
 	if not payload.has("arguments"):
 		return ""
-
 	var args: Array = payload["arguments"]
-
 	for i in range(args.size()):
 		var arg = args[i]
-
 		if arg is Dictionary and _combat_log_arg_has_card(arg):
 			return "combat_log_card_" + str(payload.get("sequence", Time.get_ticks_msec())) + "_" + str(i)
-
 	return ""
 
 func _on_combat_log_line_hover_started(ref_id: String) -> void:
 	if not combat_log_card_refs.has(ref_id):
 		return
-
 	combat_log_hover_token += 1
 	show_hover_combat_log_card_popup(ref_id)
 
 func _format_combat_log_statement_clickable(payload: Dictionary) -> String:
 	var statement := str(payload.get("statement", ""))
-
 	if not payload.has("arguments"):
 		return statement
-
 	var args: Array = payload["arguments"]
-
 	for i in range(args.size()):
 		var placeholder := "$" + str(i + 1)
 		var arg = args[i]
 		var replacement := _get_combat_log_arg_name(arg)
-
 		if arg is Dictionary and _combat_log_arg_has_card(arg):
 			var ref_id := "combat_log_card_" + str(payload.get("sequence", Time.get_ticks_msec())) + "_" + str(i)
 			combat_log_card_refs[ref_id] = arg.duplicate(true)
 			replacement = "[url=" + ref_id + "]" + replacement + "[/url]"
-
 		statement = statement.replace(placeholder, replacement)
-
 	return statement
 
 func _combat_log_arg_has_card(arg: Dictionary) -> bool:
 	return arg.has("card") or arg.get("type", "") == "card" or arg.get("type", "") == "unit"
 
-
 func _on_combat_log_meta_hover_started(meta) -> void:
 	var ref_id := str(meta)
-
 	if not combat_log_card_refs.has(ref_id):
 		return
-
 	combat_log_hover_token += 1
 	show_hover_combat_log_card_popup(ref_id)
-
 
 func _on_combat_log_meta_hover_ended(meta) -> void:
 	var ref_id := str(meta)
 	var my_token := combat_log_hover_token
-
 	await get_tree().create_timer(0.15).timeout
-
 	if my_token != combat_log_hover_token:
 		return
-
 	if ref_id != hover_card_popup_unit_id:
 		return
-
 	if hover_card_pinned:
 		return
-
 	hide_hover_unit_card_popup()
 
 func _on_combat_log_mouse_exited() -> void:
@@ -485,16 +440,12 @@ func _on_combat_log_mouse_exited() -> void:
 
 func _on_combat_log_meta_clicked(meta) -> void:
 	var ref_id := str(meta)
-
 	if not combat_log_card_refs.has(ref_id):
 		return
-
 	if hover_card_pinned and hover_card_pinned_unit_id == ref_id:
 		clear_all_hover_card_popups()
 		return
-
 	clear_all_hover_card_popups()
-
 	hover_card_pinned = true
 	hover_card_pinned_unit_id = ref_id
 	show_hover_combat_log_card_popup(ref_id)
@@ -527,71 +478,6 @@ func show_hover_combat_log_card_popup(ref_id: String) -> void:
 func update_energy(payload):
 	my_energy.text = str(int(payload["energy"]))
 	enemy_energy.text = str(int(payload["opponent_energy"]))
-
-#func update_players(payload):
-	##print(payload)
-	#for key in payload:
-		#print(key)
-	#my_deck_size.text = str(int(payload["my_deck_size"]))
-	#enemy_deck_size.text = str(int(payload["opponent_deck_size"]))
-	#my_hand_size.text = str(int(payload["my_hand_size"]))
-	#enemy_hand_size.text = str(int(payload["opponent_hand_size"]))
-	#my_energy.text = str(int(payload["my_energy"]))
-	#enemy_energy.text = str(int(payload["opponent_energy"]))
-	##my_victory_points.text = str(int(payload["my_victory_points"]))
-	##enemy_victory_points.text = str(int(payload["opponent_victory_points"]))
-	#var hand_width = 2
-	#var card_number = 0
-	#var row_node
-	#for child in hand.get_children():
-		#hand.remove_child(child)
-		#child.queue_free()
-	#for unit in payload["my_hand"]:
-		#print("******************")
-		#print("Card: ",unit)
-		#print("******************")
-		#if card_number == 0:
-			#row_node = HBoxContainer.new()
-			#hand.add_child(row_node)
-			#row_node.alignment = BoxContainer.ALIGNMENT_CENTER
-			#row_node.add_theme_constant_override("separation",10)
-		#var new_card = card_preview.instantiate()
-		#row_node.add_child(new_card)
-		#new_card["card_name"].text = unit["name"]
-		#new_card["card_id"] = unit["id"]
-		#new_card["source_type"] = "card"
-		##print("hand unit id",unit["id"])
-		#new_card["card_type"].text = unit["subtype"].capitalize()
-		#new_card["type"] = "game_type"
-		#new_card["card_select"].connect("pressed",_on_card_select_pressed)
-		#new_card.connect("mouse_focus",_on_card_select_mouse_focus)
-		#new_card.connect("get_info",_on_card_get_info)
-		#var card_effect_text = ""
-		#var _discount = 0
-		#for ability in unit["abilities"]:
-			##print(ability)
-			#if unit["abilities"][ability]["name"] == "health":
-				#new_card["card_health"].text = str(int(unit["abilities"][ability]["value"]))
-			#elif unit["abilities"][ability]["name"] == "attack":
-				#new_card["card_attack"].text = str(int(unit["abilities"][ability]["value"]))
-			#elif unit["abilities"][ability]["name"] == "actions":
-				#pass
-			#elif unit["abilities"][ability]["name"] == "efficient":
-				#_discount = unit["abilities"][ability]["value"]
-			#elif unit["abilities"][ability]["value"] > 0:
-				#card_effect_text += unit["abilities"][ability]["name"].capitalize() + "-" + str(int(unit["abilities"][ability]["value"])) + " "
-		#new_card["card_effects"].text = card_effect_text
-		#new_card["card_price"].text = str(int(unit["cost"]))
-		#card_number+=1
-		#if card_number == hand_width:
-			#card_number = 0
-
-	#var new_card = CARD_SCENE.instantiate()
-	#container.add_child(new_card)
-	#new_card.define_scale(3)
-	#new_card.add_details(card)
-	#new_card.card_button_type = "select"
-	#new_card.connect("select_card",select_card)
 
 func update_players(payload):
 	#print(payload)
@@ -636,30 +522,23 @@ func update_players(payload):
 			new_card.last_card  = true
 			card_number = 0
 
-#func update_tile(payload):
-	##print("update tile: ",payload)
-	#battlefield.update_grid_space(payload)
-	#
-	#if payload["action"] == "play":
-		#if payload.has("card"):
-			#show_played_card_popup(payload["card"], is_card_played_by_me(payload))
-		#elif payload.has("unit") and payload["unit"].has("card"):
-			#show_played_card_popup(payload["unit"]["card"], is_card_played_by_me(payload))
-	##for tile in payload["tile"]:
-		##print(tile)
-		##battlefield.update_grid_space(tile)
-	##pass
-
 func update_tile(payload):
 	var tile = payload["tile"]
 	if tile["occupied"] and tile.has("occupant"):
-		known_units[str(tile["occupant"]["id"])] = tile["occupant"].duplicate(true)
-		var tile_id = str(tile["id"])
-		var new_occupant_id = str(tile["occupant"]["id"])
-		last_known_unit_positions[new_occupant_id] = {
+		var tile_id := str(tile["id"])
+		var occupant = tile["occupant"]
+		var occupant_id := str(occupant["id"])
+		var tile_popup_position := _get_tile_popup_position_from_payload(tile)
+		recent_tile_popup_positions[occupant_id] = tile_popup_position
+		_clear_recent_tile_popup_position_later(occupant_id)
+		last_known_unit_positions[occupant_id] = {
 			"global_position": _get_tile_global_position_by_tile_id(tile_id),
 			"tile_id": tile_id
 		}
+		_queue_unit_stat_change_popups(occupant, tile_popup_position)
+		known_unit_abilities[occupant_id] = occupant["abilities"].duplicate(true)
+		known_units[occupant_id] = occupant.duplicate(true)
+		var new_occupant_id = occupant_id
 		var is_new_unit_on_tile := false
 		if not known_occupants.has(tile_id):
 			is_new_unit_on_tile = true
@@ -675,6 +554,9 @@ func update_tile(payload):
 		known_occupants.erase(str(tile["id"]))
 	battlefield.update_grid_space(payload)
 
+func _clear_recent_tile_popup_position_later(unit_id: String) -> void:
+	await get_tree().create_timer(0.75).timeout
+	recent_tile_popup_positions.erase(unit_id)
 
 func _on_end_turn_button_pressed():
 	end_turn.emit()
@@ -714,34 +596,6 @@ func on_focus(_focus):
 var start_curve_point
 var focused_card = 0
 var focused_type = ""
-
-#func _on_card_select_mouse_focus(_pos,_focus,_id,_focused_type):
-	#if not Input.is_action_pressed("M1") && click_hover == false:
-		#on_focus(_focus)
-		#if _focus:
-			#start_curve_point = _pos
-			#focused_card = _id
-			#focused_type = _focused_type
-
-#func _on_card_select_mouse_focus(_pos, _focus, _id, _focused_type):
-	#if Input.is_action_pressed("M1") or click_hover:
-		#return
-	#on_focus(_focus)
-	#if _focus:
-		#start_curve_point = _pos
-		#focused_card = _id
-		#focused_type = _focused_type
-		##if _focused_type == "unit":
-			##get_info.emit({
-				##"type": "unit",
-				##"id": str(_id)
-			##})
-	#else:
-		#if _focused_type == "unit":
-			#hide_hover_unit_card_popup(str(_id))
-
-		#focused_card = null
-		#focused_type = ""
 
 func _on_card_select_mouse_focus(_pos, _focus, _id, _focused_type):
 	if Input.is_action_pressed("M1") or click_hover:
@@ -809,7 +663,12 @@ func _capture_pending_effects_for_target(target_id) -> void:
 				if col.has_method("get") and col.get("target_payload") != null:
 					var target_payload = col.get("target_payload")
 					if target_payload is Dictionary and target_payload.has("affected"):
-						pending_effects_from_selected_target = target_payload["affected"].duplicate(true)
+						var effects = target_payload["affected"].duplicate(true)
+						var popup_pos = col.global_position + Vector2(80, 60)
+						for affected in effects:
+							if affected is Dictionary:
+								affected["popup_position"] = popup_pos
+						pending_effects_from_selected_target = effects
 				return
 
 func _play_pending_effects_after_action_line() -> void:
@@ -819,22 +678,9 @@ func _play_pending_effects_after_action_line() -> void:
 	pending_effects_from_selected_target.clear()
 	await get_tree().create_timer(0.25).timeout
 	for affected in effects_to_play:
-		_queue_affected_popup(affected)
+		_queue_affected_popup(affected, true)
 	_play_effect_popup_queue()
 
-#func _queue_affected_popup(affected: Dictionary) -> void:
-	#var affected_id := str(affected.get("id", ""))
-	#var popup_position := _find_effect_popup_position(affected)
-	#for change in affected.get("changes", []):
-		#var text := _get_change_popup_text(change)
-		#if text != "":
-			#effect_popup_queue.append({
-				#"position": popup_position,
-				#"text": text,
-				#"value": float(change.get("value", 0))
-			#})
-
-#func _queue_affected_popup(affected: Dictionary) -> void:
 func _queue_affected_popup(affected: Dictionary, force_show := false) -> void:
 	var affected_id := str(affected.get("id", ""))
 	var popup_position := _find_effect_popup_position(affected)
@@ -926,30 +772,6 @@ func set_grid_buttons_visible(_visible):
 		for column in row:
 			column.unit_button.visible = _visible
 			column.disable_button(true)
-
-#func choose_target(payload):
-	#if payload.has("valid_targets"):
-		#var valid_targets = str_to_var(payload["valid_targets"])
-		#for row in battlefield["grid"]:
-			#for col in row:
-				#col.disable_button(true)
-				#for target in valid_targets:
-					#if target["id"]==col["tile_id"]:
-						#col.target_type = "tile"
-					#if target["id"]==col["occupant_id"]:
-						#col.target_type = "unit"
-					#if target["id"]==col["tile_id"] || target["id"]==col["occupant_id"]:
-						##enable grid button and apply graphic
-						#col.disable_button(false)
-						#col.edit_theme_graphic(target)
-						##print("valid_target: ", target["id"])
-	##print(payload)
-	#pass
-
-# Action Example
-#{ "action": "use", "source_type": "unit", "source_id": "e5025867-c211-bbe9-a382-545baa1ad614",
-#"dest_type": "unit", "dest_id": "cee40ccd-5585-8941-2953-199cc53e5465", "disposition": "unfriendly",
-#"sequence": 138.0 }
 
 func choose_target(payload):
 	clear_target_preview()
@@ -1092,7 +914,7 @@ func show_action(payload):
 		#_play_affected_effects(payload["affected"])
 	if payload.has("affected"):
 		_play_affected_effects(payload["affected"], true)
-	elif payload["action"] == "play" or payload["action"] == "use":
+	elif payload["action"] == "play" or payload["action"] == "use" or payload["action"] == "move":
 		_play_pending_effects_after_action_line()
 
 func _on_combat_action_timer_timeout():
@@ -1106,14 +928,6 @@ func _on_card_get_info(data):
 		side_tabs.current_tab = 0
 		return
 	get_info.emit(data)
-
-#func info_request(payload):
-	#card_view_card.show()
-	#card_view_id = str(payload["def"]["id"])
-	##print(payload)
-	#if payload["def"]:
-		#card_view_card.add_details(payload["def"])
-	#side_tabs.current_tab = 1
 
 func _on_side_tabs_tab_clicked(tab):
 	if tab == log_tab_index:
@@ -1299,32 +1113,38 @@ func _play_affected_effects(affected_list, force_show := false) -> void:
 		_queue_affected_popup(affected, force_show)
 	_play_effect_popup_queue()
 
-#func _play_affected_effects(affected_list) -> void:
-	#if affected_list is String:
-		#affected_list = str_to_var(affected_list)
-	#if not affected_list is Array:
-		#return
-	#await get_tree().create_timer(0.25).timeout
-	#for affected in affected_list:
-		#_queue_affected_popup(affected)
-	#_play_effect_popup_queue()
-
 func _find_effect_popup_position(affected: Dictionary) -> Vector2:
+	if affected.has("popup_position"):
+		return affected["popup_position"]
 	var affected_id := str(affected.get("id", ""))
+	if recent_tile_popup_positions.has(affected_id):
+		return recent_tile_popup_positions[affected_id]
+	if last_known_unit_positions.has(affected_id):
+		return last_known_unit_positions[affected_id]["global_position"] + Vector2(80, 60)
 	for row in battlefield["grid"]:
 		for col in row:
 			if affected_id == str(col.occupant_id) or affected_id == str(col.tile_id):
 				return col.global_position + Vector2(80, 60)
-	if last_known_unit_positions.has(affected_id):
-		return last_known_unit_positions[affected_id]["global_position"] + Vector2(80, 60)
-	if affected.has("x") and affected.has("y"):
-		for row in battlefield["grid"]:
-			for col in row:
-				if int(col.get("x")) == int(affected["x"]) and int(col.get("y")) == int(affected["y"]):
-					return col.global_position + Vector2(80, 60)
 	return Vector2(960, 540)
 
-func _queue_unit_stat_change_popups(unit: Dictionary) -> void:
+#func _find_effect_popup_position(affected: Dictionary) -> Vector2:
+	#if affected.has("popup_position"):
+		#return affected["popup_position"]
+	#var affected_id := str(affected.get("id", ""))
+	#for row in battlefield["grid"]:
+		#for col in row:
+			#if affected_id == str(col.occupant_id) or affected_id == str(col.tile_id):
+				#return col.global_position + Vector2(80, 60)
+	#if last_known_unit_positions.has(affected_id):
+		#return last_known_unit_positions[affected_id]["global_position"] + Vector2(80, 60)
+	#if affected.has("x") and affected.has("y"):
+		#for row in battlefield["grid"]:
+			#for col in row:
+				#if int(col.get("x")) == int(affected["x"]) and int(col.get("y")) == int(affected["y"]):
+					#return col.global_position + Vector2(80, 60)
+	#return Vector2(960, 540)
+
+func _queue_unit_stat_change_popups(unit: Dictionary, popup_position_override = null) -> void:
 	var unit_id := str(unit["id"])
 	if not known_unit_abilities.has(unit_id):
 		known_unit_abilities[unit_id] = unit["abilities"].duplicate(true)
@@ -1345,12 +1165,15 @@ func _queue_unit_stat_change_popups(unit: Dictionary) -> void:
 			"name": str(new_ability.get("name", "")),
 			"value": diff
 		}
-		_queue_affected_popup({
+		var affected := {
 			"id": unit_id,
 			"x": unit.get("x", null),
 			"y": unit.get("y", null),
 			"changes": [fake_change]
-		})
+		}
+		if popup_position_override != null:
+			affected["popup_position"] = popup_position_override
+		_queue_affected_popup(affected)
 	_play_effect_popup_queue()
 
 func _format_combat_log_statement(payload: Dictionary) -> String:
@@ -1386,29 +1209,69 @@ func _connect_right_click_close_to_tree(node: Node) -> void:
 				if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 					force_hide_hover_unit_card_popup()
 		)
-
 	for child in node.get_children():
 		_connect_right_click_close_to_tree(child)
-
-#func _add_right_click_close_overlay(popup_card: Control) -> void:
-	#var close_overlay := Control.new()
-	#close_overlay.name = "right_click_close_overlay"
-	#close_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
-	#close_overlay.z_index = 999
-	#close_overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
-	#popup_card.add_child(close_overlay)
-	#close_overlay.gui_input.connect(func(event: InputEvent):
-		#if event is InputEventMouseButton:
-			#if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-				#force_hide_hover_unit_card_popup()
-	#)
 
 func clear_all_hover_card_popups() -> void:
 	for popup in get_tree().get_nodes_in_group("hover_card_popups"):
 		if is_instance_valid(popup):
 			popup.queue_free()
-
 	hover_card_popup = null
 	hover_card_popup_unit_id = ""
 	hover_card_pinned = false
 	hover_card_pinned_unit_id = ""
+
+func _on_log_card_entry_hover_started(card_data: Dictionary) -> void:
+	if hover_card_pinned:
+		return
+	log_card_hover_token += 1
+	var my_token := log_card_hover_token
+	await get_tree().create_timer(hover_card_delay_seconds).timeout
+	if my_token != log_card_hover_token:
+		return
+	if hover_card_pinned:
+		return
+	show_log_card_popup(card_data, false)
+
+func _on_log_card_entry_hover_ended() -> void:
+	log_card_hover_token += 1
+	await get_tree().create_timer(hover_hide_delay_seconds).timeout
+	if hover_card_pinned:
+		return
+	hide_hover_unit_card_popup()
+
+func _on_log_card_entry_right_clicked(card_data: Dictionary) -> void:
+	var popup_id := str(card_data.get("id", card_data.get("name", "")))
+	if hover_card_pinned and hover_card_pinned_unit_id == popup_id:
+		clear_all_hover_card_popups()
+		return
+	clear_all_hover_card_popups()
+	hover_card_pinned = true
+	hover_card_pinned_unit_id = popup_id
+	show_log_card_popup(card_data, true)
+
+func show_log_card_popup(card_data: Dictionary, pinned := false) -> void:
+	var popup_card = CARD_SCENE.instantiate()
+	popup_card.add_to_group("hover_card_popups")
+	card_popup_layer.add_child(popup_card)
+	var popup_id := str(card_data.get("id", card_data.get("name", Time.get_ticks_msec())))
+	hover_card_popup = popup_card
+	hover_card_popup_unit_id = popup_id
+	hover_card_pinned = pinned
+	hover_card_pinned_unit_id = popup_id if pinned else ""
+	popup_card.define_scale(4)
+	popup_card.add_details(card_data, card_data.has("card"))
+	popup_card.mouse_filter = Control.MOUSE_FILTER_STOP
+	popup_card.z_index = 1000
+	popup_card.global_position = log_visuals.global_position + Vector2(-360, 40)
+	_connect_right_click_close_to_tree(popup_card)
+
+func _get_tile_popup_position_from_payload(tile: Dictionary) -> Vector2:
+	for row in battlefield["grid"]:
+		for col in row:
+			if str(col.tile_id) == str(tile.get("id", "")):
+				return col.global_position + Vector2(80, 60)
+			if tile.has("display_x") and tile.has("display_y"):
+				if int(col.get("display_x")) == int(tile["display_x"]) and int(col.get("display_y")) == int(tile["display_y"]):
+					return col.global_position + Vector2(80, 60)
+	return Vector2(960, 540)
