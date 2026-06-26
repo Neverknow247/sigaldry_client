@@ -1,5 +1,6 @@
 extends Control
 
+var sounds = Sounds
 var stats = Stats
 var utils = Utils
 
@@ -263,34 +264,45 @@ func format_number_with_commas(number: int) -> String:
 	return result
 
 func _on_cancel_button_pressed() -> void:
+	sounds.play_sound("click", 1, -15)
 	cancel.emit()
 
 func _on_home_button_pressed() -> void:
+	sounds.play_sound("click", 1, -15)
 	home.emit()
 
 func _on_profile_button_pressed() -> void:
+	sounds.play_sound("click", 1, -15)
 	pass # Replace with function body.
 
 func _on_collection_button_pressed() -> void:
+	sounds.play_sound("click", 1, -15)
 	collection.emit()
 
 func _on_rewards_button_pressed() -> void:
+	sounds.play_sound("click", 1, -15)
 	rewards.emit()
 
 func _on_builder_button_pressed() -> void:
+	sounds.play_sound("click", 1, -15)
 	build.emit()
 
 func _on_editor_button_pressed() -> void:
+	sounds.play_sound("click", 1, -15)
 	edit.emit()
 
 func _on_battle_button_pressed() -> void:
+	sounds.play_sound("click", 1, -15)
 	battle.emit()
 
 func _on_pve_button_pressed() -> void:
+	sounds.play_sound("click", 1, -15)
 	pve_battle.emit()
 
 func _on_pvp_button_pressed() -> void:
+	sounds.play_sound("click", 1, -15)
 	pvp_battle.emit()
 
 func _on_shop_button_pressed() -> void:
+	sounds.play_sound("click", 1, -15)
 	shop.emit()

@@ -25,9 +25,10 @@ config/icon="res://assets/art/icon.svg"
 
 [autoload]
 
+Utils="*res://singletons/utils.gd"
+Sounds="*uid://bebv744ebrt71"
 Stats="*res://singletons/stats.gd"
 KeyWordGlossary="*res://tools/key_word_glossary.gd"
-Utils="*res://singletons/utils.gd"
 SaveAndLoad="*res://save_and_load/save_and_load.gd"
 CardArtCache="*res://singletons/card_art_cache.gd"
 

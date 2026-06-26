@@ -1,0 +1,5 @@
+res://assets/themes/theme.tres
+res://singletons/sounds.tscn
+res://singletons/sounds.gd
+res://tools/hud.tscn
+res://tools/hud.gd

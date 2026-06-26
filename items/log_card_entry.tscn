@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://c0jb56w32wp73" path="res://items/log_card_entry.gd" id="1_2yhpb"]
 
 [node name="log_card_entry" type="Button" unique_id=1509220513]
-visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 icon_alignment = 1

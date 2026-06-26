@@ -8,6 +8,13 @@ var utils = Utils
 #const card_preview = preload("res://items/card_preview.tscn")
 const CARD_SCENE = preload("res://items/card.tscn")
 const LOG_CARD_ENTRY_SCENE = preload("res://items/log_card_entry.tscn")
+const LOG_EVENT_ICONS := {
+	"draw": preload("res://assets/art/battlefield_icons/draw.png"),
+	"play_unit": preload("res://assets/art/battlefield_icons/play_unit.png"),
+	"play_trap": preload("res://assets/art/battlefield_icons/play_trap.png"),
+	"died": preload("res://assets/art/battlefield_icons/unit_died.png"),
+	"attacks": preload("res://assets/art/battlefield_icons/attack_unit.png"),
+}
 
 signal end_turn
 signal concede
@@ -272,6 +279,8 @@ func _add_turn_log_separator_if_needed(active_avatar_id: String) -> void:
 	separator.custom_minimum_size = Vector2(0, 32)
 
 func add_combat_log(payload):
+	print("************************************")
+	utils.j_print(payload)
 	var panel := PanelContainer.new()
 	first_log.add_sibling(panel)
 	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -281,6 +290,7 @@ func add_combat_log(payload):
 	row.custom_minimum_size = Vector2(0, 72)
 	row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_theme_constant_override("separation", 8)
+	_add_log_event_icon(row, _get_log_icon_key(payload))
 	var text := _format_combat_log_statement(payload)
 	var label := Label.new()
 	label.text = text
@@ -1275,3 +1285,40 @@ func _get_tile_popup_position_from_payload(tile: Dictionary) -> Vector2:
 				if int(col.get("display_x")) == int(tile["display_x"]) and int(col.get("display_y")) == int(tile["display_y"]):
 					return col.global_position + Vector2(80, 60)
 	return Vector2(960, 540)
+
+func _get_log_icon_key(payload: Dictionary) -> String:
+	var statement := str(payload.get("statement", "")).to_lower()
+	if statement.contains("draw"):
+		return "draw"
+	if statement.contains("died") or statement.contains("dies"):
+		return "died"
+	if statement.contains("attack"):
+		return "attacks"
+	if statement.contains("trap"):
+		return "play_trap"
+	if statement.contains("play"):
+		for arg in payload.get("arguments", []):
+			if arg is Dictionary:
+				#print("*(**************)")
+				#utils.j_print(arg)
+				var subtype := str(arg.get("subtype", "")).to_lower()
+				if subtype == "" and arg.has("card") and arg["card"] is Dictionary:
+					subtype = str(arg["card"].get("subtype", "")).to_lower()
+				if subtype == "trap":
+					return "play_trap"
+				if subtype == "unit" or subtype == "avatar":
+					return "play_unit"
+	return ""
+
+func _add_log_event_icon(row: HBoxContainer, icon_key: String) -> void:
+	if icon_key == "":
+		return
+	if not LOG_EVENT_ICONS.has(icon_key):
+		return
+	var icon := TextureRect.new()
+	icon.texture = LOG_EVENT_ICONS[icon_key]
+	icon.custom_minimum_size = Vector2(32, 32)
+	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	icon.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	row.add_child(icon)

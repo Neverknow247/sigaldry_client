@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://bebv744ebrt71"]
+
+[ext_resource type="Script" uid="uid://bs3hhyo3ry4hn" path="res://singletons/sounds.gd" id="1_evlul"]
+
+[node name="sounds" type="Node" unique_id=1600762787]
+script = ExtResource("1_evlul")
+
+[node name="music" type="AudioStreamPlayer" parent="." unique_id=192743354]
+
+[node name="voice" type="AudioStreamPlayer" parent="." unique_id=1909058321]
+
+[node name="sounds" type="Node" parent="." unique_id=1949098796]
+
+[node name="sound_1" type="AudioStreamPlayer" parent="sounds" unique_id=36565723]
+
+[node name="sound_2" type="AudioStreamPlayer" parent="sounds" unique_id=1267559548]
+
+[node name="sound_3" type="AudioStreamPlayer" parent="sounds" unique_id=2114209611]
+
+[node name="sound_4" type="AudioStreamPlayer" parent="sounds" unique_id=1523727246]
+
+[node name="sound_5" type="AudioStreamPlayer" parent="sounds" unique_id=829790718]
+
+[node name="sound_6" type="AudioStreamPlayer" parent="sounds" unique_id=588702813]
+
+[node name="sound_7" type="AudioStreamPlayer" parent="sounds" unique_id=1646616186]
+
+[node name="sound_8" type="AudioStreamPlayer" parent="sounds" unique_id=1995773368]
+
+[node name="sound_9" type="AudioStreamPlayer" parent="sounds" unique_id=1228254128]
+
+[node name="sound_10" type="AudioStreamPlayer" parent="sounds" unique_id=142596903]
+
+[node name="sound_11" type="AudioStreamPlayer" parent="sounds" unique_id=1651734848]
+
+[node name="sound_12" type="AudioStreamPlayer" parent="sounds" unique_id=1676703195]
+
+[node name="sound_13" type="AudioStreamPlayer" parent="sounds" unique_id=930030937]
+
+[node name="sound_14" type="AudioStreamPlayer" parent="sounds" unique_id=646382460]
+
+[node name="sound_15" type="AudioStreamPlayer" parent="sounds" unique_id=549079515]
