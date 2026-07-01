@@ -18,6 +18,15 @@ var voice = {
 
 var sounds = {
 	"click" : load(sounds_path+"click_1.mp3"),
+	"play_potion": load(sounds_path + "draw_card.mp3"),
+	"play_trap": load(sounds_path + "draw_card.mp3"),
+	"play_unit": load(sounds_path + "draw_card.mp3"),
+	"move_unit": load(sounds_path + "draw_card.mp3"),
+	"attack": load(sounds_path + "attack.mp3"),
+	"take_damage": load(sounds_path + "draw_card.mp3"),
+	"draw_card": load(sounds_path + "draw_card.mp3"),
+	"end_turn": load(sounds_path + "draw_card.mp3"),
+	"start_turn": load(sounds_path + "draw_card.mp3"),
 	#"" : load(music_path+""),
 }
 

@@ -250,10 +250,12 @@ func update_turn(payload):
 	if payload["active_avatar_id"]:
 		if payload["active_avatar_id"] == payload["my_avatar_id"]:
 			my_turn = true
+			#play_game_sound("start_turn")
 			end_turn_button.text = "End Turn"
 			end_turn_button.disabled = false
 		else:
 			my_turn = false
+			#play_game_sound("end_turn")
 			end_turn_button.text = "Opponent's Turn"
 			end_turn_button.disabled = true
 		_add_turn_log_separator_if_needed(str(payload["active_avatar_id"]))
@@ -279,8 +281,10 @@ func _add_turn_log_separator_if_needed(active_avatar_id: String) -> void:
 	separator.custom_minimum_size = Vector2(0, 32)
 
 func add_combat_log(payload):
-	print("************************************")
-	utils.j_print(payload)
+	#print("************************************")
+	#utils.j_print(payload)
+	if str(payload.get("statement", "")).to_lower().contains("draw"):
+		play_game_sound("draw_card")
 	var panel := PanelContainer.new()
 	first_log.add_sibling(panel)
 	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -569,6 +573,7 @@ func _clear_recent_tile_popup_position_later(unit_id: String) -> void:
 	recent_tile_popup_positions.erase(unit_id)
 
 func _on_end_turn_button_pressed():
+	#play_game_sound("end_turn")
 	end_turn.emit()
 
 func _on_concede_button_pressed():
@@ -696,6 +701,8 @@ func _queue_affected_popup(affected: Dictionary, force_show := false) -> void:
 	var popup_position := _find_effect_popup_position(affected)
 	for change in affected.get("changes", []):
 		var text := _get_change_popup_text(change)
+		if str(change.get("name", "")) == "health" and float(change.get("value", 0)) < 0:
+			play_game_sound("take_damage")
 		if text == "":
 			continue
 		var effect_key := affected_id + ":" + str(change.get("name", ""))
@@ -884,6 +891,7 @@ func _is_mouse_over_hover_area() -> bool:
 	return false
 
 func show_action(payload):
+	_play_sound_for_action(payload)
 	combat_action_path.curve = Curve2D.new()
 	var pos_1 = Vector2.ZERO
 	if my_turn:
@@ -1322,3 +1330,34 @@ func _add_log_event_icon(row: HBoxContainer, icon_key: String) -> void:
 	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	icon.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	row.add_child(icon)
+
+func play_game_sound(sound_key: String, volume_db := 0.0) -> void:
+	if sound_key == "":
+		return
+	if not Sounds.sounds.has(sound_key):
+		return
+	Sounds.play_sound(sound_key, 1, volume_db)
+
+func _play_sound_for_action(payload: Dictionary) -> void:
+	match str(payload.get("action", "")):
+		"move":
+			play_game_sound("move_unit")
+		"use":
+			play_game_sound("attack")
+		"play":
+			play_game_sound(_get_play_sound_key(payload))
+
+func _get_play_sound_key(payload: Dictionary) -> String:
+	var subtype := ""
+	for key in ["card", "unit", "source"]:
+		if payload.has(key) and payload[key] is Dictionary:
+			subtype = str(payload[key].get("subtype", "")).to_lower()
+			if subtype != "":
+				break
+	match subtype:
+		"potion":
+			return "play_potion"
+		"trap":
+			return "play_trap"
+		_:
+			return "play_unit"
