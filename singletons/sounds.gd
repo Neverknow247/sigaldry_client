@@ -23,12 +23,12 @@ var sounds = {
 	"play_potion": load(sounds_path + "draw_card.mp3"),
 	"play_trap": load(sounds_path + "draw_card.mp3"),
 	"play_unit": load(sounds_path + "ground_slam.wav"),
-	"move_unit": load(sounds_path + "draw_card.mp3"),
+	"move_unit": load(sounds_path + "walking.wav"),
 	"attack": load(sounds_path + "attack.mp3"),
-	"take_damage": load(sounds_path + "draw_card.mp3"),
+	"take_damage": load(sounds_path + "damage.wav"),
 	"draw_card": load(sounds_path + "draw_card.mp3"),
-	"end_turn": load(sounds_path + "draw_card.mp3"),
-	"start_turn": load(sounds_path + "draw_card.mp3"),
+	"end_turn": load(sounds_path + "end_turn.wav"),
+	"start_turn": load(sounds_path + "end_turn.wav"),
 	#"" : load(music_path+""),
 }
 

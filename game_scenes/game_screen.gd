@@ -129,6 +129,9 @@ var active_card_popups: Array = []
 var known_occupants := {}
 var shown_played_card_popups := {}
 
+var last_active_avatar_id_for_sound := ""
+var has_received_first_turn_update := false
+
 func _ready():
 	set_color_backgrounds()
 	path_2d.curve = Curve2D.new()
@@ -248,25 +251,44 @@ func update_unit(payload):
 func update_turn(payload):
 	if payload.has("my_avatar_id"):
 		my_avatar_id = str(payload["my_avatar_id"])
-	#print("update turn: ",payload)
 	if payload["active_avatar_id"]:
-		if payload["active_avatar_id"] == payload["my_avatar_id"]:
+		var active_avatar_id := str(payload["active_avatar_id"])
+		if active_avatar_id == my_avatar_id:
 			my_turn = true
-			#play_game_sound("start_turn")
 			end_turn_button.text = "End Turn"
 			end_turn_button.disabled = false
 		else:
 			my_turn = false
-			#play_game_sound("end_turn")
 			end_turn_button.text = "Opponent's Turn"
 			end_turn_button.disabled = true
-		_add_turn_log_separator_if_needed(str(payload["active_avatar_id"]))
+		_play_turn_change_sound_if_needed(payload)
+		_add_turn_log_separator_if_needed(active_avatar_id)
 	if payload.has("ticks_remaining"):
 		turn_timer_count.text = str(int(payload["ticks_remaining"]))
 		turn_timer_right.max_value = payload["ticks_in_turn"]
 		turn_timer_right.value = payload["ticks_remaining"]
 		turn_timer_left.max_value = payload["ticks_in_turn"]
 		turn_timer_left.value = payload["ticks_remaining"]
+
+func _play_turn_change_sound_if_needed(payload: Dictionary) -> void:
+	if not payload.has("active_avatar_id"):
+		return
+	var active_avatar_id := str(payload["active_avatar_id"])
+	if active_avatar_id == "":
+		return
+	# First turn update is just sync/setup. Do not play a sound.
+	if not has_received_first_turn_update:
+		has_received_first_turn_update = true
+		last_active_avatar_id_for_sound = active_avatar_id
+		return
+	# Same active avatar means same turn. Do not replay sound.
+	if active_avatar_id == last_active_avatar_id_for_sound:
+		return
+	last_active_avatar_id_for_sound = active_avatar_id
+	if active_avatar_id == my_avatar_id:
+		play_game_sound("start_turn")
+	else:
+		play_game_sound("end_turn")
 
 func _add_turn_log_separator_if_needed(active_avatar_id: String) -> void:
 	if active_avatar_id == "":
@@ -285,8 +307,6 @@ func _add_turn_log_separator_if_needed(active_avatar_id: String) -> void:
 func add_combat_log(payload):
 	#print("************************************")
 	#utils.j_print(payload)
-	if str(payload.get("statement", "")).to_lower().contains("draw"):
-		play_game_sound("draw_card")
 	var panel := PanelContainer.new()
 	first_log.add_sibling(panel)
 	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -563,8 +583,22 @@ func update_tile(payload):
 		known_occupants[tile_id] = new_occupant_id
 		if is_new_unit_on_tile:
 			var popup_unit_id := str(tile["occupant"]["id"])
+			
+			var subtype = str(tile["occupant"].get("subtype","")).to_lower()
+			
 			if not shown_played_card_popups.has(popup_unit_id):
 				shown_played_card_popups[popup_unit_id] = true
+				
+				match subtype:
+					"trap":
+						play_game_sound("play_trap")
+					"potion":
+						play_game_sound("play_potion")
+					"unit":
+						play_game_sound("play_unit")
+					_:
+						play_game_sound("draw_card")
+				
 				show_played_card_popup(tile["occupant"], is_occupant_mine(tile["occupant"]))
 				_animate_unit_played(tile_id)
 	elif tile.has("id"):
