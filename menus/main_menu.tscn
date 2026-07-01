@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://be8308edhjqd8"]
+[gd_scene format=3 uid="uid://be8308edhjqd8"]
 
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_ij7vn"]
 [ext_resource type="Script" uid="uid://dc0qr50csa8a7" path="res://menus/main_menu.gd" id="1_lhqmb"]
@@ -26,7 +26,7 @@ texture = ExtResource("6_hswy5")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rx1ud"]
 texture = ExtResource("7_vmd75")
 
-[node name="main_menu" type="Control"]
+[node name="main_menu" type="Control" unique_id=1249760953]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,7 +37,7 @@ mouse_filter = 2
 theme = ExtResource("1_ij7vn")
 script = ExtResource("1_lhqmb")
 
-[node name="background" type="TextureRect" parent="."]
+[node name="background" type="TextureRect" parent="." unique_id=360271221]
 self_modulate = Color(0.31061733, 0.31061703, 0.31061718, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -47,7 +47,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_a63lr")
 
-[node name="background_color" type="ColorRect" parent="background"]
+[node name="background_color" type="ColorRect" parent="background" unique_id=1673616298]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -57,7 +57,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.290196, 0.478431, 0.588235, 1)
 
-[node name="fake_hud" type="ColorRect" parent="background"]
+[node name="fake_hud" type="ColorRect" parent="background" unique_id=1403835160]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 1
 anchors_preset = 10
@@ -65,7 +65,7 @@ anchor_right = 1.0
 offset_bottom = 64.0
 grow_horizontal = 2
 
-[node name="main" type="MarginContainer" parent="."]
+[node name="main" type="MarginContainer" parent="." unique_id=1407860230]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.059000004
@@ -79,16 +79,16 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="color_rect" type="ColorRect" parent="main"]
+[node name="color_rect" type="ColorRect" parent="main" unique_id=1142701558]
 visible = false
 layout_mode = 2
 color = Color(0.42365062, 0.42365065, 0.42365062, 1)
 
-[node name="main_region" type="VBoxContainer" parent="main"]
+[node name="main_region" type="VBoxContainer" parent="main" unique_id=1470436017]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="main_margin" type="MarginContainer" parent="main/main_region"]
+[node name="main_margin" type="MarginContainer" parent="main/main_region" unique_id=1377658740]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 100
@@ -96,11 +96,11 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 100
 
-[node name="button_section" type="HBoxContainer" parent="main/main_region/main_margin"]
+[node name="button_section" type="HBoxContainer" parent="main/main_region/main_margin" unique_id=1887162820]
 layout_mode = 2
 theme_override_constants/separation = 50
 
-[node name="main_button" type="Button" parent="main/main_region/main_margin/button_section"]
+[node name="main_button" type="Button" parent="main/main_region/main_margin/button_section" unique_id=1587178562]
 custom_minimum_size = Vector2(957, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -109,12 +109,12 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="button_subsection" type="VBoxContainer" parent="main/main_region/main_margin/button_section"]
+[node name="button_subsection" type="VBoxContainer" parent="main/main_region/main_margin/button_section" unique_id=1574890935]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 50
 
-[node name="button_1" type="Button" parent="main/main_region/main_margin/button_section/button_subsection"]
+[node name="button_1" type="Button" parent="main/main_region/main_margin/button_section/button_subsection" unique_id=378798389]
 layout_mode = 2
 size_flags_vertical = 3
 icon = ExtResource("5_vmd75")
@@ -122,7 +122,7 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="button_2" type="Button" parent="main/main_region/main_margin/button_section/button_subsection"]
+[node name="button_2" type="Button" parent="main/main_region/main_margin/button_section/button_subsection" unique_id=756463366]
 layout_mode = 2
 size_flags_vertical = 3
 icon = ExtResource("6_caclp")
@@ -130,7 +130,7 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="button_3" type="Button" parent="main/main_region/main_margin/button_section/button_subsection"]
+[node name="button_3" type="Button" parent="main/main_region/main_margin/button_section/button_subsection" unique_id=836022828]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
@@ -139,12 +139,12 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="play_section" type="HBoxContainer" parent="main/main_region"]
+[node name="play_section" type="HBoxContainer" parent="main/main_region" unique_id=1761244521]
 layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="build_button" type="Button" parent="main/main_region/play_section"]
+[node name="build_button" type="Button" parent="main/main_region/play_section" unique_id=617447721]
 custom_minimum_size = Vector2(384, 128)
 layout_mode = 2
 theme_override_constants/outline_size = 12
@@ -154,11 +154,11 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_nc6jr")
 theme_override_styles/hover = SubResource("StyleBoxTexture_hswy5")
 text = "Build"
 
-[node name="control" type="Control" parent="main/main_region/play_section"]
+[node name="control" type="Control" parent="main/main_region/play_section" unique_id=216330447]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="fight_button" type="Button" parent="main/main_region/play_section"]
+[node name="fight_button" type="Button" parent="main/main_region/play_section" unique_id=494062624]
 custom_minimum_size = Vector2(384, 128)
 layout_mode = 2
 theme_override_constants/outline_size = 12
@@ -168,7 +168,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_rx1ud")
 theme_override_styles/hover = SubResource("StyleBoxTexture_hswy5")
 text = "Fight"
 
-[node name="buttons" type="HBoxContainer" parent="."]
+[node name="buttons" type="HBoxContainer" parent="." unique_id=1562553994]
 visible = false
 layout_mode = 1
 anchors_preset = 10
@@ -179,64 +179,64 @@ grow_horizontal = 2
 theme_override_constants/separation = 25
 alignment = 1
 
-[node name="battle" type="VBoxContainer" parent="buttons"]
+[node name="battle" type="VBoxContainer" parent="buttons" unique_id=1665204479]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="search_for_a_pvp_game_button" type="Button" parent="buttons/battle"]
+[node name="search_for_a_pvp_game_button" type="Button" parent="buttons/battle" unique_id=442498304]
 custom_minimum_size = Vector2(230, 40)
 layout_mode = 2
 text = "Online Game
 "
 
-[node name="search_for_a_pve_game" type="Button" parent="buttons/battle"]
+[node name="search_for_a_pve_game" type="Button" parent="buttons/battle" unique_id=1924625243]
 custom_minimum_size = Vector2(230, 40)
 layout_mode = 2
 text = "Offline"
 
-[node name="view_cards_button" type="Button" parent="buttons"]
+[node name="view_cards_button" type="Button" parent="buttons" unique_id=1052778659]
 custom_minimum_size = Vector2(230, 40)
 layout_mode = 2
 text = "View All Cards"
 
-[node name="card_design" type="VBoxContainer" parent="buttons"]
+[node name="card_design" type="VBoxContainer" parent="buttons" unique_id=940810615]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="card_builder_button" type="Button" parent="buttons/card_design"]
+[node name="card_builder_button" type="Button" parent="buttons/card_design" unique_id=1513307235]
 custom_minimum_size = Vector2(230, 40)
 layout_mode = 2
 text = "Card Builder"
 
-[node name="card_editor_button" type="Button" parent="buttons/card_design"]
+[node name="card_editor_button" type="Button" parent="buttons/card_design" unique_id=135704129]
 custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
 text = "Card Editor"
 
-[node name="deck_editor_button" type="Button" parent="buttons"]
+[node name="deck_editor_button" type="Button" parent="buttons" unique_id=477942083]
 custom_minimum_size = Vector2(230, 40)
 layout_mode = 2
 text = "Deck Editor"
 
-[node name="spacer2" type="Control" parent="buttons"]
+[node name="spacer2" type="Control" parent="buttons" unique_id=1379796758]
 visible = false
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
-[node name="logout_button" type="Button" parent="buttons"]
+[node name="logout_button" type="Button" parent="buttons" unique_id=1353503123]
 visible = false
 custom_minimum_size = Vector2(230, 40)
 layout_mode = 2
 text = "Logout
 "
 
-[node name="quit_button" type="Button" parent="buttons"]
+[node name="quit_button" type="Button" parent="buttons" unique_id=820983215]
 visible = false
 custom_minimum_size = Vector2(230, 40)
 layout_mode = 2
 text = "Quit"
 
-[node name="rewards_box" type="HBoxContainer" parent="."]
+[node name="rewards_box" type="HBoxContainer" parent="." unique_id=1935059415]
 visible = false
 layout_mode = 0
 offset_left = 64.0
@@ -246,21 +246,21 @@ offset_bottom = 848.0
 theme_override_constants/separation = 64
 alignment = 1
 
-[node name="templates_scroll" type="ScrollContainer" parent="rewards_box"]
+[node name="templates_scroll" type="ScrollContainer" parent="rewards_box" unique_id=1160378545]
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 
-[node name="templates" type="VBoxContainer" parent="rewards_box/templates_scroll"]
+[node name="templates" type="VBoxContainer" parent="rewards_box/templates_scroll" unique_id=1851232437]
 layout_mode = 2
 
-[node name="components_scroll" type="ScrollContainer" parent="rewards_box"]
+[node name="components_scroll" type="ScrollContainer" parent="rewards_box" unique_id=1546914733]
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 
-[node name="components" type="VBoxContainer" parent="rewards_box/components_scroll"]
+[node name="components" type="VBoxContainer" parent="rewards_box/components_scroll" unique_id=860464706]
 layout_mode = 2
 
-[node name="rewards_button" type="Button" parent="."]
+[node name="rewards_button" type="Button" parent="." unique_id=182699753]
 visible = false
 custom_minimum_size = Vector2(0, 128)
 layout_mode = 1
@@ -277,7 +277,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Rewards Available!"
 
-[node name="game_finished_screen" parent="." instance=ExtResource("3_yjgyn")]
+[node name="game_finished_screen" parent="." unique_id=978751728 instance=ExtResource("3_yjgyn")]
 visible = false
 layout_mode = 1
 

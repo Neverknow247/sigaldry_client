@@ -1,0 +1,6 @@
+res://game_scenes/game_screen.tscn
+res://assets/themes/theme.tres
+res://game_scenes/game_screen.gd
+res://menus/main_menu.gd
+res://singletons/sounds.gd
+res://menus/main_menu.tscn

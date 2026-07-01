@@ -3,6 +3,7 @@ extends Control
 var scene_name = "game"
 
 var stats = Stats
+var sounds = Sounds
 var utils = Utils
 
 #const card_preview = preload("res://items/card_preview.tscn")
@@ -169,6 +170,7 @@ func set_color_backgrounds():
 	log_visuals.color = stats.background_color
 
 func join_game(payload):
+	sounds.play_music("battle_music",1,-20)
 	await battlefield.create_grid(payload["board"]["cols"],payload["board"]["rows"])
 	#print("join game: ",payload)
 	battlefield_data = payload["board"]["tiles"]
@@ -564,6 +566,7 @@ func update_tile(payload):
 			if not shown_played_card_popups.has(popup_unit_id):
 				shown_played_card_popups[popup_unit_id] = true
 				show_played_card_popup(tile["occupant"], is_occupant_mine(tile["occupant"]))
+				_animate_unit_played(tile_id)
 	elif tile.has("id"):
 		known_occupants.erase(str(tile["id"]))
 	battlefield.update_grid_space(payload)
@@ -899,6 +902,14 @@ func show_action(payload):
 	else:
 		pos_1 = Vector2(1528,96)
 	var pos_2 = Vector2.ZERO
+	
+	if payload.has("source_id") and payload.has("dest_id"):
+		match str(payload.get("action", "")):
+			"move":
+				_animate_unit_move(str(payload["source_id"]), str(payload["dest_id"]))
+			"use":
+				_animate_unit_attack(str(payload["source_id"]), str(payload["dest_id"]))
+	
 	if payload["action"] == "use":
 		if payload["disposition"] == "friendly":
 			combat_action_line.default_color = Color.GREEN
@@ -1361,3 +1372,85 @@ func _get_play_sound_key(payload: Dictionary) -> String:
 			return "play_trap"
 		_:
 			return "play_unit"
+
+
+#ANIMATIONS
+
+func _get_grid_space_by_id(id: String):
+	for row in battlefield["grid"]:
+		for col in row:
+			if str(col.tile_id) == id or str(col.occupant_id) == id:
+				return col
+	return null
+
+func _animate_unit_move(source_id: String, dest_id: String) -> void:
+	var source_space = _get_grid_space_by_id(source_id)
+	var dest_space = _get_grid_space_by_id(dest_id)
+	if source_space == null or dest_space == null:
+		return
+	var source_visual = source_space.unit_content
+	var dest_visual = dest_space.unit_content
+	if source_visual == null or dest_visual == null:
+		return
+	var ghost = source_visual.duplicate()
+	card_popup_layer.add_child(ghost)
+	ghost.global_position = source_visual.global_position
+	ghost.scale = source_visual.scale
+	ghost.z_index = 950
+	_make_control_tree_ignore_mouse(ghost)
+	source_visual.modulate.a = 0.0
+	dest_visual.modulate.a = 0.0
+	var tween := create_tween()
+	tween.tween_property(ghost, "global_position", dest_visual.global_position, 0.25)
+	tween.finished.connect(func():
+		if is_instance_valid(dest_visual):
+			dest_visual.modulate.a = 1.0
+		if is_instance_valid(source_visual):
+			source_visual.modulate.a = 1.0
+		if is_instance_valid(ghost):
+			ghost.queue_free()
+	)
+
+func _animate_unit_attack(source_id: String, dest_id: String) -> void:
+	var source_space = _get_grid_space_by_id(source_id)
+	var dest_space = _get_grid_space_by_id(dest_id)
+	if source_space == null or dest_space == null:
+		return
+	var source_visual = source_space.unit_content
+	if source_visual == null:
+		return
+	var ghost = source_visual.duplicate()
+	card_popup_layer.add_child(ghost)
+	ghost.global_position = source_visual.global_position
+	ghost.scale = source_visual.scale
+	ghost.z_index = 950
+	ghost.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_make_control_tree_ignore_mouse(ghost)
+	source_visual.modulate.a = 0.0
+	var start_pos = source_visual.global_position
+	var target_pos = dest_space.unit_content.global_position
+	var hit_pos = start_pos.lerp(target_pos, 0.82)
+	var tween := create_tween()
+	tween.tween_property(ghost, "global_position", hit_pos, 0.16)
+	if is_instance_valid(source_visual):
+		tween.tween_property(ghost, "global_position", start_pos, 0.14)
+	tween.finished.connect(func():
+		if is_instance_valid(source_visual):
+			source_visual.modulate.a = 1.0
+		if is_instance_valid(ghost):
+			ghost.queue_free()
+	)
+
+func _animate_unit_played(tile_id: String) -> void:
+	var grid_space = _get_grid_space_by_id(tile_id)
+	if grid_space == null:
+		return
+	var visual = grid_space.unit_content
+	if visual == null:
+		return
+	var original_scale = visual.scale
+	visual.pivot_offset = visual.size / 2.0
+	visual.scale = original_scale * 1.45
+	var tween := create_tween()
+	tween.tween_property(visual, "scale", original_scale * 0.92, 0.14)
+	tween.tween_property(visual, "scale", original_scale, 0.08)

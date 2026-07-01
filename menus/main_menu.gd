@@ -3,6 +3,7 @@ extends Control
 var scene_name = "menu"
 
 var stats = Stats
+var sounds = Sounds
 
 const REWARD = preload("res://items/reward.tscn")
 
@@ -25,6 +26,7 @@ signal button_3
 
 func _ready():
 	background_color.color = stats.background_color
+	sounds.play_music("menu_music",1,-20)
 
 func _on_logout_button_pressed():
 	stats["save_data"]["remember_me"]["username"] = ""

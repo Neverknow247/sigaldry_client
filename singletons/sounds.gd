@@ -9,6 +9,8 @@ var voice_path = "res://assets/audio/voice/"
 var sounds_path = "res://assets/audio/sounds/"
 
 var music = {
+	"menu_music" : load(music_path+"menu_music.mp3"),
+	"battle_music" : load(music_path+"battle_music.mp3"),
 	#"" : load(music_path+""),
 }
 
@@ -20,7 +22,7 @@ var sounds = {
 	"click" : load(sounds_path+"click_1.mp3"),
 	"play_potion": load(sounds_path + "draw_card.mp3"),
 	"play_trap": load(sounds_path + "draw_card.mp3"),
-	"play_unit": load(sounds_path + "draw_card.mp3"),
+	"play_unit": load(sounds_path + "ground_slam.wav"),
 	"move_unit": load(sounds_path + "draw_card.mp3"),
 	"attack": load(sounds_path + "attack.mp3"),
 	"take_damage": load(sounds_path + "draw_card.mp3"),
