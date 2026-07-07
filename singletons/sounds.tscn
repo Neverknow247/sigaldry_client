@@ -6,37 +6,54 @@
 script = ExtResource("1_evlul")
 
 [node name="music" type="AudioStreamPlayer" parent="." unique_id=192743354]
+bus = &"Music"
 
 [node name="voice" type="AudioStreamPlayer" parent="." unique_id=1909058321]
+bus = &"Voice"
 
 [node name="sounds" type="Node" parent="." unique_id=1949098796]
 
 [node name="sound_1" type="AudioStreamPlayer" parent="sounds" unique_id=36565723]
+bus = &"Sounds"
 
 [node name="sound_2" type="AudioStreamPlayer" parent="sounds" unique_id=1267559548]
+bus = &"Sounds"
 
 [node name="sound_3" type="AudioStreamPlayer" parent="sounds" unique_id=2114209611]
+bus = &"Sounds"
 
 [node name="sound_4" type="AudioStreamPlayer" parent="sounds" unique_id=1523727246]
+bus = &"Sounds"
 
 [node name="sound_5" type="AudioStreamPlayer" parent="sounds" unique_id=829790718]
+bus = &"Sounds"
 
-[node name="sound_6" type="AudioStreamPlayer" parent="sounds" unique_id=588702813]
+[node name="sound_6" type="AudioStreamPlayer" parent="sounds" unique_id=1420503655]
+bus = &"Sounds"
 
-[node name="sound_7" type="AudioStreamPlayer" parent="sounds" unique_id=1646616186]
+[node name="sound_7" type="AudioStreamPlayer" parent="sounds" unique_id=1400492053]
+bus = &"Sounds"
 
-[node name="sound_8" type="AudioStreamPlayer" parent="sounds" unique_id=1995773368]
+[node name="sound_8" type="AudioStreamPlayer" parent="sounds" unique_id=2013272893]
+bus = &"Sounds"
 
-[node name="sound_9" type="AudioStreamPlayer" parent="sounds" unique_id=1228254128]
+[node name="sound_9" type="AudioStreamPlayer" parent="sounds" unique_id=1360835839]
+bus = &"Sounds"
 
-[node name="sound_10" type="AudioStreamPlayer" parent="sounds" unique_id=142596903]
+[node name="sound_10" type="AudioStreamPlayer" parent="sounds" unique_id=1142735354]
+bus = &"Sounds"
 
-[node name="sound_11" type="AudioStreamPlayer" parent="sounds" unique_id=1651734848]
+[node name="sound_11" type="AudioStreamPlayer" parent="sounds" unique_id=1448964552]
+bus = &"Sounds"
 
-[node name="sound_12" type="AudioStreamPlayer" parent="sounds" unique_id=1676703195]
+[node name="sound_12" type="AudioStreamPlayer" parent="sounds" unique_id=1394328938]
+bus = &"Sounds"
 
-[node name="sound_13" type="AudioStreamPlayer" parent="sounds" unique_id=930030937]
+[node name="sound_13" type="AudioStreamPlayer" parent="sounds" unique_id=1007811761]
+bus = &"Sounds"
 
-[node name="sound_14" type="AudioStreamPlayer" parent="sounds" unique_id=646382460]
+[node name="sound_14" type="AudioStreamPlayer" parent="sounds" unique_id=1961819771]
+bus = &"Sounds"
 
-[node name="sound_15" type="AudioStreamPlayer" parent="sounds" unique_id=549079515]
+[node name="sound_15" type="AudioStreamPlayer" parent="sounds" unique_id=886310817]
+bus = &"Sounds"
