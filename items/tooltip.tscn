@@ -1,68 +1,86 @@
-[gd_scene load_steps=4 format=3 uid="uid://dt77vy5nu6wl3"]
+[gd_scene load_steps=5 format=3 uid="uid://dt77vy5nu6wl3"]
 
 [ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="1_50101"]
 [ext_resource type="Script" uid="uid://wcmm20qs6qbg" path="res://items/tooltip.gd" id="2_t656t"]
 [ext_resource type="Script" uid="uid://bs3sddjowfnua" path="res://items/card_rich_effects.gd" id="3_dh6ti"]
 
-[node name="tooltip" type="Control"]
-custom_minimum_size = Vector2(10, 10)
-layout_mode = 3
-anchors_preset = 0
-offset_right = 704.0
-offset_bottom = 56.0
-mouse_filter = 2
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tooltip"]
+bg_color = Color(0.2745098, 0.2980392, 0.3294118, 0.95686275)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.94901961, 0.67058824, 0.21568628, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 8
+
+[node name="tooltip" type="Popup"]
+transparent_bg = true
+oversampling_override = 1.0
+unresizable = true
+borderless = true
 theme = ExtResource("1_50101")
 script = ExtResource("2_t656t")
 
-[node name="window" type="Window" parent="."]
-oversampling_override = 1.0
-title = "Title Here"
-position = Vector2i(608, 490)
-size = Vector2i(704, 100)
-wrap_controls = true
-unresizable = true
-sharp_corners = true
-
-[node name="tooltip_rich_text_label" type="RichTextLabel" parent="window"]
+[node name="panel_container" type="PanelContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_50101")
-theme_override_font_sizes/normal_font_size = 36
-theme_override_font_sizes/bold_font_size = 36
-theme_override_font_sizes/bold_italics_font_size = 36
-theme_override_font_sizes/italics_font_size = 36
-theme_override_font_sizes/mono_font_size = 36
+theme_override_styles/panel = SubResource("StyleBoxFlat_tooltip")
+
+[node name="margin_container" type="MarginContainer" parent="panel_container"]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 22
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 26
+
+[node name="v_box_container" type="VBoxContainer" parent="panel_container/margin_container"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="header_row" type="HBoxContainer" parent="panel_container/margin_container/v_box_container"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="title_label" type="Label" parent="panel_container/margin_container/v_box_container/header_row"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.94901961, 0.67058824, 0.21568628, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 38
+text = "Title Here"
+uppercase = true
+vertical_alignment = 1
+
+[node name="close_button" type="Button" parent="panel_container/margin_container/v_box_container/header_row"]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 28
+text = "x"
+flat = true
+
+[node name="tooltip_rich_text_label" type="RichTextLabel" parent="panel_container/margin_container/v_box_container"]
+custom_minimum_size = Vector2(620, 0)
+layout_mode = 2
+theme_override_colors/default_color = Color(0.92, 0.92, 0.92, 1)
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/bold_font_size = 30
+theme_override_font_sizes/bold_italics_font_size = 30
+theme_override_font_sizes/italics_font_size = 30
+theme_override_font_sizes/mono_font_size = 30
 bbcode_enabled = true
 text = "jhhjh"
 fit_content = true
+autowrap_mode = 3
 script = ExtResource("3_dh6ti")
 
-[node name="color_rect" type="ColorRect" parent="window/tooltip_rich_text_label"]
-visible = false
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 0.741176)
-
-[node name="color_rect2" type="ColorRect" parent="window/tooltip_rich_text_label"]
-visible = false
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.43230593, 0.054326028, 0.37217668, 1)
-
-[connection signal="close_requested" from="window" to="." method="_on_window_close_requested"]
-[connection signal="gui_input" from="window/tooltip_rich_text_label" to="." method="_on_tooltip_rich_text_label_gui_input"]
+[connection signal="popup_hide" from="." to="." method="_on_popup_hide"]
+[connection signal="pressed" from="panel_container/margin_container/v_box_container/header_row/close_button" to="." method="_on_close_button_pressed"]

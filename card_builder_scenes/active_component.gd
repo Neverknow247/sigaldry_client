@@ -1,5 +1,7 @@
 extends Control
 
+const StoneTileScript = preload("res://tools/stone_tile.gd")
+
 var height = 0
 var width = 0
 var shape = []
@@ -8,6 +10,8 @@ var start = Vector2.ZERO
 var minSizeOfSquares = 0.0
 var screensize = Vector2(400,400)
 var grid_square_size = 10
+
+var stone_tile := StoneTileScript.new()
 
 func reset_active_component():
 	height = 0
@@ -61,5 +65,5 @@ func _draw():
 				elif shape[y][x] == 5:
 					col = Color("AQUAMARINE",.75)
 					#col = Color.BLUE_VIOLET
-				draw_rect(rect,col)
+				stone_tile.draw(self,rect,col)
 				i+=1

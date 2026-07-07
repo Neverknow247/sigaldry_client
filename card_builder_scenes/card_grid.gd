@@ -7,6 +7,7 @@ const plus_one_icon = preload("res://items/plus_one_icon.tscn")
 const plus_two_icon = preload("res://items/plus_two_icon.tscn")
 const plus_unknown_icon = preload("res://items/plus_unknown_icon.tscn")
 const times_two_icon = preload("res://items/times_two_icon.tscn")
+const StoneTileScript = preload("res://tools/stone_tile.gd")
 
 var height = 0
 var width = 0
@@ -16,6 +17,8 @@ var bonuses = []
 var minSizeOfSquares = 0.0
 var screensize = Vector2(400,400)
 var grid_square_size = 100
+
+var stone_tile := StoneTileScript.new()
 
 #Other Colors I Like
 #@export var color_one = Color("#333f58")
@@ -88,6 +91,8 @@ func _draw():
 	if height == 0 and width == 0:
 		return
 	else:
+		@warning_ignore("integer_division")
+		var overlap_start = grid_mouse_pos - Vector2.ONE * (shape.size()/2)
 		var i = 0
 		for x in width:
 			if height % 2 == 0:
@@ -107,6 +112,7 @@ func _draw():
 				if (mouse_pos.x >= pos.x and mouse_pos.x < pos.x+grid_square_size) and (mouse_pos.y >= pos.y and mouse_pos.y < pos.y+grid_square_size):
 					#col = Color.TEAL
 					grid_mouse_pos = pos/grid_square_size
+				var is_stone_cell = false
 				if current_components:
 					for _component in component_shapes:
 						#if _component == component_shapes[component_shapes.size()-1]:
@@ -116,6 +122,7 @@ func _draw():
 							if _component["shape"][y-_component["y"]][x-_component["x"]] == 1 || _component["shape"][y-_component["y"]][x-_component["x"]] == 5:
 								col = Color.DIM_GRAY
 								second_col = Color(1,1,1,0)
+								is_stone_cell = true
 								if _component == component_shapes[component_shapes.size()-1]:
 									col = Color(_component["color_profile"]["background_color"])
 									second_col = Color(1,1,1,0)
@@ -127,8 +134,20 @@ func _draw():
 					#if (x >= active_component_start.x and x < active_component_start.x+active_component_width) and (y >= active_component_start.y and y < active_component_start.y+active_component_height):
 						#if shape[y-active_component_start.y][x-active_component_start.x] == 1:
 							#col = Color(active_component_color,.5)
-				draw_rect(rect,col)
-				#draw_rect(rect,second_col,false,4)
+				if is_stone_cell:
+					stone_tile.draw(self,rect,col)
+				else:
+					var connect_left = x > 0 and tiles[y][x-1] != 0
+					var connect_right = x < width-1 and tiles[y][x+1] != 0
+					var connect_top = y > 0 and tiles[y-1][x] != 0
+					var connect_bottom = y < height-1 and tiles[y+1][x] != 0
+					stone_tile.draw_socket(self,rect,col,connect_left,connect_right,connect_top,connect_bottom)
+				if active_component and is_stone_cell:
+					if (x >= overlap_start.x and x < overlap_start.x+shape.size()) and (y >= overlap_start.y and y < overlap_start.y+shape.size()):
+						var shape_y = int(y-overlap_start.y)
+						var shape_x = int(x-overlap_start.x)
+						if shape[shape_y][shape_x] == 1 or shape[shape_y][shape_x] == 5:
+							stone_tile.draw_overlap_warning(self,rect)
 				if x == start.x and y == start.y:
 					var start_point = start_icon.instantiate()
 					start_point.global_position = pos + Vector2(minSizeOfSquares,minSizeOfSquares)/2

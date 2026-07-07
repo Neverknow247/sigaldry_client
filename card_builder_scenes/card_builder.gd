@@ -10,6 +10,7 @@ var KEYWORD_GLOSS = KeyWordGlossary
 const ARE_YOU_SURE_POPUP = preload("res://items/are_you_sure_popup.tscn")
 const COLOR_PROFILE_SQUARE_LARGE = preload("res://items/color_profile_square_large.tscn")
 const COMPONENT_BUTTON = preload("res://card_builder_scenes/component_button.tscn")
+const ShapeMatchScript = preload("res://card_builder_scenes/shape_match.gd")
 
 @onready var red_button: CheckButton = $grid_container/red_button
 @onready var orange_button: CheckButton = $grid_container/orange_button
@@ -31,17 +32,17 @@ const COMPONENT_BUTTON = preload("res://card_builder_scenes/component_button.tsc
 ]
 
 @onready var next_bonuses = {
-	"r" : $next_bonus_row/color_bonus_square,
-	"o" : $next_bonus_row/color_bonus_square2,
-	"y" : $next_bonus_row/color_bonus_square3,
-	"g" : $next_bonus_row/color_bonus_square4,
-	"u" : $next_bonus_row/color_bonus_square5,
-	"p" : $next_bonus_row/color_bonus_square6,
-	"w" : $next_bonus_row/color_bonus_square7,
-	"b" : $next_bonus_row/color_bonus_square8,
-	"a" : $next_bonus_row/color_bonus_square9,
-	"n" : $next_bonus_row/color_bonus_square9,
-	"k" : $next_bonus_row/color_bonus_square9,
+	"r" : $next_bonus_row/h_box_container/color_bonus_square,
+	"o" : $next_bonus_row/h_box_container/color_bonus_square2,
+	"y" : $next_bonus_row/h_box_container/color_bonus_square3,
+	"g" : $next_bonus_row/h_box_container/color_bonus_square4,
+	"u" : $next_bonus_row/h_box_container/color_bonus_square5,
+	"p" : $next_bonus_row/h_box_container/color_bonus_square6,
+	"w" : $next_bonus_row/h_box_container/color_bonus_square7,
+	"b" : $next_bonus_row/h_box_container/color_bonus_square8,
+	"a" : $next_bonus_row/h_box_container/color_bonus_square9,
+	"n" : $next_bonus_row/h_box_container/color_bonus_square9,
+	"k" : $next_bonus_row/h_box_container/color_bonus_square9,
 }
 
 @onready var start_color_square: ColorRect = $start_end_colors/start_color/start_color_square
@@ -90,6 +91,7 @@ signal set_new_card(_new_card)
 @onready var component_container = $component_container
 @onready var component_v_box = $component_container/component_v_box
 @onready var clear_component_piece_button = $clear_component_piece_button
+@onready var shape_pattern_grid = $shape_pattern_picker/grid
 
 @onready var card_compare_screen = $card_compare_screen
 @onready var card_select_screen = $card_compare_screen/card_select_screen
@@ -137,6 +139,7 @@ func reset_card_builder():
 	card_preview.hide()
 	search_bar.text = ""
 	#search_bar.hide()
+	shape_pattern_grid.reset_pattern()
 	selected_template_num = 0
 	selected_template_type = ""
 	#template_select.selected = 0
@@ -244,6 +247,32 @@ func set_up_component_select():
 			pass
 		else:
 			component.hide()
+	sort_components_by_shape()
+
+var shape_pattern_cells: Array = []
+
+func _on_shape_pattern_grid_pattern_changed(cells: Array) -> void:
+	shape_pattern_cells = cells
+	set_up_component_select()
+
+func sort_components_by_shape() -> void:
+	if shape_pattern_cells.is_empty():
+		return
+	var matches: Array = []
+	var non_matches: Array = []
+	for component in component_v_box.get_children():
+		var shape_cells = ShapeMatchScript.filled_cells(component.component_shape_grid.tiles)
+		if ShapeMatchScript.matches_with_rotation(shape_pattern_cells,shape_cells):
+			matches.append(component)
+		else:
+			non_matches.append(component)
+	var index = 0
+	for component in matches:
+		component_v_box.move_child(component,index)
+		index += 1
+	for component in non_matches:
+		component_v_box.move_child(component,index)
+		index += 1
 
 func card_builder_update_grid(payload):
 	#print(payload["components"])

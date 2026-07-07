@@ -36,7 +36,7 @@ func _ready():
 
 func save_all():
 	update_save_data()
-	#update_settings()
+	update_settings()
 
 func update_save_data():
 	var save_data = load_data_from_file()
@@ -133,20 +133,18 @@ func load_dictionary(save_data):
 			stats_save[sub_stat] = save_data[sub_stat]
 	return stats_save
 
-#func update_settings():
-	#var settings = ConfigFile.new()
-	#settings.set_value("volume_settings","setting",utils.volume_settings)
-	#settings.set_value("squash_and_stretch","setting",utils.squash_and_stretch)
-	#settings.set_value("screen_shake","setting",utils.screen_shake)
-	#settings.set_value("window_mode","setting",utils.window_mode)
-	#settings.set_value("two_cores","setting",utils.two_cores)
-	#settings.save(SAVE_SETTINGS_PATH)
+func update_settings():
+	var settings = ConfigFile.new()
+	settings.set_value("volume_settings","setting",Utils.volume_settings)
+	settings.save(SAVE_SETTINGS_PATH)
 
-#func load_settings():
-	#var settings = ConfigFile.new()
-	#var err = settings.load(SAVE_SETTINGS_PATH)
-	#if err != OK:
-		#return
-	#for setting in settings.get_sections():
-		#var single_setting = settings.get_value(setting, "setting")
-		#utils[setting] = single_setting
+func load_settings():
+	var settings = ConfigFile.new()
+	var err = settings.load(SAVE_SETTINGS_PATH)
+	if err != OK:
+		return
+	if settings.has_section_key("volume_settings","setting"):
+		var loaded_volume_settings = settings.get_value("volume_settings","setting")
+		for volume_key in Utils.volume_settings:
+			if loaded_volume_settings.has(volume_key):
+				Utils.volume_settings[volume_key] = loaded_volume_settings[volume_key]

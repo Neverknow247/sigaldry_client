@@ -16,6 +16,8 @@ func _ready():
 func start():
 	if await SaveAndLoad.load_data():
 		stats["save_data"]["stats"]["power_on_count"] += 1
+	SaveAndLoad.load_settings()
+	Utils.apply_volume_settings()
 	await SaveAndLoad.save_all()
 	finish()
 

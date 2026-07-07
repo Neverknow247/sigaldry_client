@@ -17,55 +17,77 @@ var backgrounds = [
 ]
 
 var tooltips
+var open_tooltips: Dictionary = {}
 
 var persistant_popups = true
 
+const VOLUME_BUS_NAMES = {
+	"master": "Master",
+	"music": "Music",
+	"voice": "Voice",
+	"sfx": "Sounds",
+}
+
+var volume_settings = {
+	"master": 1.0,
+	"music": 1.0,
+	"voice": 1.0,
+	"sfx": 1.0,
+}
+
+func set_bus_volume(volume_key: String, linear_value: float):
+	linear_value = clampf(linear_value, 0.0, 1.0)
+	volume_settings[volume_key] = linear_value
+	var bus_index = AudioServer.get_bus_index(VOLUME_BUS_NAMES[volume_key])
+	AudioServer.set_bus_volume_db(bus_index, linear_to_db(linear_value))
+
+func apply_volume_settings():
+	for volume_key in volume_settings:
+		set_bus_volume(volume_key, volume_settings[volume_key])
+
 func spawn_tooltips_on_mouse(meta_data):
-	var tooltip_instance =  TOOLTIP_SCENE.instantiate()
-	var tooltip_label =  tooltip_instance.find_child("tooltip_rich_text_label")
+	if not meta_data in KeyWordGlossary.key_glossary:
+		print("UNKNOWN")
+		return
+	if open_tooltips.has(meta_data) and is_instance_valid(open_tooltips[meta_data]):
+		open_tooltips[meta_data].grab_focus()
+		return
+	var current_scene = get_tree().get_current_scene()
+	if not current_scene.is_in_group("client"):
+		return
+	var glossary_entry = KeyWordGlossary.key_glossary[meta_data]
 	var tooltip_text = ""
-	if meta_data in KeyWordGlossary.key_glossary:
-		var words = KeyWordGlossary.key_glossary[meta_data]["description"].split(" ")
-		for word in words:
-			var is_dependent = false
-			var dependent_keyword
-			var dependent_key
-			if word[0] == "<": #and word[word.length()-1] == ">":
-				#var key = word.substr(1,word.length() - 2)
-				var key = word.substr(1,word.length() - (word.length() - word.find(">")) -1)
-				is_dependent = true
-				dependent_key = key
-				dependent_keyword = KeyWordGlossary.key_glossary[key]["name"]
-			if is_dependent:
-				tooltip_text += "[url=" + dependent_key + "]" + \
-				dependent_keyword.capitalize() + "[/url]" + " "
-			else:
-				tooltip_text += word + " "
-		tooltip_label.text = tooltip_text
+	var words = glossary_entry["description"].split(" ")
+	for word in words:
+		var is_dependent = false
+		var dependent_keyword
+		var dependent_key
+		if word[0] == "<": #and word[word.length()-1] == ">":
+			#var key = word.substr(1,word.length() - 2)
+			var key = word.substr(1,word.length() - (word.length() - word.find(">")) -1)
+			is_dependent = true
+			dependent_key = key
+			dependent_keyword = KeyWordGlossary.key_glossary[key]["name"]
+		if is_dependent:
+			tooltip_text += "[url=" + dependent_key + "][color=#f2ab37][u]" + \
+			dependent_keyword.capitalize() + "[/u][/color][/url]" + " "
+		else:
+			tooltip_text += word + " "
 		#for key in KeyWordGlossary.key_glossary[meta_data]["dependencies"]:
 			#print(key)
 			#print(KeyWordGlossary.key_glossary[key]["name"])
-	else:
-		print("UNKNOWN")
-		tooltip_label.text = "UNKNOWN"
-		return
-	var current_scene = get_tree().get_current_scene()
-	if current_scene.is_in_group("client"):
-		current_scene.tooltips.add_child(tooltip_instance)
-	tooltip_instance.window.position = get_tree().current_scene.get_global_mouse_position()
-	if tooltip_instance.window.position.x > 1920 - 736:
-		tooltip_instance.window.position.x = 1920 - 736
-	if tooltip_instance.window.position.y > 1080 - 136:
-		tooltip_instance.window.position.y = 1080 - 136
-	tooltip_instance.z_index = 100
-	tooltip_instance.set_up_size()
-	tooltip_instance.window.title = KeyWordGlossary.key_glossary[meta_data]["name"].capitalize()
+	var tooltip_instance = TOOLTIP_SCENE.instantiate()
+	current_scene.tooltips.add_child(tooltip_instance)
+	tooltip_instance.set_up_text(meta_data, glossary_entry["name"].capitalize(), tooltip_text)
+	tooltip_instance.popup_centered_on_screen(open_tooltips.size())
+	open_tooltips[meta_data] = tooltip_instance
 
 func clear_tooltips():
 	if !persistant_popups:
 		for child in tooltips.get_children():
 			tooltips.remove_child(child)
 			child.queue_free()
+		open_tooltips.clear()
 
 func instantiate_scene_on_world(scene:PackedScene, position:Vector2):
 	var world = get_tree().current_scene

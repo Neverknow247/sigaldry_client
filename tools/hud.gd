@@ -5,6 +5,7 @@ var stats = Stats
 var utils = Utils
 
 const ARE_YOU_SURE_POPUP = preload("res://items/are_you_sure_popup.tscn")
+const SETTINGS_POPUP = preload("res://items/settings_popup.tscn")
 const STANDARD_MATERIALS_1 = preload("res://assets/art/icons/larger_icons/Icon_Currency_GoldCoin.png")
 const STANDARD_MATERIALS_2 = preload("res://assets/art/icons/larger_icons/Icon_Currency_GoldCoin2.png")
 
@@ -94,7 +95,6 @@ func reset_settings():
 	settings_dropdown.clear()
 	settings_dropdown.size.y = 0
 	settings_dropdown.add_item("Settings",3)
-	settings_dropdown.set_item_disabled(0,true)
 	settings_dropdown.add_item("Logout",1)
 	settings_dropdown.add_item("Quit",0)
 
@@ -185,7 +185,6 @@ func update_scene(new_scene_name):
 				button.hide()
 			settings_dropdown.clear()
 			settings_dropdown.add_item("Settings",3)
-			settings_dropdown.set_item_disabled(0,true)
 			settings_dropdown.add_item("Concede",10)
 			settings_dropdown.add_item("Logout",1)
 			settings_dropdown.add_item("Quit",0)
@@ -216,7 +215,8 @@ func _on_settings_dropdown_index_pressed(index: int) -> void:
 	#print("DROP DOWN SELECT: ",settings_dropdown.get_item_text(index))
 	match settings_dropdown.get_item_text(index):
 		"Settings":
-			pass
+			sounds.play_sound("click", 1, -15)
+			utils.instantiate_popup_on_world(SETTINGS_POPUP)
 		"Logout":
 			stats["save_data"]["remember_me"]["username"] = ""
 			stats["save_data"]["remember_me"]["password"] = ""

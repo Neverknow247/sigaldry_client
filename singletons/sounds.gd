@@ -34,6 +34,8 @@ var sounds = {
 
 var music_playing = null
 
+const SOUND_PITCH_VARIANCE = 0.08
+
 func play_music(music_string, pitch_scale = 1, volume_db = 0):
 	if music_playing != music_string:
 		music_player.pitch_scale = pitch_scale
@@ -53,7 +55,7 @@ func play_voice(voice_string, pitch_scale = 1, volume_db = 0):
 func play_sound(sound_string, pitch_scale = 1, volume_db = 0):
 	for sound_player in sounds_players:
 		if !sound_player.playing:
-			sound_player.pitch_scale = pitch_scale
+			sound_player.pitch_scale = pitch_scale + Stats.rng.randf_range(-SOUND_PITCH_VARIANCE, SOUND_PITCH_VARIANCE)
 			sound_player.volume_db = volume_db
 			sound_player.stream = sounds[sound_string]
 			sound_player.play()

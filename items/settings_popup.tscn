@@ -1,0 +1,193 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://items/settings_popup.gd" id="1_svrxq"]
+[ext_resource type="Theme" uid="uid://cgjvtmk54s78p" path="res://assets/themes/theme.tres" id="2_qfr4h"]
+
+[node name="settings_popup" type="Popup" unique_id=3081726451]
+transparent_bg = true
+oversampling_override = 1.0
+initial_position = 2
+size = Vector2i(800, 560)
+visible = true
+theme = ExtResource("2_qfr4h")
+script = ExtResource("1_svrxq")
+
+[node name="color_rect" type="ColorRect" parent="." unique_id=3081726452]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.83500004)
+
+[node name="margin_container" type="MarginContainer" parent="color_rect" unique_id=3081726453]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="color_rect" type="ColorRect" parent="color_rect/margin_container" unique_id=3081726454]
+layout_mode = 2
+color = Color(0.60933006, 0.6093301, 0.60933006, 0.518)
+
+[node name="center_container" type="CenterContainer" parent="color_rect" unique_id=3081726455]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="v_box_container" type="VBoxContainer" parent="color_rect/center_container" unique_id=3081726456]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="title_label" type="Label" parent="color_rect/center_container/v_box_container" unique_id=3081726457]
+layout_mode = 2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 36
+text = "settings"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="master_row" type="HBoxContainer" parent="color_rect/center_container/v_box_container" unique_id=3081726458]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="master_label" type="Label" parent="color_rect/center_container/v_box_container/master_row" unique_id=3081726459]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 26
+text = "master"
+uppercase = true
+
+[node name="master_slider" type="HSlider" parent="color_rect/center_container/v_box_container/master_row" unique_id=3081726460]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 4
+min_value = 0.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="master_value_label" type="Label" parent="color_rect/center_container/v_box_container/master_row" unique_id=3081726461]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 26
+text = "100%"
+horizontal_alignment = 2
+
+[node name="music_row" type="HBoxContainer" parent="color_rect/center_container/v_box_container" unique_id=3081726462]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="music_label" type="Label" parent="color_rect/center_container/v_box_container/music_row" unique_id=3081726463]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 26
+text = "music"
+uppercase = true
+
+[node name="music_slider" type="HSlider" parent="color_rect/center_container/v_box_container/music_row" unique_id=3081726464]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 4
+min_value = 0.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="music_value_label" type="Label" parent="color_rect/center_container/v_box_container/music_row" unique_id=3081726465]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 26
+text = "100%"
+horizontal_alignment = 2
+
+[node name="voice_row" type="HBoxContainer" parent="color_rect/center_container/v_box_container" unique_id=3081726466]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="voice_label" type="Label" parent="color_rect/center_container/v_box_container/voice_row" unique_id=3081726467]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 26
+text = "voice"
+uppercase = true
+
+[node name="voice_slider" type="HSlider" parent="color_rect/center_container/v_box_container/voice_row" unique_id=3081726468]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 4
+min_value = 0.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="voice_value_label" type="Label" parent="color_rect/center_container/v_box_container/voice_row" unique_id=3081726469]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 26
+text = "100%"
+horizontal_alignment = 2
+
+[node name="sfx_row" type="HBoxContainer" parent="color_rect/center_container/v_box_container" unique_id=3081726470]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="sfx_label" type="Label" parent="color_rect/center_container/v_box_container/sfx_row" unique_id=3081726471]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 26
+text = "sfx"
+uppercase = true
+
+[node name="sfx_slider" type="HSlider" parent="color_rect/center_container/v_box_container/sfx_row" unique_id=3081726472]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 4
+min_value = 0.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="sfx_value_label" type="Label" parent="color_rect/center_container/v_box_container/sfx_row" unique_id=3081726473]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 26
+text = "100%"
+horizontal_alignment = 2
+
+[node name="close_button" type="Button" parent="color_rect/center_container/v_box_container" unique_id=3081726474]
+custom_minimum_size = Vector2(160, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "CLOSE"
+
+[connection signal="value_changed" from="color_rect/center_container/v_box_container/master_row/master_slider" to="." method="_on_master_slider_value_changed"]
+[connection signal="drag_ended" from="color_rect/center_container/v_box_container/master_row/master_slider" to="." method="_on_master_slider_drag_ended"]
+[connection signal="value_changed" from="color_rect/center_container/v_box_container/music_row/music_slider" to="." method="_on_music_slider_value_changed"]
+[connection signal="drag_ended" from="color_rect/center_container/v_box_container/music_row/music_slider" to="." method="_on_music_slider_drag_ended"]
+[connection signal="value_changed" from="color_rect/center_container/v_box_container/voice_row/voice_slider" to="." method="_on_voice_slider_value_changed"]
+[connection signal="drag_ended" from="color_rect/center_container/v_box_container/voice_row/voice_slider" to="." method="_on_voice_slider_drag_ended"]
+[connection signal="value_changed" from="color_rect/center_container/v_box_container/sfx_row/sfx_slider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="drag_ended" from="color_rect/center_container/v_box_container/sfx_row/sfx_slider" to="." method="_on_sfx_slider_drag_ended"]
+[connection signal="pressed" from="color_rect/center_container/v_box_container/close_button" to="." method="_on_close_button_pressed"]
